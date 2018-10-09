@@ -25,7 +25,7 @@ import { SpinnerButtonOptions } from '../../../partials/content/general/spinner-
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit, OnDestroy {
-	public model: any = { username: 'tsafi', password: '1234' };
+	public model: any = { username: '', password: '' };
 	@HostBinding('class') classes: string = 'm-login__signin';
 	@Output() actionChange = new Subject<string>();
 	public loading = false;
@@ -57,11 +57,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 		if (this.validate(this.f)) {
 			this.authService.login(this.model).subscribe(response => {
 				if (response !== 'undefined' && response.status === 'Success') {
-					console.log('Login successfull: ' + response.name);
+					console.log('LoghNotin successfull: ' + response.name);
 					this.authNoticeService.setNotice(response.message, 'success');
 					this.router.navigate(['/']);
-				} else {
+				} else if (response.message) {
 					this.authNoticeService.setNotice(response.message, 'error');
+				} else {
+					this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), 'error');
 				}
 
 				this.cdr.detectChanges();
