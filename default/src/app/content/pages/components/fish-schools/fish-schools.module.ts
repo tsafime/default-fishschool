@@ -18,6 +18,7 @@ import {
 	MatToolbarModule,
 	MatTooltipModule, MatTreeModule
 } from '@angular/material';
+
 import {IconComponent} from '../material/buttons-and-indicators/icon/icon.component';
 import {CardComponent} from '../material/layout/card/card.component';
 import {ProgressBarComponent} from '../material/buttons-and-indicators/progress-bar/progress-bar.component';

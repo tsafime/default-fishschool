@@ -1,4 +1,5 @@
 export interface FishSchoolModel {
+
 	id: number;
 	companyId: number;
 	name: string;

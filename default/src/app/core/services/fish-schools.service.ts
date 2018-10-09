@@ -29,20 +29,6 @@ export class FishSchoolsService {
 			tap(this.saveData.bind(this)),
 			catchError(this.handleError('Fish school view', []))
 		);
-
-		/*const json = this.jsonBuilder.buildFileteredQuery();
-		this.http.post<FishSchoolsResponse>('http://localhost:51120/fishschool/view', json).subscribe(
-			val => {
-				console.log('POST call successful value returned in body', val);
-				this.saveData(val);
-			},
-			response => {
-				console.log('POST call in error', response);
-				this.handleError('fish school view', []);
-			}
-		);
-
-		return this.data;*/
 	}
 
 	private saveData(fishData: FishSchoolsResponse) {
