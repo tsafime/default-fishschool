@@ -24,13 +24,15 @@ export interface PeriodicElement {
 })
 export class FishSchoolsComponent implements OnInit {
 
-	// displayedColumns1: string[] = ['id', 'companyId', 'name', 'status', 'creationDate', 'updatedDate', 'age', 'specie', 'quantity', 'dead',
+	// All columns:
+	// displayedColumns: string[] = ['id', 'companyId', 'name', 'status', 'creationDate', 'updatedDate', 'age', 'specie', 'quantity', 'dead',
 	// 	'menualAvgWeight', 'averageWeight', 'foodWeight', 'totalGivenFood', 'actualGivenFood', 'percentageTsemach', 'deadLastUpdateDate',
-	//     'foodTypeName', 'feedDate', 'sale', 'totalSale', 'fcr', 'salesFcr', 'totalWeight'];
-	// displayedColumns1: string[] = ['age', 'averageWeight', 'dead', 'fcr', 'feedDate', 'foodTypeName', 'foodWeight', 'name',
-	// 	'percentageTsemach', 'quantity', 'salesFcr', 'specie', 'status', 'totalGivenFood', 'totalWeight'];
-	displayedColumns1: string[] = ['age', 'averageWeight', 'dead', 'fcr', 'feedDate'];
-	dataSource1: MatTableDataSource<FishSchoolModel>;
+	// 	'foodTypeName', 'feedDate', 'sale', 'totalSale', 'fcr', 'salesFcr', 'totalWeight'];
+	 displayedColumns: string[] = ['feedDate', 'age', 'averageWeight', 'quantity', 'totalWeight', 'totalGivenFood', 'actualGivenFood',
+		 'foodWeight', 'foodTypeName', 'dead', 'fcr' ];
+    header: string[] = ['Selected Date', 'Age', 'Avg. G', '# Fish', 'Total KG', 'Feed Plan', 'Given Feed', 'Total Food', 'Food Type',
+		'Mortality', 'F.C.R.'];
+	dataSource: MatTableDataSource<FishSchoolModel>;
 	data: FishSchoolsResponse;
 
 	@ViewChild(MatSort) sort: MatSort;
@@ -39,11 +41,12 @@ export class FishSchoolsComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.dataSource1.sort = this.sort;
 
 		const subscription = this.service.view().subscribe(response => {
 				console.log('Successfull: ' + response.data);
-				this.dataSource1 = new MatTableDataSource<FishSchoolModel>(response.data);
+				this.dataSource = new MatTableDataSource<FishSchoolModel>(response.data);
+				this.dataSource.sort = this.sort;
+				// this.dataSource.filter =
 				// this.authNoticeService.setNotice(response.message, 'success');
 			},
 			response => {
@@ -67,6 +70,10 @@ export class FishSchoolsComponent implements OnInit {
 
 		// TODO: Check data status: Success and notify if failure
 		console.log('On NgInit()...');
+	}
+
+	applyFilter(filterValue: string) {
+		this.dataSource.filter = filterValue.trim().toLowerCase();
 	}
 }
 
