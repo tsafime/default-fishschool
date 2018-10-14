@@ -25,8 +25,10 @@ export class FishSchoolsService {
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 10, 0, ['feedDate'], 'ASC');
 
 		const json = JSON.stringify(filteredQuery) ;
-
 		return this.http.post<FishSchoolsResponse>('http://localhost:51120/fishschool/view', json).pipe(
+			map((result: any) => {
+				return result;
+			}),
 			tap(this.saveData.bind(this)),
 			catchError(this.handleError('Fish school view', []))
 		);
@@ -42,6 +44,7 @@ export class FishSchoolsService {
 
 	private handleError<T>(operation = 'operation', result?: any) {
 
+		// TODO: Check 1st we got here and then we got good results
 		console.log('In error');
 		return (error: any): Observable<T> => {
 
