@@ -1,15 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {QueryFilter} from './query.filter';
 
-@Injectable()
-export class JsonBuilderService {
+export class FilteredQuery {
 
-	constructor(private http: HttpClient) {
-	}
-
-	buildFileteredQuery() {
-
-		const json = '{' +
+	/* Example:
+	const json = '{' +
 			'  "filters": [' +
 			'    {' +
 			'      "key": "name",' +
@@ -35,6 +29,20 @@ export class JsonBuilderService {
 			'  ],' +
 			'  "orderDirection": "ASC"' +
 			'}';
-		return json;
+	 */
+	filters: QueryFilter[];
+	size: number;
+	page: number;
+	orderBy: string[];
+	orderDirection: string;
+
+	constructor(filters: QueryFilter[], size: number, page: number, orderBy: string[], orderDirection: string = 'ASC') {
+		this.filters = filters;
+		this.size = size;
+		this.page = page;
+		this.orderBy = orderBy;
+		this.orderDirection = orderDirection;
 	}
 }
+
+

@@ -66,7 +66,6 @@ import {ProgressSpinnerComponent} from '../material/buttons-and-indicators/progr
 import {BottomSheetExampleComponent} from '../material/popups-and-modals/bottom-sheet/bottom-sheet-example/bottom-sheet-example.component';
 import {SortHeaderComponent} from '../material/data-table/sort-header/sort-header.component';
 import {FishSchoolsService} from '../../../../core/services/fish-schools.service';
-import {JsonBuilderService} from '../../../../core/services/json.builder.service';
 import {InterceptService} from '../apps/e-commerce/_core/utils/intercept.service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 
@@ -147,8 +146,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 			useClass: InterceptService,
 			multi: true
 		},
-		FishSchoolsService,
-		JsonBuilderService
+		FishSchoolsService
 	],
 	declarations: [
 		MaterialComponent,

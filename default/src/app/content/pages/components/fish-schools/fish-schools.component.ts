@@ -43,7 +43,7 @@ export class FishSchoolsComponent implements OnInit {
 	ngOnInit() {
 
 		const subscription = this.service.view().subscribe(response => {
-				console.log('Successfull: ' + response.data);
+				console.log('Successfully loaded: ' + response.data.length + ' records');
 				this.dataSource = new MatTableDataSource<FishSchoolModel>(response.data);
 				this.dataSource.sort = this.sort;
 				// this.dataSource.filter =

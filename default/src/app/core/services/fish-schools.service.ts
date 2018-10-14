@@ -3,29 +3,30 @@ import {HttpClient} from '@angular/common/http';
 import {from, Observable, of} from 'rxjs';
 import {FishSchoolModel} from '../models/fish-school.model';
 import {catchError, map, tap} from 'rxjs/operators';
-import {JsonBuilderService} from './json.builder.service';
 import {FishSchoolsResponse} from '../models/fish.schools.model';
-
+import {QueryFilter} from '../models/fishschool/query.filter';
+import {FilteredQuery} from '../models/fishschool/filtered.query';
 
 @Injectable()
 export class FishSchoolsService {
 
 	data: FishSchoolModel[];
 
-	constructor(private http: HttpClient, private jsonBuilder: JsonBuilderService) {
+	constructor(private http: HttpClient) {
 	}
 
 	view(): Observable<FishSchoolsResponse> {
 
-		const json = this.jsonBuilder.buildFileteredQuery();
-		return this.http.post<FishSchoolsResponse>('http://localhost:51120/fishschool/view', json).pipe(
-			map((result: any) => {
-				if (result instanceof Array) {
-					return result.pop();
-				}
+		// TODO: read from a panel in the HTML to create FilteredQuery
+		const queryFilters: QueryFilter[] = [];
+		queryFilters.push(new QueryFilter('name', ['270517 102'], '=', 'AND'));
+		queryFilters.push(new QueryFilter('feedDate', ['30-07-2017'], '=', 'AND'));
 
-				return result;
-			}),
+		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 10, 0, ['feedDate'], 'ASC');
+
+		const json = JSON.stringify(filteredQuery) ;
+
+		return this.http.post<FishSchoolsResponse>('http://localhost:51120/fishschool/view', json).pipe(
 			tap(this.saveData.bind(this)),
 			catchError(this.handleError('Fish school view', []))
 		);
