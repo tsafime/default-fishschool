@@ -7,11 +7,12 @@ import { PartialsModule } from '../../../partials/partials.module';
 import { ListTimelineModule } from '../../../partials/layout/quick-sidebar/list-timeline/list-timeline.module';
 import { WidgetChartsModule } from '../../../partials/content/widgets/charts/widget-charts.module';
 import {
-	MAT_BOTTOM_SHEET_DATA,
+	DateAdapter,
+	MAT_BOTTOM_SHEET_DATA, MAT_DATE_FORMATS, MAT_DATE_LOCALE,
 	MatAutocompleteModule, MatBottomSheetModule,
 	MatBottomSheetRef, MatButtonModule,
 	MatButtonToggleModule,
-	MatCardModule, MatChipsModule, MatDividerModule, MatExpansionModule, MatFormFieldModule,
+	MatCardModule, MatChipsModule, MatDividerModule, MatExpansionModule, MatFormFieldControl, MatFormFieldModule,
 	MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule,
 	MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule,
 	MatSelectModule, MatSidenavModule, MatSliderModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule,
@@ -68,6 +69,21 @@ import {SortHeaderComponent} from '../material/data-table/sort-header/sort-heade
 import {FishSchoolsService} from '../../../../core/services/fish-schools.service';
 import {InterceptService} from '../apps/e-commerce/_core/utils/intercept.service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {TranslateModule} from '@ngx-translate/core';
+import {SpinnerButtonModule} from '../../../partials/content/general/spinner-button/spinner-button.module';
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
+
+export const DD_MM_YYYY_Format = {
+	parse: {
+		dateInput: 'DD-MM-YYYY',
+	},
+	display: {
+		dateInput: 'DD/MM/YYYY',
+		monthYearLabel: 'MMM YYYY',
+		dateA11yLabel: 'LL',
+		monthYearA11yLabel: 'MMMM YYYY',
+	},
+};
 
 @NgModule({
 	imports: [
@@ -116,6 +132,8 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 		LayoutModule,
 		ListTimelineModule,
 		WidgetChartsModule,
+		TranslateModule.forChild(),
+		SpinnerButtonModule,
 		RouterModule.forChild([
 			{
 				path: '',
@@ -132,21 +150,17 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 		Modal3Component,
 		IconComponent,
 		TreeComponent,
-		BottomSheetExampleComponent
+		BottomSheetExampleComponent,
 	],
 	providers: [
 		MatIconRegistry,
 		{ provide: MatBottomSheetRef, useValue: {} },
-		{
-			provide: MAT_BOTTOM_SHEET_DATA, useValue: {}
-		},
+		{ provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
 		InterceptService,
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: InterceptService,
-			multi: true
-		},
-		FishSchoolsService
+		{ provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true},
+		FishSchoolsService,
+		{ provide: DateAdapter, useClass: MomentDateAdapter },
+		{ provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format },
 	],
 	declarations: [
 		MaterialComponent,
@@ -189,7 +203,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 		TreeComponent,
 		BottomSheetComponent,
 		BottomSheetExampleComponent,
-		FishSchoolsComponent
+		FishSchoolsComponent,
 	]
 })
 

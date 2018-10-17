@@ -15,14 +15,13 @@ export class FishSchoolsService {
 	constructor(private http: HttpClient) {
 	}
 
-	view(): Observable<FishSchoolsResponse> {
+	view(model: any): Observable<FishSchoolsResponse> {
 
-		// TODO: read from a panel in the HTML to create FilteredQuery
 		const queryFilters: QueryFilter[] = [];
-		queryFilters.push(new QueryFilter('name', ['270517 102'], '=', 'AND'));
-		queryFilters.push(new QueryFilter('feedDate', ['30-07-2017'], '=', 'AND'));
+		queryFilters.push(new QueryFilter('name', [model.schoolName], '=', 'AND'));
+		queryFilters.push(new QueryFilter('feedDate', [model.startDate.format('DD-MM-YYYY')], '=', 'NONE'));
 
-		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 10, 0, ['feedDate'], 'ASC');
+		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, model.days, 0, ['feedDate'], 'ASC');
 
 		const json = JSON.stringify(filteredQuery) ;
 		return this.http.post<FishSchoolsResponse>('http://localhost:51120/fishschool/view', json).pipe(
@@ -36,16 +35,12 @@ export class FishSchoolsService {
 
 	private saveData(fishData: FishSchoolsResponse) {
 
-		console.log('In save');
 		if (typeof fishData !== 'undefined') {
 			this.data = fishData.data;
 		}
 	}
 
 	private handleError<T>(operation = 'operation', result?: any) {
-
-		// TODO: Check 1st we got here and then we got good results
-		console.log('In error');
 		return (error: any): Observable<T> => {
 
 			// TODO: send the error to remote logging infrastructure
