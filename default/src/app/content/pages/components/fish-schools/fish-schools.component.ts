@@ -1,23 +1,10 @@
-import {PeriodicElement} from '../material/data-table/material-table/material-table.component';
-import {Component, OnInit, ViewChild, AfterViewInit, ChangeDetectionStrategy, EventEmitter, Output, Input} from '@angular/core';
-import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
-import {SelectionModel} from '@angular/cdk/collections';
-import {merge, Observable, of as observableOf} from 'rxjs';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource, MatSort} from '@angular/material';
 import {FishSchoolsService} from '../../../../core/services/fish-schools.service';
 import {FishSchoolModel} from '../../../../core/models/fish-school.model';
 import {FishSchoolsResponse} from '../../../../core/models/fish.schools.model';
-import {NgbDateStruct, NgbCalendar, NgbDateAdapter, NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
-import {NgbDatepickerI18n, NgbCalendarIslamicCivil, NgbCalendarIslamicUmalqura} from '@ng-bootstrap/ng-bootstrap';
 import {SpinnerButtonOptions} from '../../../partials/content/general/spinner-button/button-options.interface';
-import {FormControl} from '@angular/forms';
 import * as moment from 'moment';
-
-export interface PeriodicElement {
-	name: string;
-	position: number;
-	weight: number;
-	symbol: string;
-}
 
 @Component({
 	selector: 'm-fish-schools',
@@ -57,7 +44,9 @@ export class FishSchoolsComponent implements OnInit {
 	}
 
 	applyFilter(filterValue: string) {
-		this.dataSource.filter = filterValue.trim().toLowerCase();
+		if (this.dataSource) {
+			this.dataSource.filter = filterValue.trim().toLowerCase();
+		}
 	}
 
 	submit() {

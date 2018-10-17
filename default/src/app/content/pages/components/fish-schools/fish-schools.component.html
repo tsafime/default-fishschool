@@ -22,16 +22,12 @@
 					<input matInput type="text" name="days" placeholder="# of days" autocomplete="off"
 						   [(ngModel)]="model.days" #days="ngModel" required>
 				</mat-form-field>
-
-				<m-spinner-button [options]="spinner" (click)="submit()">{{'AUTH.GENERAL.SUBMIT_BUTTON' |
-					translate}}
-				</m-spinner-button>
-
+				<m-spinner-button [options]="spinner" (click)="submit()">{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}</m-spinner-button>
 			</div>
 		</form>
 	</div>
 </div>
-<div class="m-section">
+<div class="m-section" *ngIf="show;else noRecords">
 	<div class="example-container mat-elevation-z8">
 		<mat-form-field>
 			<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -48,3 +44,8 @@
 		</table>
 	</div>
 </div>
+<ng-template #noRecords>
+	<div class="m-section">
+		<p>No records to display</p>
+	</div>
+</ng-template>

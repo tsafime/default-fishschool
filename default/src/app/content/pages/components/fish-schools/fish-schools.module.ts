@@ -12,7 +12,7 @@ import {
 	MatAutocompleteModule, MatBottomSheetModule,
 	MatBottomSheetRef, MatButtonModule,
 	MatButtonToggleModule,
-	MatCardModule, MatChipsModule, MatDividerModule, MatExpansionModule, MatFormFieldControl, MatFormFieldModule,
+	MatCardModule, MatChipsModule, MatDividerModule, MatExpansionModule, MatFormFieldModule,
 	MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule,
 	MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule,
 	MatSelectModule, MatSidenavModule, MatSliderModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule,
