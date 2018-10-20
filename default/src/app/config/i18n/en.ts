@@ -29,6 +29,8 @@ export const locale = {
 			LOGIN: {
 				TITLE: 'Login Account',
 				BUTTON: 'Sign In',
+				USERNAME: 'Username',
+				PASSWORD: 'Password'
 			},
 			FORGOT: {
 				TITLE: 'Forgotten Password?',
@@ -53,18 +55,20 @@ export const locale = {
 				NOT_FOUND: 'The requested {{name}} is not found',
 				INVALID_LOGIN: 'The login detail is incorrect',
 				CONNECTION_FAILURE: 'Unable to connect to the server, please try again later'
-			}
+			},
 		},
 		FISH_SCHOOL: {
 			NO_RECORDS: 'No records to display',
 			VALIDATION: {
-				LOAD_FAILURE: 'Unable to load fish school records, please try again later'
+				LOAD_FAILURE: 'Unable to load fish school records, please try again later',
+				REQUIRED_FIELD: '{{name}} is required',
+				MIN_LENGTH_FIELD: '{{name}} minimum length is {{min}}',
 			},
 			FILTERS: {
 				SCHOOL_NAME: 'School name',
-				STRAT_DATE: 'Start date',
+				START_DATE: 'Start date',
 				NUM_OF_DAYS: '# of days'
-			}
+			},
 		},
 		ECOMMERCE: {
 			COMMON: {

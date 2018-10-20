@@ -7,6 +7,8 @@ import {SpinnerButtonOptions} from '../../../partials/content/general/spinner-bu
 import * as moment from 'moment';
 import {TranslateService} from '@ngx-translate/core';
 import {Moment} from 'moment';
+import {NgForm} from '@angular/forms';
+import * as objectPath from 'object-path';
 
 @Component({
 	selector: 'm-fish-schools',
@@ -34,11 +36,14 @@ export class FishSchoolsComponent implements OnInit {
 		fullWidth: false
 	};
 
-	public model: FsModel = {schoolName: '270517 102', startDate: moment(), days: 10};
+	public model: FsModel = {schoolName: '270517 102', startDate: moment('2017-07-30'), days: 10};
 
 	@ViewChild(MatSort) sort: MatSort;
 	show: boolean = false;
 	alerts: Array<FsAlert> = [];
+
+	@ViewChild('f') f: NgForm;
+	errors: any = [];
 
 	constructor(private service: FishSchoolsService, private translate: TranslateService) {
 	}
@@ -58,7 +63,6 @@ export class FishSchoolsComponent implements OnInit {
 		this.spinner.active = true;
 		this.show = false;
 
-		// if (this.validate(this.f)) {
 		this.service.view(this.model).subscribe(response => {
 				console.log('Successfully loaded: ' + response.data.length + ' records');
 				this.dataSource = new MatTableDataSource<FishSchoolModel>(response.data);
@@ -97,6 +101,7 @@ export class FishSchoolsComponent implements OnInit {
 			() => {
 				console.log('Done processing HTTP to view FishShcools');
 			});
+		// }
 
 		this.spinner.active = false;
 		console.log('view() finished');

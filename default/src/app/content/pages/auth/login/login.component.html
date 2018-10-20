@@ -11,14 +11,14 @@
 <form class="m-login__form m-form" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
 	<div class="form-group">
 		<mat-form-field>
-			<mat-label>Username</mat-label>
+			<mat-label>{{'AUTH.LOGIN.USERNAME' | translate}}</mat-label>
 			<input matInput type="text" name="text" placeholder="Username" autocomplete="off"
 				   [(ngModel)]="model.username" #username="ngModel" required>
 		</mat-form-field>
 	</div>
 	<div class="form-group">
 		<mat-form-field>
-			<mat-label>Password</mat-label>
+			<mat-label>{{'AUTH.LOGIN.PASSWORD' | translate}}</mat-label>
 			<input matInput minlength="4" type="password" name="password" placeholder="Password" autocomplete="off"
 				   [(ngModel)]="model.password" #password="ngModel" required>
 		</mat-form-field>

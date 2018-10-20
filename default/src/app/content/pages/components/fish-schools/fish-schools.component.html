@@ -8,11 +8,24 @@
 				<mat-form-field>
 					<mat-label>{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</mat-label>
 					<input matInput type="text" name="schoolName" placeholder="School name" autocomplete="off"
-						   [(ngModel)]="model.schoolName" required>
+						   [(ngModel)]="model.schoolName" #schoolName="ngModel" minlength="4" required>
+					<div *ngIf="schoolName.invalid && (schoolName.dirty || schoolName.touched)" class="text-danger">
+						<div *ngIf="schoolName.errors.required">
+							{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate } }}</div>
+						<div *ngIf="schoolName.errors.minlength">
+							{{ 'FISH_SCHOOL.VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate, min: 4 } }}</div>
+					</div>
 				</mat-form-field>
 				<mat-form-field>
-					<mat-label>{{'FISH_SCHOOL.FILTERS.STRAT_DATE' | translate}}</mat-label>
-					<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="model.startDate" required>
+					<mat-label>{{'FISH_SCHOOL.FILTERS.START_DATE' | translate}}</mat-label>
+					<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="model.startDate"
+						   #startDate="ngModel" minlength="10" required>
+					<div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="text-danger">
+						<div *ngIf="startDate.errors.required">
+							{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.START_DATE' | translate } }}</div>
+						<div *ngIf="startDate.errors.minlength">
+							{{ 'FISH_SCHOOL.VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.START_DATE' | translate, min: 10 } }}</div>
+					</div>
 					<mat-datepicker-toggle matSuffix [for]="picker">
 						<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
 					</mat-datepicker-toggle>
@@ -22,9 +35,17 @@
 				<mat-form-field>
 					<mat-label>{{'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate}}</mat-label>
 					<input matInput type="text" name="days" placeholder="# of days" autocomplete="off"
-						   [(ngModel)]="model.days" #days="ngModel" required>
+						   [(ngModel)]="model.days" #days="ngModel" minlength="1" required>
+					<div *ngIf="days.invalid && (days.dirty || days.touched)" class="text-danger">
+						<div *ngIf="days.errors.required">
+							{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate } }}</div>
+						<div *ngIf="days.errors.minlength">
+							{{ 'FISH_SCHOOL.VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate, min: 1 } }}</div>
+					</div>
 				</mat-form-field>
-				<m-spinner-button [options]="spinner" (click)="submit()">{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}</m-spinner-button>
+				<div class="m-login__action m-login__action--fit">
+					<m-spinner-button [options]="spinner" (click)="submit()">{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}</m-spinner-button>
+				</div>
 			</div>
 		</form>
 	</div>
