@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FishSchoolsComponent } from './fish-schools.component';
-import { RouterModule } from '@angular/router';
-import { LayoutModule } from '../../../layout/layout.module';
-import { PartialsModule } from '../../../partials/partials.module';
-import { ListTimelineModule } from '../../../partials/layout/quick-sidebar/list-timeline/list-timeline.module';
-import { WidgetChartsModule } from '../../../partials/content/widgets/charts/widget-charts.module';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FishSchoolsComponent} from './fish-schools.component';
+import {RouterModule} from '@angular/router';
+import {LayoutModule} from '../../../layout/layout.module';
+import {PartialsModule} from '../../../partials/partials.module';
+import {ListTimelineModule} from '../../../partials/layout/quick-sidebar/list-timeline/list-timeline.module';
+import {WidgetChartsModule} from '../../../partials/content/widgets/charts/widget-charts.module';
 import {
 	DateAdapter,
 	MAT_BOTTOM_SHEET_DATA, MAT_DATE_FORMATS, MAT_DATE_LOCALE,
@@ -72,6 +72,8 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TranslateModule} from '@ngx-translate/core';
 import {SpinnerButtonModule} from '../../../partials/content/general/spinner-button/spinner-button.module';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {AlertComponent} from '../ngbootstrap/alert/alert.component';
 
 export const DD_MM_YYYY_Format = {
 	parse: {
@@ -134,6 +136,7 @@ export const DD_MM_YYYY_Format = {
 		WidgetChartsModule,
 		TranslateModule.forChild(),
 		SpinnerButtonModule,
+		NgbModule,
 		RouterModule.forChild([
 			{
 				path: '',
@@ -154,13 +157,13 @@ export const DD_MM_YYYY_Format = {
 	],
 	providers: [
 		MatIconRegistry,
-		{ provide: MatBottomSheetRef, useValue: {} },
-		{ provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
+		{provide: MatBottomSheetRef, useValue: {}},
+		{provide: MAT_BOTTOM_SHEET_DATA, useValue: {}},
 		InterceptService,
-		{ provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true},
+		{provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true},
 		FishSchoolsService,
-		{ provide: DateAdapter, useClass: MomentDateAdapter },
-		{ provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format },
+		{provide: DateAdapter, useClass: MomentDateAdapter},
+		{provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format},
 	],
 	declarations: [
 		MaterialComponent,
@@ -203,8 +206,12 @@ export const DD_MM_YYYY_Format = {
 		TreeComponent,
 		BottomSheetComponent,
 		BottomSheetExampleComponent,
+		AlertComponent,
+
+		// FishSchool components
 		FishSchoolsComponent,
 	]
 })
 
-export class FishSchoolsModule {}
+export class FishSchoolsModule {
+}

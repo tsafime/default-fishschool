@@ -6,6 +6,7 @@ import {catchError, map, tap} from 'rxjs/operators';
 import {FishSchoolsResponse} from '../models/fish.schools.model';
 import {QueryFilter} from '../models/fishschool/query.filter';
 import {FilteredQuery} from '../models/fishschool/filtered.query';
+import {FsModel} from '../../content/pages/components/fish-schools/fish-schools.component';
 
 @Injectable()
 export class FishSchoolsService {
@@ -15,15 +16,15 @@ export class FishSchoolsService {
 	constructor(private http: HttpClient) {
 	}
 
-	view(model: any): Observable<FishSchoolsResponse> {
+	view(model: FsModel): Observable<FishSchoolsResponse> {
 
 		const queryFilters: QueryFilter[] = [];
 		queryFilters.push(new QueryFilter('name', [model.schoolName], '=', 'AND'));
 		queryFilters.push(new QueryFilter('feedDate', [model.startDate.format('DD-MM-YYYY')], '=', 'NONE'));
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, model.days, 0, ['feedDate'], 'ASC');
+		const json = JSON.stringify(filteredQuery);
 
-		const json = JSON.stringify(filteredQuery) ;
 		return this.http.post<FishSchoolsResponse>('http://localhost:51120/fishschool/view', json).pipe(
 			map((result: any) => {
 				return result;
@@ -52,22 +53,5 @@ export class FishSchoolsService {
 			// Let the app keep running by returning an empty result.
 			return of(result as T);
 		};
-
-		/*console.log('operation: ' + operation + ', error: ' + result);
-		return (error: any): Observable<any> => {
-			if (error.error instanceof ErrorEvent) {
-				// A client-side or network error occurred. Handle it accordingly.
-				console.error('An error occurred:', error.error.message);
-			} else {
-				// The backend returned an unsuccessful response code.
-				// The response body may contain clues as to what went wrong,
-				console.error(
-					`Backend returned code ${error.status}, ` +
-					`body was: ${error.error}`);
-			}
-
-			result.push(error.error);
-			return from(result);
-		};*/
 	}
 }

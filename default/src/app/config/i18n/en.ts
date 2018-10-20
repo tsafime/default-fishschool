@@ -55,6 +55,17 @@ export const locale = {
 				CONNECTION_FAILURE: 'Unable to connect to the server, please try again later'
 			}
 		},
+		FISH_SCHOOL: {
+			NO_RECORDS: 'No records to display',
+			VALIDATION: {
+				LOAD_FAILURE: 'Unable to load fish school records, please try again later'
+			},
+			FILTERS: {
+				SCHOOL_NAME: 'School name',
+				STRAT_DATE: 'Start date',
+				NUM_OF_DAYS: '# of days'
+			}
+		},
 		ECOMMERCE: {
 			COMMON: {
 				SELECTED_RECORDS_COUNT: 'Selected records count: ',

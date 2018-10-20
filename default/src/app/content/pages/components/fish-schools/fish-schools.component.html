@@ -1,15 +1,17 @@
 <div class="m-section">
 	<div class="example-container mat-elevation-z8">
+		<div *ngFor="let alert of alerts">
+			<ngb-alert [dismissible]="true" [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
+		</div>
 		<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 			<div class="example-container">
 				<mat-form-field>
-					<mat-label>School name</mat-label>
+					<mat-label>{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</mat-label>
 					<input matInput type="text" name="schoolName" placeholder="School name" autocomplete="off"
 						   [(ngModel)]="model.schoolName" required>
 				</mat-form-field>
-
 				<mat-form-field>
-					<mat-label>Start date</mat-label>
+					<mat-label>{{'FISH_SCHOOL.FILTERS.STRAT_DATE' | translate}}</mat-label>
 					<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="model.startDate" required>
 					<mat-datepicker-toggle matSuffix [for]="picker">
 						<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
@@ -18,7 +20,7 @@
 				</mat-form-field>
 
 				<mat-form-field>
-					<mat-label># of days</mat-label>
+					<mat-label>{{'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate}}</mat-label>
 					<input matInput type="text" name="days" placeholder="# of days" autocomplete="off"
 						   [(ngModel)]="model.days" #days="ngModel" required>
 				</mat-form-field>
@@ -27,12 +29,13 @@
 		</form>
 	</div>
 </div>
-<div class="m-section" *ngIf="show;else noRecords">
+<!--<div class="m-section" *ngIf="show;else noRecords">-->
+<div class="m-section">
 	<div class="example-container mat-elevation-z8">
 		<mat-form-field>
 			<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 		</mat-form-field>
-		<table class="table-striped" mat-table matSort [dataSource]="dataSource">
+		<table class="table-striped" mat-table matSort matSortActive="feedDate" matSortDirection="asc" [dataSource]="dataSource">
 			<ng-container *ngFor="let disCol of displayedColumns; let colIndex = index"
 						  matColumnDef="{{ displayedColumns[colIndex] }}">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[colIndex] }}</th>
@@ -44,8 +47,8 @@
 		</table>
 	</div>
 </div>
-<ng-template #noRecords>
+<!--<ng-template #noRecords>
 	<div class="m-section">
 		<p>No records to display</p>
 	</div>
-</ng-template>
+</ng-template>-->

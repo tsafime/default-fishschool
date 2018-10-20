@@ -1,10 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource, MatSort} from '@angular/material';
 import {FishSchoolsService} from '../../../../core/services/fish-schools.service';
 import {FishSchoolModel} from '../../../../core/models/fish-school.model';
 import {FishSchoolsResponse} from '../../../../core/models/fish.schools.model';
 import {SpinnerButtonOptions} from '../../../partials/content/general/spinner-button/button-options.interface';
 import * as moment from 'moment';
+import {TranslateService} from '@ngx-translate/core';
+import {Moment} from 'moment';
 
 @Component({
 	selector: 'm-fish-schools',
@@ -32,12 +34,13 @@ export class FishSchoolsComponent implements OnInit {
 		fullWidth: false
 	};
 
-	public model: any = { schoolName: '270517 102', startDate: moment(),  days: 10 };
+	public model: FsModel = {schoolName: '270517 102', startDate: moment(), days: 10};
 
 	@ViewChild(MatSort) sort: MatSort;
 	show: boolean = false;
+	alerts: Array<FsAlert> = [];
 
-	constructor(private service: FishSchoolsService) {
+	constructor(private service: FishSchoolsService, private translate: TranslateService) {
 	}
 
 	ngOnInit() {
@@ -49,46 +52,79 @@ export class FishSchoolsComponent implements OnInit {
 		}
 	}
 
-	submit() {
+	async submit() {
+
+		this.alerts = [];
 		this.spinner.active = true;
 		this.show = false;
 
 		// if (this.validate(this.f)) {
-			this.service.view(this.model).subscribe(response => {
-					console.log('Successfully loaded: ' + response.data.length + ' records');
-					this.dataSource = new MatTableDataSource<FishSchoolModel>(response.data);
-					this.dataSource.sort = this.sort;
+		this.service.view(this.model).subscribe(response => {
+				console.log('Successfully loaded: ' + response.data.length + ' records');
+				this.dataSource = new MatTableDataSource<FishSchoolModel>(response.data);
+				this.dataSource.sort = this.sort;
 
-					if (response.data.length > 0) {
-						console.log('Set show = true');
-						this.show = true;
-					}
-					// this.dataSource.filter =
-					// this.authNoticeService.setNotice(response.message, 'success');
-				},
-				response => {
-					console.log('Failure...' + response);
-					// if (response !== 'undefined' && response.status === 'Failure') {
-					// 	this.authNoticeService.setNotice(response.message, 'error');
-					// } else {
-					// 	this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'error');
-					// }
-				});
-
-			// this.service.view();
-			// const data = this.service.data;
-			/*
-            Example repsonse:
-            {"status":"Success","code":"MSG_02","message":"List of entities loaded successfully","size":9,
-            "data":[{"name":"270517 102","status":"ACTIVE","age":2,"specie":"Barakuda","quantity":1000,"dead":10,"averageWeight":0.11,
-            "foodWeight":6.655E-4,"totalGivenFood":122.0,"percentageTsemach":5.0,"foodTypeName":"Food Type","feedDate":"30/10/2016",
-            "fcr":1110.09,"salesFcr":122.0,"totalWeight":0.11}]}
-             */
-
-			// TODO: Check data status: Success and notify if failure
-		// }
+				if (response.data.length > 0) {
+					console.log('Set show = true');
+					this.show = true;
+				} else if (response.message) {
+					this.sendAlert({
+						message: this.translate.instant('FISH_SCHOOL.NO_RECORDS'),
+						type: 'info'
+					});
+				} else {
+					// Keep same message as in Login
+					this.sendAlert({
+						message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
+						type: 'error'
+					});
+				}
+			},
+			response => {
+				console.log('Failure...' + response);
+				if (response !== 'undefined' && response.status === 'Failure') {
+					this.sendAlert({
+						message: response.message,
+						type: 'error'
+					});
+				} else {
+					this.sendAlert({
+						message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FAILURE'),
+						type: 'error'
+					});
+				}
+			},
+			() => {
+				console.log('Done processing HTTP to view FishShcools');
+			});
 
 		this.spinner.active = false;
+		console.log('view() finished');
+	}
+
+	closeAlert(alert: FsAlert) {
+		const index: number = this.alerts.indexOf(alert);
+		this.alerts.splice(index, 1);
+	}
+
+	private sendAlert(alert: FsAlert) {
+		if (this.alerts.length > 2) {
+			this.alerts.splice(0, 1);
+		}
+
+		this.alerts.push(alert);
+		console.log('Alerts length: ' + this.alerts.length);
+		console.log('Alerts: ' + this.alerts[0].message);
 	}
 }
 
+export interface FsAlert {
+	type: string;
+	message: string;
+}
+
+export interface FsModel {
+	schoolName: string;
+	startDate: Moment;
+	days: number;
+}
