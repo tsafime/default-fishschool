@@ -1,54 +1,99 @@
 <div class="m-section">
-	<div class="example-container mat-elevation-z8">
-		<div *ngFor="let alert of alerts">
-			<ngb-alert [dismissible]="true" [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
-		</div>
-		<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
-			<div class="example-container">
-				<mat-form-field>
-					<mat-label>{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</mat-label>
-					<input matInput type="text" name="schoolName" placeholder="School name" autocomplete="off"
-						   [(ngModel)]="model.schoolName" #schoolName="ngModel" minlength="4" required>
-					<div *ngIf="schoolName.invalid && (schoolName.dirty || schoolName.touched)" class="text-danger">
-						<div *ngIf="schoolName.errors.required">
-							{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate } }}</div>
-						<div *ngIf="schoolName.errors.minlength">
-							{{ 'FISH_SCHOOL.VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate, min: 4 } }}</div>
-					</div>
-				</mat-form-field>
-				<mat-form-field>
-					<mat-label>{{'FISH_SCHOOL.FILTERS.START_DATE' | translate}}</mat-label>
-					<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="model.startDate"
-						   #startDate="ngModel" minlength="10" required>
-					<div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="text-danger">
-						<div *ngIf="startDate.errors.required">
-							{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.START_DATE' | translate } }}</div>
-						<div *ngIf="startDate.errors.minlength">
-							{{ 'FISH_SCHOOL.VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.START_DATE' | translate, min: 10 } }}</div>
-					</div>
-					<mat-datepicker-toggle matSuffix [for]="picker">
-						<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-					</mat-datepicker-toggle>
-					<mat-datepicker #picker [startAt]="model.startDate"></mat-datepicker>
-				</mat-form-field>
+	<mat-accordion class="example-headers-align">
+		<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+							 [expanded]="panelOpenState === true">
+			<mat-expansion-panel-header>
+				<mat-panel-title>{{'FISH_SCHOOL.FILTERS.PANEL.HEADER' | translate}}</mat-panel-title>
+				<mat-panel-description>{{'FISH_SCHOOL.FILTERS.PANEL.DESCRIPTION' | translate}}</mat-panel-description>
+			</mat-expansion-panel-header>
 
-				<mat-form-field>
-					<mat-label>{{'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate}}</mat-label>
-					<input matInput type="text" name="days" placeholder="# of days" autocomplete="off"
-						   [(ngModel)]="model.days" #days="ngModel" minlength="1" required>
-					<div *ngIf="days.invalid && (days.dirty || days.touched)" class="text-danger">
-						<div *ngIf="days.errors.required">
-							{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate } }}</div>
-						<div *ngIf="days.errors.minlength">
-							{{ 'FISH_SCHOOL.VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate, min: 1 } }}</div>
-					</div>
-				</mat-form-field>
-				<div class="m-login__action m-login__action--fit">
-					<m-spinner-button [options]="spinner" (click)="submit()">{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}</m-spinner-button>
-				</div>
+			<div *ngFor="let alert of alerts">
+				<ngb-alert [dismissible]="true" [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}
+				</ngb-alert>
 			</div>
-		</form>
-	</div>
+			<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+				<div class="example-container">
+					<!-- School name -->
+					<mat-form-field>
+						<label>{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
+						<mat-select name="schoolName" #schoolName="ngModel" [(ngModel)]="model.schoolName" required>
+							<option [value]="null" disabled selected>{{'FISH_SCHOOL.FILTERS.CHOOSE_SCHOOL_NAME' |
+								translate}}
+							</option>
+							<mat-option *ngFor="let name of fishSchoolNames" [value]="name">{{name}}</mat-option>
+						</mat-select>
+						<div *ngIf="schoolName.invalid" class="text-danger">
+							<div *ngIf="schoolName.errors.required">
+								{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name:
+								'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate } }}
+							</div>
+						</div>
+					</mat-form-field>
+
+					<!-- School status -->
+					<div class="mat-form-field-wrapper">
+						<mat-button-toggle-group name="status" class="form-group" [(ngModel)]="model.status"
+												 #status="ngModel">
+							<button class="btn" value="ACTIVE" (click)="model.status = 'ACTIVE'"
+									[class.btn-primary]="model.status === '' || model.status === 'ACTIVE'">
+								{{'FISH_SCHOOL.FILTERS.STATUS.ACTIVE' | translate}}
+							</button>
+							<button class="btn" value="INACTIVE" (click)="model.status = 'INACTIVE'"
+									[class.btn-primary]="model.status === 'INACTIVE'">
+								{{'FISH_SCHOOL.FILTERS.STATUS.INACTIVE' | translate}}
+							</button>
+							<button class="btn" value="SOLD" (click)="model.status = 'SOLD'"
+									[class.btn-primary]="model.status === 'SOLD'">
+								{{'FISH_SCHOOL.FILTERS.STATUS.SOLD' | translate}}
+							</button>
+						</mat-button-toggle-group>
+					</div>
+					<!-- Start date -->
+					<mat-form-field>
+						<mat-label>{{'FISH_SCHOOL.FILTERS.START_DATE' | translate}}</mat-label>
+						<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="model.startDate"
+							   #startDate="ngModel" minlength="10" required>
+						<div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)"
+							 class="text-danger">
+							<div *ngIf="startDate.errors.required">
+								{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name:
+								'FISH_SCHOOL.FILTERS.START_DATE' | translate } }}
+							</div>
+							<div *ngIf="startDate.errors.minlength">
+								{{ 'FISH_SCHOOL.VALIDATION.MIN_LENGTH_FIELD' | translate: { name:
+								'FISH_SCHOOL.FILTERS.START_DATE' | translate, min: 10 } }}
+							</div>
+						</div>
+						<mat-datepicker-toggle matSuffix [for]="picker">
+							<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+						</mat-datepicker-toggle>
+						<mat-datepicker #picker [startAt]="model.startDate"></mat-datepicker>
+					</mat-form-field>
+
+					<!-- # of days -->
+					<mat-form-field>
+						<mat-label>{{'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate}}</mat-label>
+						<input matInput type="text" name="days" placeholder="# of days" autocomplete="off"
+							   [(ngModel)]="model.days" #days="ngModel" minlength="1" required>
+						<div *ngIf="days.invalid && (days.dirty || days.touched)" class="text-danger">
+							<div *ngIf="days.errors.required">
+								{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name:
+								'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate } }}
+							</div>
+							<div *ngIf="days.errors.minlength">
+								{{ 'FISH_SCHOOL.VALIDATION.MIN_LENGTH_FIELD' | translate: { name:
+								'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate, min: 1 } }}
+							</div>
+						</div>
+					</mat-form-field>
+
+					<button class="btn btn-primary" (click)="submit()" [disabled]="! f.form.valid">
+						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
+					</button>
+				</div>
+			</form>
+		</mat-expansion-panel>
+	</mat-accordion>
 </div>
 <!--<div class="m-section" *ngIf="show;else noRecords">-->
 <div class="m-section">
@@ -56,7 +101,8 @@
 		<mat-form-field>
 			<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 		</mat-form-field>
-		<table class="table-striped" mat-table matSort matSortActive="feedDate" matSortDirection="asc" [dataSource]="dataSource">
+		<table class="table-striped" mat-table matSort matSortActive="feedDate" matSortDirection="asc"
+			   [dataSource]="dataSource">
 			<ng-container *ngFor="let disCol of displayedColumns; let colIndex = index"
 						  matColumnDef="{{ displayedColumns[colIndex] }}">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[colIndex] }}</th>

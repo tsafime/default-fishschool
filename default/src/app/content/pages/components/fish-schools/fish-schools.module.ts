@@ -48,7 +48,6 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MaterialPreviewModule} from '../../../partials/content/general/material-preview/material-preivew.module';
 import {ButtonComponent} from '../material/buttons-and-indicators/button/button.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {PizzaPartyComponent} from '../material/popups-and-modals/snackbar/pizza-party.component';
 import {MaterialComponent} from '../material/material.component';
 import {SliderComponent} from '../material/formcontrols/slider/slider.component';
 import {MaterialTabsComponent} from '../material/layout/material-tabs/material-tabs.component';
@@ -146,7 +145,6 @@ export const DD_MM_YYYY_Format = {
 	],
 	exports: [RouterModule],
 	entryComponents: [
-		PizzaPartyComponent,
 		DialogComponent,
 		ModalComponent,
 		Modal2Component,
@@ -196,7 +194,6 @@ export const DD_MM_YYYY_Format = {
 		ModalComponent,
 		Modal2Component,
 		Modal3Component,
-		PizzaPartyComponent,
 		SnackbarComponent,
 		MaterialTooltipComponent,
 		PaginatorComponent,

@@ -66,8 +66,18 @@ export const locale = {
 			},
 			FILTERS: {
 				SCHOOL_NAME: 'School name',
+				CHOOSE_SCHOOL_NAME: 'Choose School Name',
+				STATUS: {
+					ACTIVE: 'Active',
+					INACTIVE: 'Inactive',
+					SOLD: 'Sold'
+				},
 				START_DATE: 'Start date',
-				NUM_OF_DAYS: '# of days'
+				NUM_OF_DAYS: '# of days',
+				PANEL: {
+					HEADER: 'Fish school filters',
+					DESCRIPTION: 'Choose Filters'
+				}
 			},
 		},
 		ECOMMERCE: {

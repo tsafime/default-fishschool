@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import {TranslateService} from '@ngx-translate/core';
 import {Moment} from 'moment';
 import {NgForm} from '@angular/forms';
-import * as objectPath from 'object-path';
+import {FsNames} from '../../../../core/models/fish-school.names.model';
 
 @Component({
 	selector: 'm-fish-schools',
@@ -27,28 +27,26 @@ export class FishSchoolsComponent implements OnInit {
 		'Mortality', 'F.C.R.'];
 	dataSource: MatTableDataSource<FishSchoolModel>;
 	data: FishSchoolsResponse;
-	spinner: SpinnerButtonOptions = {
-		active: false,
-		spinnerSize: 18,
-		raised: true,
-		buttonColor: 'primary',
-		spinnerColor: 'accent',
-		fullWidth: false
-	};
 
-	public model: FsModel = {schoolName: '270517 102', startDate: moment('2017-07-30'), days: 10};
+	public model: FsModel = {schoolName: '', status: 'ACTIVE', startDate: moment('2017-07-26'), days: 10};
 
 	@ViewChild(MatSort) sort: MatSort;
 	show: boolean = false;
 	alerts: Array<FsAlert> = [];
+	fishSchoolNames: string[];
 
 	@ViewChild('f') f: NgForm;
 	errors: any = [];
+	panelOpenState: boolean = true;
 
 	constructor(private service: FishSchoolsService, private translate: TranslateService) {
 	}
 
 	ngOnInit() {
+		this.service.names().then(response => {
+			this.fishSchoolNames = response.data;
+			return response;
+		});
 	}
 
 	applyFilter(filterValue: string) {
@@ -57,53 +55,48 @@ export class FishSchoolsComponent implements OnInit {
 		}
 	}
 
-	async submit() {
+	submit() {
 
 		this.alerts = [];
-		this.spinner.active = true;
 		this.show = false;
+		this.dataSource = new MatTableDataSource<FishSchoolModel>();
 
-		this.service.view(this.model).subscribe(response => {
-				console.log('Successfully loaded: ' + response.data.length + ' records');
-				this.dataSource = new MatTableDataSource<FishSchoolModel>(response.data);
-				this.dataSource.sort = this.sort;
+		this.service.view(this.model).then(response => {
+			console.log('Successfully loaded: ' + response.data.length + ' records');
+			this.dataSource = new MatTableDataSource<FishSchoolModel>(response.data);
+			this.dataSource.sort = this.sort;
 
-				if (response.data.length > 0) {
-					console.log('Set show = true');
-					this.show = true;
-				} else if (response.message) {
-					this.sendAlert({
-						message: this.translate.instant('FISH_SCHOOL.NO_RECORDS'),
-						type: 'info'
-					});
-				} else {
-					// Keep same message as in Login
-					this.sendAlert({
-						message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
-						type: 'error'
-					});
-				}
-			},
-			response => {
-				console.log('Failure...' + response);
-				if (response !== 'undefined' && response.status === 'Failure') {
-					this.sendAlert({
-						message: response.message,
-						type: 'error'
-					});
-				} else {
-					this.sendAlert({
-						message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FAILURE'),
-						type: 'error'
-					});
-				}
-			},
-			() => {
-				console.log('Done processing HTTP to view FishShcools');
-			});
-		// }
+			if (response.data.length > 0) {
+				console.log('Set show = true');
+				this.show = true;
+			} else if (response.message) {
+				this.sendAlert({
+					message: this.translate.instant('FISH_SCHOOL.NO_RECORDS'),
+					type: 'info'
+				});
+			} else {
+				// Keep same message as in Login
+				this.sendAlert({
+					message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
+					type: 'danger'
+				});
+			}
+		})
+		.catch(response => {
+			console.log('Failure...' + response);
+			if (response !== 'undefined' && response.status === 'Failure') {
+				this.sendAlert({
+					message: response.message,
+					type: 'danger'
+				});
+			} else {
+				this.sendAlert({
+					message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FAILURE'),
+					type: 'danger'
+				});
+			}
+		});
 
-		this.spinner.active = false;
 		console.log('view() finished');
 	}
 
@@ -130,6 +123,7 @@ export interface FsAlert {
 
 export interface FsModel {
 	schoolName: string;
+	status: string;
 	startDate: Moment;
 	days: number;
 }
