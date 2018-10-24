@@ -31,7 +31,6 @@ export class FishSchoolsComponent implements OnInit {
 	public model: FsModel = {schoolName: '', status: 'ACTIVE', startDate: moment('2017-07-26'), days: 10};
 
 	@ViewChild(MatSort) sort: MatSort;
-	show: boolean = false;
 	alerts: Array<FsAlert> = [];
 	fishSchoolNames: string[];
 
@@ -58,17 +57,13 @@ export class FishSchoolsComponent implements OnInit {
 	submit() {
 
 		this.alerts = [];
-		this.show = false;
-		this.dataSource = new MatTableDataSource<FishSchoolModel>();
 
 		this.service.view(this.model).then(response => {
-			console.log('Successfully loaded: ' + response.data.length + ' records');
-			this.dataSource = new MatTableDataSource<FishSchoolModel>(response.data);
-			this.dataSource.sort = this.sort;
 
-			if (response.data.length > 0) {
-				console.log('Set show = true');
-				this.show = true;
+			if (response.status === 'Success') {
+				console.log('Successfully loaded: ' + response.data.length + ' records');
+				this.dataSource = new MatTableDataSource<FishSchoolModel>(response.data);
+				this.dataSource.sort = this.sort;
 			} else if (response.message) {
 				this.sendAlert({
 					message: this.translate.instant('FISH_SCHOOL.NO_RECORDS'),
