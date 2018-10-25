@@ -23,14 +23,14 @@ export class FishSchoolsComponent implements OnInit {
 	// 	'foodTypeName', 'feedDate', 'sale', 'totalSale', 'fcr', 'salesFcr', 'totalWeight'];
 
 	// If you choose to ddiplay other dates like: creationDate, updatedDate, deadLastUpdateDate make sure to uncomment in submit() the relevant cases
-	displayedColumns: string[] = ['feedDate', 'age', 'averageWeight', 'quantity', 'totalWeight', 'totalGivenFood', 'actualGivenFood',
+	displayedColumns: string[] = ['feedDate', 'age', 'menualAvgWeight', 'averageWeight', 'quantity', 'totalWeight', 'totalGivenFood', 'actualGivenFood',
 		'foodWeight', 'foodTypeName', 'dead', 'fcr'];
-	headers: string[] = ['Selected Date', 'Age', 'Avg. G', '# Fish', 'Total KG', 'Feed Plan', 'Given Feed', 'Total Food', 'Food Type',
+	headers: string[] = ['Selected Date', 'Age', 'Manual Weight', 'Avg. G', '# Fish', 'Total KG', 'Feed Plan', 'Given Feed', 'Total Food', 'Food Type',
 		'Mortality', 'F.C.R.'];
 	dataSource: MatTableDataSource<FishSchoolModel>;
 	data: FishSchoolsResponse;
 
-	public model: FsModel = {schoolName: '', status: 'ACTIVE', startDate: moment('2017-07-26'), days: 10};
+	public model: FsModel = {schoolName: '270517 102', status: 'ACTIVE', startDate: moment('2017-06-16'), days: 10};
 
 	@ViewChild(MatSort) sort: MatSort;
 	alerts: Array<FsAlert> = [];
@@ -44,9 +44,11 @@ export class FishSchoolsComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.service.names().then(response => {
+		this.service.names().toPromise().then(response => {
 			this.fishSchoolNames = response.data;
 			return response;
+		}).catch(error => {
+			this.alertNoConnaction();
 		});
 	}
 
@@ -60,7 +62,7 @@ export class FishSchoolsComponent implements OnInit {
 
 		this.alerts = [];
 
-		this.service.view(this.model).then(response => {
+		this.service.view(this.model).toPromise().then(response => {
 
 			if (response.status === 'Success') {
 
@@ -101,13 +103,17 @@ export class FishSchoolsComponent implements OnInit {
 					type: 'danger'
 				});
 			} else {
-
-				// Keep same message as in Login
-				this.sendAlert({
-					message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
-					type: 'danger'
-				});
+				this.alertNoConnaction();
 			}
+		});
+	}
+
+	private alertNoConnaction() {
+
+		// Keep same message as in Login
+		this.sendAlert({
+			message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
+			type: 'danger'
 		});
 	}
 

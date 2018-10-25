@@ -15,7 +15,7 @@ export class FishSchoolsService {
 	constructor(private http: HttpClient) {
 	}
 
-	view(model: FsModel): Promise<FishSchoolsResponse> {
+	view(model: FsModel) {
 
 		const queryFilters: QueryFilter[] = [];
 		queryFilters.push(new QueryFilter('name', [model.schoolName], '=', 'AND'));
@@ -24,11 +24,13 @@ export class FishSchoolsService {
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, model.days, 0, ['feedDate'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
-		return this.http.post<FishSchoolsResponse>('http://localhost:51120/fishschool/view', json).toPromise();
+		const httpPost = this.http.post<FishSchoolsResponse>('http://localhost:51120/fishschool/view', json);
+		return httpPost;
 	}
 
-	names(): Promise<FsNames> {
+	names() {
 		const json = {};
-		return this.http.post<FsNames>('http://localhost:51120/fishschool/names', json).toPromise();
+		const httpPost = this.http.post<FsNames>('http://localhost:51120/fishschool/names', json);
+		return httpPost;
 	}
 }

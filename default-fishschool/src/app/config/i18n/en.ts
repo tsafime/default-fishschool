@@ -67,6 +67,7 @@ export const locale = {
 			FILTERS: {
 				SCHOOL_NAME: 'School name',
 				CHOOSE_SCHOOL_NAME: 'Choose School Name',
+				SEARCH: 'Search',
 				STATUS: {
 					ACTIVE: 'Active',
 					INACTIVE: 'Inactive',
