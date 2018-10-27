@@ -50,7 +50,7 @@ export class AuthenticationService implements AuthService {
 	 * Get user roles
 	 * @returns {Observable<any>}
 	 */
-	public getUserRoles(): Observable<any> {
+	public getUserRoles(): Observable<string> {
 		return this.tokenStorage.getUserRole();
 	}
 

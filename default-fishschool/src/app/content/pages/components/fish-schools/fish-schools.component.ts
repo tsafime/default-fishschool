@@ -1,14 +1,17 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource, MatSort, MatSortable} from '@angular/material';
 import {FishSchoolsService} from '../../../../core/services/fish-schools.service';
-import {FishSchoolModel} from '../../../../core/models/fish-school.model';
-import {FishSchoolsResponse} from '../../../../core/models/fish.schools.model';
+import {FishSchoolModel} from '../../../../core/models/fishschool/fish-school.model';
+import {FishSchools} from '../../../../core/models/fishschool/fish.schools.model';
 import {SpinnerButtonOptions} from '../../../partials/content/general/spinner-button/button-options.interface';
 import * as moment from 'moment';
 import {TranslateService} from '@ngx-translate/core';
 import {Moment} from 'moment';
 import {NgForm} from '@angular/forms';
-import {FsNames} from '../../../../core/models/fish-school.names.model';
+import {FsNames} from '../../../../core/models/fishschool/fish-school.names.model';
+import {AuthenticationService} from '../../../../core/auth/authentication.service';
+import {Observable} from 'rxjs';
+import * as deepEqual from 'deep-equal';
 
 @Component({
 	selector: 'm-fish-schools',
@@ -22,13 +25,13 @@ export class FishSchoolsComponent implements OnInit {
 	// 	'menualAvgWeight', 'averageWeight', 'foodWeight', 'totalGivenFood', 'actualGivenFood', 'percentageTsemach', 'deadLastUpdateDate',
 	// 	'foodTypeName', 'feedDate', 'sale', 'totalSale', 'fcr', 'salesFcr', 'totalWeight'];
 
-	// If you choose to ddiplay other dates like: creationDate, updatedDate, deadLastUpdateDate make sure to uncomment in submit() the relevant cases
+	// If you choose to ddiplay other dates like: creationDate, updatedDate, deadLastUpdateDate make sure to uncomment in view() the relevant cases
 	displayedColumns: string[] = ['feedDate', 'age', 'menualAvgWeight', 'averageWeight', 'quantity', 'totalWeight', 'totalGivenFood', 'actualGivenFood',
 		'foodWeight', 'foodTypeName', 'dead', 'fcr'];
 	headers: string[] = ['Selected Date', 'Age', 'Manual Weight', 'Avg. G', '# Fish', 'Total KG', 'Feed Plan', 'Given Feed', 'Total Food', 'Food Type',
-		'Mortality', 'F.C.R.'];
+		'Mortality', 'F.C.R.', 'Save'];
 	dataSource: MatTableDataSource<FishSchoolModel>;
-	data: FishSchoolsResponse;
+	data: FishSchools;
 
 	public model: FsModel = {schoolName: '270517 102', status: 'ACTIVE', startDate: moment('2017-06-16'), days: 10};
 
@@ -39,8 +42,10 @@ export class FishSchoolsComponent implements OnInit {
 	@ViewChild('f') f: NgForm;
 	errors: any = [];
 	panelOpenState: boolean = true;
+	roles: string;
+	originalData: FishSchoolModel[] = [];
 
-	constructor(private service: FishSchoolsService, private translate: TranslateService) {
+	constructor(private service: FishSchoolsService, private authService: AuthenticationService, private translate: TranslateService) {
 	}
 
 	ngOnInit() {
@@ -50,6 +55,10 @@ export class FishSchoolsComponent implements OnInit {
 		}).catch(error => {
 			this.alertNoConnaction();
 		});
+
+		this.authService.getUserRoles().subscribe(role => {
+			this.roles = role;
+		});
 	}
 
 	applyFilter(filterValue: string) {
@@ -58,7 +67,7 @@ export class FishSchoolsComponent implements OnInit {
 		}
 	}
 
-	submit() {
+	view() {
 
 		this.alerts = [];
 
@@ -73,21 +82,9 @@ export class FishSchoolsComponent implements OnInit {
 						type: 'info'
 					});
 				} else {
-					this.dataSource = new MatTableDataSource<FishSchoolModel>(response.data);
 
-					this.dataSource.sortingDataAccessor = (item, property) => {
-						switch (property) {
-							// case 'deadLastUpdateDate':
-							// case 'updatedDate':
-							// case 'creationDate':
-							case 'feedDate':
-								return moment(item.feedDate, 'DD/MM/YYYY');
-							default:
-								return item[property];
-						}
-					};
-
-					this.dataSource.sort = this.sort;
+					// Deep copy
+					this.loadData(response.data);
 				}
 			} else {
 				this.sendAlert({
@@ -96,7 +93,6 @@ export class FishSchoolsComponent implements OnInit {
 				});
 			}
 		}).catch(response => {
-			console.log('Failure...' + response);
 			if (response !== 'undefined' && response.status === 'Failure') {
 				this.sendAlert({
 					message: response.message,
@@ -108,6 +104,75 @@ export class FishSchoolsComponent implements OnInit {
 		});
 	}
 
+	save() {
+
+		const httpPost: Observable<FishSchools> = this.service.save(this.originalData, this.dataSource.data);
+
+		if (httpPost !== null) {
+			httpPost.toPromise().then(response => {
+				if (response.status === 'Success') {
+
+					// Response may contain partial data, merge it
+					const data = response.data;
+					this.dataSource.data.forEach((item, index) => {
+
+						// We might get less data since not all records in table were updated
+						if (data[index]) {
+							const deepEqual1 = deepEqual(item.id, data[index].id);
+							const i = this.dataSource.data.indexOf(item);
+							this.dataSource.data[i] = data[index];
+						}
+					});
+
+					this.loadData(this.dataSource.data);
+					this.sendAlert({
+						message: this.translate.instant('FISH_SCHOOL.RESULTS.FISH_SCHOOL_UPDATE_SUCCESS'),
+						type: 'success'
+					});
+				}
+			}).catch(response => {
+				if (response.error !== 'undefined' && response.error.status === 'Failure') {
+					this.sendAlert({
+						message: response.message,
+						type: 'danger'
+					});
+				} else {
+					this.alertNoConnaction();
+				}
+			});
+		} else {
+			this.sendAlert({
+				message: this.translate.instant('FISH_SCHOOL.NO_CHANGES'),
+				type: 'info'
+			});
+		}
+	}
+
+	closeAlert(alert: FsAlert) {
+		const index: number = this.alerts.indexOf(alert);
+		this.alerts.splice(index, 1);
+	}
+
+	private loadData(data: FishSchoolModel[]) {
+
+		this.originalData = JSON.parse(JSON.stringify(data));
+		this.dataSource = new MatTableDataSource<FishSchoolModel>(data);
+
+		this.dataSource.sortingDataAccessor = (item, property) => {
+			switch (property) {
+				// case 'deadLastUpdateDate':
+				// case 'updatedDate':
+				// case 'creationDate':
+				case 'feedDate':
+					return moment(item.feedDate, 'DD/MM/YYYY');
+				default:
+					return item[property];
+			}
+		};
+
+		this.dataSource.sort = this.sort;
+	}
+
 	private alertNoConnaction() {
 
 		// Keep same message as in Login
@@ -115,11 +180,6 @@ export class FishSchoolsComponent implements OnInit {
 			message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
 			type: 'danger'
 		});
-	}
-
-	closeAlert(alert: FsAlert) {
-		const index: number = this.alerts.indexOf(alert);
-		this.alerts.splice(index, 1);
 	}
 
 	private sendAlert(alert: FsAlert) {

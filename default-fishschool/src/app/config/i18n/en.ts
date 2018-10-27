@@ -59,6 +59,7 @@ export const locale = {
 		},
 		FISH_SCHOOL: {
 			NO_RECORDS: 'No records to display',
+			NO_CHANGES: 'No changes detected, will not save records',
 			VALIDATION: {
 				LOAD_FAILURE: 'Unable to load fish school records, please try again later',
 				REQUIRED_FIELD: '{{name}} is required',
@@ -80,6 +81,12 @@ export const locale = {
 					DESCRIPTION: 'Choose Filters'
 				}
 			},
+			RESULTS: {
+				FISH_SCHOOL_UPDATE_SUCCESS: 'Fish schools updated successfully',
+			},
+		},
+		ACTIONS: {
+			SAVE: 'Save',
 		},
 		ECOMMERCE: {
 			COMMON: {

@@ -25,7 +25,7 @@ export class TokenStorage {
 	 * Get user roles in JSON string
 	 * @returns {Observable<any>}
 	 */
-	public getUserRole(): Observable<any> {
+	public getUserRole(): Observable<string> {
 		const role = localStorage.getItem('userRole');
 		return of(role);
 	}
@@ -55,7 +55,7 @@ export class TokenStorage {
 	 * @param role
 	 * @returns {TokenStorage}
 	 */
-	public setUserRole(role: any): any {
+	public setUserRole(role: string): any {
 		if (role != null) {
 			localStorage.setItem('userRole', role);
 		}

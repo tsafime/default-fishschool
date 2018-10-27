@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 		if (this.validate(this.f)) {
 			this.authService.login(this.model).subscribe(response => {
 				if (response !== 'undefined' && response.status === 'Success') {
-					console.log('LoghNotin successfull: ' + response.name);
 					this.authNoticeService.setNotice(response.message, 'success');
 					this.router.navigate(['/']);
 				} else if (response.message) {

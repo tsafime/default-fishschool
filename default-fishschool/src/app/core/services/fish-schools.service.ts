@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {FishSchoolModel} from '../models/fish-school.model';
-import {FishSchoolsResponse} from '../models/fish.schools.model';
+import {FishSchoolModel} from '../models/fishschool/fish-school.model';
+import {FishSchools} from '../models/fishschool/fish.schools.model';
 import {QueryFilter} from '../models/fishschool/query.filter';
 import {FilteredQuery} from '../models/fishschool/filtered.query';
 import {FsModel} from '../../content/pages/components/fish-schools/fish-schools.component';
-import {FsNames} from '../models/fish-school.names.model';
+import {FsNames} from '../models/fishschool/fish-school.names.model';
+import * as deepEqual from 'deep-equal';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class FishSchoolsService {
-
-	data: FishSchoolModel[];
 
 	constructor(private http: HttpClient) {
 	}
@@ -24,13 +24,25 @@ export class FishSchoolsService {
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, model.days, 0, ['feedDate'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
-		const httpPost = this.http.post<FishSchoolsResponse>('http://localhost:51120/fishschool/view', json);
-		return httpPost;
+		return this.http.post<FishSchools>('http://localhost:51120/fishschool/view', json);
 	}
 
 	names() {
 		const json = {};
-		const httpPost = this.http.post<FsNames>('http://localhost:51120/fishschool/names', json);
-		return httpPost;
+		return this.http.post<FsNames>('http://localhost:51120/fishschool/names', json);
+	}
+
+	save(originalData: FishSchoolModel[], editedData: FishSchoolModel[]): Observable<FishSchools> {
+
+		const dirty: FishSchoolModel[] = editedData.filter((item, index) => {
+			const deepEqual1 = deepEqual(item, originalData[index]);
+			return ! deepEqual1;
+		});
+
+		if (dirty.length > 0) {
+			return this.http.post<FishSchools>('http://localhost:51120/fishschool/update', {entities: dirty});
+		}
+
+		return null;
 	}
 }
