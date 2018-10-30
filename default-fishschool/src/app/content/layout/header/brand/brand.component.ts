@@ -7,6 +7,7 @@ import { DOCUMENT } from '@angular/common';
 @Component({
 	selector: 'm-brand',
 	templateUrl: './brand.component.html',
+	styleUrls: ['./brand.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BrandComponent implements OnInit {

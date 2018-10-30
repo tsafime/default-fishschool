@@ -471,13 +471,13 @@ export class MenuConfig implements ConfigModel {
 						page: '/fish-schools',
 						translate: 'MENU.FISH_SCHOOLS'
 					},
-					{section: 'Tools'},
+					/*{section: 'Tools'},
 					{
 						title: 'Layout Builder',
 						root: true,
 						icon: 'flaticon-settings',
 						page: '/builder'
-					}
+					}*/
 				]
 			}
 		};
