@@ -60,6 +60,7 @@ export const locale = {
 		FISH_SCHOOL: {
 			NO_RECORDS: 'No records to display',
 			NO_CHANGES: 'No changes detected, will not update records',
+			UPDATE_WITHOUT_RECORDS: 'Your Fish school data not yet visible, update cannot be done',
 			VALIDATION: {
 				LOAD_FAILURE: 'Unable to load fish school records, please try again later',
 				REQUIRED_FIELD: '{{name}} is required',

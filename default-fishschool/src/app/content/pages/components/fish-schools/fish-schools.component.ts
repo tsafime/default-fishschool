@@ -112,7 +112,7 @@ export class FishSchoolsComponent implements OnInit {
 
 	update() {
 
-		if (this.dataSource.data) {
+		if (this.dataSource) {
 			const httpPost: Observable<FishSchools> = this.service.update(this.originalData, this.dataSource.data);
 
 			if (httpPost !== null) {
@@ -153,6 +153,11 @@ export class FishSchoolsComponent implements OnInit {
 					type: 'info'
 				});
 			}
+		} else {
+			this.sendAlert({
+				message: this.translate.instant('FISH_SCHOOL.UPDATE_WITHOUT_RECORDS'),
+				type: 'warning'
+			});
 		}
 	}
 
