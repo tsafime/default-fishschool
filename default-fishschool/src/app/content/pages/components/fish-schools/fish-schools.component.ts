@@ -188,6 +188,7 @@ export class FishSchoolsComponent implements OnInit {
 		};
 
 		this.dataSource.sort = this.sort;
+		this.panelOpenState = false;
 	}
 
 	private alertNoConnaction() {
