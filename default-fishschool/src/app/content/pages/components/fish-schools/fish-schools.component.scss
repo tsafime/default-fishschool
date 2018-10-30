@@ -22,7 +22,9 @@ th.mat-sort-header-sorted {
 	vertical-align: middle;
 }
 
-.no-alert {
-	padding: 0.85rem 1.5rem;
-	position: relative;
+// Remove input number arrows, example taken from: https://css-tricks.com/snippets/css/turn-off-number-input-spinners/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }

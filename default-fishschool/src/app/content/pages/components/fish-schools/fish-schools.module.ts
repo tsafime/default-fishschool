@@ -19,8 +19,9 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InterceptService} from '../../../../core/services/intercept.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {FishSchoolsService} from '../../../../core/services/fish-schools.service';
+import {FishSchoolsService} from '../../../../core/services/fishschool/fish-schools.service';
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
+import {FishSchoolsAuthorizationService} from '../../../../core/services/fishschool/fish-schools.authorization.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -82,6 +83,7 @@ export const DD_MM_YYYY_Format = {
 			useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
 		},
 		FishSchoolsService,
+		FishSchoolsAuthorizationService,
 	],
 	declarations: [
 		FishSchoolsComponent,
