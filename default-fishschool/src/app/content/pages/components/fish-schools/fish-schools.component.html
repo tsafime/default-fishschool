@@ -54,7 +54,7 @@
 					<mat-form-field>
 						<mat-label>{{'FISH_SCHOOL.FILTERS.START_DATE' | translate}}</mat-label>
 						<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="model.startDate"
-							   #startDate="ngModel" minlength="10" required>
+							   #startDate="ngModel" minlength="10" required [max]="maxDate">
 						<div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)"
 							 class="text-danger">
 							<div *ngIf="startDate.errors.required">

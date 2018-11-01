@@ -44,6 +44,7 @@ export class FishSchoolsComponent implements OnInit {
 	roles: string;
 	originalData: FishSchoolModel[] = [];
 	recordsFormGroup: FormGroup[] = [];
+	maxDate: Date = new Date();
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService) {
