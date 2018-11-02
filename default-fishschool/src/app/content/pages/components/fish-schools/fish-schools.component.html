@@ -212,8 +212,7 @@
 
 							<!-- TODO: Use pull down menu -->
 
-							<input matInput type="number" [value]="row.foodTypeName" [(ngModel)]="row.foodTypeName" required step=".01" min="0"
-								   (keypress)="($event.charCode == 8 || $event.charCode == 0 || $event.charCode == 13) ? null : $event.charCode >= 48 && $event.charCode <= 57">
+							<input matInput type="text" [value]="row.foodTypeName" [(ngModel)]="row.foodTypeName" required>
 						</mat-form-field>
 						<ng-template #display>{{row.foodTypeName}}</ng-template>
 					</td>
