@@ -1,13 +1,14 @@
 <!--Begin::Section-->
 <div class="row">
-	<div class="col-xl-4">
+	<!--<div class="col-xl-4">
 		<m-finance-stats></m-finance-stats>
 	</div>
 	<div class="col-xl-4">
 		<m-blog></m-blog>
-	</div>
-	<div class="col-xl-4">
-		<m-packages></m-packages>
+	</div>-->
+	<div class="col-xl-6">
+		<!--<m-packages></m-packages>-->
+		<m-schools-summary (valueChange)="mySchoolsSum = $event" [schoolsSum]="mySchoolsSum"></m-schools-summary>
 	</div>
 </div>
 <!--End::Section-->

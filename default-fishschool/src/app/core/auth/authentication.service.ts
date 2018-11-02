@@ -2,7 +2,7 @@ import {Observable, Subject, from, throwError} from 'rxjs';
 import {map, catchError, tap, switchMap} from 'rxjs/operators';
 
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {AuthService} from 'ngx-auth';
 
 import {TokenStorage} from './token-storage.service';

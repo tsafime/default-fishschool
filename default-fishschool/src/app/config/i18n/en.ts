@@ -57,6 +57,18 @@ export const locale = {
 				CONNECTION_FAILURE: 'Unable to connect to the server, please try again later'
 			},
 		},
+		DASHBOARD: {
+			FARM_SUMMARY: 'Farm summary',
+			SUMMARY: 'Summary',
+			AVG_WEIGHT: 'Average Weight',
+			NUM_OF_FISH: '# Of Fish',
+			FOOD_WEIGHT: 'Food Weight',
+			FCR: 'F.C.R.',
+			PLAN_FOOD: 'Plan Food',
+			QUANTITY: 'Quantity',
+			FEED_DATE: 'Feed Date',
+			FOOD_TYPE: 'Food Type'
+		},
 		FISH_SCHOOL: {
 			NO_RECORDS: 'No records to display',
 			NO_CHANGES: 'No changes detected, will not update records',

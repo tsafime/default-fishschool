@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource, MatSort, MatSortable} from '@angular/material';
+import {MatTableDataSource, MatSort} from '@angular/material';
 import {FishSchoolsService} from '../../../../core/services/fishschool/fish-schools.service';
 import {FishSchoolModel} from '../../../../core/models/fishschool/fish-school.model';
 import {FishSchools} from '../../../../core/models/fishschool/fish.schools.model';
 import * as moment from 'moment';
 import {TranslateService} from '@ngx-translate/core';
 import {Moment} from 'moment';
-import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import {NgForm, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../../../core/auth/authentication.service';
 import {Observable} from 'rxjs';
 import * as deepEqual from 'deep-equal';
@@ -24,11 +24,12 @@ export class FishSchoolsComponent implements OnInit {
 	// 	'menualAvgWeight', 'averageWeight', 'foodWeight', 'totalGivenFood', 'actualGivenFood', 'percentageTsemach', 'deadLastUpdateDate',
 	// 	'foodTypeName', 'feedDate', 'sale', 'totalSale', 'fcr', 'salesFcr', 'totalWeight'];
 
-	// If you choose to ddiplay other dates like: creationDate, updatedDate, deadLastUpdateDate make sure to uncomment in view() the relevant cases
-	displayedColumns: string[] = ['feedDate', 'age', 'menualAvgWeight', 'averageWeight', 'quantity', 'totalWeight', 'totalGivenFood', 'actualGivenFood',
-		'foodWeight', 'foodTypeName', 'dead', 'fcr'];
-	headers: string[] = ['Selected Date', 'Age', 'Manual Weight', 'Avg. G', '# Fish', 'Total KG', 'Feed Plan', 'Given Feed', 'Total Food', 'Food Type',
-		'Mortality', 'F.C.R.', 'Save'];
+	// If you choose to ddiplay other dates like: creationDate, updatedDate, deadLastUpdateDate make sure to uncomment in view()
+	// the relevant cases
+	displayedColumns: string[] = ['feedDate', 'age', 'menualAvgWeight', 'averageWeight', 'quantity', 'totalWeight', 'totalGivenFood',
+		'actualGivenFood', 'foodWeight', 'foodTypeName', 'dead', 'fcr'];
+	headers: string[] = ['Selected Date', 'Age', 'Manual Weight', 'Avg. G', '# Fish', 'Total KG', 'Feed Plan', 'Given Feed', 'Total Food',
+		'Food Type', 'Mortality', 'F.C.R.', 'Save'];
 	dataSource: MatTableDataSource<FishSchoolModel>;
 	data: FishSchools;
 
@@ -43,7 +44,6 @@ export class FishSchoolsComponent implements OnInit {
 	panelOpenState: boolean = true;
 	roles: string;
 	originalData: FishSchoolModel[] = [];
-	recordsFormGroup: FormGroup[] = [];
 	maxDate: Date = new Date();
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService, private translate: TranslateService,
@@ -61,11 +61,6 @@ export class FishSchoolsComponent implements OnInit {
 		this.authService.getUserRoles().subscribe(role => {
 			this.roles = role;
 		});
-
-		this.recordsFormGroup.push(new FormGroup({
-			fishSchool: new FormGroup({
-			})
-		}));
 	}
 
 	applyFilter(filterValue: string) {

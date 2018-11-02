@@ -1,0 +1,90 @@
+<m-portlet [options]="{class: ['m--bg-warning', 'm-portlet--bordered-semi']}">
+	<!-- use ng-container[mPortletHeadTitle] for the title -->
+	<ng-container mPortletHeadTitle>
+		<div class="m-portlet__head-title">
+			<h3 class="m-portlet__head-text m--font-light">{{'DASHBOARD.FARM_SUMMARY' | translate}}</h3>
+		</div>
+	</ng-container>
+
+	<!-- use ng-container[mPortletBody] for the body content -->
+	<ng-container mPortletBody>
+		<!--begin::Widget 29-->
+		<div class="m-widget29">
+			<div class="m-widget_content">
+				<h3 class="m-widget_content-title">{{'DASHBOARD.SUMMARY' | translate}}</h3>
+				<div class="m-widget_content-items">
+					<div class="m-widget_content-item">
+						<span>{{'DASHBOARD.AVG_WEIGHT' | translate}}</span>
+						<span class="m--font-accent">{{ schoolsSum.totalAverageWeight }}</span>
+					</div>
+					<div class="m-widget_content-item">
+						<span>{{'DASHBOARD.NUM_OF_FISH' | translate}}</span>
+						<span class="m--font-brand">{{ schoolsSum.totalNumberOfFish }}</span>
+					</div>
+					<div class="m-widget_content-item">
+						<span>{{'DASHBOARD.FOOD_WEIGHT' | translate}}</span>
+						<span>{{ schoolsSum.totalFoodWeight }}</span>
+					</div>
+					<div class="m-widget_content-item">
+						<span>{{'DASHBOARD.FCR' | translate}}</span>
+						<span class="m--font-accent">{{ schoolsSum.totalFCR }}</span>
+					</div>
+					<div class="m-widget_content-item">
+						<span>{{'DASHBOARD.PLAN_FOOD' | translate}}</span>
+						<span class="m--font-brand">{{ schoolsSum.totalPlanFood }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="m-widget_content" *ngFor="let sum of schoolsSum.schoolSummaries">
+				<h3 class="m-widget_content-title">Name: {{ sum.name }}</h3>
+				<div class="m-widget_content-items">
+					<div class="m-widget_content-item">
+						<span>{{'DASHBOARD.QUANTITY' | translate}}</span>
+						<span class="m--font-accent">{{ sum.quantity }}</span>
+					</div>
+					<div class="m-widget_content-item">
+						<span>{{'DASHBOARD.AVG_WEIGHT' | translate}}</span>
+						<span class="m--font-brand">{{ sum.averageWeight }}</span>
+					</div>
+					<div class="m-widget_content-item">
+						<span>{{'DASHBOARD.FOOD_WEIGHT' | translate}}</span>
+						<span>{{ sum.foodWeight }}</span>
+					</div>
+					<div class="m-widget_content-item">
+						<span>{{'DASHBOARD.FCR' | translate}}</span>
+						<span class="m--font-accent">{{ sum.fcr }}</span>
+					</div>
+					<div class="m-widget_content-item">
+						<span>{{'DASHBOARD.FEED_DATE' | translate}}</span>
+						<span class="m--font-brand">{{sum.feedDate}}</span>
+					</div>
+					<div class="m-widget_content-item">
+						<span>{{'DASHBOARD.FOOD_TYPE' | translate}}</span>
+						<span>{{sum.foodTypeName}}</span>
+					</div>
+				</div>
+				<div class="m-widget2">
+					<div class="m-widget2__item">
+						<div class="m-widget2__img m-widget4__img--logo">
+							<h4 class="m-widget_content-title">Feed Types:</h4>
+						</div>
+						<div class="m-widget2__item">
+							<div class="m-widget2__info" *ngFor="let feed of sum.feedTypes">
+								<span class="m-widget2__title element_bold">
+									{{'DASHBOARD.FOOD_TYPE' | translate}}:,
+								</span>
+								<span class="element_normal">{{ feed.key }}</span>
+								<span class="m-widget2__sub element_bold">
+									{{'DASHBOARD.QUANTITY' | translate}}:
+								</span>
+								<span class="element_normal">{{ feed.value }}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end::Widget 29-->
+	</ng-container>
+	<!--<ng-template #loading>Loading Farm summary...</ng-template>-->
+</m-portlet>
