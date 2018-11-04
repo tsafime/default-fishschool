@@ -209,10 +209,13 @@
 					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[9] }}</th>
 					<td mat-cell *matCellDef="let row">
 						<mat-form-field floatLabel="never" *ngIf="isReadWite('foodTypeName'); else display">
-
-							<!-- TODO: Use pull down menu -->
-
-							<input matInput type="text" [value]="row.foodTypeName" [(ngModel)]="row.foodTypeName" required>
+							<mat-select name="foodTypeName" #schoolName="ngModel" [(ngModel)]="row.foodTypeName"
+										placeholder="{{'FOOD.FOOD_TYPE' | translate}}" required>
+								<option [value]="null" disabled>{{'FOOD.CHOOSE_FOOD_TYPE' |
+									translate}}
+								</option>
+								<mat-option *ngFor="let food of foodNames" [value]="food">{{food}}</mat-option>
+							</mat-select>
 						</mat-form-field>
 						<ng-template #display>{{row.foodTypeName}}</ng-template>
 					</td>

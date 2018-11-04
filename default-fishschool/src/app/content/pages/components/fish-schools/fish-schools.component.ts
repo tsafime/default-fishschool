@@ -11,6 +11,8 @@ import {AuthenticationService} from '../../../../core/auth/authentication.servic
 import {Observable} from 'rxjs';
 import * as deepEqual from 'deep-equal';
 import {FishSchoolsAuthorizationService} from '../../../../core/services/fishschool/fish-schools.authorization.service';
+import {FsNames} from '../../../../core/models/fishschool/fish-school.names.model';
+import {FoodService} from '../../../../core/services/fishschool/food.service';
 
 @Component({
 	selector: 'm-fish-schools',
@@ -45,13 +47,14 @@ export class FishSchoolsComponent implements OnInit {
 	roles: string;
 	originalData: FishSchoolModel[] = [];
 	maxDate: Date = new Date();
+	foodNames: string[];
 
-	constructor(private service: FishSchoolsService, private authService: AuthenticationService, private translate: TranslateService,
-				private authorization: FishSchoolsAuthorizationService) {
+	constructor(private service: FishSchoolsService, private foodService: FoodService, private authService: AuthenticationService,
+				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService) {
 	}
 
-	ngOnInit() {
-		this.service.names().toPromise().then(response => {
+	async ngOnInit() {
+		await this.service.names().toPromise().then(response => {
 			this.fishSchoolNames = response.data;
 			return response;
 		}).catch(error => {
@@ -60,6 +63,11 @@ export class FishSchoolsComponent implements OnInit {
 
 		this.authService.getUserRoles().subscribe(role => {
 			this.roles = role;
+		});
+
+		this.foodService.names().toPromise().then(response => {
+			this.foodNames = response.data;
+			return response;
 		});
 	}
 
