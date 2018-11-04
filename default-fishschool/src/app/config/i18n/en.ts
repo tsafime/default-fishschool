@@ -98,6 +98,10 @@ export const locale = {
 				FISH_SCHOOL_UPDATE_SUCCESS: 'Fish schools updated successfully',
 			},
 		},
+		FOOD: {
+			FOOD_TYPE: 'Food Type',
+			CHOOSE_FOOD_TYPE: 'Choose Food Type',
+		},
 		ACTIONS: {
 			SAVE: 'Save',
 		},

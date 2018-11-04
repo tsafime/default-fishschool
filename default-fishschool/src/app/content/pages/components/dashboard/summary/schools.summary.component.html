@@ -9,7 +9,7 @@
 	<!-- use ng-container[mPortletBody] for the body content -->
 	<ng-container mPortletBody>
 		<!--begin::Widget 29-->
-		<div class="m-widget29">
+		<div class="m-widget29" (click)="viewDetails()">
 			<div class="m-widget_content">
 				<h3 class="m-widget_content-title">{{'DASHBOARD.SUMMARY' | translate}}</h3>
 				<div class="m-widget_content-items">
@@ -63,9 +63,9 @@
 						<span>{{sum.foodTypeName}}</span>
 					</div>
 				</div>
-				<div class="m-widget2">
+				<!--<div class="m-widget2">
 					<div class="m-widget2__item">
-						<div class="m-widget2__img m-widget4__img--logo">
+						<div class="m-widget2__img m-widget4__img&#45;&#45;logo">
 							<h4 class="m-widget_content-title">Feed Types:</h4>
 						</div>
 						<div class="m-widget2__item">
@@ -81,7 +81,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 		<!--end::Widget 29-->

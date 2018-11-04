@@ -8,12 +8,21 @@ import { ListTimelineModule } from '../../../partials/layout/quick-sidebar/list-
 import { WidgetChartsModule } from '../../../partials/content/widgets/charts/widget-charts.module';
 import {SchoolsSummaryService} from '../../../../core/services/fishschool/summary/schools.summary.service';
 import {DD_MM_YYYY_Format} from '../fish-schools/fish-schools.module';
-import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material';
+import {
+	DateAdapter,
+	MAT_DATE_FORMATS,
+	MAT_DIALOG_DEFAULT_OPTIONS,
+	MatDialogModule,
+	MatFormFieldModule,
+	MatInputModule
+} from '@angular/material';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {InterceptService} from '../../../../core/services/intercept.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {SchoolsSummaryComponent} from './summary/schools.summary.component';
+import {SchoolsSummaryDetailsComponent} from './summary/details/schools.summary.details.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
 	imports: [
@@ -23,6 +32,10 @@ import {SchoolsSummaryComponent} from './summary/schools.summary.component';
 		PartialsModule,
 		ListTimelineModule,
 		WidgetChartsModule,
+		MatInputModule,
+		MatFormFieldModule,
+		FormsModule,
+		MatDialogModule,
 		TranslateModule.forChild(),
 		RouterModule.forChild([
 			{
@@ -36,11 +49,16 @@ import {SchoolsSummaryComponent} from './summary/schools.summary.component';
 		{provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true},
 		{provide: DateAdapter, useClass: MomentDateAdapter},
 		{provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format},
-		SchoolsSummaryService
+		SchoolsSummaryService,
+		{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+	],
+	entryComponents: [
+		SchoolsSummaryDetailsComponent
 	],
 	declarations: [
 		DashboardComponent,
 		SchoolsSummaryComponent,
+		SchoolsSummaryDetailsComponent,
 	]
 })
 export class DashboardModule {}
