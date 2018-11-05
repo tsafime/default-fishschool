@@ -11,9 +11,9 @@ import {DD_MM_YYYY_Format} from '../fish-schools/fish-schools.module';
 import {
 	DateAdapter,
 	MAT_DATE_FORMATS,
-	MAT_DIALOG_DEFAULT_OPTIONS, MatDialog,
+	MAT_DIALOG_DEFAULT_OPTIONS, MatDatepickerModule, MatDialog,
 	MatDialogModule,
-	MatFormFieldModule,
+	MatFormFieldModule, MatIconModule, MatIconRegistry,
 	MatInputModule, MatSortModule, MatTableModule
 } from '@angular/material';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
@@ -38,6 +38,8 @@ import {FormsModule} from '@angular/forms';
 		MatDialogModule,
 		MatTableModule,
 		MatSortModule,
+		MatDatepickerModule,
+		MatIconModule,
 		TranslateModule.forChild(),
 		RouterModule.forChild([
 			{
@@ -53,6 +55,9 @@ import {FormsModule} from '@angular/forms';
 		{provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format},
 		SchoolsSummaryService,
 		{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+		{provide: DateAdapter, useClass: MomentDateAdapter},
+		{provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format},
+		MatIconRegistry,
 	],
 	entryComponents: [
 		SchoolsSummaryDetailsComponent

@@ -460,7 +460,7 @@ export class MenuConfig implements ConfigModel {
 						root: true,
 						icon: 'flaticon-line-graph',
 						page: '/',
-						badge: {type: 'm-badge--danger', value: '2'},
+						// badge: {type: 'm-badge--danger', value: '2'},
 						translate: 'MENU.DASHBOARD'
 					},
 {

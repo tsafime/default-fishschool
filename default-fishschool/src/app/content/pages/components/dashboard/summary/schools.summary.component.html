@@ -4,6 +4,17 @@
 		<div class="m-portlet__head-title">
 			<h3 class="m-portlet__head-text m--font-light">{{'DASHBOARD.FARM_SUMMARY' | translate}}</h3>
 		</div>
+		<div class="col-md-1">
+			<mat-form-field>
+				<mat-label>{{'DASHBOARD.SUMMARY_DATE' | translate}}</mat-label>
+				<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="summaryDate"
+					   #startDate="ngModel" minlength="10" required [max]="maxDate" (dateChange)="view()">
+				<mat-datepicker-toggle matSuffix [for]="picker">
+					<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+				</mat-datepicker-toggle>
+				<mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+			</mat-form-field>
+		</div>
 	</ng-container>
 
 	<!-- use ng-container[mPortletBody] for the body content -->

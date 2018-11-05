@@ -75,6 +75,7 @@ export const locale = {
 				NAME: 'Name',
 				FEED_DATE: 'Feed Date',
 			},
+			SUMMARY_DATE: 'Summary Date',
 		},
 		FISH_SCHOOL: {
 			NO_RECORDS: 'No records to display',

@@ -1,7 +1,6 @@
-<div *ngIf="alerts !== undefined && alerts.length > 0; else noAlerts">
+<div *ngIf="alerts !== undefined && alerts.length > 0;">
 	<div *ngFor="let alert of alerts">
-		<ngb-alert [dismissible]="true" [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}
-		</ngb-alert>
+		<ngb-alert [dismissible]="true" [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
 	</div>
 </div>
 <div class="m-section">

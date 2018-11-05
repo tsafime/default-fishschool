@@ -5,6 +5,7 @@ import {FilteredQuery} from '../../../models/fishschool/filtered.query';
 import * as moment from 'moment';
 import {SummariesModel} from '../../../models/fishschool/summary/summaries.model';
 import {Observable} from 'rxjs';
+import {Moment} from 'moment';
 
 @Injectable()
 export class SchoolsSummaryService {
@@ -12,9 +13,13 @@ export class SchoolsSummaryService {
 	constructor(private http: HttpClient) {
 	}
 
-	view(): Observable<any> {
+	view(date: Moment): Observable<any> {
 		const queryFilters: QueryFilter[] = [];
-		queryFilters.push(new QueryFilter('feedDate', [moment().format('DD/MM/YYYY')], '=', 'NONE'));
+		if (date === undefined) {
+			date = moment();
+		}
+
+		queryFilters.push(new QueryFilter('feedDate', [date.format('DD/MM/YYYY')], '=', 'NONE'));
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 10, 0, ['feedDate'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
