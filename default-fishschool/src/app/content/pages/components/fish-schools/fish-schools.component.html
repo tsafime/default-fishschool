@@ -104,9 +104,9 @@
 	<div class="example-container mat-elevation-z8">
 		<mat-form-field>
 			<input matInput type="text" (keyup)="applyFilter($event.target.value)"
-				   placeholder="{{'FISH_SCHOOL.FILTERS.SEARCH' | translate}}">
+				   placeholder="{{'ACTIONS.SEARCH' | translate}}">
 		</mat-form-field>
-		<table class="table-striped" mat-table matSort matSortActive="menualAvgWeight" matSortDirection="desc"
+		<table class="table table-bordered table-striped" mat-table matSort matSortActive="menualAvgWeight" matSortDirection="desc"
 			   #table matSortDisableClear [dataSource]="dataSource" class="col-md-12">
 
 			<!-- feedDate Column -->

@@ -25,14 +25,13 @@ export class FishSchoolsComponent implements OnInit {
 	// 	'menualAvgWeight', 'averageWeight', 'foodWeight', 'totalGivenFood', 'actualGivenFood', 'percentageTsemach', 'deadLastUpdateDate',
 	// 	'foodTypeName', 'feedDate', 'sale', 'totalSale', 'fcr', 'salesFcr', 'totalWeight'];
 
-	// If you choose to ddiplay other dates like: creationDate, updatedDate, deadLastUpdateDate make sure to uncomment in view()
+	// If you choose to diplay other dates like: creationDate, updatedDate, deadLastUpdateDate make sure to uncomment in view()
 	// the relevant cases
+	// displayedColumns = The JSON names
 	displayedColumns: string[] = ['feedDate', 'age', 'menualAvgWeight', 'averageWeight', 'quantity', 'totalWeight', 'totalGivenFood',
 		'actualGivenFood', 'foodWeight', 'foodTypeName', 'dead', 'fcr'];
 
-	// TODO: Use language translation
-	headers: string[] = ['Selected Date', 'Age', 'Manual Weight', 'Avg. G', '# Fish', 'Total KG', 'Feed Plan', 'Given Feed', 'Total Food',
-		'Food Type', 'Mortality', 'F.C.R.', 'Save'];
+	headers: string[];
 	dataSource: MatTableDataSource<FishSchoolModel>;
 	data: FishSchools;
 
@@ -51,6 +50,19 @@ export class FishSchoolsComponent implements OnInit {
 
 	constructor(private service: FishSchoolsService, private foodService: FoodService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService) {
+
+		this.headers = [this.translate.instant('FISH_SCHOOL.TABLE.SELECTED_DATE'),
+			this.translate.instant('FISH_SCHOOL.TABLE.AGE'),
+			this.translate.instant('FISH_SCHOOL.TABLE.MANUAL_WEIGHT'),
+			this.translate.instant('FISH_SCHOOL.TABLE.AVERAGE_GRAMS'),
+			this.translate.instant('FISH_SCHOOL.TABLE.NUMBER_OF_FISH'),
+			this.translate.instant('FISH_SCHOOL.TABLE.TOTAL_KG'),
+			this.translate.instant('FISH_SCHOOL.TABLE.FEED_PLAN'),
+			this.translate.instant('FISH_SCHOOL.TABLE.GIVEN_FEED'),
+			this.translate.instant('FISH_SCHOOL.TABLE.TOTAL_FOOD'),
+			this.translate.instant('FISH_SCHOOL.TABLE.FOOD_TYPE'),
+			this.translate.instant('FISH_SCHOOL.TABLE.MORTALITY'),
+			this.translate.instant('GENERAL.F_C_R')];
 	}
 
 	async ngOnInit() {

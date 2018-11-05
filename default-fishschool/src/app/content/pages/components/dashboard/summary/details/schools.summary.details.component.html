@@ -1,12 +1,13 @@
-<h1 mat-dialog-title>Summary details</h1>
+<h1 mat-dialog-title>{{'DASHBOARD.DETAILS.SUMMARY_HEADER' | translate}}</h1>
 <div mat-dialog-content>
-	<div class="example-container mat-elevation-z8">
+	<div class="mat-elevation-z8">
 		<mat-form-field>
 			<input matInput type="text" (keyup)="applyFilter($event.target.value)"
-				   placeholder="{{'FISH_SCHOOL.FILTERS.SEARCH' | translate}}">
+				   placeholder="{{'ACTIONS.SEARCH' | translate}}">
 		</mat-form-field>
-		<table class="table-striped" mat-table matSort #table matSortDisableClear matSort matSortActive="name"
-			   matSortDirection="desc" multiTemplateDataRows [dataSource]="summaryDataSource" class="col-md-12">
+		<table class="table table-bordered table-striped table-hover table-dark table-responsive" bordered="true" mat-table matSort
+			   #table matSortDisableClear matSort matSortActive="name" matSortDirection="desc"
+			   multiTemplateDataRows [dataSource]="summaryDataSource" class="col-md-12">
 
 			<!-- name Column -->
 			<ng-container matColumnDef="name">
@@ -46,7 +47,7 @@
 
 			<ng-container matColumnDef="expandedDetail">
 				<td mat-cell *matCellDef="let row">
-					<table class="table table-bordered table-striped">
+					<table class="table table-bordered table-striped table-hover table-info">
 						<thead>
 							<tr>
 								<th *ngFor = "let item of summaryDetailsHeaders">{{item}}</th>
@@ -62,7 +63,7 @@
 				</td>
 			</ng-container>
 
-			<tr mat-header-row *matHeaderRowDef="summaryDisplayedColumns"></tr>
+			<tr mat-header-row *matHeaderRowDef="summaryDisplayedColumns; sticky: true"></tr>
 			<tr mat-row *matRowDef="let element; columns: summaryDisplayedColumns;" class="example-element-row">
 			</tr>
 			<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>

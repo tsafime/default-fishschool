@@ -4,33 +4,35 @@ import {SchoolSummaryModel} from '../../../../../../core/models/fishschool/summa
 import {PairModel} from '../../../../../../core/models/fishschool/summary/pair.model';
 import * as moment from 'moment';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
 	selector: 'm-schools-summary-details',
 	templateUrl: './schools.summary.details.component.html',
-	styleUrls: ['./schools.summary.details.component.scss'],
-	animations: [
-		trigger('detailExpand', [
-			state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
-			state('expanded', style({height: '*'})),
-			transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-		]),
-	],
+	styleUrls: ['./schools.summary.details.component.scss']
 })
 export class SchoolsSummaryDetailsComponent implements OnInit {
 
+	// summaryDisplayedColumns = The JSON names
 	summaryDisplayedColumns: string[] = ['name', 'quantity', 'averageWeight', 'foodWeight', 'fcr', 'feedDate'];
-
-	// TODO: Use language translation
-	summaryHeaders: string[] = ['Name', '# Of Fish', 'Avg. Weight', 'Food Weight', 'F.C.R.', 'Feed Date'];
+	summaryHeaders: string[];
 	summaryDataSource: MatTableDataSource<SchoolSummaryModel>;
 	@ViewChild(MatSort) summarySort: MatSort;
 
-	// TODO: Use language translation
-	summaryDetailsHeaders: string[] = ['Food Type', 'Quantity'];
+	summaryDetailsHeaders: string[];
 
-	constructor(public dialogRef: MatDialogRef<SchoolsSummaryDetailsComponent>,
+	constructor(public dialogRef: MatDialogRef<SchoolsSummaryDetailsComponent>, private translate: TranslateService,
 				@Inject(MAT_DIALOG_DATA) public schoolsSum: SchoolSummaryModel[]) {
+
+		this.summaryHeaders = [this.translate.instant('DASHBOARD.DETAILS.NAME'),
+			this.translate.instant('DASHBOARD.NUM_OF_FISH'),
+			this.translate.instant('DASHBOARD.AVG_WEIGHT'),
+			this.translate.instant('DASHBOARD.FOOD_WEIGHT'),
+			this.translate.instant('GENERAL.F_C_R'),
+			this.translate.instant('DASHBOARD.DETAILS.FEED_DATE')];
+
+		this.summaryDetailsHeaders = [this.translate.instant('DASHBOARD.FOOD_TYPE'),
+			this.translate.instant('DASHBOARD.QUANTITY')];
 	}
 
 	ngOnInit() {

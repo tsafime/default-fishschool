@@ -57,17 +57,24 @@ export const locale = {
 				CONNECTION_FAILURE: 'Unable to connect to the server, please try again later'
 			},
 		},
+		GENERAL: {
+			F_C_R: 'F.C.R.',
+		},
 		DASHBOARD: {
 			FARM_SUMMARY: 'Farm summary',
 			SUMMARY: 'Summary',
 			AVG_WEIGHT: 'Average Weight',
 			NUM_OF_FISH: '# Of Fish',
 			FOOD_WEIGHT: 'Food Weight',
-			FCR: 'F.C.R.',
 			PLAN_FOOD: 'Plan Food',
 			QUANTITY: 'Quantity',
 			FEED_DATE: 'Feed Date',
-			FOOD_TYPE: 'Food Type'
+			FOOD_TYPE: 'Food Type',
+			DETAILS: {
+				SUMMARY_HEADER: 'Summary Details',
+				NAME: 'Name',
+				FEED_DATE: 'Feed Date',
+			},
 		},
 		FISH_SCHOOL: {
 			NO_RECORDS: 'No records to display',
@@ -81,7 +88,6 @@ export const locale = {
 			FILTERS: {
 				SCHOOL_NAME: 'School name',
 				CHOOSE_SCHOOL_NAME: 'Choose School Name',
-				SEARCH: 'Search',
 				STATUS: {
 					ACTIVE: 'Active',
 					INACTIVE: 'Inactive',
@@ -94,6 +100,19 @@ export const locale = {
 					DESCRIPTION: 'Choose Filters'
 				}
 			},
+			TABLE: {
+				SELECTED_DATE: 'Selected Date',
+				AGE: 'Age',
+				MANUAL_WEIGHT: 'Manual Weight',
+				AVERAGE_GRAMS: 'Avg. Grams',
+				NUMBER_OF_FISH: '# Fish',
+				TOTAL_KG: 'Total KG',
+				FEED_PLAN: 'Feed Plan',
+				GIVEN_FEED: 'Given Feed',
+				TOTAL_FOOD: 'Total Food',
+				FOOD_TYPE: 'Food Type',
+				MORTALITY: 'Mortality',
+			},
 			RESULTS: {
 				FISH_SCHOOL_UPDATE_SUCCESS: 'Fish schools updated successfully',
 			},
@@ -105,6 +124,7 @@ export const locale = {
 		ACTIONS: {
 			SAVE: 'Save',
 			CLOSE: 'Close',
+			SEARCH: 'Search',
 		},
 		ECOMMERCE: {
 			COMMON: {
