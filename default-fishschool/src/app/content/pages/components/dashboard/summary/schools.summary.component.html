@@ -26,23 +26,23 @@
 				<div class="m-widget_content-items">
 					<div class="m-widget_content-item">
 						<span>{{'DASHBOARD.AVG_WEIGHT' | translate}}</span>
-						<span class="m--font-accent">{{ schoolsSum.totalAverageWeight }}</span>
+						<span class="m--font-accent">{{ schoolsSum.totalAverageWeight | number }}</span>
 					</div>
 					<div class="m-widget_content-item">
 						<span>{{'DASHBOARD.NUM_OF_FISH' | translate}}</span>
-						<span class="m--font-brand">{{ schoolsSum.totalNumberOfFish }}</span>
+						<span class="m--font-brand">{{ schoolsSum.totalNumberOfFish | number }}</span>
 					</div>
 					<div class="m-widget_content-item">
 						<span>{{'DASHBOARD.FOOD_WEIGHT' | translate}}</span>
-						<span>{{ schoolsSum.totalFoodWeight }}</span>
+						<span>{{ schoolsSum.totalFoodWeight | number }}</span>
 					</div>
 					<div class="m-widget_content-item">
 						<span>{{'GENERAL.F_C_R' | translate}}</span>
-						<span class="m--font-accent">{{ schoolsSum.totalFCR }}</span>
+						<span class="m--font-accent">{{ schoolsSum.totalFCR | number }}</span>
 					</div>
 					<div class="m-widget_content-item">
 						<span>{{'DASHBOARD.PLAN_FOOD' | translate}}</span>
-						<span class="m--font-brand">{{ schoolsSum.totalPlanFood }}</span>
+						<span class="m--font-brand">{{ schoolsSum.totalPlanFood | number }}</span>
 					</div>
 				</div>
 			</div>
