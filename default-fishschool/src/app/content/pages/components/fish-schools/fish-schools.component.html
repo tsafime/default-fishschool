@@ -125,9 +125,10 @@
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never" *ngIf="isReadWite('age'); else display">
 						<input matInput type="number" [value]="row.age" [(ngModel)]="row.age" required step=".01"
-							   min="0">
+							   min="0" class="input-number-format">
+						<label class="label-number-format">{{row.age | number}}</label>
 					</mat-form-field>
-					<ng-template #display>{{row.age}}</ng-template>
+					<ng-template #display>{{row.age | number}}</ng-template>
 				</td>
 			</ng-container>
 
@@ -149,9 +150,10 @@
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never" *ngIf="isReadWite('averageWeight'); else display">
 						<input matInput type="number" [value]="row.averageWeight" [(ngModel)]="row.averageWeight"
-							   required step=".01" min="0">
+							   required step=".01" min="0" class="input-number-format">
+						<label class="label-number-format">{{row.averageWeight | number}}</label>
 					</mat-form-field>
-					<ng-template #display>{{row.averageWeight}}</ng-template>
+					<ng-template #display>{{row.averageWeight | number}}</ng-template>
 				</td>
 			</ng-container>
 
@@ -161,9 +163,10 @@
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never" *ngIf="isReadWite('quantity'); else display">
 						<input matInput type="number" [value]="row.quantity" [(ngModel)]="row.quantity" required
-							   step=".01" min="0">
+							   step=".01" min="0" class="input-number-format">
+						<label class="label-number-format">{{row.quantity | number}}</label>
 					</mat-form-field>
-					<ng-template #display>{{row.quantity}}</ng-template>
+					<ng-template #display>{{row.quantity | number}}</ng-template>
 				</td>
 			</ng-container>
 
@@ -173,16 +176,17 @@
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never" *ngIf="isReadWite('totalWeight'); else display">
 						<input matInput type="number" [value]="row.totalWeight" [(ngModel)]="row.totalWeight" required
-							   step=".01" min="0">
+							   step=".01" min="0" class="input-number-format">
+						<label class="label-number-format">{{row.totalWeight | number}}</label>
 					</mat-form-field>
-					<ng-template #display>{{row.totalWeight}}</ng-template>
+					<ng-template #display>{{row.totalWeight | number}}</ng-template>
 				</td>
 			</ng-container>
 
 			<!-- totalGivenFood Column -->
 			<ng-container matColumnDef="totalGivenFood">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[6] }}</th>
-				<td mat-cell *matCellDef="let row"> {{row.totalGivenFood}}</td>
+				<td mat-cell *matCellDef="let row"> {{row.totalGivenFood | number}}</td>
 			</ng-container>
 
 			<!-- actualGivenFood Column -->
@@ -191,9 +195,10 @@
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never" *ngIf="isReadWite('actualGivenFood'); else display">
 						<input matInput type="number" [value]="row.actualGivenFood" [(ngModel)]="row.actualGivenFood"
-							   required step=".01" min="0">
+							   required step=".01" min="0" class="input-number-format">
+						<label class="label-number-format">{{row.actualGivenFood | number}}</label>
 					</mat-form-field>
-					<ng-template #display>{{row.actualGivenFood}}</ng-template>
+					<ng-template #display>{{row.actualGivenFood | number}}</ng-template>
 				</td>
 			</ng-container>
 
@@ -203,9 +208,10 @@
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never" *ngIf="isReadWite('foodWeight'); else display">
 						<input matInput type="number" [value]="row.foodWeight" [(ngModel)]="row.foodWeight" required
-							   step=".01" min="0">
+							   step=".01" min="0" class="input-number-format">
+						<label class="label-number-format">{{row.foodWeight | number}}</label>
 					</mat-form-field>
-					<ng-template #display>{{row.foodWeight}}</ng-template>
+					<ng-template #display>{{row.foodWeight | number}}</ng-template>
 				</td>
 			</ng-container>
 
@@ -232,9 +238,10 @@
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never" *ngIf="isReadWite('dead'); else display">
 						<input matInput type="number" [value]="row.dead" [(ngModel)]="row.dead" required step=".01"
-							   min="0">
+							   min="0" class="input-number-format">
+						<label class="label-number-format">{{row.dead | number}}</label>
 					</mat-form-field>
-					<ng-template #display>{{row.dead}}</ng-template>
+					<ng-template #display>{{row.dead | number}}</ng-template>
 				</td>
 			</ng-container>
 

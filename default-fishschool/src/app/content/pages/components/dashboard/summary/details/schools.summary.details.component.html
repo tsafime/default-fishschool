@@ -1,13 +1,13 @@
 <h1 mat-dialog-title>{{'DASHBOARD.DETAILS.SUMMARY_HEADER' | translate}}</h1>
+<mat-form-field class="position-relative">
+	<input matInput type="text" (keyup)="applyFilter($event.target.value)"
+		   placeholder="{{'ACTIONS.SEARCH' | translate}}">
+</mat-form-field>
 <div mat-dialog-content>
 	<div class="mat-elevation-z8">
-		<mat-form-field>
-			<input matInput type="text" (keyup)="applyFilter($event.target.value)"
-				   placeholder="{{'ACTIONS.SEARCH' | translate}}">
-		</mat-form-field>
-		<table class="table table-bordered table-striped table-hover table-dark table-responsive" bordered="true" mat-table matSort
-			   #table matSortDisableClear matSort matSortActive="name" matSortDirection="desc"
-			   multiTemplateDataRows [dataSource]="summaryDataSource" class="col-md-12">
+		<table mat-table class="table table-bordered table-dark table-hover col-md-6"
+			   #table matSort matSortActive="name" matSortDirection="desc"
+			   multiTemplateDataRows [dataSource]="summaryDataSource">
 
 			<!-- name Column -->
 			<ng-container matColumnDef="name">
@@ -18,25 +18,25 @@
 			<!-- quantity Column -->
 			<ng-container matColumnDef="quantity">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ summaryHeaders[1] }}</th>
-				<td mat-cell *matCellDef="let row">{{row.quantity}}</td>
+				<td mat-cell *matCellDef="let row">{{row.quantity | number}}</td>
 			</ng-container>
 
 			<!-- averageWeight Column -->
 			<ng-container matColumnDef="averageWeight">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ summaryHeaders[2] }}</th>
-				<td mat-cell *matCellDef="let row">{{row.averageWeight}}</td>
+				<td mat-cell *matCellDef="let row">{{row.averageWeight | number}}</td>
 			</ng-container>
 
 			<!-- averageWeight Column -->
 			<ng-container matColumnDef="foodWeight">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ summaryHeaders[3] }}</th>
-				<td mat-cell *matCellDef="let row">{{row.foodWeight}}</td>
+				<td mat-cell *matCellDef="let row">{{row.foodWeight | number}}</td>
 			</ng-container>
 
 			<!-- fcr Column -->
 			<ng-container matColumnDef="fcr">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ summaryHeaders[4] }}</th>
-				<td mat-cell *matCellDef="let row">{{row.fcr}}</td>
+				<td mat-cell *matCellDef="let row">{{row.fcr | number}}</td>
 			</ng-container>
 
 			<!-- feedDate Column -->
@@ -47,7 +47,7 @@
 
 			<ng-container matColumnDef="expandedDetail">
 				<td mat-cell *matCellDef="let row">
-					<table class="table table-bordered table-striped table-hover table-info">
+					<table class="table table-bordered table-hover table-success">
 						<thead>
 							<tr>
 								<th *ngFor = "let item of summaryDetailsHeaders">{{item}}</th>
@@ -56,7 +56,7 @@
 						<tbody>
 							<tr *ngFor = "let item of row.feedTypes ">
 								<td >{{item.key}}</td>
-								<td >{{item.value}}</td>
+								<td >{{item.value | number}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -64,8 +64,7 @@
 			</ng-container>
 
 			<tr mat-header-row *matHeaderRowDef="summaryDisplayedColumns; sticky: true"></tr>
-			<tr mat-row *matRowDef="let element; columns: summaryDisplayedColumns;" class="example-element-row">
-			</tr>
+			<tr mat-row *matRowDef="let element; columns: summaryDisplayedColumns;" class="example-element-row"></tr>
 			<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 		</table>
 	</div>

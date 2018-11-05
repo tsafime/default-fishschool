@@ -28,3 +28,21 @@ input[type=number]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
 }
+
+label.label-number-format {
+	position: absolute;
+	left: 0px; top: 0px;
+	padding: .4375em 0;
+	background: white;
+	border: none;
+}
+
+input.input-number-format {
+	position: relative;
+}
+
+#input, label { padding: 0; border: 1px solid black; }
+
+input.input-number-format:focus + label.label-number-format {
+	display: none;
+}

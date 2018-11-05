@@ -40,19 +40,19 @@
 				<div class="m-widget_content-items">
 					<div class="m-widget_content-item">
 						<span>{{'DASHBOARD.QUANTITY' | translate}}</span>
-						<span class="m--font-accent">{{ sum.quantity }}</span>
+						<span class="m--font-accent">{{ sum.quantity | number }}</span>
 					</div>
 					<div class="m-widget_content-item">
 						<span>{{'DASHBOARD.AVG_WEIGHT' | translate}}</span>
-						<span class="m--font-brand">{{ sum.averageWeight }}</span>
+						<span class="m--font-brand">{{ sum.averageWeight | number }}</span>
 					</div>
 					<div class="m-widget_content-item">
 						<span>{{'DASHBOARD.FOOD_WEIGHT' | translate}}</span>
-						<span>{{ sum.foodWeight }}</span>
+						<span>{{ sum.foodWeight | number }}</span>
 					</div>
 					<div class="m-widget_content-item">
 						<span>{{'GENERAL.F_C_R' | translate}}</span>
-						<span class="m--font-accent">{{ sum.fcr }}</span>
+						<span class="m--font-accent">{{ sum.fcr | number }}</span>
 					</div>
 					<div class="m-widget_content-item">
 						<span>{{'DASHBOARD.FEED_DATE' | translate}}</span>

@@ -15,10 +15,10 @@ export class SchoolsSummaryComponent implements OnInit {
 	@Output() valueChange = new EventEmitter<SummaryModel>();
 	private isDialogOpened: boolean = false;
 	config = {
-		maxWidth: '100vw',
-		maxHeight: '100vh',
-		height: '100%',
-		width: '100%',
+		// maxWidth: '100vw',
+		// maxHeight: '100vh',
+		 height: '100%',
+		 width: '100%',
 		data: {}
 	};
 
