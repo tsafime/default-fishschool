@@ -13,8 +13,14 @@ export class SchoolsSummaryComponent implements OnInit {
 
 	@Input() public schoolsSum: SummaryModel;
 	@Output() valueChange = new EventEmitter<SummaryModel>();
-	animal: string;
-	name: string;
+	private isDialogOpened: boolean = false;
+	config = {
+		maxWidth: '100vw',
+		maxHeight: '100vh',
+		height: '100%',
+		width: '100%',
+		data: {}
+	};
 
 	constructor(private summaryService: SchoolsSummaryService, public dialog: MatDialog) {
 	}
@@ -32,14 +38,15 @@ export class SchoolsSummaryComponent implements OnInit {
 	}
 
 	viewDetails(): void {
-		const dialogRef = this.dialog.open(SchoolsSummaryDetailsComponent, {
-			width: '700px',
-			data: {name: this.name, animal: this.animal}
-		});
+		if (! this.isDialogOpened) {
+			this.isDialogOpened = true;
+			this.config.data = this.schoolsSum.schoolSummaries;
 
-		dialogRef.afterClosed().subscribe(result => {
-			console.log('The dialog was closed');
-			this.animal = result;
-		});
+			const dialogRef = this.dialog.open(SchoolsSummaryDetailsComponent, this.config);
+
+			dialogRef.afterClosed().subscribe(result => {
+				this.isDialogOpened = false;
+			});
+		}
 	}
 }

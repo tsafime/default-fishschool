@@ -102,151 +102,153 @@
 		<h4>{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}: {{ model.schoolName }}</h4>
 	</div>
 	<div class="example-container mat-elevation-z8">
-		<!--<form class="m-form" name="form2" (ngSubmit)="tf.form.valid" [formGroup]="recordsFormGroup" novalidate>-->
-			<mat-form-field>
-				<input matInput type="number" (keyup)="applyFilter($event.target.value)"
-					   placeholder="{{'FISH_SCHOOL.FILTERS.SEARCH' | translate}}">
-			</mat-form-field>
-			<table class="table-striped" mat-table matSort matSortActive="menualAvgWeight" matSortDirection="desc"
-				   #table matSortDisableClear [dataSource]="dataSource" class="col-md-12">
+		<mat-form-field>
+			<input matInput type="text" (keyup)="applyFilter($event.target.value)"
+				   placeholder="{{'FISH_SCHOOL.FILTERS.SEARCH' | translate}}">
+		</mat-form-field>
+		<table class="table-striped" mat-table matSort matSortActive="menualAvgWeight" matSortDirection="desc"
+			   #table matSortDisableClear [dataSource]="dataSource" class="col-md-12">
 
-				<!-- feedDate Column -->
-				<ng-container matColumnDef="feedDate">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[0] }}</th>
-					<td mat-cell *matCellDef="let row"
-						[style.background]="(model.startDate.format('DD/MM/YYYY') === row.feedDate)? 'lightblue' : ''"
-						class="date-width">
-						{{row.feedDate}}
-					</td>
-				</ng-container>
+			<!-- feedDate Column -->
+			<ng-container matColumnDef="feedDate">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[0] }}</th>
+				<td mat-cell *matCellDef="let row"
+					[style.background]="(model.startDate.format('DD/MM/YYYY') === row.feedDate)? 'lightblue' : ''"
+					class="date-width">
+					{{row.feedDate}}
+				</td>
+			</ng-container>
 
-				<!-- age Column -->
-				<ng-container matColumnDef="age">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[1] }}</th>
-					<td mat-cell *matCellDef="let row">
-						<mat-form-field floatLabel="never" *ngIf="isReadWite('age'); else display">
-							<input matInput type="number" [value]="row.age" [(ngModel)]="row.age" required step=".01" min="0">
-						</mat-form-field>
-						<ng-template #display>{{row.age}}</ng-template>
-					</td>
-				</ng-container>
+			<!-- age Column -->
+			<ng-container matColumnDef="age">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[1] }}</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-form-field floatLabel="never" *ngIf="isReadWite('age'); else display">
+						<input matInput type="number" [value]="row.age" [(ngModel)]="row.age" required step=".01"
+							   min="0">
+					</mat-form-field>
+					<ng-template #display>{{row.age}}</ng-template>
+				</td>
+			</ng-container>
 
-				<!-- menualAvgWeight Column -->
-				<ng-container matColumnDef="menualAvgWeight">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[2] }}</th>
-					<td mat-cell *matCellDef="let row"
-						[style.background]="row.menualAvgWeight === true? 'lightgreen': ''"
-						class="vertical-align-middle">
-						<i class="material-icons" *ngIf="row.menualAvgWeight === true">
-							done
-						</i>
-					</td>
-				</ng-container>
+			<!-- menualAvgWeight Column -->
+			<ng-container matColumnDef="menualAvgWeight">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[2] }}</th>
+				<td mat-cell *matCellDef="let row"
+					[style.background]="row.menualAvgWeight === true? 'lightgreen': ''"
+					class="vertical-align-middle">
+					<i class="material-icons" *ngIf="row.menualAvgWeight === true">
+						done
+					</i>
+				</td>
+			</ng-container>
 
-				<!-- averageWeight Column -->
-				<ng-container matColumnDef="averageWeight">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[3] }}</th>
-					<td mat-cell *matCellDef="let row">
-						<mat-form-field floatLabel="never" *ngIf="isReadWite('averageWeight'); else display">
-							<input matInput type="number" [value]="row.averageWeight" [(ngModel)]="row.averageWeight" required step=".01" min="0">
-						</mat-form-field>
-						<ng-template #display>{{row.averageWeight}}</ng-template>
-					</td>
-				</ng-container>
+			<!-- averageWeight Column -->
+			<ng-container matColumnDef="averageWeight">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[3] }}</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-form-field floatLabel="never" *ngIf="isReadWite('averageWeight'); else display">
+						<input matInput type="number" [value]="row.averageWeight" [(ngModel)]="row.averageWeight"
+							   required step=".01" min="0">
+					</mat-form-field>
+					<ng-template #display>{{row.averageWeight}}</ng-template>
+				</td>
+			</ng-container>
 
-				<!-- quantity Column -->
-				<ng-container matColumnDef="quantity">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[4] }}</th>
-					<td mat-cell *matCellDef="let row">
-						<mat-form-field floatLabel="never" *ngIf="isReadWite('quantity'); else display">
-							<input matInput type="number" [value]="row.quantity" [(ngModel)]="row.quantity" required step=".01" min="0">
-						</mat-form-field>
-						<ng-template #display>{{row.quantity}}</ng-template>
-					</td>
-				</ng-container>
+			<!-- quantity Column -->
+			<ng-container matColumnDef="quantity">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[4] }}</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-form-field floatLabel="never" *ngIf="isReadWite('quantity'); else display">
+						<input matInput type="number" [value]="row.quantity" [(ngModel)]="row.quantity" required
+							   step=".01" min="0">
+					</mat-form-field>
+					<ng-template #display>{{row.quantity}}</ng-template>
+				</td>
+			</ng-container>
 
-				<!-- totalWeight Column -->
-				<ng-container matColumnDef="totalWeight">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[5] }}</th>
-					<td mat-cell *matCellDef="let row">
-						<mat-form-field floatLabel="never" *ngIf="isReadWite('totalWeight'); else display">
-							<input matInput type="number" [value]="row.totalWeight" [(ngModel)]="row.totalWeight" required step=".01" min="0">
-						</mat-form-field>
-						<ng-template #display>{{row.totalWeight}}</ng-template>
-					</td>
-				</ng-container>
+			<!-- totalWeight Column -->
+			<ng-container matColumnDef="totalWeight">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[5] }}</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-form-field floatLabel="never" *ngIf="isReadWite('totalWeight'); else display">
+						<input matInput type="number" [value]="row.totalWeight" [(ngModel)]="row.totalWeight" required
+							   step=".01" min="0">
+					</mat-form-field>
+					<ng-template #display>{{row.totalWeight}}</ng-template>
+				</td>
+			</ng-container>
 
-				<!-- totalGivenFood Column -->
-				<ng-container matColumnDef="totalGivenFood">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[6] }}</th>
-					<td mat-cell *matCellDef="let row"> {{row.totalGivenFood}}</td>
-				</ng-container>
+			<!-- totalGivenFood Column -->
+			<ng-container matColumnDef="totalGivenFood">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[6] }}</th>
+				<td mat-cell *matCellDef="let row"> {{row.totalGivenFood}}</td>
+			</ng-container>
 
-				<!-- actualGivenFood Column -->
-				<ng-container matColumnDef="actualGivenFood">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[7] }}</th>
-					<td mat-cell *matCellDef="let row">
-						<mat-form-field floatLabel="never" *ngIf="isReadWite('actualGivenFood'); else display">
-							<input matInput type="number" [value]="row.actualGivenFood" [(ngModel)]="row.actualGivenFood" required step=".01" min="0">
-						</mat-form-field>
-						<ng-template #display>{{row.actualGivenFood}}</ng-template>
-					</td>
-				</ng-container>
+			<!-- actualGivenFood Column -->
+			<ng-container matColumnDef="actualGivenFood">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[7] }}</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-form-field floatLabel="never" *ngIf="isReadWite('actualGivenFood'); else display">
+						<input matInput type="number" [value]="row.actualGivenFood" [(ngModel)]="row.actualGivenFood"
+							   required step=".01" min="0">
+					</mat-form-field>
+					<ng-template #display>{{row.actualGivenFood}}</ng-template>
+				</td>
+			</ng-container>
 
-				<!-- foodWeight Column -->
-				<ng-container matColumnDef="foodWeight">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[8] }}</th>
-					<td mat-cell *matCellDef="let row">
-						<mat-form-field floatLabel="never" *ngIf="isReadWite('foodWeight'); else display">
-							<input matInput type="number" [value]="row.foodWeight" [(ngModel)]="row.foodWeight" required step=".01" min="0">
-						</mat-form-field>
-						<ng-template #display>{{row.foodWeight}}</ng-template>
-					</td>
-				</ng-container>
+			<!-- foodWeight Column -->
+			<ng-container matColumnDef="foodWeight">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[8] }}</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-form-field floatLabel="never" *ngIf="isReadWite('foodWeight'); else display">
+						<input matInput type="number" [value]="row.foodWeight" [(ngModel)]="row.foodWeight" required
+							   step=".01" min="0">
+					</mat-form-field>
+					<ng-template #display>{{row.foodWeight}}</ng-template>
+				</td>
+			</ng-container>
 
-				<!-- foodTypeName Column -->
-				<ng-container matColumnDef="foodTypeName">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[9] }}</th>
-					<td mat-cell *matCellDef="let row">
-						<mat-form-field floatLabel="never" *ngIf="isReadWite('foodTypeName'); else display">
-							<mat-select name="foodTypeName" #schoolName="ngModel" [(ngModel)]="row.foodTypeName"
-										placeholder="{{'FOOD.FOOD_TYPE' | translate}}" required>
-								<option [value]="null" disabled>{{'FOOD.CHOOSE_FOOD_TYPE' |
-									translate}}
-								</option>
-								<mat-option *ngFor="let food of foodNames" [value]="food">{{food}}</mat-option>
-							</mat-select>
-						</mat-form-field>
-						<ng-template #display>{{row.foodTypeName}}</ng-template>
-					</td>
-				</ng-container>
+			<!-- foodTypeName Column -->
+			<ng-container matColumnDef="foodTypeName">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[9] }}</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-form-field floatLabel="never" *ngIf="isReadWite('foodTypeName'); else display">
+						<mat-select name="foodTypeName" #schoolName="ngModel" [(ngModel)]="row.foodTypeName"
+									placeholder="{{'FOOD.FOOD_TYPE' | translate}}" required>
+							<option [value]="null" disabled>{{'FOOD.CHOOSE_FOOD_TYPE' |
+								translate}}
+							</option>
+							<mat-option *ngFor="let food of foodNames" [value]="food">{{food}}</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<ng-template #display>{{row.foodTypeName}}</ng-template>
+				</td>
+			</ng-container>
 
-				<!-- dead Column -->
-				<ng-container matColumnDef="dead">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[10] }}</th>
-					<td mat-cell *matCellDef="let row">
-						<mat-form-field floatLabel="never" *ngIf="isReadWite('dead'); else display">
-							<input matInput type="number" [value]="row.dead" [(ngModel)]="row.dead" required step=".01" min="0">
-						</mat-form-field>
-						<ng-template #display>{{row.dead}}</ng-template>
-					</td>
-				</ng-container>
+			<!-- dead Column -->
+			<ng-container matColumnDef="dead">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[10] }}</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-form-field floatLabel="never" *ngIf="isReadWite('dead'); else display">
+						<input matInput type="number" [value]="row.dead" [(ngModel)]="row.dead" required step=".01"
+							   min="0">
+					</mat-form-field>
+					<ng-template #display>{{row.dead}}</ng-template>
+				</td>
+			</ng-container>
 
-				<!-- averageWeight Column -->
-				<ng-container matColumnDef="fcr">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[11] }}</th>
-					<td mat-cell *matCellDef="let row"> {{row.fcr}}</td>
-				</ng-container>
+			<!-- averageWeight Column -->
+			<ng-container matColumnDef="fcr">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[11] }}</th>
+				<td mat-cell *matCellDef="let row"> {{row.fcr}}</td>
+			</ng-container>
 
-				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-			</table>
-			<span>
-				<button class="btn btn-primary" (click)="update()">{{ 'ACTIONS.SAVE' | translate }}</button>
-				<!--<p>Valid? {{tf.form.valid}}</p>
-				<button class="btn btn-primary" (click)="update()" [disabled]="! tf.form.valid">{{ 'ACTIONS.SAVE' | translate }}</button>-->
-			</span>
-			<!--{{incRowIndex()}}-->
-		<!--</form>-->
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		</table>
+		<span>
+			<button class="btn btn-primary" (click)="update()">{{ 'ACTIONS.SAVE' | translate }}</button>
+		</span>
 	</div>
 </div>

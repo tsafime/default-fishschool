@@ -104,6 +104,7 @@ export const locale = {
 		},
 		ACTIONS: {
 			SAVE: 'Save',
+			CLOSE: 'Close',
 		},
 		ECOMMERCE: {
 			COMMON: {

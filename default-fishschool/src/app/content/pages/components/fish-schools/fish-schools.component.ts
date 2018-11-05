@@ -11,7 +11,6 @@ import {AuthenticationService} from '../../../../core/auth/authentication.servic
 import {Observable} from 'rxjs';
 import * as deepEqual from 'deep-equal';
 import {FishSchoolsAuthorizationService} from '../../../../core/services/fishschool/fish-schools.authorization.service';
-import {FsNames} from '../../../../core/models/fishschool/fish-school.names.model';
 import {FoodService} from '../../../../core/services/fishschool/food.service';
 
 @Component({
@@ -30,6 +29,8 @@ export class FishSchoolsComponent implements OnInit {
 	// the relevant cases
 	displayedColumns: string[] = ['feedDate', 'age', 'menualAvgWeight', 'averageWeight', 'quantity', 'totalWeight', 'totalGivenFood',
 		'actualGivenFood', 'foodWeight', 'foodTypeName', 'dead', 'fcr'];
+
+	// TODO: Use language translation
 	headers: string[] = ['Selected Date', 'Age', 'Manual Weight', 'Avg. G', '# Fish', 'Total KG', 'Feed Plan', 'Given Feed', 'Total Food',
 		'Food Type', 'Mortality', 'F.C.R.', 'Save'];
 	dataSource: MatTableDataSource<FishSchoolModel>;
@@ -42,7 +43,6 @@ export class FishSchoolsComponent implements OnInit {
 	fishSchoolNames: string[];
 
 	@ViewChild('f') f: NgForm;
-	errors: any = [];
 	panelOpenState: boolean = true;
 	roles: string;
 	originalData: FishSchoolModel[] = [];

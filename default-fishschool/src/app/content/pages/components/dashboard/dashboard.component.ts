@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SummaryModel} from '../../../../core/models/fishschool/summary/summary.model';
 
 @Component({
