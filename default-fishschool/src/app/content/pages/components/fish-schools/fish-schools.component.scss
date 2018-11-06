@@ -31,7 +31,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 label.label-number-format {
 	position: absolute;
-	left: 0px; top: 0px;
+	left: 0px;
+	top: 0px;
 	padding: .4375em 0;
 	background: white;
 	border: none;
@@ -41,8 +42,15 @@ input.input-number-format {
 	position: relative;
 }
 
-#input, label { padding: 0; border: 1px solid black; }
-
+// Display on/off label to show formatted number
 input.input-number-format:focus + label.label-number-format {
 	display: none;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+	padding-left: 3px;
+}
+
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell {
+	padding-left: 3px;
 }

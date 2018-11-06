@@ -16,15 +16,12 @@ export class SchoolsSummaryComponent implements OnInit {
 	@Input() public schoolsSum: SummaryModel;
 	@Output() valueChange = new EventEmitter<SummaryModel>();
 	private isDialogOpened: boolean = false;
-	summaryDate: Moment;
-	startDate: Moment = moment();
+	summaryDate: Moment = moment();
 	maxDate: Moment = moment();
 
 	private config = {
-		// maxWidth: '100vw',
-		// maxHeight: '100vh',
-		 height: '100%',
-		 width: '100%',
+		height: '100%',
+		width: '100%',
 		data: {}
 	};
 
@@ -48,7 +45,7 @@ export class SchoolsSummaryComponent implements OnInit {
 	}
 
 	viewDetails(): void {
-		if (! this.isDialogOpened) {
+		if (!this.isDialogOpened) {
 			this.isDialogOpened = true;
 			this.config.data = this.schoolsSum.schoolSummaries;
 

@@ -89,11 +89,11 @@ export class FishSchoolsComponent implements OnInit {
 		}
 	}
 
-	view() {
+	async view() {
 
 		this.alerts = [];
 
-		this.service.view(this.model).toPromise().then(response => {
+		await this.service.view(this.model).toPromise().then(response => {
 
 			if (response.status === 'Success') {
 

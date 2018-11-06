@@ -98,15 +98,15 @@
 </div>
 <div class="m-section">
 	<div [hidden]="model.schoolName === ''">
-		<h4>{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}: {{ model.schoolName }}</h4>
+		<h5>{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}: {{ model.schoolName }}</h5>
 	</div>
 	<div class="example-container mat-elevation-z8">
 		<mat-form-field>
 			<input matInput type="text" (keyup)="applyFilter($event.target.value)"
 				   placeholder="{{'ACTIONS.SEARCH' | translate}}">
 		</mat-form-field>
-		<table class="table table-bordered table-striped" mat-table matSort matSortActive="menualAvgWeight" matSortDirection="desc"
-			   #table matSortDisableClear [dataSource]="dataSource" class="col-md-12">
+		<table class="table table-bordered table-striped table-hover col-md-12" mat-table matSort
+			   matSortActive="menualAvgWeight" matSortDirection="desc" #table matSortDisableClear [dataSource]="dataSource">
 
 			<!-- feedDate Column -->
 			<ng-container matColumnDef="feedDate">
@@ -247,10 +247,10 @@
 			<!-- averageWeight Column -->
 			<ng-container matColumnDef="fcr">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ headers[11] }}</th>
-				<td mat-cell *matCellDef="let row"> {{row.fcr}}</td>
+				<td mat-cell *matCellDef="let row"> {{row.fcr | number}}</td>
 			</ng-container>
 
-			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 		</table>
 		<span>
