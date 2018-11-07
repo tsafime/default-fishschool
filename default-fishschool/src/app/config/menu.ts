@@ -200,124 +200,6 @@ export class MenuConfig implements ConfigModel {
 										}
 									]
 								},
-								{
-									bullet: 'line',
-									heading: {
-										heading: true,
-										title: 'Project Reports',
-									},
-									items: [
-										{
-											title: 'Coca Cola CRM',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title:
-												'Delta Airlines Booking Site',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Malibu Accounting',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Vineseed Website Rewamp',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Zircon Mobile App',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Mercury CMS',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										}
-									]
-								},
-								{
-									bullet: 'dot',
-									heading: {
-										heading: true,
-										title: 'HR Reports',
-									},
-									items: [
-										{
-											title: 'Staff Directory',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Client Directory',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Salary Reports',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Staff Payslips',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Corporate Expenses',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Project Expenses',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										}
-									]
-								},
-								{
-									heading: {
-										heading: true,
-										title: 'Reporting Apps',
-										icon: '',
-									},
-									items: [
-										{
-											title: 'Report Adjusments',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Sources & Mediums',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Reporting Settings',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Conversions',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Report Flows',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										},
-										{
-											title: 'Audit & Logs',
-											tooltip: 'Non functional dummy link',
-											icon: '',
-										}
-									]
-								}
 							]
 						}
 					},
@@ -361,91 +243,6 @@ export class MenuConfig implements ConfigModel {
 										]
 									}
 								},
-								{
-									title: 'Audience',
-									tooltip: 'Non functional dummy link',
-									icon: 'flaticon-computer',
-									submenu: {
-										type: 'classic',
-										alignment: 'right',
-										items: [
-											{
-												title: 'Active Users',
-												tooltip: 'Non functional dummy link',
-												icon: 'flaticon-users',
-											},
-											{
-												title: 'User Explorer',
-												tooltip: 'Non functional dummy link',
-												icon: 'flaticon-interface-1',
-											},
-											{
-												title: 'Users Flows',
-												tooltip: 'Non functional dummy link',
-												icon: 'flaticon-lifebuoy',
-											},
-											{
-												title: 'Market Segments',
-												tooltip: 'Non functional dummy link',
-												icon: 'flaticon-graphic-1',
-											},
-											{
-												title: 'User Reports',
-												tooltip: 'Non functional dummy link',
-												icon: 'flaticon-graphic',
-											}
-										]
-									}
-								},
-								{
-									title: 'Marketing',
-									tooltip: 'Non functional dummy link',
-									icon: 'flaticon-map',
-								},
-								{
-									title: 'Campaigns',
-									tooltip: 'Non functional dummy link',
-									icon: 'flaticon-graphic-2',
-									badge: {
-										type: 'm-badge--success',
-										value: '3'
-									}
-								},
-								{
-									title: 'Cloud Manager',
-									tooltip: 'Non functional dummy link',
-									icon: 'flaticon-infinity',
-									submenu: {
-										type: 'classic',
-										alignment: 'left',
-										items: [
-											{
-												title: 'File Upload',
-												tooltip: 'Non functional dummy link',
-												icon: 'flaticon-add',
-												badge: {
-													type: 'm-badge--danger',
-													value: '3'
-												}
-											},
-											{
-												title: 'File Attributes',
-												tooltip: 'Non functional dummy link',
-												icon: 'flaticon-signs-1',
-											},
-											{
-												title: 'Folders',
-												tooltip: 'Non functional dummy link',
-												icon: 'flaticon-folder',
-											},
-											{
-												title: 'System Settings',
-												tooltip: 'Non functional dummy link',
-												icon: 'flaticon-cogwheel-2',
-											}
-										]
-									}
-								}
 							]
 						}
 					}
@@ -463,13 +260,21 @@ export class MenuConfig implements ConfigModel {
 						// badge: {type: 'm-badge--danger', value: '2'},
 						translate: 'MENU.DASHBOARD'
 					},
-{
+					{
 						title: 'Fish Schools',
 						desc: 'Fish schools operations',
 						root: true,
 						icon: 'flaticon-exclamation',
 						page: '/fish-schools',
 						translate: 'MENU.FISH_SCHOOLS'
+					},
+					{
+						title: 'Farm',
+						desc: 'Farm operations',
+						root: true,
+						icon: 'flaticon-lifebuoy',
+						page: '/farm',
+						translate: 'MENU.FARM'
 					},
 					/*{section: 'Tools'},
 					{

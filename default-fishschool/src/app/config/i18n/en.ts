@@ -12,7 +12,8 @@ export const locale = {
 			REPORTS: 'Reports',
 			APPS: 'Apps',
 			DASHBOARD: 'Dashboard',
-			FISH_SCHOOLS: 'Fish schools'
+			FISH_SCHOOLS: 'Fish schools',
+			FARM: 'Farm',
 		},
 		AUTH: {
 			GENERAL: {
@@ -77,15 +78,19 @@ export const locale = {
 			},
 			SUMMARY_DATE: 'Summary Date',
 		},
+		VALIDATION: {
+			LOAD_FAILURE: 'Unable to load fish school records, please try again later',
+			REQUIRED_FIELD: '{{name}} is required',
+			MIN_LENGTH_FIELD: '{{name}} minimum length is {{min}}',
+		},
+		FARM: {
+			ACTUAL_GIVEN_FOOD: 'Actual Given Food',
+			MORTALITY: 'Mortality',
+		},
 		FISH_SCHOOL: {
 			NO_RECORDS: 'No records to display',
 			NO_CHANGES: 'No changes detected, will not update records',
 			UPDATE_WITHOUT_RECORDS: 'Your Fish school data not yet visible, update cannot be done',
-			VALIDATION: {
-				LOAD_FAILURE: 'Unable to load fish school records, please try again later',
-				REQUIRED_FIELD: '{{name}} is required',
-				MIN_LENGTH_FIELD: '{{name}} minimum length is {{min}}',
-			},
 			FILTERS: {
 				SCHOOL_NAME: 'School name',
 				CHOOSE_SCHOOL_NAME: 'Choose School Name',

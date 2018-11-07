@@ -23,6 +23,6 @@ export class SchoolsSummaryService {
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 10, 0, ['feedDate'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
-		return this.http.post<SummariesModel>('http://localhost:51120/fishschool/summary', json);
+		return this.http.post<SummariesModel>('http://localhost:51120/farm/summary', json);
 	}
 }

@@ -28,7 +28,11 @@ const routes: Routes = [
 				path: 'fish-schools',
 				loadChildren: './components/fish-schools/fish-schools.module#FishSchoolsModule'
 			},
-                        {
+			{
+				path: 'farm',
+				loadChildren: './components/farm/farm.module#FarmModule'
+			},
+            /*{
 				path: 'builder',
 				loadChildren: './builder/builder.module#BuilderModule'
 			},
@@ -43,7 +47,7 @@ const routes: Routes = [
 			{
 				path: 'inner',
 				component: InnerComponent
-			},
+			},*/
 		]
 	},
 	{

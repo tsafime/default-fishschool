@@ -35,7 +35,7 @@ export class FishSchoolsComponent implements OnInit {
 	dataSource: MatTableDataSource<FishSchoolModel>;
 	data: FishSchools;
 
-	public model: FsModel = {schoolName: '270517 102', status: 'ACTIVE', startDate: moment('2017-06-16'), days: 10};
+	public model: FsModel = {schoolName: '270517 102', status: 'ACTIVE', feedDate: moment('2017-06-16'), days: 10};
 
 	@ViewChild(MatSort) sort: MatSort;
 	alerts: Array<FsAlert> = [];
@@ -70,7 +70,7 @@ export class FishSchoolsComponent implements OnInit {
 			this.fishSchoolNames = response.data;
 			return response;
 		}).catch(error => {
-			this.alertNoConnaction();
+			this.alertNoConnection();
 		});
 
 		this.authService.getUserRoles().subscribe(role => {
@@ -121,7 +121,7 @@ export class FishSchoolsComponent implements OnInit {
 					type: 'danger'
 				});
 			} else {
-				this.alertNoConnaction();
+				this.alertNoConnection();
 			}
 		});
 	}
@@ -160,7 +160,7 @@ export class FishSchoolsComponent implements OnInit {
 							type: 'danger'
 						});
 					} else {
-						this.alertNoConnaction();
+						this.alertNoConnection();
 					}
 				});
 			} else {
@@ -207,7 +207,7 @@ export class FishSchoolsComponent implements OnInit {
 		this.panelOpenState = false;
 	}
 
-	private alertNoConnaction() {
+	private alertNoConnection() {
 
 		// Keep same message as in Login
 		this.sendAlert({
@@ -238,6 +238,6 @@ export interface FsAlert {
 export interface FsModel {
 	schoolName: string;
 	status: string;
-	startDate: Moment;
+	feedDate: Moment;
 	days: number;
 }

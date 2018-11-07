@@ -10,7 +10,7 @@ import * as deepEqual from 'deep-equal';
 import {Observable} from 'rxjs';
 
 @Injectable()
-export class FishSchoolsService {
+export class FarmService {
 
 	constructor(private http: HttpClient) {
 	}
@@ -18,13 +18,16 @@ export class FishSchoolsService {
 	view(model: FsModel) {
 
 		const queryFilters: QueryFilter[] = [];
-		queryFilters.push(new QueryFilter('name', [model.schoolName], '=', 'AND'));
+		if (model.schoolName) {
+			queryFilters.push(new QueryFilter('name', [model.schoolName], '=', 'AND'));
+		}
+
 		queryFilters.push(new QueryFilter('status', [model.status], '=', 'AND'));
 		queryFilters.push(new QueryFilter('feedDate', [model.feedDate.format('DD/MM/YYYY')], '=', 'NONE'));
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, model.days, 0, ['feedDate'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
-		return this.http.post<FishSchools>('http://localhost:51120/fishschool/view', json);
+		return this.http.post<FishSchools>('http://localhost:51120/farm/view', json);
 	}
 
 	names() {
