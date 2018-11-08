@@ -9,7 +9,7 @@
 	</div>
 	<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 		<div class="example-container">
-			<table class="table table-bordered table-striped table-hover table-dark table-responsive col-md-12">
+			<table class="table table-bordered table-striped table-hover table-light table-responsive col-md-12">
 				<thead>
 					<tr>
 						<th>School name</th>
@@ -25,7 +25,7 @@
 							<input matInput type="number" name="actualGivenFood{{i}}" autocomplete="off"
 								   [(ngModel)]="school.actualGivenFood" #actualGivenFood="ngModel" minlength="1" required>
 
-							<div *ngIf="actualGivenFood.invalid && (actualGivenFood.dirty || actualGivenFood.touched)" class="text-danger">
+							<div *ngIf="actualGivenFood.invalid && (actualGivenFood.dirty && actualGivenFood.touched)" class="text-danger">
 								<div *ngIf="actualGivenFood.errors.required">
 									{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'FARM.ACTUAL_GIVEN_FOOD' | translate } }}
 								</div>
@@ -38,7 +38,7 @@
 						<td>
 							<input matInput type="number" #dead="ngModel" name="dead{{i}}" autocomplete="off"
 								   [(ngModel)]="school.dead" minlength="1" required>
-							<div *ngIf="dead.invalid && (dead.dirty || dead.touched)" class="text-danger">
+							<div *ngIf="dead.invalid && (dead.dirty && dead.touched)" class="text-danger">
 								<div *ngIf="dead.errors.required">
 									{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'FARM.MORTALITY' | translate } }}
 								</div>

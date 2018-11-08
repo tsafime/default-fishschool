@@ -19,7 +19,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {InterceptService} from '../../../../core/services/intercept.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
-import {FarmComponent} from './farm.component';
+import {DailyFarmComponent} from './daily/daily.farm.component';
 import {FarmService} from '../../../../core/services/farm/farm-schools.service';
 import {FishSchoolsService} from '../../../../core/services/fishschool/fish-schools.service';
 import {NgbAlertConfig, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
@@ -50,7 +50,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		RouterModule.forChild([
 			{
 				path: '',
-				component: FarmComponent
+				component: DailyFarmComponent
 			}
 		])
 	],
@@ -73,7 +73,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	entryComponents: [
 	],
 	declarations: [
-		FarmComponent,
+		DailyFarmComponent,
 	]
 })
 export class FarmModule {}

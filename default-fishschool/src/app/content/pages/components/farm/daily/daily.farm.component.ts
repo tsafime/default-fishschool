@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import * as moment from 'moment';
-import {FishSchoolModel} from '../../../../core/models/fishschool/fish-school.model';
-import {FarmService} from '../../../../core/services/farm/farm-schools.service';
-import {FishSchoolsService} from '../../../../core/services/fishschool/fish-schools.service';
+import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school.model';
+import {FarmService} from '../../../../../core/services/farm/farm-schools.service';
+import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import {Observable} from 'rxjs';
-import {FishSchools} from '../../../../core/models/fishschool/fish.schools.model';
+import {FishSchools} from '../../../../../core/models/fishschool/fish.schools.model';
 import * as deepEqual from 'deep-equal';
 
 @Component({
 	selector: 'm-farm',
-	templateUrl: './farm.component.html',
-	styleUrls: ['./farm.component.scss']
+	templateUrl: './daily.farm.component.html',
+	styleUrls: ['./daily.farm.component.scss']
 })
-export class FarmComponent implements OnInit {
+export class DailyFarmComponent implements OnInit {
 
 	dailySchools: FishSchoolModel[] = [];
 	originalData: FishSchoolModel[] = [];

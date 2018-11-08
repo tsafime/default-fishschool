@@ -10,7 +10,7 @@ export class MenuConfig implements ConfigModel {
 			header: {
 				self: {},
 				items: [
-					{
+					/*{
 						title: 'Actions',
 						root: true,
 						icon: 'flaticon-add',
@@ -245,7 +245,7 @@ export class MenuConfig implements ConfigModel {
 								},
 							]
 						}
-					}
+					}*/
 				]
 			},
 			aside: {
@@ -261,28 +261,27 @@ export class MenuConfig implements ConfigModel {
 						translate: 'MENU.DASHBOARD'
 					},
 					{
-						title: 'Fish Schools',
-						desc: 'Fish schools operations',
-						root: true,
-						icon: 'flaticon-exclamation',
-						page: '/fish-schools',
-						translate: 'MENU.FISH_SCHOOLS'
-					},
-					{
 						title: 'Farm',
-						desc: 'Farm operations',
+						icon: 'flaticon-map',
+						// bullet: 'line',
 						root: true,
-						icon: 'flaticon-lifebuoy',
-						page: '/farm',
-						translate: 'MENU.FARM'
+						submenu: [
+							{
+								title: 'Daily Update',
+								desc: 'Daily farm update',
+								icon: 'flaticon-list',
+								page: '/farm',
+								translate: 'MENU.FARM',
+							},
+							{
+								title: 'Fish Schools',
+								desc: 'Fish schools operations',
+								icon: 'flaticon-lifebuoy',
+								page: '/fish-schools',
+								translate: 'MENU.FISH_SCHOOLS'
+							},
+						]
 					},
-					/*{section: 'Tools'},
-					{
-						title: 'Layout Builder',
-						root: true,
-						icon: 'flaticon-settings',
-						page: '/builder'
-					}*/
 				]
 			}
 		};

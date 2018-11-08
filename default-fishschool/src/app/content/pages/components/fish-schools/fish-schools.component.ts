@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource, MatSort} from '@angular/material';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource, MatSort, MatSortable} from '@angular/material';
 import {FishSchoolsService} from '../../../../core/services/fishschool/fish-schools.service';
 import {FishSchoolModel} from '../../../../core/models/fishschool/fish-school.model';
 import {FishSchools} from '../../../../core/models/fishschool/fish.schools.model';
@@ -18,7 +18,7 @@ import {FoodService} from '../../../../core/services/fishschool/food.service';
 	templateUrl: './fish-schools.component.html',
 	styleUrls: ['./fish-schools.component.scss']
 })
-export class FishSchoolsComponent implements OnInit {
+export class FishSchoolsComponent implements OnInit, AfterViewInit {
 
 	// All columns:
 	// displayedColumns: string[] = ['id', 'companyId', 'name', 'status', 'creationDate', 'updatedDate', 'age', 'specie', 'quantity', 'dead',
@@ -87,6 +87,10 @@ export class FishSchoolsComponent implements OnInit {
 		if (this.dataSource) {
 			this.dataSource.filter = filterValue.trim().toLowerCase();
 		}
+	}
+
+	ngAfterViewInit() {
+		console.log('View initiated......');
 	}
 
 	async view() {
