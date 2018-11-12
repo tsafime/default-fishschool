@@ -23,6 +23,7 @@ import {FishSchoolsService} from '../../../../core/services/fishschool/fish-scho
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 import {FishSchoolsAuthorizationService} from '../../../../core/services/fishschool/fish-schools.authorization.service';
 import {FoodService} from '../../../../core/services/fishschool/food.service';
+import {ToastrModule} from 'ng6-toastr-notifications';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -61,6 +62,7 @@ export const DD_MM_YYYY_Format = {
 		MatDatepickerModule,
 		MatTableModule,
 		MatSortModule,
+		ToastrModule.forRoot(),
 		TranslateModule.forChild(),
 		RouterModule.forChild([
 			{

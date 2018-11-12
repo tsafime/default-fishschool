@@ -7,8 +7,11 @@ import * as deepEqual from 'deep-equal';
 import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
 import {AuthenticationService} from '../../../../../core/auth/authentication.service';
 import {FoodService} from '../../../../../core/services/fishschool/food.service';
-import {FsAlert} from '../../fish-schools/fish-schools.component';
 import {FsResponse} from '../../../../../core/models/fishschool/fs.response.model';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {ToastConfig} from '../../../../../core/models/toast/toast.config';
+import {ToastMessage} from '../../../../../core/models/toast/toast.message';
+
 
 @Component({
 	selector: 'm-food-names',
@@ -24,10 +27,17 @@ export class FoodNamesComponent implements OnInit {
 	originalData: FoodModel[] = [];
 
 	@ViewChild(MatSort) sort: MatSort;
-	alerts: Array<FsAlert> = [];
+	// toastConfig = {
+	// 	toastTimeout: 7000,
+	// 	dismiss: 'auto',
+	// 	showCloseButton: true,
+	// 	position: 'top-right',
+	// 	animate: 'slideFromRight',
+	// };
 
 	constructor(private foodService: FoodService, private authService: AuthenticationService,
-				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService) {
+				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
+				public toastr: ToastrManager) {
 
 		this.headers = [this.translate.instant('FOOD.TABLE.NAME'),
 			this.translate.instant('FOOD.TABLE.QUANTITY')];
@@ -39,15 +49,13 @@ export class FoodNamesComponent implements OnInit {
 
 	async view() {
 
-		this.alerts = [];
-
 		await this.foodService.view().toPromise().then(response => {
 
 			if (response.status === 'Success') {
 
 				if (response.data.length === 0) {
 					this.dataSource = new MatTableDataSource<FoodModel>([]);
-					this.sendAlert({
+					this.showSuccess({
 						message: this.translate.instant('VALIDATION.NO_RECORDS'),
 						type: 'info'
 					});
@@ -57,19 +65,22 @@ export class FoodNamesComponent implements OnInit {
 					this.loadData(response.data);
 				}
 			} else {
-				this.sendAlert({
+				this.showError({
 					message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FOOD_FAILURE'),
 					type: 'danger'
 				});
 			}
 		}).catch(response => {
 			if (response !== 'undefined' && response.status === 'Failure') {
-				this.sendAlert({
+				this.showError({
 					message: response.message,
 					type: 'danger'
 				});
 			} else {
-				this.alertNoConnection();
+				this.showError({
+					message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
+					type: 'danger'
+				});
 			}
 		});
 	}
@@ -95,23 +106,26 @@ export class FoodNamesComponent implements OnInit {
 						}
 					});
 
-					this.sendAlert({
+					this.showInfo({
 						message: this.translate.instant('FOOD.RESULTS.FOOD_UPDATE_SUCCESS'),
 						type: 'info'
 					});
 				}
 			}).catch(response => {
 				if (response.error !== 'undefined' && response.error.status === 'Failure') {
-					this.sendAlert({
+					this.showError({
 						message: response.error.code + ': ' + response.error.message,
 						type: 'danger'
 					});
 				} else {
-					this.alertNoConnection();
+					this.showError({
+						message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
+						type: 'danger'
+					});
 				}
 			});
 		} else {
-			this.sendAlert({
+			this.showInfo({
 				message: this.translate.instant('VALIDATION.NO_CHANGES'),
 				type: 'info'
 			});
@@ -138,9 +152,24 @@ export class FoodNamesComponent implements OnInit {
 		return this.authorization.isReadWrite('Food', 'UPDATE', prop);
 	}
 
-	closeAlert(alert: FsAlert) {
-		const index: number = this.alerts.indexOf(alert);
-		this.alerts.splice(index, 1);
+	showSuccess(toast: ToastMessage) {
+		this.toastr.successToastr(toast.message, toast.type, ToastConfig);
+		window.scrollTo(0, 0);
+	}
+
+	showError(toast: ToastMessage) {
+		this.toastr.errorToastr(toast.message, toast.type, ToastConfig);
+		window.scrollTo(0, 0);
+	}
+
+	showWarning(toast: ToastMessage) {
+		this.toastr.warningToastr(toast.message, toast.type, ToastConfig);
+		window.scrollTo(0, 0);
+	}
+
+	showInfo(toast: ToastMessage) {
+		this.toastr.infoToastr(toast.message, toast.type, ToastConfig);
+		window.scrollTo(0, 0);
 	}
 
 	private loadData(data: FoodModel[]) {
@@ -162,29 +191,13 @@ export class FoodNamesComponent implements OnInit {
 
 		this.dataSource.sort = this.sort;
 	}
-
-	private alertNoConnection() {
-
-		// Keep same message as in Login
-		this.sendAlert({
-			message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
-			type: 'danger'
-		});
-	}
-
-	private sendAlert(alert: FsAlert) {
-
-		if (this.alerts.length > 2) {
-			this.alerts.splice(0, 1);
-		}
-
-		this.alerts.push(alert);
-		setTimeout(() => {
-			this.closeAlert(alert);
-		}, 10000);
-		window.scrollTo(0, 0);
-	}
 }
+
+export interface Toaster {
+	message: string;
+	title: string;
+}
+
 export interface FoodsModel extends FsResponse {
 	data: FoodModel[];
 }

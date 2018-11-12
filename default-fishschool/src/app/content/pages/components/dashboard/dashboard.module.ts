@@ -23,6 +23,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {SchoolsSummaryComponent} from './summary/schools.summary.component';
 import {SchoolsSummaryDetailsComponent} from './summary/details/schools.summary.details.component';
 import {FormsModule} from '@angular/forms';
+import {ToastrModule} from 'ng6-toastr-notifications';
 
 @NgModule({
 	imports: [
@@ -40,6 +41,7 @@ import {FormsModule} from '@angular/forms';
 		MatSortModule,
 		MatDatepickerModule,
 		MatIconModule,
+		ToastrModule.forRoot(),
 		TranslateModule.forChild(),
 		RouterModule.forChild([
 			{

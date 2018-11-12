@@ -24,6 +24,7 @@ import {FarmService} from '../../../../../core/services/farm/farm-schools.servic
 import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import {NgbAlertConfig, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
+import {ToastrModule} from 'ng6-toastr-notifications';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -46,6 +47,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		MatDatepickerModule,
 		MatIconModule,
 		NgbAlertModule,
+		ToastrModule.forRoot(),
 		TranslateModule.forChild(),
 		RouterModule.forChild([
 			{

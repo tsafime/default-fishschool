@@ -7,6 +7,9 @@ import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-s
 import {Observable} from 'rxjs';
 import {FishSchools} from '../../../../../core/models/fishschool/fish.schools.model';
 import * as deepEqual from 'deep-equal';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {ToastConfig} from '../../../../../core/models/toast/toast.config';
+import {ToastMessage} from '../../../../../core/models/toast/toast.message';
 
 @Component({
 	selector: 'm-daily-farm',
@@ -17,9 +20,9 @@ export class DailyFarmComponent implements OnInit {
 
 	dailySchools: FishSchoolModel[] = [];
 	originalData: FishSchoolModel[] = [];
-	alerts: Array<FsAlert> = [];
 
-	constructor(private service: FarmService, private fsService: FishSchoolsService, private translate: TranslateService) {
+	constructor(private service: FarmService, private fsService: FishSchoolsService, private translate: TranslateService,
+				public toastr: ToastrManager) {
 	}
 
 	async ngOnInit() {
@@ -28,10 +31,13 @@ export class DailyFarmComponent implements OnInit {
 
 	async getDailySchools() {
 		await this.viewDailySchools().then(response => {
-				return response;
-			}).catch(error => {
-				console.log('Error: ' + error);
+			return response;
+		}).catch(error => {
+			this.showError({
+				message: error,
+				type: 'danger'
 			});
+		});
 		return this.dailySchools;
 	}
 
@@ -56,62 +62,56 @@ export class DailyFarmComponent implements OnInit {
 					this.originalData = JSON.parse(JSON.stringify(data));
 					data.forEach((item, index) => {
 						const deepEqual1 = deepEqual(item.id, data[index].id);
-						const i = this.dailySchools.indexOf(item);
-						this.dailySchools[i] = data[index];
+						if (deepEqual1) {
+							const i = this.dailySchools.indexOf(item);
+							this.dailySchools[i] = data[index];
+						}
 					});
 
-					this.sendAlert({
+					this.showSuccess({
 						message: this.translate.instant('FISH_SCHOOL.RESULTS.FISH_SCHOOL_UPDATE_SUCCESS'),
 						type: 'success'
 					});
 				}
 			}).catch(response => {
 				if (response.error !== 'undefined' && response.error.status === 'Failure') {
-					this.sendAlert({
+					this.showError({
 						message: response.error.code + ': ' + response.error.message,
 						type: 'danger'
 					});
 				} else {
-					this.alertNoConnection();
+					this.showError({
+						message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
+						type: 'danger'
+					});
 				}
 			});
 		} else {
-			this.sendAlert({
+			this.showInfo({
 				message: this.translate.instant('VALIDATION.NO_CHANGES'),
 				type: 'info'
 			});
 		}
 	}
 
-	closeAlert(alert: FsAlert) {
-		const index: number = this.alerts.indexOf(alert);
-		this.alerts.splice(index, 1);
+	showSuccess(toast: ToastMessage) {
+		this.toastr.successToastr(toast.message, toast.type, ToastConfig);
+		window.scrollTo(0, 0);
 	}
 
-	private alertNoConnection() {
-
-		// Keep same message as in Login
-		this.sendAlert({
-			message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
-			type: 'danger'
-		});
+	showError(toast: ToastMessage) {
+		this.toastr.errorToastr(toast.message, toast.type, ToastConfig);
+		window.scrollTo(0, 0);
 	}
 
-	private sendAlert(alert: FsAlert) {
-		if (this.alerts.length > 2) {
-			this.alerts.splice(0, 1);
-		}
+	showWarning(toast: ToastMessage) {
+		this.toastr.warningToastr(toast.message, toast.type, ToastConfig);
+		window.scrollTo(0, 0);
+	}
 
-		this.alerts.push(alert);
-		setTimeout(() => {
-			this.closeAlert(alert);
-		}, 10000);
-
+	showInfo(toast: ToastMessage) {
+		this.toastr.infoToastr(toast.message, toast.type, ToastConfig);
 		window.scrollTo(0, 0);
 	}
 }
 
-export interface FsAlert {
-	type: string;
-	message: string;
-}

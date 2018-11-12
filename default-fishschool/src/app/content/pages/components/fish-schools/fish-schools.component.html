@@ -1,8 +1,3 @@
-<div *ngIf="alerts !== undefined && alerts.length > 0;">
-	<div *ngFor="let alert of alerts">
-		<ngb-alert [dismissible]="true" [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
-	</div>
-</div>
 <div class="m-section">
 	<mat-accordion class="example-headers-align">
 		<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
@@ -29,25 +24,6 @@
 							</div>
 						</div>
 					</mat-form-field>
-
-					<!-- School status -->
-					<!--<div class="mat-form-field-wrapper">
-						<mat-button-toggle-group name="status" class="form-group" [(ngModel)]="model.status"
-												 #status="ngModel">
-							<button class="btn" value="ACTIVE" (click)="model.status = 'ACTIVE'"
-									[class.btn-primary]="model.status === '' || model.status === 'ACTIVE'">
-								{{'FISH_SCHOOL.FILTERS.STATUS.ACTIVE' | translate}}
-							</button>
-							<button class="btn" value="INACTIVE" (click)="model.status = 'INACTIVE'"
-									[class.btn-primary]="model.status === 'INACTIVE'">
-								{{'FISH_SCHOOL.FILTERS.STATUS.INACTIVE' | translate}}
-							</button>
-							<button class="btn" value="SOLD" (click)="model.status = 'SOLD'"
-									[class.btn-primary]="model.status === 'SOLD'">
-								{{'FISH_SCHOOL.FILTERS.STATUS.SOLD' | translate}}
-							</button>
-						</mat-button-toggle-group>
-					</div>-->
 
 					<!-- Start date -->
 					<mat-form-field>

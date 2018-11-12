@@ -12,6 +12,9 @@ import {Observable} from 'rxjs';
 import * as deepEqual from 'deep-equal';
 import {FishSchoolsAuthorizationService} from '../../../../core/services/fishschool/fish-schools.authorization.service';
 import {FoodService} from '../../../../core/services/fishschool/food.service';
+import {ToastConfig} from '../../../../core/models/toast/toast.config';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {ToastMessage} from '../../../../core/models/toast/toast.message';
 
 @Component({
 	selector: 'm-fish-schools',
@@ -38,7 +41,6 @@ export class FishSchoolsComponent implements OnInit {
 	public model: FsModel = {schoolName: '270517 102', status: 'ACTIVE', feedDate: moment('2017-06-16'), days: 10};
 
 	@ViewChild(MatSort) sort: MatSort;
-	alerts: Array<FsAlert> = [];
 	fishSchoolNames: string[];
 
 	@ViewChild('f') f: NgForm;
@@ -49,7 +51,8 @@ export class FishSchoolsComponent implements OnInit {
 	foodNames: string[];
 
 	constructor(private service: FishSchoolsService, private foodService: FoodService, private authService: AuthenticationService,
-				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService) {
+				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
+				public toastr: ToastrManager) {
 
 		this.headers = [this.translate.instant('FISH_SCHOOL.TABLE.SELECTED_DATE'),
 			this.translate.instant('FISH_SCHOOL.TABLE.AGE'),
@@ -70,7 +73,10 @@ export class FishSchoolsComponent implements OnInit {
 			this.fishSchoolNames = response.data;
 			return response;
 		}).catch(error => {
-			this.alertNoConnection();
+			this.showError({
+				message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
+				type: 'danger'
+			});
 		});
 
 		this.authService.getUserRoles().subscribe(role => {
@@ -91,15 +97,13 @@ export class FishSchoolsComponent implements OnInit {
 
 	async view() {
 
-		this.alerts = [];
-
 		await this.service.view(this.model).toPromise().then(response => {
 
 			if (response.status === 'Success') {
 
 				if (response.data.length === 0) {
 					this.dataSource = new MatTableDataSource<FishSchoolModel>([]);
-					this.sendAlert({
+					this.showInfo({
 						message: this.translate.instant('VALIDATION.NO_RECORDS'),
 						type: 'info'
 					});
@@ -109,19 +113,22 @@ export class FishSchoolsComponent implements OnInit {
 					this.loadData(response.data);
 				}
 			} else {
-				this.sendAlert({
+				this.showError({
 					message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FS_FAILURE'),
 					type: 'danger'
 				});
 			}
 		}).catch(response => {
 			if (response !== 'undefined' && response.status === 'Failure') {
-				this.sendAlert({
+				this.showError({
 					message: response.message,
 					type: 'danger'
 				});
 			} else {
-				this.alertNoConnection();
+				this.showError({
+					message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
+					type: 'danger'
+				});
 			}
 		});
 	}
@@ -148,42 +155,60 @@ export class FishSchoolsComponent implements OnInit {
 						});
 
 						this.loadData(this.dataSource.data);
-						this.sendAlert({
+						this.showSuccess({
 							message: this.translate.instant('FISH_SCHOOL.RESULTS.FISH_SCHOOL_UPDATE_SUCCESS'),
 							type: 'success'
 						});
 					}
 				}).catch(response => {
 					if (response.error !== 'undefined' && response.error.status === 'Failure') {
-						this.sendAlert({
+						this.showError({
 							message: response.error.code + ': ' + response.error.message,
 							type: 'danger'
 						});
 					} else {
-						this.alertNoConnection();
+						this.showError({
+							message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
+							type: 'danger'
+						});
 					}
 				});
 			} else {
-				this.sendAlert({
+				this.showInfo({
 					message: this.translate.instant('VALIDATION.NO_CHANGES'),
 					type: 'info'
 				});
 			}
 		} else {
-			this.sendAlert({
+			this.showWarning({
 				message: this.translate.instant('FISH_SCHOOL.UPDATE_WITHOUT_RECORDS'),
 				type: 'warning'
 			});
 		}
 	}
 
-	closeAlert(alert: FsAlert) {
-		const index: number = this.alerts.indexOf(alert);
-		this.alerts.splice(index, 1);
-	}
-
 	isReadWrite(prop: string): boolean {
 		return this.authorization.isReadWrite('FishSchool', 'UPDATE', prop);
+	}
+
+	showSuccess(toast: ToastMessage) {
+		this.toastr.successToastr(toast.message, toast.type, ToastConfig);
+		window.scrollTo(0, 0);
+	}
+
+	showError(toast: ToastMessage) {
+		this.toastr.errorToastr(toast.message, toast.type, ToastConfig);
+		window.scrollTo(0, 0);
+	}
+
+	showWarning(toast: ToastMessage) {
+		this.toastr.warningToastr(toast.message, toast.type, ToastConfig);
+		window.scrollTo(0, 0);
+	}
+
+	showInfo(toast: ToastMessage) {
+		this.toastr.infoToastr(toast.message, toast.type, ToastConfig);
+		window.scrollTo(0, 0);
 	}
 
 	private loadData(data: FishSchoolModel[]) {
@@ -206,33 +231,6 @@ export class FishSchoolsComponent implements OnInit {
 		this.dataSource.sort = this.sort;
 		this.panelOpenState = false;
 	}
-
-	private alertNoConnection() {
-
-		// Keep same message as in Login
-		this.sendAlert({
-			message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
-			type: 'danger'
-		});
-	}
-
-	private sendAlert(alert: FsAlert) {
-		if (this.alerts.length > 2) {
-			this.alerts.splice(0, 1);
-		}
-
-		this.alerts.push(alert);
-		setTimeout(() => {
-			this.closeAlert(alert);
-		}, 10000);
-
-		window.scrollTo(0, 0);
-	}
-}
-
-export interface FsAlert {
-	type: string;
-	message: string;
 }
 
 export interface FsModel {

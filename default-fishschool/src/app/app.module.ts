@@ -1,7 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 
 import 'hammerjs';
 import { environment } from '../environments/environment';
@@ -44,6 +43,7 @@ import { LayoutRefService } from './core/services/layout/layout-ref.service';
 import { SplashScreenService } from './core/services/splash-screen.service';
 import { DataTableService } from './core/services/datatable.service';
 import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -54,7 +54,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	declarations: [AppComponent],
 	imports: [
 		BrowserAnimationsModule,
-		BrowserModule,
+		CommonModule,
 		AppRoutingModule,
 		HttpClientModule,
 		LayoutModule,
