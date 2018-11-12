@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource, MatSort, MatSortable} from '@angular/material';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource, MatSort} from '@angular/material';
 import {FishSchoolsService} from '../../../../core/services/fishschool/fish-schools.service';
 import {FishSchoolModel} from '../../../../core/models/fishschool/fish-school.model';
 import {FishSchools} from '../../../../core/models/fishschool/fish.schools.model';
@@ -18,7 +18,7 @@ import {FoodService} from '../../../../core/services/fishschool/food.service';
 	templateUrl: './fish-schools.component.html',
 	styleUrls: ['./fish-schools.component.scss']
 })
-export class FishSchoolsComponent implements OnInit, AfterViewInit {
+export class FishSchoolsComponent implements OnInit {
 
 	// All columns:
 	// displayedColumns: string[] = ['id', 'companyId', 'name', 'status', 'creationDate', 'updatedDate', 'age', 'specie', 'quantity', 'dead',
@@ -89,10 +89,6 @@ export class FishSchoolsComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	ngAfterViewInit() {
-		console.log('View initiated......');
-	}
-
 	async view() {
 
 		this.alerts = [];
@@ -104,7 +100,7 @@ export class FishSchoolsComponent implements OnInit, AfterViewInit {
 				if (response.data.length === 0) {
 					this.dataSource = new MatTableDataSource<FishSchoolModel>([]);
 					this.sendAlert({
-						message: this.translate.instant('FISH_SCHOOL.NO_RECORDS'),
+						message: this.translate.instant('VALIDATION.NO_RECORDS'),
 						type: 'info'
 					});
 				} else {
@@ -114,7 +110,7 @@ export class FishSchoolsComponent implements OnInit, AfterViewInit {
 				}
 			} else {
 				this.sendAlert({
-					message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FAILURE'),
+					message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FS_FAILURE'),
 					type: 'danger'
 				});
 			}
@@ -160,7 +156,7 @@ export class FishSchoolsComponent implements OnInit, AfterViewInit {
 				}).catch(response => {
 					if (response.error !== 'undefined' && response.error.status === 'Failure') {
 						this.sendAlert({
-							message: response.message,
+							message: response.error.code + ': ' + response.error.message,
 							type: 'danger'
 						});
 					} else {
@@ -169,7 +165,7 @@ export class FishSchoolsComponent implements OnInit, AfterViewInit {
 				});
 			} else {
 				this.sendAlert({
-					message: this.translate.instant('FISH_SCHOOL.NO_CHANGES'),
+					message: this.translate.instant('VALIDATION.NO_CHANGES'),
 					type: 'info'
 				});
 			}
@@ -186,7 +182,7 @@ export class FishSchoolsComponent implements OnInit, AfterViewInit {
 		this.alerts.splice(index, 1);
 	}
 
-	isReadWite(prop: string): boolean {
+	isReadWrite(prop: string): boolean {
 		return this.authorization.isReadWrite('FishSchool', 'UPDATE', prop);
 	}
 
@@ -228,7 +224,7 @@ export class FishSchoolsComponent implements OnInit, AfterViewInit {
 		this.alerts.push(alert);
 		setTimeout(() => {
 			this.closeAlert(alert);
-		}, 5000);
+		}, 10000);
 
 		window.scrollTo(0, 0);
 	}

@@ -14,6 +14,8 @@ export const locale = {
 			DASHBOARD: 'Dashboard',
 			FISH_SCHOOLS: 'Fish schools',
 			FARM: 'Farm',
+			FOOD_NAMES: 'Food Names',
+			FOOD_STOREROOM: 'Food Storeroom',
 		},
 		AUTH: {
 			GENERAL: {
@@ -79,17 +81,18 @@ export const locale = {
 			SUMMARY_DATE: 'Summary Date',
 		},
 		VALIDATION: {
-			LOAD_FAILURE: 'Unable to load fish school records, please try again later',
+			LOAD_FS_FAILURE: 'Unable to load Fish School records, please try again later',
+			LOAD_FOOD_FAILURE: 'Unable to load Food records, please try again later',
 			REQUIRED_FIELD: '{{name}} is required',
 			MIN_LENGTH_FIELD: '{{name}} minimum length is {{min}}',
+			NO_RECORDS: 'No records to display',
+			NO_CHANGES: 'No changes detected, will not update records',
 		},
 		FARM: {
 			ACTUAL_GIVEN_FOOD: 'Actual Given Food',
 			MORTALITY: 'Mortality',
 		},
 		FISH_SCHOOL: {
-			NO_RECORDS: 'No records to display',
-			NO_CHANGES: 'No changes detected, will not update records',
 			UPDATE_WITHOUT_RECORDS: 'Your Fish school data not yet visible, update cannot be done',
 			FILTERS: {
 				SCHOOL_NAME: 'School name',
@@ -126,9 +129,18 @@ export const locale = {
 		FOOD: {
 			FOOD_TYPE: 'Food Type',
 			CHOOSE_FOOD_TYPE: 'Choose Food Type',
+			TABLE: {
+				NAME: 'Name',
+				QUANTITY: 'Quantity',
+			},
+			RESULTS: {
+				FOOD_UPDATE_SUCCESS: 'Food updated successfully',
+			},
 		},
 		ACTIONS: {
 			SAVE: 'Save',
+			UPDATE: 'Update',
+			ADD: 'Add new',
 			CLOSE: 'Close',
 			SEARCH: 'Search',
 		},

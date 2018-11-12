@@ -262,7 +262,7 @@ export class MenuConfig implements ConfigModel {
 					},
 					{
 						title: 'Farm',
-						icon: 'flaticon-map',
+						icon: 'fa fa-fish',
 						// bullet: 'line',
 						root: true,
 						submenu: [
@@ -279,6 +279,28 @@ export class MenuConfig implements ConfigModel {
 								icon: 'flaticon-lifebuoy',
 								page: '/fish-schools',
 								translate: 'MENU.FISH_SCHOOLS'
+							},
+						]
+					},
+					{
+						title: 'Food',
+						icon: 'flaticon-tea-cup',
+						// bullet: 'line',
+						root: true,
+						submenu: [
+							{
+								title: 'Food Names',
+								desc: 'Daily farm update',
+								icon: 'flaticon-list',
+								page: '/food-names',
+								translate: 'MENU.FOOD_NAMES',
+							},
+							{
+								title: 'Food Storeroom',
+								desc: 'Food storeroom  operations',
+								icon: 'flaticon-lifebuoy',
+								page: '/food-storeroom',
+								translate: 'MENU.FOOD_STOREROOM'
 							},
 						]
 					},

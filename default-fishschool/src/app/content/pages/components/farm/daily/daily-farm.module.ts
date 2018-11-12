@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { LayoutModule } from '../../../layout/layout.module';
-import { PartialsModule } from '../../../partials/partials.module';
-import { ListTimelineModule } from '../../../partials/layout/quick-sidebar/list-timeline/list-timeline.module';
-import { WidgetChartsModule } from '../../../partials/content/widgets/charts/widget-charts.module';
-import {DD_MM_YYYY_Format, FishSchoolsModule} from '../fish-schools/fish-schools.module';
+import { LayoutModule } from '../../../../layout/layout.module';
+import { PartialsModule } from '../../../../partials/partials.module';
+import { ListTimelineModule } from '../../../../partials/layout/quick-sidebar/list-timeline/list-timeline.module';
+import { WidgetChartsModule } from '../../../../partials/content/widgets/charts/widget-charts.module';
+import {DD_MM_YYYY_Format, FishSchoolsModule} from '../../fish-schools/fish-schools.module';
 import {
 	DateAdapter,
 	MAT_DATE_FORMATS,
@@ -16,12 +16,12 @@ import {
 } from '@angular/material';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {InterceptService} from '../../../../core/services/intercept.service';
+import {InterceptService} from '../../../../../core/services/intercept.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
-import {DailyFarmComponent} from './daily/daily.farm.component';
-import {FarmService} from '../../../../core/services/farm/farm-schools.service';
-import {FishSchoolsService} from '../../../../core/services/fishschool/fish-schools.service';
+import {DailyFarmComponent} from './daily-farm.component';
+import {FarmService} from '../../../../../core/services/farm/farm-schools.service';
+import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import {NgbAlertConfig, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
@@ -76,4 +76,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		DailyFarmComponent,
 	]
 })
-export class FarmModule {}
+export class DailyFarmModule {}

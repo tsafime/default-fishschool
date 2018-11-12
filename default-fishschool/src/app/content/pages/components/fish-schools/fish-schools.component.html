@@ -126,7 +126,7 @@
 					[ngStyle]="sort.active == 'age' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[1] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isReadWite('age'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isReadWrite('age'); else display">
 						<input matInput type="number" [value]="row.age" [(ngModel)]="row.age" required step=".01"
 							   min="0" class="input-number-format">
 						<label class="label-number-format">{{row.age | number}}</label>
@@ -155,7 +155,7 @@
 					[ngStyle]="sort.active == 'averageWeight' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[3] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isReadWite('averageWeight'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isReadWrite('averageWeight'); else display">
 						<input matInput type="number" [value]="row.averageWeight" [(ngModel)]="row.averageWeight"
 							   required step=".01" min="0" class="input-number-format">
 						<label class="label-number-format">{{row.averageWeight | number}}</label>
@@ -170,7 +170,7 @@
 					[ngStyle]="sort.active == 'quantity' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[4] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isReadWite('quantity'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isReadWrite('quantity'); else display">
 						<input matInput type="number" [value]="row.quantity" [(ngModel)]="row.quantity" required
 							   step=".01" min="0" class="input-number-format">
 						<label class="label-number-format">{{row.quantity | number}}</label>
@@ -185,7 +185,7 @@
 					[ngStyle]="sort.active == 'totalWeight' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[5] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isReadWite('totalWeight'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isReadWrite('totalWeight'); else display">
 						<input matInput type="number" [value]="row.totalWeight" [(ngModel)]="row.totalWeight" required
 							   step=".01" min="0" class="input-number-format">
 						<label class="label-number-format">{{row.totalWeight | number}}</label>
@@ -208,7 +208,7 @@
 					[ngStyle]="sort.active == 'actualGivenFood' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">>
 					{{ headers[7] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isReadWite('actualGivenFood'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isReadWrite('actualGivenFood'); else display">
 						<input matInput type="number" [value]="row.actualGivenFood" [(ngModel)]="row.actualGivenFood"
 							   required step=".01" min="0" class="input-number-format">
 						<label class="label-number-format">{{row.actualGivenFood | number}}</label>
@@ -223,7 +223,7 @@
 					[ngStyle]="sort.active == 'foodWeight' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[8] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isReadWite('foodWeight'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isReadWrite('foodWeight'); else display">
 						<input matInput type="number" [value]="row.foodWeight" [(ngModel)]="row.foodWeight" required
 							   step=".01" min="0" class="input-number-format">
 						<label class="label-number-format">{{row.foodWeight | number}}</label>
@@ -238,7 +238,7 @@
 					[ngStyle]="sort.active == 'foodTypeName' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[9] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isReadWite('foodTypeName'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isReadWrite('foodTypeName'); else display">
 						<mat-select name="foodTypeName" #schoolName="ngModel" [(ngModel)]="row.foodTypeName"
 									placeholder="{{'FOOD.FOOD_TYPE' | translate}}" required>
 							<option [value]="null" disabled>{{'FOOD.CHOOSE_FOOD_TYPE' |
@@ -257,7 +257,7 @@
 					[ngStyle]="sort.active == 'dead' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[10] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isReadWite('dead'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isReadWrite('dead'); else display">
 						<input matInput type="number" [value]="row.dead" [(ngModel)]="row.dead" required step=".01"
 							   min="0" class="input-number-format">
 						<label class="label-number-format">{{row.dead | number}}</label>
@@ -278,7 +278,7 @@
 			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 		</table>
 		<span>
-			<button class="btn btn-primary" (click)="update()">{{ 'ACTIONS.SAVE' | translate }}</button>
+			<button class="btn btn-primary" (click)="update()">{{ 'ACTIONS.UPDATE' | translate }}</button>
 		</span>
 	</div>
 </div>

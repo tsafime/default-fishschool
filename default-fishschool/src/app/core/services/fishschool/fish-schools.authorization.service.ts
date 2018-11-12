@@ -52,7 +52,18 @@ export class FishSchoolsAuthorizationService {
 		});
 
 		// If exists it is RO otherwise it is enabled
-		const property = this.authorizations[role][entity][action][prop];
-		return ! property;
+		const authByRole = this.authorizations[role];
+		if (authByRole) {
+			const authByEntity = authByRole[entity];
+			if (authByEntity) {
+				const authByAction = authByEntity[action];
+				if (authByAction) {
+					const property = authByAction[prop];
+					return !property;
+				}
+			}
+		}
+
+		return false;
 	}
 }

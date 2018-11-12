@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
-import { ActionComponent } from './header/action/action.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
-import { ProfileComponent } from './header/profile/profile.component';
 import { ErrorPageComponent } from './snippets/error-page/error-page.component';
-import { InnerComponent } from "./components/inner/inner.component";
 
 const routes: Routes = [
 	{
@@ -30,7 +27,15 @@ const routes: Routes = [
 			},
 			{
 				path: 'farm',
-				loadChildren: './components/farm/farm.module#FarmModule'
+				loadChildren: './components/farm/daily/daily-farm.module#DailyFarmModule'
+			},
+			{
+				path: 'food-names',
+				loadChildren: './components/food/food-names/food-names.module#FoodNamesModule'
+			},
+			{
+				path: 'food-storeroom',
+				loadChildren: './components/food/food-storeroom/food-storeroom.module#FoodStoreroomModule'
 			},
             /*{
 				path: 'builder',

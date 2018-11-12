@@ -9,9 +9,9 @@ import {FishSchools} from '../../../../../core/models/fishschool/fish.schools.mo
 import * as deepEqual from 'deep-equal';
 
 @Component({
-	selector: 'm-farm',
-	templateUrl: './daily.farm.component.html',
-	styleUrls: ['./daily.farm.component.scss']
+	selector: 'm-daily-farm',
+	templateUrl: './daily-farm.component.html',
+	styleUrls: ['./daily-farm.component.scss']
 })
 export class DailyFarmComponent implements OnInit {
 
@@ -68,7 +68,7 @@ export class DailyFarmComponent implements OnInit {
 			}).catch(response => {
 				if (response.error !== 'undefined' && response.error.status === 'Failure') {
 					this.sendAlert({
-						message: response.message,
+						message: response.error.code + ': ' + response.error.message,
 						type: 'danger'
 					});
 				} else {
@@ -77,7 +77,7 @@ export class DailyFarmComponent implements OnInit {
 			});
 		} else {
 			this.sendAlert({
-				message: this.translate.instant('FISH_SCHOOL.NO_CHANGES'),
+				message: this.translate.instant('VALIDATION.NO_CHANGES'),
 				type: 'info'
 			});
 		}
@@ -105,7 +105,7 @@ export class DailyFarmComponent implements OnInit {
 		this.alerts.push(alert);
 		setTimeout(() => {
 			this.closeAlert(alert);
-		}, 5000);
+		}, 10000);
 
 		window.scrollTo(0, 0);
 	}
