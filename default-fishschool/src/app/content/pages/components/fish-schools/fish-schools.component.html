@@ -86,9 +86,9 @@
 
 			<!-- feedDate Column -->
 			<ng-container matColumnDef="feedDate">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header
+				<td mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="sort.active == 'feedDate' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
-					{{ headers[0] }}</th>
+					{{ headers[0] }}</td>
 				<td mat-cell *matCellDef="let row"
 					[style.background]="(model.feedDate.format('DD/MM/YYYY') === row.feedDate)? 'lightblue' : ''"
 					class="date-width">
@@ -98,9 +98,9 @@
 
 			<!-- age Column -->
 			<ng-container matColumnDef="age">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header
+				<td mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="sort.active == 'age' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
-					{{ headers[1] }}</th>
+					{{ headers[1] }}</td>
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never" *ngIf="isReadWrite('age'); else display">
 						<input matInput type="number" [value]="row.age" [(ngModel)]="row.age" required step=".01"

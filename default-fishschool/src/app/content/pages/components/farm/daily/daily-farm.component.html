@@ -9,13 +9,13 @@
 	</div>
 	<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 		<div class="example-container">
-			<table class="table table-bordered table-striped table-hover table-light table-responsive col-md-12">
+			<table class="table table-bordered table-striped table-hover table-light table-responsive">
 				<thead>
 					<tr>
-						<th>School name</th>
-						<th>Daily Feed</th>
-						<th>Food Type</th>
-						<th>Mortality</th>
+						<th>{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</th>
+						<th>{{'FOOD.TABLE.DAILY_FEED' | translate}}</th>
+						<th>{{'FOOD.TABLE.FOOD_TYPE' | translate}}</th>
+						<th>{{'FOOD.TABLE.MORTALITY' | translate}}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -23,28 +23,28 @@
 						<td>{{school.name}}</td>
 						<td>
 							<input matInput type="number" name="actualGivenFood{{i}}" autocomplete="off"
-								   [(ngModel)]="school.actualGivenFood" #actualGivenFood="ngModel" minlength="1" required>
+								   [(ngModel)]="school.actualGivenFood" #actualGivenFood="ngModel" minlength="0" required>
 
 							<div *ngIf="actualGivenFood.invalid && (actualGivenFood.dirty && actualGivenFood.touched)" class="text-danger">
 								<div *ngIf="actualGivenFood.errors.required">
 									{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'FARM.ACTUAL_GIVEN_FOOD' | translate } }}
 								</div>
-								<div *ngIf="actualGivenFood.errors.minlength">
-									{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FARM.ACTUAL_GIVEN_FOOD' | translate, min: 1 } }}
-								</div>
+								<!--<div *ngIf="actualGivenFood.errors.minlength">
+									{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FARM.ACTUAL_GIVEN_FOOD' | translate, min: 0 } }}
+								</div>-->
 							</div>
 						</td>
 						<td>{{school.foodTypeName}}</td>
 						<td>
 							<input matInput type="number" #dead="ngModel" name="dead{{i}}" autocomplete="off"
-								   [(ngModel)]="school.dead" minlength="1" required>
+								   [(ngModel)]="school.dead" minlength="0" required>
 							<div *ngIf="dead.invalid && (dead.dirty && dead.touched)" class="text-danger">
 								<div *ngIf="dead.errors.required">
 									{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'FARM.MORTALITY' | translate } }}
 								</div>
-								<div *ngIf="dead.errors.minlength">
-									{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FARM.MORTALITY' | translate, min: 1 } }}
-								</div>
+								<!--<div *ngIf="dead.errors.minlength">
+									{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FARM.MORTALITY' | translate, min: 0 } }}
+								</div>-->
 							</div>
 						</td>
 					</tr>

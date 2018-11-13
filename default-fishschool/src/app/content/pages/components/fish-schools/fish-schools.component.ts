@@ -6,7 +6,6 @@ import {FishSchools} from '../../../../core/models/fishschool/fish.schools.model
 import * as moment from 'moment';
 import {TranslateService} from '@ngx-translate/core';
 import {Moment} from 'moment';
-import {NgForm} from '@angular/forms';
 import {AuthenticationService} from '../../../../core/auth/authentication.service';
 import {Observable} from 'rxjs';
 import * as deepEqual from 'deep-equal';
@@ -43,7 +42,6 @@ export class FishSchoolsComponent implements OnInit {
 	@ViewChild(MatSort) sort: MatSort;
 	fishSchoolNames: string[];
 
-	@ViewChild('f') f: NgForm;
 	panelOpenState: boolean = true;
 	roles: string;
 	originalData: FishSchoolModel[] = [];

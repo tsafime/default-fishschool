@@ -132,6 +132,9 @@ export const locale = {
 			TABLE: {
 				NAME: 'Name',
 				QUANTITY: 'Quantity',
+				DAILY_FEED: 'Daily Feed',
+				FOOD_TYPE: 'Food Type',
+				MORTALITY: 'Mortality',
 			},
 			RESULTS: {
 				FOOD_UPDATE_SUCCESS: 'Food updated successfully',
