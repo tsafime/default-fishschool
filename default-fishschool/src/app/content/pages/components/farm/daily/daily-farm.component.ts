@@ -34,7 +34,7 @@ export class DailyFarmComponent implements OnInit {
 			return response;
 		}).catch(error => {
 			this.showError({
-				message: error,
+				message: error.message,
 				type: 'danger'
 			});
 		});
