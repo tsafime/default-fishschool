@@ -14,8 +14,11 @@ export class FoodService {
 	}
 
 	names() {
-		const json = {};
-		return this.http.post<FsNames>('http://localhost:51120/food/names', json);
+		const queryFilters: QueryFilter[] = [];
+		queryFilters.push(new QueryFilter('status', ['ACTIVE'], '=', 'NONE'));
+		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 400, 0, ['name'], 'ASC');
+		const json = JSON.stringify(filteredQuery);
+		return this.http.post<FoodsModel>('http://localhost:51120/food/view', json);
 	}
 
 	view() {

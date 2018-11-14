@@ -14,6 +14,7 @@ import {FoodService} from '../../../../core/services/fishschool/food.service';
 import {ToastConfig} from '../../../../core/models/toast/toast.config';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {ToastMessage} from '../../../../core/models/toast/toast.message';
+import {FoodModel} from '../food/food-names/food-names.component';
 
 @Component({
 	selector: 'm-fish-schools',
@@ -25,13 +26,13 @@ export class FishSchoolsComponent implements OnInit {
 	// All columns:
 	// displayedColumns: string[] = ['id', 'companyId', 'name', 'status', 'creationDate', 'updatedDate', 'age', 'specie', 'quantity', 'dead',
 	// 	'menualAvgWeight', 'averageWeight', 'foodWeight', 'totalGivenFood', 'actualGivenFood', 'percentageTsemach', 'deadLastUpdateDate',
-	// 	'foodTypeName', 'feedDate', 'sale', 'totalSale', 'fcr', 'salesFcr', 'totalWeight'];
+	// 	'food', 'feedDate', 'sale', 'totalSale', 'fcr', 'salesFcr', 'totalWeight'];
 
 	// If you choose to diplay other dates like: creationDate, updatedDate, deadLastUpdateDate make sure to uncomment in view()
 	// the relevant cases
 	// displayedColumns = The JSON names
 	displayedColumns: string[] = ['feedDate', 'age', 'menualAvgWeight', 'averageWeight', 'quantity', 'totalWeight', 'totalGivenFood',
-		'actualGivenFood', 'foodWeight', 'foodTypeName', 'dead', 'fcr'];
+		'actualGivenFood', 'foodWeight', 'food', 'dead', 'fcr'];
 
 	headers: string[];
 	dataSource: MatTableDataSource<FishSchoolModel>;
@@ -46,7 +47,7 @@ export class FishSchoolsComponent implements OnInit {
 	roles: string;
 	originalData: FishSchoolModel[] = [];
 	maxDate: Date = new Date();
-	foodNames: string[];
+	foods: FoodModel[];
 
 	constructor(private service: FishSchoolsService, private foodService: FoodService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
@@ -82,7 +83,7 @@ export class FishSchoolsComponent implements OnInit {
 		});
 
 		this.foodService.names().toPromise().then(response => {
-			this.foodNames = response.data;
+			this.foods = response.data;
 			return response;
 		});
 	}
@@ -185,8 +186,16 @@ export class FishSchoolsComponent implements OnInit {
 		}
 	}
 
+	compareObjects(o1: any, o2: any): boolean {
+		return o1.name === o2.name && o1.id === o2.id;
+	}
+
 	isReadWrite(prop: string): boolean {
 		return this.authorization.isReadWrite('FishSchool', 'UPDATE', prop);
+	}
+
+	isFoodReadWrite(prop: string): boolean {
+		return this.authorization.isReadWrite('Food', 'UPDATE', prop);
 	}
 
 	showSuccess(toast: ToastMessage) {

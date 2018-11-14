@@ -19,11 +19,16 @@ export interface FishSchoolModel {
 	actualGivenFood: number;
 	percentageTsemach: number;
 	deadLastUpdateDate: Moment;
-	foodTypeName: string;
+	food: FoodModel;
 	feedDate: Moment;
 	sale: number;
 	totalSale: number;
 	fcr: number;
 	salesFcr: number;
 	totalWeight: number;
+}
+
+export interface FoodModel {
+	id: number;
+	name: string;
 }
