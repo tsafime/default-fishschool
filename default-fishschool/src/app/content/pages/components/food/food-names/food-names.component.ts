@@ -11,6 +11,7 @@ import {FsResponse} from '../../../../../core/models/fishschool/fs.response.mode
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {ToastConfig} from '../../../../../core/models/toast/toast.config';
 import {ToastMessage} from '../../../../../core/models/toast/toast.message';
+import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
 
 
 @Component({
@@ -18,26 +19,19 @@ import {ToastMessage} from '../../../../../core/models/toast/toast.message';
 	templateUrl: './food-names.component.html',
 	styleUrls: ['./food-names.component.scss']
 })
-export class FoodNamesComponent implements OnInit {
+export class FoodNamesComponent extends ToastSupport implements OnInit {
 
 	displayedColumns: string[] = ['name', 'quantity'];
-
 	headers: string[];
 	dataSource: MatTableDataSource<FoodModel>;
 	originalData: FoodModel[] = [];
-
 	@ViewChild(MatSort) sort: MatSort;
-	// toastConfig = {
-	// 	toastTimeout: 7000,
-	// 	dismiss: 'auto',
-	// 	showCloseButton: true,
-	// 	position: 'top-right',
-	// 	animate: 'slideFromRight',
-	// };
 
 	constructor(private foodService: FoodService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
 				public toastr: ToastrManager) {
+
+		super(toastr);
 
 		this.headers = [this.translate.instant('FOOD.TABLE.NAME'),
 			this.translate.instant('FOOD.TABLE.QUANTITY')];
@@ -55,32 +49,20 @@ export class FoodNamesComponent implements OnInit {
 
 				if (response.data.length === 0) {
 					this.dataSource = new MatTableDataSource<FoodModel>([]);
-					this.showSuccess({
-						message: this.translate.instant('VALIDATION.NO_RECORDS'),
-						type: 'info'
-					});
+					this.showSuccess({message: this.translate.instant('VALIDATION.NO_RECORDS'), type: 'info'});
 				} else {
 
 					// Deep copy
 					this.loadData(response.data);
 				}
 			} else {
-				this.showError({
-					message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FOOD_FAILURE'),
-					type: 'danger'
-				});
+				this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FOOD_FAILURE'), type: 'danger'});
 			}
 		}).catch(response => {
 			if (response !== 'undefined' && response.status === 'Failure') {
-				this.showError({
-					message: response.message,
-					type: 'danger'
-				});
+				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
-				this.showError({
-					message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
-					type: 'danger'
-				});
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
 	}
@@ -106,29 +88,17 @@ export class FoodNamesComponent implements OnInit {
 						}
 					});
 
-					this.showInfo({
-						message: this.translate.instant('FOOD.RESULTS.FOOD_UPDATE_SUCCESS'),
-						type: 'info'
-					});
+					this.showInfo({message: this.translate.instant('FOOD.RESULTS.FOOD_UPDATE_SUCCESS'), type: 'info'});
 				}
 			}).catch(response => {
 				if (response.error !== 'undefined' && response.error.status === 'Failure') {
-					this.showError({
-						message: response.error.code + ': ' + response.error.message,
-						type: 'danger'
-					});
+					this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 				} else {
-					this.showError({
-						message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
-						type: 'danger'
-					});
+					this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 				}
 			});
 		} else {
-			this.showInfo({
-				message: this.translate.instant('VALIDATION.NO_CHANGES'),
-				type: 'info'
-			});
+			this.showInfo({message: this.translate.instant('VALIDATION.NO_CHANGES'), type: 'info'});
 		}
 	}
 
@@ -144,33 +114,13 @@ export class FoodNamesComponent implements OnInit {
 		}
 	}
 
-	isSaveReadWrite(prop: string): boolean {
-		return this.authorization.isReadWrite('Food', 'SAVE', prop);
+	isFoodReadWrite(prop: string): boolean {
+		return this.authorization.isFoodReadWrite('UPDATE', prop);
 	}
 
-	isUpdateReadWrite(prop: string): boolean {
-		return this.authorization.isReadWrite('Food', 'UPDATE', prop);
-	}
-
-	showSuccess(toast: ToastMessage) {
-		this.toastr.successToastr(toast.message, toast.type, ToastConfig);
-		window.scrollTo(0, 0);
-	}
-
-	showError(toast: ToastMessage) {
-		this.toastr.errorToastr(toast.message, toast.type, ToastConfig);
-		window.scrollTo(0, 0);
-	}
-
-	showWarning(toast: ToastMessage) {
-		this.toastr.warningToastr(toast.message, toast.type, ToastConfig);
-		window.scrollTo(0, 0);
-	}
-
-	showInfo(toast: ToastMessage) {
-		this.toastr.infoToastr(toast.message, toast.type, ToastConfig);
-		window.scrollTo(0, 0);
-	}
+	/*isFoodReadWrite(action: string, prop: string): boolean {
+		return this.authorization.isFoodReadWrite(action, prop);
+	}*/
 
 	private loadData(data: FoodModel[]) {
 

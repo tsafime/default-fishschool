@@ -26,7 +26,7 @@ export class FishSchoolsAuthorizationService {
 	}
 
 	/*
-	 isReadWrite('Company', 'SAVE', 'creationDate');
+	 isFishSchoolReadWrite('Company', 'SAVE', 'creationDate');
 	 JSON example:
 		{
 		  "ADMIN": {
@@ -44,7 +44,20 @@ export class FishSchoolsAuthorizationService {
 			  }
 		}
 	 */
-	isReadWrite(entity: string, action: string, prop: string): boolean {
+
+	isFishSchoolReadWrite(action: string, prop: string): boolean {
+		return this.isReadWrite('FishSchool', action, prop);
+	}
+
+	isFoodReadWrite(action: string, prop: string): boolean {
+		return this.isReadWrite('Food', action, prop);
+	}
+
+	isFoodStoreroomReadWrite(action: string, prop: string): boolean {
+		return this.isReadWrite('FoodControl', action, prop);
+	}
+
+	private isReadWrite(entity: string, action: string, prop: string): boolean {
 
 		let role: string = '';
 		this.tokenStorage.getUserRole().subscribe(userRole => {

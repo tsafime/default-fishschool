@@ -11,17 +11,16 @@ import {Observable} from 'rxjs';
 import * as deepEqual from 'deep-equal';
 import {FishSchoolsAuthorizationService} from '../../../../core/services/fishschool/fish-schools.authorization.service';
 import {FoodService} from '../../../../core/services/fishschool/food.service';
-import {ToastConfig} from '../../../../core/models/toast/toast.config';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ToastMessage} from '../../../../core/models/toast/toast.message';
 import {FoodModel} from '../food/food-names/food-names.component';
+import {ToastSupport} from '../../../../core/models/fishschool/toast.support';
 
 @Component({
 	selector: 'm-fish-schools',
 	templateUrl: './fish-schools.component.html',
 	styleUrls: ['./fish-schools.component.scss']
 })
-export class FishSchoolsComponent implements OnInit {
+export class FishSchoolsComponent extends ToastSupport implements OnInit {
 
 	// All columns:
 	// displayedColumns: string[] = ['id', 'companyId', 'name', 'status', 'creationDate', 'updatedDate', 'age', 'specie', 'quantity', 'dead',
@@ -52,6 +51,8 @@ export class FishSchoolsComponent implements OnInit {
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
 				public toastr: ToastrManager) {
 
+		super(toastr);
+
 		this.headers = [this.translate.instant('FISH_SCHOOL.TABLE.SELECTED_DATE'),
 			this.translate.instant('FISH_SCHOOL.TABLE.AGE'),
 			this.translate.instant('FISH_SCHOOL.TABLE.MANUAL_WEIGHT'),
@@ -71,10 +72,7 @@ export class FishSchoolsComponent implements OnInit {
 			this.fishSchoolNames = response.data;
 			return response;
 		}).catch(error => {
-			this.showError({
-				message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
-				type: 'danger'
-			});
+			this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 		});
 
 		this.authService.getUserRoles().subscribe(role => {
@@ -118,15 +116,9 @@ export class FishSchoolsComponent implements OnInit {
 			}
 		}).catch(response => {
 			if (response !== 'undefined' && response.status === 'Failure') {
-				this.showError({
-					message: response.message,
-					type: 'danger'
-				});
+				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
-				this.showError({
-					message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
-					type: 'danger'
-				});
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
 	}
@@ -153,35 +145,20 @@ export class FishSchoolsComponent implements OnInit {
 						});
 
 						this.loadData(this.dataSource.data);
-						this.showSuccess({
-							message: this.translate.instant('FISH_SCHOOL.RESULTS.FISH_SCHOOL_UPDATE_SUCCESS'),
-							type: 'success'
-						});
+						this.showSuccess({message: this.translate.instant('FISH_SCHOOL.RESULTS.FISH_SCHOOL_UPDATE_SUCCESS'), type: 'success'});
 					}
 				}).catch(response => {
 					if (response.error !== 'undefined' && response.error.status === 'Failure') {
-						this.showError({
-							message: response.error.code + ': ' + response.error.message,
-							type: 'danger'
-						});
+						this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 					} else {
-						this.showError({
-							message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
-							type: 'danger'
-						});
+						this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 					}
 				});
 			} else {
-				this.showInfo({
-					message: this.translate.instant('VALIDATION.NO_CHANGES'),
-					type: 'info'
-				});
+				this.showInfo({message: this.translate.instant('VALIDATION.NO_CHANGES'), type: 'info'});
 			}
 		} else {
-			this.showWarning({
-				message: this.translate.instant('FISH_SCHOOL.UPDATE_WITHOUT_RECORDS'),
-				type: 'warning'
-			});
+			this.showWarning({message: this.translate.instant('FISH_SCHOOL.UPDATE_WITHOUT_RECORDS'), type: 'warning'});
 		}
 	}
 
@@ -189,32 +166,12 @@ export class FishSchoolsComponent implements OnInit {
 		return o1.name === o2.name && o1.id === o2.id;
 	}
 
-	isReadWrite(prop: string): boolean {
-		return this.authorization.isReadWrite('FishSchool', 'UPDATE', prop);
+	isFishSchoolReadWrite(action: string, prop: string): boolean {
+		return this.authorization.isFishSchoolReadWrite(action, prop);
 	}
 
-	isFoodReadWrite(prop: string): boolean {
-		return this.authorization.isReadWrite('Food', 'UPDATE', prop);
-	}
-
-	showSuccess(toast: ToastMessage) {
-		this.toastr.successToastr(toast.message, toast.type, ToastConfig);
-		window.scrollTo(0, 0);
-	}
-
-	showError(toast: ToastMessage) {
-		this.toastr.errorToastr(toast.message, toast.type, ToastConfig);
-		window.scrollTo(0, 0);
-	}
-
-	showWarning(toast: ToastMessage) {
-		this.toastr.warningToastr(toast.message, toast.type, ToastConfig);
-		window.scrollTo(0, 0);
-	}
-
-	showInfo(toast: ToastMessage) {
-		this.toastr.infoToastr(toast.message, toast.type, ToastConfig);
-		window.scrollTo(0, 0);
+	isFoodReadWrite(action: string, prop: string): boolean {
+		return this.authorization.isFoodReadWrite(action, prop);
 	}
 
 	private loadData(data: FishSchoolModel[]) {

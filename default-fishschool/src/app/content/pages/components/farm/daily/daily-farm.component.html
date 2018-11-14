@@ -24,7 +24,7 @@
 					[ngStyle]="sort.active == 'actualGivenFood' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[1] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isReadWrite('actualGivenFood'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isFishSchoolReadWrite('actualGivenFood'); else display">
 						<input matInput type="number" [value]="row.actualGivenFood" [(ngModel)]="row.actualGivenFood" required step=".01"
 							   min="0" class="input-number-format">
 						<label class="label-number-format">{{row.actualGivenFood | number}}</label>
@@ -47,7 +47,7 @@
 					[ngStyle]="sort.active == 'dead' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[3] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isReadWrite('dead'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isFishSchoolReadWrite('dead'); else display">
 						<input matInput type="number" [value]="row.dead" [(ngModel)]="row.dead" required step=".01"
 							   min="0" class="input-number-format">
 						<label class="label-number-format">{{row.dead | number}}</label>
