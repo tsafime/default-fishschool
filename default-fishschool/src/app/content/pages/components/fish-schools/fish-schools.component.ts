@@ -36,7 +36,7 @@ export class FishSchoolsComponent implements OnInit {
 
 	headers: string[];
 	dataSource: MatTableDataSource<FishSchoolModel>;
-	data: FishSchools;
+	originalData: FishSchoolModel[] = [];
 
 	public model: FsModel = {schoolName: '270517 102', status: 'ACTIVE', feedDate: moment('2017-06-16'), days: 10};
 
@@ -45,7 +45,6 @@ export class FishSchoolsComponent implements OnInit {
 
 	panelOpenState: boolean = true;
 	roles: string;
-	originalData: FishSchoolModel[] = [];
 	maxDate: Date = new Date();
 	foods: FoodModel[];
 

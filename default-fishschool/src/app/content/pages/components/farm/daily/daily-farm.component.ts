@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import * as moment from 'moment';
 import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school.model';
@@ -10,6 +10,8 @@ import * as deepEqual from 'deep-equal';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {ToastConfig} from '../../../../../core/models/toast/toast.config';
 import {ToastMessage} from '../../../../../core/models/toast/toast.message';
+import {MatSort, MatTableDataSource} from '@angular/material';
+import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
 
 @Component({
 	selector: 'm-daily-farm',
@@ -18,80 +20,131 @@ import {ToastMessage} from '../../../../../core/models/toast/toast.message';
 })
 export class DailyFarmComponent implements OnInit {
 
-	dailySchools: FishSchoolModel[] = [];
+	displayedColumns: string[] = ['name', 'actualGivenFood', 'food', 'dead'];
+	headers: string[];
+	dataSource: MatTableDataSource<FishSchoolModel>;
 	originalData: FishSchoolModel[] = [];
+	@ViewChild(MatSort) sort: MatSort;
 
 	constructor(private service: FarmService, private fsService: FishSchoolsService, private translate: TranslateService,
-				public toastr: ToastrManager) {
+				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager) {
+
+		this.headers = [this.translate.instant('FISH_SCHOOL.FILTERS.SCHOOL_NAME'),
+			this.translate.instant('FOOD.TABLE.DAILY_FEED'),
+			this.translate.instant('FOOD.TABLE.FOOD_TYPE'),
+			this.translate.instant('FOOD.TABLE.MORTALITY')];
 	}
 
 	async ngOnInit() {
-		this.getDailySchools();
+		this.view();
 	}
 
-	async getDailySchools() {
-		await this.viewDailySchools().then(response => {
-			return response;
-		}).catch(error => {
-			this.showError({
-				message: error.message,
-				type: 'danger'
-			});
+	async view() {
+		await this.service.view({feedDate: moment(), days: 400, status: 'ACTIVE', schoolName: undefined}).toPromise()
+			.then(response => {
+
+			if (response.status === 'Success') {
+
+				if (response.data.length === 0) {
+					this.dataSource = new MatTableDataSource<FishSchoolModel>([]);
+					this.showInfo({
+						message: this.translate.instant('VALIDATION.NO_RECORDS'),
+						type: 'info'
+					});
+				} else {
+
+					// Deep copy
+					this.loadData(response.data);
+				}
+			} else {
+				this.showError({
+					message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FS_FAILURE'),
+					type: 'danger'
+				});
+			}
+		}).catch(response => {
+			if (response !== 'undefined' && response.status === 'Failure') {
+				this.showError({
+					message: response.message,
+					type: 'danger'
+				});
+			} else {
+				this.showError({
+					message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
+					type: 'danger'
+				});
+			}
 		});
-		return this.dailySchools;
 	}
 
 	async viewDailySchools(): Promise<any> {
 
 		const promise = await this.service.view({feedDate: moment(), days: 400, status: 'ACTIVE', schoolName: undefined}).toPromise();
-		this.dailySchools = promise.data;
+		return promise.data;
 	}
 
 	update() {
 
-		const httpPost: Observable<FishSchools> = this.service.update(this.originalData, this.dailySchools);
+		if (this.dataSource) {
+			const httpPost: Observable<FishSchools> = this.service.update(this.originalData, this.dataSource.data);
 
-		if (httpPost !== null) {
-			httpPost.toPromise().then(response => {
-				if (response.status === 'Success') {
+			if (httpPost !== null) {
+				httpPost.toPromise().then(response => {
+					if (response.status === 'Success') {
 
-					// Response may contain partial data, merge it
-					const data = response.data;
+						// Response may contain partial data, merge it
+						const data = response.data;
+						this.dataSource.data.forEach((item, index) => {
 
-					// Deep copy
-					this.originalData = JSON.parse(JSON.stringify(data));
-					data.forEach((item, index) => {
-						const deepEqual1 = deepEqual(item.id, data[index].id);
-						if (deepEqual1) {
-							const i = this.dailySchools.indexOf(item);
-							this.dailySchools[i] = data[index];
-						}
-					});
+							// We might get less data since not all records in table were updated
+							if (data[index]) {
+								const deepEqual1 = deepEqual(item.id, data[index].id);
+								const i = this.dataSource.data.indexOf(item);
+								this.dataSource.data[i] = data[index];
+							}
+						});
 
-					this.showSuccess({
-						message: this.translate.instant('FISH_SCHOOL.RESULTS.FISH_SCHOOL_UPDATE_SUCCESS'),
-						type: 'success'
-					});
-				}
-			}).catch(response => {
-				if (response.error !== 'undefined' && response.error.status === 'Failure') {
-					this.showError({
-						message: response.error.code + ': ' + response.error.message,
-						type: 'danger'
-					});
-				} else {
-					this.showError({
-						message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
-						type: 'danger'
-					});
-				}
-			});
+						this.loadData(this.dataSource.data);
+						this.showSuccess({
+							message: this.translate.instant('FISH_SCHOOL.RESULTS.FISH_SCHOOL_UPDATE_SUCCESS'),
+							type: 'success'
+						});
+					}
+				}).catch(response => {
+					if (response.error !== 'undefined' && response.error.status === 'Failure') {
+						this.showError({
+							message: response.error.code + ': ' + response.error.message,
+							type: 'danger'
+						});
+					} else {
+						this.showError({
+							message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'),
+							type: 'danger'
+						});
+					}
+				});
+			} else {
+				this.showInfo({
+					message: this.translate.instant('VALIDATION.NO_CHANGES'),
+					type: 'info'
+				});
+			}
 		} else {
-			this.showInfo({
-				message: this.translate.instant('VALIDATION.NO_CHANGES'),
-				type: 'info'
+			this.showWarning({
+				message: this.translate.instant('FISH_SCHOOL.UPDATE_WITHOUT_RECORDS'),
+				type: 'warning'
 			});
 		}
+	}
+
+	applyFilter(filterValue: string) {
+		if (this.dataSource) {
+			this.dataSource.filter = filterValue.trim().toLowerCase();
+		}
+	}
+
+	isReadWrite(prop: string): boolean {
+		return this.authorization.isReadWrite('FishSchool', 'UPDATE', prop);
 	}
 
 	showSuccess(toast: ToastMessage) {
@@ -112,6 +165,25 @@ export class DailyFarmComponent implements OnInit {
 	showInfo(toast: ToastMessage) {
 		this.toastr.infoToastr(toast.message, toast.type, ToastConfig);
 		window.scrollTo(0, 0);
+	}
+
+	private loadData(data: FishSchoolModel[]) {
+
+		this.originalData = JSON.parse(JSON.stringify(data));
+		this.dataSource = new MatTableDataSource<FishSchoolModel>(data);
+
+		this.dataSource.sortingDataAccessor = (item, property) => {
+			switch (property) {
+				case 'name':
+					return '\'' + item.name + '\'';
+				case 'food':
+					return '\'' + item.food.name + '\'';
+				default:
+					return item[property];
+			}
+		};
+
+		this.dataSource.sort = this.sort;
 	}
 }
 

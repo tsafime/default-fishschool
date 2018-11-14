@@ -25,6 +25,7 @@ import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-s
 import {NgbAlertConfig, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 import {ToastrModule} from 'ng6-toastr-notifications';
+import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -69,6 +70,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 			useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
 		},
 		MatIconRegistry,
+		FishSchoolsAuthorizationService,
 		FarmService,
 		FishSchoolsService,
 	],

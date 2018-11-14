@@ -130,6 +130,7 @@ export const locale = {
 			FOOD_TYPE: 'Food Type',
 			CHOOSE_FOOD_TYPE: 'Choose Food Type',
 			TABLE: {
+				TITAL: 'Daily Farm Update',
 				NAME: 'Name',
 				QUANTITY: 'Quantity',
 				DAILY_FEED: 'Daily Feed',
