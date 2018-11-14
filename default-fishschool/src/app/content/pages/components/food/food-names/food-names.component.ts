@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Moment} from 'moment';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
@@ -7,12 +6,10 @@ import * as deepEqual from 'deep-equal';
 import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
 import {AuthenticationService} from '../../../../../core/auth/authentication.service';
 import {FoodService} from '../../../../../core/services/fishschool/food.service';
-import {FsResponse} from '../../../../../core/models/fishschool/fs.response.model';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ToastConfig} from '../../../../../core/models/toast/toast.config';
-import {ToastMessage} from '../../../../../core/models/toast/toast.message';
 import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
-
+import {FoodModel} from '../../../../../core/models/food/food.model';
+import {FoodsModel} from '../../../../../core/models/food/foods.model';
 
 @Component({
 	selector: 'm-food-names',
@@ -118,10 +115,6 @@ export class FoodNamesComponent extends ToastSupport implements OnInit {
 		return this.authorization.isFoodReadWrite('UPDATE', prop);
 	}
 
-	/*isFoodReadWrite(action: string, prop: string): boolean {
-		return this.authorization.isFoodReadWrite(action, prop);
-	}*/
-
 	private loadData(data: FoodModel[]) {
 
 		this.originalData = JSON.parse(JSON.stringify(data));
@@ -143,22 +136,4 @@ export class FoodNamesComponent extends ToastSupport implements OnInit {
 	}
 }
 
-export interface Toaster {
-	message: string;
-	title: string;
-}
-
-export interface FoodsModel extends FsResponse {
-	data: FoodModel[];
-}
-
-export interface FoodModel {
-	id: number;
-	companyId: number;
-	name: string;
-	quantity: number;
-	status: string;
-	creationDate: Moment;
-	updatedDate: Moment;
-}
 

@@ -1,4 +1,5 @@
 import {Moment} from 'moment';
+import {FoodModel} from '../food/food.model';
 
 export interface FishSchoolModel {
 
@@ -28,7 +29,3 @@ export interface FishSchoolModel {
 	totalWeight: number;
 }
 
-export interface FoodModel {
-	id: number;
-	name: string;
-}

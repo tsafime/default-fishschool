@@ -11,6 +11,5 @@ export class FoodStoreroomComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('FoodStoreroomComponent init...');
 	}
 }

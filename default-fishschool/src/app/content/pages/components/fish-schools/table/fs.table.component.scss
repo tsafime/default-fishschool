@@ -1,15 +1,6 @@
 @charset "UTF-8";
 
-.btn.btn-primary {
-	color: #fff;
-}
-
-.vertical-align-middle {
-	text-align: center;
-	vertical-align: middle;
-}
-
-/*// Remove input number arrows, example taken from: https://css-tricks.com/snippets/css/turn-off-number-input-spinners/
+// Remove input number arrows, example taken from: https://css-tricks.com/snippets/css/turn-off-number-input-spinners/
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
@@ -32,12 +23,4 @@ input.input-number-format {
 // Display on/off label to show formatted number
 input.input-number-format:focus + label.label-number-format {
 	display: none;
-}*/
-
-td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
-	padding-left: 3px;
-}
-
-td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell {
-	padding-left: 3px;
 }

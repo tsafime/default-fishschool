@@ -24,6 +24,8 @@ import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-per
 import {FishSchoolsAuthorizationService} from '../../../../core/services/fishschool/fish-schools.authorization.service';
 import {FoodService} from '../../../../core/services/fishschool/food.service';
 import {ToastrModule} from 'ng6-toastr-notifications';
+import { TableComponent } from './table/fs.table.component';
+import {ReloadFishSchoolsService} from '../../../../core/services/fishschool/reload-fish-schools.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -88,9 +90,11 @@ export const DD_MM_YYYY_Format = {
 		FishSchoolsService,
 		FishSchoolsAuthorizationService,
 		FoodService,
+		ReloadFishSchoolsService,
 	],
 	declarations: [
 		FishSchoolsComponent,
+		TableComponent,
 	]
 })
 

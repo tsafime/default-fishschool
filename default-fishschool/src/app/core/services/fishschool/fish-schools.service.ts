@@ -4,7 +4,7 @@ import {FishSchoolModel} from '../../models/fishschool/fish-school.model';
 import {FishSchools} from '../../models/fishschool/fish.schools.model';
 import {QueryFilter} from '../../models/fishschool/query.filter';
 import {FilteredQuery} from '../../models/fishschool/filtered.query';
-import {FsModel} from '../../../content/pages/components/fish-schools/fish-schools.component';
+import {FsRequestModel} from '../../../content/pages/components/fish-schools/fish-schools.component';
 import {FsNames} from '../../models/fishschool/fish-school.names.model';
 import * as deepEqual from 'deep-equal';
 import {Observable} from 'rxjs';
@@ -15,7 +15,7 @@ export class FishSchoolsService {
 	constructor(private http: HttpClient) {
 	}
 
-	view(model: FsModel) {
+	view(model: FsRequestModel) {
 
 		const queryFilters: QueryFilter[] = [];
 		queryFilters.push(new QueryFilter('name', [model.schoolName], '=', 'AND'));

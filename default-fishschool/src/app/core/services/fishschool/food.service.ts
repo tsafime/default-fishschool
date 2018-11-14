@@ -4,8 +4,8 @@ import * as deepEqual from 'deep-equal';
 import {Observable} from 'rxjs';
 import {QueryFilter} from '../../models/fishschool/query.filter';
 import {FilteredQuery} from '../../models/fishschool/filtered.query';
-import {FsNames} from '../../models/fishschool/fish-school.names.model';
-import {FoodModel, FoodsModel} from '../../../content/pages/components/food/food-names/food-names.component';
+import {FoodsModel} from '../../models/food/foods.model';
+import {FoodModel} from '../../models/food/food.model';
 
 @Injectable()
 export class FoodService {
