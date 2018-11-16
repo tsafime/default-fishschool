@@ -26,6 +26,8 @@ import {FoodService} from '../../../../core/services/fishschool/food.service';
 import {ToastrModule} from 'ng6-toastr-notifications';
 import { TableComponent } from './table/fs.table.component';
 import {ReloadFishSchoolsService} from '../../../../core/services/fishschool/reload-fish-schools.service';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -53,7 +55,7 @@ export const DD_MM_YYYY_Format = {
 		MatInputModule,
 		MatFormFieldModule,
 		FormsModule,
-		ReactiveFormsModule,
+		ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
 		MaterialPreviewModule,
 		MatIconModule,
 		MatExpansionModule,
@@ -72,6 +74,8 @@ export const DD_MM_YYYY_Format = {
 				component: FishSchoolsComponent
 			}
 		]),
+		// NgSelectModule,
+		NgxMatSelectSearchModule,
 	],
 	exports: [
 		RouterModule,

@@ -55,7 +55,7 @@ export class DailyFarmComponent extends ToastSupport implements OnInit {
 					this.loadData(response.data);
 				}
 			} else {
-				this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FS_FAILURE'), type: 'danger'});
+				this.showError({message: this.translate.instant('VALIDATION.LOAD_FS_FAILURE'), type: 'danger'});
 			}
 		}).catch(response => {
 			if (response !== 'undefined' && response.status === 'Failure') {
@@ -104,10 +104,7 @@ export class DailyFarmComponent extends ToastSupport implements OnInit {
 					}
 				});
 			} else {
-				this.showInfo({
-					message: this.translate.instant('VALIDATION.NO_CHANGES'),
-					type: 'info'
-				});
+				this.showInfo({message: this.translate.instant('VALIDATION.NO_CHANGES'), type: 'info'});
 			}
 		} else {
 			this.showWarning({message: this.translate.instant('FISH_SCHOOL.UPDATE_WITHOUT_RECORDS'), type: 'warning'});

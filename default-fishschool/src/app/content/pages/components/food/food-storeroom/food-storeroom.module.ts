@@ -22,6 +22,9 @@ import {MaterialPreviewModule} from '../../../../partials/content/general/materi
 import {InterceptService} from '../../../../../core/services/intercept.service';
 import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
 import {FoodStoreroomComponent} from './food-storeroom.component';
+import {FoodService} from '../../../../../core/services/fishschool/food.service';
+import {ToastrModule} from 'ng6-toastr-notifications';
+import {ReloadFishSchoolsService} from '../../../../../core/services/fishschool/reload-fish-schools.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -67,6 +70,7 @@ const routes: Routes = [
 		MatDatepickerModule,
 		MatTableModule,
 		MatSortModule,
+		ToastrModule.forRoot(),
 		TranslateModule.forChild(),
 		RouterModule.forChild(routes),
 	],
@@ -85,6 +89,8 @@ const routes: Routes = [
 			useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
 		},
 		FishSchoolsAuthorizationService,
+		FoodService,
+		ReloadFishSchoolsService,
 	],
 	declarations: [
 		FoodStoreroomComponent,

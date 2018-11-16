@@ -1,3 +1,71 @@
-<p>
-  food-storeroom works!
-</p>
+<div class="m-section">
+	<mat-accordion class="example-headers-align">
+		<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+							 [expanded]="panelOpenState === true">
+			<mat-expansion-panel-header>
+				<mat-panel-title>{{'FOOD_STOREROOM.FILTERS.PANEL.HEADER' | translate}}</mat-panel-title>
+			</mat-expansion-panel-header>
+			<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+				<div class="example-container">
+
+					<!-- Start date -->
+					<mat-form-field>
+						<mat-label>{{'FOOD_STOREROOM.FILTERS.START_DATE' | translate}}</mat-label>
+						<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="model.startDate"
+							   #startDate="ngModel" minlength="10" required [max]="maxDate">
+						<div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)"
+							 class="text-danger">
+							<div *ngIf="startDate.errors.required">
+								{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name:
+								'FOOD_STOREROOM.FILTERS.START_DATE' | translate } }}
+							</div>
+							<div *ngIf="startDate.errors.minlength">
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name:
+								'FOOD_STOREROOM.FILTERS.START_DATE' | translate, min: 10 } }}
+							</div>
+						</div>
+						<mat-datepicker-toggle matSuffix [for]="picker">
+							<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+						</mat-datepicker-toggle>
+						<mat-datepicker #picker [startAt]="model.startDate"></mat-datepicker>
+					</mat-form-field>
+
+					<!-- Activity type: SELL, SHIPPMENT -->
+					<span class="col-sm-1"></span>
+					<div class="mat-form-field">
+						<mat-button-toggle-group name="status" class="form-group" [(ngModel)]="model.status" #status="ngModel">
+							<button class="btn" value="SELL" (click)="model.status = 'SELL'"
+									[class.btn-primary]="model.status === '' || model.status === 'SELL'">
+								{{'FOOD_STOREROOM.FILTERS.STATUS.SELL' | translate}}
+							</button>
+							<button class="btn" value="SHIPPMENT" (click)="model.status = 'SHIPPMENT'"
+									[class.btn-primary]="model.status === 'SHIPPMENT'">
+								{{'FOOD_STOREROOM.FILTERS.STATUS.SHIPPMENT' | translate}}
+							</button>
+						</mat-button-toggle-group>
+					</div>
+					<span class="col-sm-1"></span>
+
+					<!-- # of days -->
+					<mat-form-field>
+						<mat-label>{{'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate}}</mat-label>
+						<input matInput type="text" name="days" placeholder="{{ 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate }}" autocomplete="off"
+							   [(ngModel)]="model.days" #days="ngModel" minlength="1" required>
+						<div *ngIf="days.invalid && (days.dirty || days.touched)" class="text-danger">
+							<div *ngIf="days.errors.required">
+								{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate } }}
+							</div>
+							<div *ngIf="days.errors.minlength">
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate, min: 1 } }}
+							</div>
+						</div>
+					</mat-form-field>
+					<span class="col-sm-1"></span>
+					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="! f.form.valid">
+						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
+					</button>
+				</div>
+			</form>
+		</mat-expansion-panel>
+	</mat-accordion>
+</div>

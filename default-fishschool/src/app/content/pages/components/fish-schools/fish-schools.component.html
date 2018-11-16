@@ -4,29 +4,60 @@
 							 [expanded]="panelOpenState === true">
 			<mat-expansion-panel-header>
 				<mat-panel-title>{{'FISH_SCHOOL.FILTERS.PANEL.HEADER' | translate}}</mat-panel-title>
-				<mat-panel-description>{{'FISH_SCHOOL.FILTERS.PANEL.DESCRIPTION' | translate}}</mat-panel-description>
 			</mat-expansion-panel-header>
 			<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 				<div class="example-container">
 					<!-- School name -->
+					<!--<mat-form-field>-->
+						<!--<mat-select name="schoolName" #schoolName="ngModel" [(ngModel)]="model.schoolName"-->
+									<!--placeholder="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}" required>-->
+							<!--<option [value]="null" disabled selected>{{'FISH_SCHOOL.FILTERS.CHOOSE_SCHOOL_NAME' |-->
+								<!--translate}}-->
+							<!--</option>-->
+							<!--<mat-option *ngFor="let name of fishSchoolNames" [value]="name">{{name}}</mat-option>-->
+						<!--</mat-select>-->
+						<!--<div *ngIf="schoolName.invalid" class="text-danger">-->
+							<!--<div *ngIf="schoolName.errors.required">-->
+								<!--{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name:-->
+								<!--'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate } }}-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</mat-form-field>-->
+
 					<mat-form-field>
-						<mat-select name="schoolName" #schoolName="ngModel" [(ngModel)]="model.schoolName"
-									placeholder="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}" required>
-							<option [value]="null" disabled selected>{{'FISH_SCHOOL.FILTERS.CHOOSE_SCHOOL_NAME' |
-								translate}}
-							</option>
-							<mat-option *ngFor="let name of fishSchoolNames" [value]="name">{{name}}</mat-option>
+						<!-- Source: https://github.com/bithost-gmbh/ngx-mat-select-search -->
+						<mat-select [formControl]="selectCtrl"required #schooNameSelect placeholder="{{'FISH_SCHOOL.FILTERS.CHOOSE_SCHOOL_NAME' | translate}}"
+									name="schooNameSelect" [(ngModel)]="model.schoolName">
+
+							<ngx-mat-select-search [formControl]="schoolNameFilterCtrl" [placeholderLabel]="getSelectSchoolNameLabel()"
+							[noEntriesFoundLabel]="getSelectSchoolNameNotFoundLabel()"></ngx-mat-select-search>
+
+							<mat-option *ngFor="let name of filteredSchoolNames | async" [value]="name">
+								{{name}}
+							</mat-option>
 						</mat-select>
-						<div *ngIf="schoolName.invalid" class="text-danger">
-							<div *ngIf="schoolName.errors.required">
-								{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name:
-								'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate } }}
-							</div>
-						</div>
 					</mat-form-field>
+					<span class="col-sm-1"></span>
+
+					<!--<div style="width: 300px; margin-bottom: 20px;">
+						&lt;!&ndash; https://github.com/ng-select/ng-select &ndash;&gt;
+						<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
+						<ng-select matInput class="custom"
+								   [items]="fishSchoolNames"
+								   placeholder="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}"
+								   notFoundText="School name not found"
+								   autofocus
+								   required
+								   #schoolName="ngModel"
+								   name="schoolName"
+								   [selectableGroup]="true"
+								   [virtualScroll]="true"
+								   [(ngModel)]="model.schoolName">
+						</ng-select>
+					</div>-->
 
 					<!-- Start date -->
-					<mat-form-field>
+					<mat-form-field class="col-md-2">
 						<mat-label>{{'FISH_SCHOOL.FILTERS.START_DATE' | translate}}</mat-label>
 						<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="model.feedDate"
 							   #startDate="ngModel" minlength="10" required [max]="maxDate">
@@ -46,25 +77,27 @@
 						</mat-datepicker-toggle>
 						<mat-datepicker #picker [startAt]="model.feedDate"></mat-datepicker>
 					</mat-form-field>
+					<span class="col-sm-1"></span>
 
 					<!-- # of days -->
-					<mat-form-field>
+					<mat-form-field class="col-md-2">
 						<mat-label>{{'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate}}</mat-label>
 						<input matInput type="text" name="days" placeholder="{{ 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate }}" autocomplete="off"
 							   [(ngModel)]="model.days" #days="ngModel" minlength="1" required>
 						<div *ngIf="days.invalid && (days.dirty || days.touched)" class="text-danger">
 							<div *ngIf="days.errors.required">
-								{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name:
+								{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name:
 								'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate } }}
 							</div>
 							<div *ngIf="days.errors.minlength">
-								{{ 'FISH_SCHOOL.VALIDATION.MIN_LENGTH_FIELD' | translate: { name:
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name:
 								'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate, min: 1 } }}
 							</div>
 						</div>
 					</mat-form-field>
 
-					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="! f.form.valid">
+					<span class="col-sm-1"></span>
+					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="! f.form.valid || model.schoolName === undefined">
 						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
 					</button>
 				</div>
@@ -72,4 +105,4 @@
 		</mat-expansion-panel>
 	</mat-accordion>
 </div>
-<m-fs-table (dataReady)="dataReady = $event" [model]="model" *ngIf="loadingStarted || dataReady"></m-fs-table>
+<m-fs-table (dataReady)="updateDataReadiness($event)" [model]="model" *ngIf="loadingStarted || dataReady"></m-fs-table>

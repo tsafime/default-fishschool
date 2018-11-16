@@ -83,21 +83,16 @@ export class TableComponent extends ToastSupport implements OnInit {
 			if (response.status === 'Success') {
 
 				if (response.data.length === 0) {
+					this.dataReady.emit(false);
 					this.dataSource = new ResponsiveDataTable<FishSchoolModel>([], this.dataReady);
-					this.showInfo({
-						message: this.translate.instant('VALIDATION.NO_RECORDS'),
-						type: 'info'
-					});
+					this.showInfo({message: this.translate.instant('VALIDATION.NO_RECORDS'), type: 'info'});
 				} else {
 
 					// Deep copy
 					this.loadData(response.data);
 				}
 			} else {
-				this.showError({
-					message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FS_FAILURE'),
-					type: 'danger'
-				});
+				this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FS_FAILURE'), type: 'danger'});
 			}
 		}).catch(response => {
 			if (response !== 'undefined' && response.status === 'Failure') {

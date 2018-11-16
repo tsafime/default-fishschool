@@ -97,6 +97,8 @@ export const locale = {
 			FILTERS: {
 				SCHOOL_NAME: 'School name',
 				CHOOSE_SCHOOL_NAME: 'Choose School Name',
+				START_TYPING_NAME: 'Start typing name',
+				SCHOOL_NAME_NOT_FOUND: 'School name not found',
 				STATUS: {
 					ACTIVE: 'Active',
 					INACTIVE: 'Inactive',
@@ -140,6 +142,19 @@ export const locale = {
 			RESULTS: {
 				FOOD_UPDATE_SUCCESS: 'Food updated successfully',
 			},
+		},
+		FOOD_STOREROOM: {
+			FILTERS: {
+				STATUS: {
+					SELL: 'Sell',
+					SHIPPMENT: 'Shippment'
+				},
+				START_DATE: 'Start date',
+				PANEL: {
+					HEADER: 'Food storeroom filters',
+					DESCRIPTION: 'Choose Food Storeroom'
+				},
+			}
 		},
 		ACTIONS: {
 			SAVE: 'Save',
