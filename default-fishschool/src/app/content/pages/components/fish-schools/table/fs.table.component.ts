@@ -85,7 +85,6 @@ export class TableComponent extends ToastSupport implements OnInit {
 			if (response.status === 'Success') {
 
 				if (response.data.length === 0) {
-					this.dataReady.emit(false);
 					this.dataSource = new ResponsiveDataTable<FishSchoolModel>([], this.dataReady);
 					this.showInfo({message: this.translate.instant('VALIDATION.NO_RECORDS'), type: 'info'});
 				} else {
@@ -173,7 +172,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 				// case 'updatedDate':
 				// case 'creationDate':
 				case 'food':
-					return item.food.name;
+					return ((item.food) ? item.food.name : '');
 				case 'feedDate':
 					return moment(item.feedDate, 'DD/MM/YYYY');
 				default:

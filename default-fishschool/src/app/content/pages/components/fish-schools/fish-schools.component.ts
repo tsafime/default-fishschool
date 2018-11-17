@@ -32,16 +32,16 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 	dataReady: boolean;
 	loadingStarted: boolean = false;
 
-	/** Control for the selected school name */
+	/*/!** Control for the selected school name *!/
 	public selectCtrl: FormControl = new FormControl();
 
-	/** control for the MatSelect filter keyword */
+	/!** control for the MatSelect filter keyword *!/
 	public schoolNameFilterCtrl: FormControl = new FormControl();
 
-	/** list of school names filtered by search keyword */
+	/!** list of school names filtered by search keyword *!/
 	public filteredSchoolNames: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
 
-	@ViewChild('schoolNameSelect') schoolNameSelect: MatSelect;
+	@ViewChild('schoolNameSelect') schoolNameSelect: MatSelect;*/
 
 	/** Subject that emits when the component has been destroyed. */
 	private _onDestroy = new Subject<void>();
@@ -65,7 +65,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 			this.roles = role;
 		});
 
-		// Load the initial school names list
+		/*// Load the initial school names list
 		this.filteredSchoolNames.next(this.fishSchoolNames);
 
 		// Listen for search field value changes
@@ -73,16 +73,16 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 			.pipe(takeUntil(this._onDestroy))
 			.subscribe(() => {
 				this.filterSchoolNames();
-			});
+			});*/
 	}
 
 	ngAfterViewInit() {
-		this.setInitialValue();
+		// this.setInitialValue();
 	}
 
 	ngOnDestroy() {
-		this._onDestroy.next();
-		this._onDestroy.complete();
+		// this._onDestroy.next();
+		// this._onDestroy.complete();
 	}
 
 	loadTableData() {
@@ -91,7 +91,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 		this.reloadService.reload(true);
 	}
 
-	getSelectSchoolNameLabel(): string {
+	/*getSelectSchoolNameLabel(): string {
 		return this.translate.instant('FISH_SCHOOL.FILTERS.START_TYPING_NAME');
 	}
 
@@ -109,9 +109,9 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 		}
 	}
 
-	/**
+	/!**
 	 * Sets the initial value after the filteredFoodNames are loaded initially
-	 */
+	 *!/
 	private setInitialValue() {
 		this.filteredSchoolNames
 			.pipe(take(1), takeUntil(this._onDestroy))
@@ -142,7 +142,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 		this.filteredSchoolNames.next(
 			this.fishSchoolNames.filter(schoolName => schoolName.toLowerCase().indexOf(search) > -1)
 		);
-	}
+	}*/
 }
 
 export interface FsRequestModel {

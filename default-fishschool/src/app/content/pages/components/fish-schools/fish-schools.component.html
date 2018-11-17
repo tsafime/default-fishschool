@@ -24,8 +24,8 @@
 						<!--</div>-->
 					<!--</mat-form-field>-->
 
-					<mat-form-field>
-						<!-- Source: https://github.com/bithost-gmbh/ngx-mat-select-search -->
+					<!--<mat-form-field>
+						&lt;!&ndash; Source: https://github.com/bithost-gmbh/ngx-mat-select-search &ndash;&gt;
 						<mat-select [formControl]="selectCtrl" required #schoolNameSelect placeholder="{{'FISH_SCHOOL.FILTERS.CHOOSE_SCHOOL_NAME' | translate}}"
 									name="schoolNameSelect" [(ngModel)]="model.schoolName">
 
@@ -36,25 +36,25 @@
 								{{name}}
 							</mat-option>
 						</mat-select>
-					</mat-form-field>
+					</mat-form-field>-->
 					<span class="col-sm-1"></span>
 
-					<!--<div style="width: 300px; margin-bottom: 20px;">
-						&lt;!&ndash; https://github.com/ng-select/ng-select &ndash;&gt;
+					<div style="width: 300px; margin-bottom: 20px;" class="mat-form-field">
+						<!-- https://github.com/ng-select/ng-select -->
 						<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
 						<ng-select matInput class="custom"
 								   [items]="fishSchoolNames"
 								   placeholder="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}"
-								   notFoundText="School name not found"
+								   notFoundText="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME_NOT_FOUND' | translate }}"
 								   autofocus
-								   required
+								   required="true"
 								   #schoolName="ngModel"
 								   name="schoolName"
 								   [selectableGroup]="true"
 								   [virtualScroll]="true"
 								   [(ngModel)]="model.schoolName">
 						</ng-select>
-					</div>-->
+					</div>
 
 					<!-- Start date -->
 					<mat-form-field class="col-md-2">

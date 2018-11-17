@@ -107,7 +107,7 @@
 			<!-- actualGivenFood Column -->
 			<ng-container matColumnDef="actualGivenFood">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
-					[ngStyle]="sort.active == 'actualGivenFood' ? {background: 'rgba(0, 0, 0, 0.54)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">>
+					[ngStyle]="sort.active == 'actualGivenFood' ? {background: 'rgba(0, 0, 0, 0.54)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[7] }}</th>
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never" *ngIf="isFishSchoolReadWrite('UPDATE', 'actualGivenFood'); else display">
