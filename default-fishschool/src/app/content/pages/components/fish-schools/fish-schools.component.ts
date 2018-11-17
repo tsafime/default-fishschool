@@ -8,7 +8,7 @@ import {AuthenticationService} from '../../../../core/auth/authentication.servic
 import {FishSchoolsAuthorizationService} from '../../../../core/services/fishschool/fish-schools.authorization.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {ToastSupport} from '../../../../core/models/fishschool/toast.support';
-import {ReloadFishSchoolsService} from '../../../../core/services/fishschool/reload-fish-schools.service';
+import {ReloadTableDataService} from '../../../../core/services/fishschool/reload-table-data.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {take, takeUntil} from 'rxjs/operators';
 import {ReplaySubject, Subject} from 'rxjs';
@@ -29,7 +29,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 	roles: string;
 	maxDate: Date = new Date();
 
-	dataReady: boolean;
+	// dataReady: boolean;
 	loadingStarted: boolean = false;
 
 	/*/!** Control for the selected school name *!/
@@ -48,7 +48,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
-				public toastr: ToastrManager, private reloadService: ReloadFishSchoolsService) {
+				public toastr: ToastrManager, private reloadService: ReloadTableDataService) {
 
 		super(toastr);
 	}
@@ -86,7 +86,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 	}
 
 	loadTableData() {
-		this.panelOpenState = true;
+		this.panelOpenState = false;
 		this.loadingStarted = true;
 		this.reloadService.reload(true);
 	}

@@ -33,13 +33,13 @@
 					<!-- Activity type: SELL, SHIPPMENT -->
 					<span class="col-sm-1"></span>
 					<div class="mat-form-field">
-						<mat-button-toggle-group name="status" class="form-group" [(ngModel)]="model.status" #status="ngModel">
-							<button class="btn" value="SELL" (click)="model.status = 'SELL'"
-									[class.btn-primary]="model.status === '' || model.status === 'SELL'">
+						<mat-button-toggle-group name="status" class="form-group" [(ngModel)]="model.action" #status="ngModel">
+							<button class="btn" value="SELL" (click)="model.action = 'SELL'"
+									[class.btn-primary]="model.action === '' || model.action === 'SELL'">
 								{{'FOOD_STOREROOM.FILTERS.STATUS.SELL' | translate}}
 							</button>
-							<button class="btn" value="SHIPPMENT" (click)="model.status = 'SHIPPMENT'"
-									[class.btn-primary]="model.status === 'SHIPPMENT'">
+							<button class="btn" value="SHIPPMENT" (click)="model.action = 'SHIPPMENT'"
+									[class.btn-primary]="model.action === 'SHIPPMENT'">
 								{{'FOOD_STOREROOM.FILTERS.STATUS.SHIPPMENT' | translate}}
 							</button>
 						</mat-button-toggle-group>
@@ -69,3 +69,5 @@
 		</mat-expansion-panel>
 	</mat-accordion>
 </div>
+
+<m-storeroom-table [model]="model" *ngIf="loadingStarted"></m-storeroom-table>

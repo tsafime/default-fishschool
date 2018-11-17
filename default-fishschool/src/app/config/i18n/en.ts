@@ -83,6 +83,7 @@ export const locale = {
 		VALIDATION: {
 			LOAD_FS_FAILURE: 'Unable to load Fish School records, please try again later',
 			LOAD_FOOD_FAILURE: 'Unable to load Food records, please try again later',
+			LOAD_FOOS_STOREROOM_FAILURE: 'Unable to load Food storeroom records, please try again later',
 			REQUIRED_FIELD: '{{name}} is required',
 			MIN_LENGTH_FIELD: '{{name}} minimum length is {{min}}',
 			NO_RECORDS: 'No records to display',
@@ -159,7 +160,15 @@ export const locale = {
 					HEADER: 'Food storeroom filters',
 					DESCRIPTION: 'Choose Food Storeroom'
 				},
-			}
+			},
+			TABLE: {
+				NAME: 'Food Name',
+				STATUS: 'Status',
+				QUANTITY: 'Quantity',
+				ACTION_TYPE: 'Action Type',
+				RECEIPT: 'Receipt',
+				FOOD_DATE: 'Food Date',
+			},
 		},
 		ACTIONS: {
 			SAVE: 'Save',

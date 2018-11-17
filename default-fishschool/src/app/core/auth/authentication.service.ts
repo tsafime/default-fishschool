@@ -9,6 +9,7 @@ import {TokenStorage} from './token-storage.service';
 import {UtilsService} from '../services/utils.service';
 import {AccessData} from './access-data';
 import {Credential} from './credential';
+import {FsUrlsService} from '../services/fishschool/fs.urls';
 
 @Injectable()
 export class AuthenticationService implements AuthService {
@@ -19,11 +20,7 @@ export class AuthenticationService implements AuthService {
 
 	public onCredentialUpdated$: Subject<AccessData>;
 
-	constructor(
-		private http: HttpClient,
-		private tokenStorage: TokenStorage,
-		private util: UtilsService
-	) {
+	constructor(private http: HttpClient, private tokenStorage: TokenStorage, private util: UtilsService) {
 		this.onCredentialUpdated$ = new Subject();
 	}
 
@@ -103,7 +100,7 @@ export class AuthenticationService implements AuthService {
 
 		const json = JSON.stringify(credential);
 
-		const response =  this.http.post<AccessData>('http://localhost:51120/login', json,
+		const response =  this.http.post<AccessData>(this.API_ENDPOINT_LOGIN, json,
 			{headers: {'Content-Type': 'application/json;charset=UTF-8'}}).pipe(
 			map((result: any) => {
 				if (result instanceof Array) {

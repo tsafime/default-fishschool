@@ -297,7 +297,7 @@ export class MenuConfig implements ConfigModel {
 							},
 							{
 								title: 'Food Storeroom',
-								desc: 'Food storeroom  operations',
+								desc: 'Food table  operations',
 								icon: 'flaticon-lifebuoy',
 								page: '/food-storeroom',
 								translate: 'MENU.FOOD_STOREROOM'

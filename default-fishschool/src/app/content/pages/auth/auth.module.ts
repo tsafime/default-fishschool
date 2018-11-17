@@ -15,6 +15,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { SpinnerButtonModule } from '../../partials/content/general/spinner-button/spinner-button.module';
 import { AuthNoticeComponent } from './auth-notice/auth-notice.component';
+import {FsUrlsService} from '../../../core/services/fishschool/fs.urls';
 
 @NgModule({
 	imports: [
@@ -39,7 +40,8 @@ import { AuthNoticeComponent } from './auth-notice/auth-notice.component';
 		LoginComponent,
 		RegisterComponent,
 		ForgotPasswordComponent,
-		AuthNoticeComponent
+		AuthNoticeComponent,
+		FsUrlsService
 	]
 })
 export class AuthModule {}

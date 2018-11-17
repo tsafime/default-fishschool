@@ -6,29 +6,26 @@ import {QueryFilter} from '../../models/fishschool/query.filter';
 import {FilteredQuery} from '../../models/fishschool/filtered.query';
 import {FoodsModel} from '../../models/food/foods.model';
 import {FoodModel} from '../../models/food/food.model';
+import {FsUrlsService} from './fs.urls';
 
 @Injectable()
 export class FoodService {
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, private urlsService: FsUrlsService) {
 	}
 
 	names() {
-		const queryFilters: QueryFilter[] = [];
-		queryFilters.push(new QueryFilter('status', ['ACTIVE'], '=', 'NONE'));
-		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 400, 0, ['name'], 'ASC');
-		const json = JSON.stringify(filteredQuery);
-		return this.http.post<FoodsModel>('http://localhost:51120/food/view', json);
+		return this.view();
 	}
 
 	view() {
 
 		const queryFilters: QueryFilter[] = [];
 		queryFilters.push(new QueryFilter('status', ['ACTIVE'], '=', 'NONE'));
-
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 400, 0, ['name'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
-		return this.http.post<FoodsModel>('http://localhost:51120/food/view', json);
+
+		return this.http.post<FoodsModel>(this.urlsService.foodViewUrl, json);
 	}
 
 	update(originalData: FoodModel[], editedData: FoodModel[]): Observable<FoodsModel> {
@@ -39,7 +36,7 @@ export class FoodService {
 		});
 
 		if (dirty.length > 0) {
-			return this.http.post<FoodsModel>('http://localhost:51120/food/update', {entities: dirty});
+			return this.http.post<FoodsModel>(this.urlsService.foodUpdateUrl, {entities: dirty});
 		}
 
 		return null;

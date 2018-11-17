@@ -10,7 +10,7 @@ import * as deepEqual from 'deep-equal';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable()
-export class ReloadFishSchoolsService {
+export class ReloadTableDataService {
 
 	@Output() change: EventEmitter<boolean> = new EventEmitter();
 

@@ -25,9 +25,10 @@ import {FishSchoolsAuthorizationService} from '../../../../core/services/fishsch
 import {FoodService} from '../../../../core/services/fishschool/food.service';
 import {ToastrModule} from 'ng6-toastr-notifications';
 import { TableComponent } from './table/fs.table.component';
-import {ReloadFishSchoolsService} from '../../../../core/services/fishschool/reload-fish-schools.service';
+import {ReloadTableDataService} from '../../../../core/services/fishschool/reload-table-data.service';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {FsUrlsService} from '../../../../core/services/fishschool/fs.urls';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -94,7 +95,8 @@ export const DD_MM_YYYY_Format = {
 		FishSchoolsService,
 		FishSchoolsAuthorizationService,
 		FoodService,
-		ReloadFishSchoolsService,
+		ReloadTableDataService,
+		FsUrlsService,
 	],
 	declarations: [
 		FishSchoolsComponent,

@@ -9,14 +9,15 @@ import {FsNames} from '../../models/fishschool/fish-school.names.model';
 import * as deepEqual from 'deep-equal';
 import {Observable} from 'rxjs';
 import {TokenStorage} from '../../auth/token-storage.service';
+import {FsUrlsService} from './fs.urls';
 
 @Injectable()
 export class FishSchoolsAuthorizationService {
 
 	authorizations: string;
 
-	constructor(private http: HttpClient, private tokenStorage: TokenStorage) {
-		this.http.post<string>('http://localhost:51120/user/authorizations', {}).toPromise()
+	constructor(private http: HttpClient, private tokenStorage: TokenStorage, private urlsService: FsUrlsService) {
+		this.http.post<string>(urlsService.authorizationsUrl, {}).toPromise()
 			.then(response => {
 				this.authorizations = response;
 			})

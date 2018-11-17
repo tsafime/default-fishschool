@@ -105,4 +105,4 @@
 		</mat-expansion-panel>
 	</mat-accordion>
 </div>
-<m-fs-table (dataReady)="updateDataReadiness($event)" [model]="model" *ngIf="loadingStarted || dataReady"></m-fs-table>
+<m-fs-table [model]="model" *ngIf="loadingStarted"></m-fs-table>

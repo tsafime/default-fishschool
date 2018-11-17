@@ -6,11 +6,12 @@ import * as moment from 'moment';
 import {SummariesModel} from '../../../models/fishschool/summary/summaries.model';
 import {Observable} from 'rxjs';
 import {Moment} from 'moment';
+import {FsUrlsService} from '../fs.urls';
 
 @Injectable()
 export class SchoolsSummaryService {
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, public urlsService: FsUrlsService) {
 	}
 
 	view(date: Moment): Observable<any> {
@@ -23,6 +24,6 @@ export class SchoolsSummaryService {
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 10, 0, ['feedDate'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
-		return this.http.post<SummariesModel>('http://localhost:51120/farm/summary', json);
+		return this.http.post<SummariesModel>(this.urlsService.farmSummaryUrl, json);
 	}
 }

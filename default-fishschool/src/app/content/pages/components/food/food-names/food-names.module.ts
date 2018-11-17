@@ -23,6 +23,7 @@ import {InterceptService} from '../../../../../core/services/intercept.service';
 import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
 import {FoodService} from '../../../../../core/services/fishschool/food.service';
 import {ToastrModule} from 'ng6-toastr-notifications';
+import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -88,6 +89,7 @@ const routes: Routes = [
 		},
 		FishSchoolsAuthorizationService,
 		FoodService,
+		FsUrlsService,
 	],
 	declarations: [
 		FoodNamesComponent,

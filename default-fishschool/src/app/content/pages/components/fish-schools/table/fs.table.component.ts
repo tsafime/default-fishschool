@@ -1,4 +1,4 @@
-import {AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FsRequestModel} from '../fish-schools.component';
 import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school.model';
 import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
@@ -6,17 +6,15 @@ import {TranslateService} from '@ngx-translate/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
-import {Observable, ReplaySubject, Subject} from 'rxjs';
+import {Observable} from 'rxjs';
 import {FishSchools} from '../../../../../core/models/fishschool/fish.schools.model';
 import * as moment from 'moment';
 import * as deepEqual from 'deep-equal';
-import {MatSelect, MatSort} from '@angular/material';
+import {MatSort} from '@angular/material';
 import {FoodService} from '../../../../../core/services/fishschool/food.service';
-import {ReloadFishSchoolsService} from '../../../../../core/services/fishschool/reload-fish-schools.service';
+import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
 import {ResponsiveDataTable} from '../../../../../core/models/fishschool/table/ResponsiveDataTable';
 import {FoodModel} from '../../../../../core/models/food/food.model';
-import {FormControl} from '@angular/forms';
-import {take, takeUntil} from 'rxjs/operators';
 
 @Component({
 	selector: 'm-fs-table',
@@ -48,7 +46,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 
     constructor(private service: FishSchoolsService, private foodService: FoodService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
-				private reloadService: ReloadFishSchoolsService) {
+				private reloadService: ReloadTableDataService) {
 		super(toastr);
 
 		this.headers = [this.translate.instant('FISH_SCHOOL.TABLE.SELECTED_DATE'),
@@ -85,7 +83,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 			if (response.status === 'Success') {
 
 				if (response.data.length === 0) {
-					this.dataSource = new ResponsiveDataTable<FishSchoolModel>([], this.dataReady);
+					// this.dataSource = new ResponsiveDataTable<FishSchoolModel>([], this.dataReady);
 					this.showInfo({message: this.translate.instant('VALIDATION.NO_RECORDS'), type: 'info'});
 				} else {
 

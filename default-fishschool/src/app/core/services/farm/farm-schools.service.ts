@@ -8,11 +8,12 @@ import {FsRequestModel} from '../../../content/pages/components/fish-schools/fis
 import {FsNames} from '../../models/fishschool/fish-school.names.model';
 import * as deepEqual from 'deep-equal';
 import {Observable} from 'rxjs';
+import {FsUrlsService} from '../fishschool/fs.urls';
 
 @Injectable()
 export class FarmService {
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, private urlsService: FsUrlsService) {
 	}
 
 	view(model: FsRequestModel) {
@@ -27,12 +28,12 @@ export class FarmService {
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, model.days, 0, ['feedDate'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
-		return this.http.post<FishSchools>('http://localhost:51120/farm/view', json);
+		return this.http.post<FishSchools>(this.urlsService.farmViewUrl, json);
 	}
 
 	names() {
 		const json = {};
-		return this.http.post<FsNames>('http://localhost:51120/fishschool/names', json);
+		return this.http.post<FsNames>(this.urlsService.fsNamesUrl, json);
 	}
 
 	update(originalData: FishSchoolModel[], editedData: FishSchoolModel[]): Observable<FishSchools> {
@@ -43,7 +44,7 @@ export class FarmService {
 		});
 
 		if (dirty.length > 0) {
-			return this.http.post<FishSchools>('http://localhost:51120/fishschool/update', {entities: dirty});
+			return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: dirty});
 		}
 
 		return null;

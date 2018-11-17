@@ -24,7 +24,10 @@ import {FishSchoolsAuthorizationService} from '../../../../../core/services/fish
 import {FoodStoreroomComponent} from './food-storeroom.component';
 import {FoodService} from '../../../../../core/services/fishschool/food.service';
 import {ToastrModule} from 'ng6-toastr-notifications';
-import {ReloadFishSchoolsService} from '../../../../../core/services/fishschool/reload-fish-schools.service';
+import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
+import {StoreroomTableComponent} from './table/storeroom.table.component';
+import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
+import {FoodStoreroomService} from '../../../../../core/services/fishschool/food.storeroom.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -90,10 +93,13 @@ const routes: Routes = [
 		},
 		FishSchoolsAuthorizationService,
 		FoodService,
-		ReloadFishSchoolsService,
+		ReloadTableDataService,
+		FsUrlsService,
+		FoodStoreroomService,
 	],
 	declarations: [
 		FoodStoreroomComponent,
+		StoreroomTableComponent,
 	]
 })
 

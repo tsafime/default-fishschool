@@ -1,13 +1,6 @@
-import {Moment} from 'moment';
+import {FoodStoreroomModel} from './food.storeroom.model';
+import {FsResponse} from '../../fishschool/fs.response.model';
 
-export interface FoodStoreroomModel {
-	id: number;
-	companyId: number;
-	name: string;
-	status: string;
-	quantity: number;
-	actionType: string;
-	receipt: string;
-	creationDate: Moment;
-	updatedDate: Moment;
+export interface FoodStoreroomsModel extends FsResponse {
+	data: FoodStoreroomModel[];
 }

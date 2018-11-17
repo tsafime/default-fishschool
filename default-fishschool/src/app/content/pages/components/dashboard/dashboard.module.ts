@@ -24,6 +24,7 @@ import {SchoolsSummaryComponent} from './summary/schools.summary.component';
 import {SchoolsSummaryDetailsComponent} from './summary/details/schools.summary.details.component';
 import {FormsModule} from '@angular/forms';
 import {ToastrModule} from 'ng6-toastr-notifications';
+import {FsUrlsService} from '../../../../core/services/fishschool/fs.urls';
 
 @NgModule({
 	imports: [
@@ -60,6 +61,7 @@ import {ToastrModule} from 'ng6-toastr-notifications';
 		{provide: DateAdapter, useClass: MomentDateAdapter},
 		{provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format},
 		MatIconRegistry,
+		FsUrlsService,
 	],
 	entryComponents: [
 		SchoolsSummaryDetailsComponent
