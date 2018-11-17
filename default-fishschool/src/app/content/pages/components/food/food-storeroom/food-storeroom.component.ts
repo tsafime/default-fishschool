@@ -22,7 +22,6 @@ import {ReloadFishSchoolsService} from '../../../../../core/services/fishschool/
 })
 export class FoodStoreroomComponent extends ToastSupport implements OnInit {
 
-	startDate: Moment = moment();
 	maxDate: Moment = moment();
 	model: FoodStoretRequestModel = { startDate: moment(), status: 'SELL', days: 10 };
 	panelOpenState: boolean = true;

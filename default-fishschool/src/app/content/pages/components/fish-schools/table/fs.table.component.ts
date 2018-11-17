@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {FsRequestModel} from '../fish-schools.component';
 import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school.model';
 import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
@@ -6,15 +6,17 @@ import {TranslateService} from '@ngx-translate/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
-import {Observable} from 'rxjs';
+import {Observable, ReplaySubject, Subject} from 'rxjs';
 import {FishSchools} from '../../../../../core/models/fishschool/fish.schools.model';
 import * as moment from 'moment';
 import * as deepEqual from 'deep-equal';
-import {MatSort} from '@angular/material';
+import {MatSelect, MatSort} from '@angular/material';
 import {FoodService} from '../../../../../core/services/fishschool/food.service';
 import {ReloadFishSchoolsService} from '../../../../../core/services/fishschool/reload-fish-schools.service';
 import {ResponsiveDataTable} from '../../../../../core/models/fishschool/table/ResponsiveDataTable';
 import {FoodModel} from '../../../../../core/models/food/food.model';
+import {FormControl} from '@angular/forms';
+import {take, takeUntil} from 'rxjs/operators';
 
 @Component({
 	selector: 'm-fs-table',

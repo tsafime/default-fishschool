@@ -26,8 +26,8 @@
 
 					<mat-form-field>
 						<!-- Source: https://github.com/bithost-gmbh/ngx-mat-select-search -->
-						<mat-select [formControl]="selectCtrl"required #schooNameSelect placeholder="{{'FISH_SCHOOL.FILTERS.CHOOSE_SCHOOL_NAME' | translate}}"
-									name="schooNameSelect" [(ngModel)]="model.schoolName">
+						<mat-select [formControl]="selectCtrl" required #schoolNameSelect placeholder="{{'FISH_SCHOOL.FILTERS.CHOOSE_SCHOOL_NAME' | translate}}"
+									name="schoolNameSelect" [(ngModel)]="model.schoolName">
 
 							<ngx-mat-select-search [formControl]="schoolNameFilterCtrl" [placeholderLabel]="getSelectSchoolNameLabel()"
 							[noEntriesFoundLabel]="getSelectSchoolNameNotFoundLabel()"></ngx-mat-select-search>

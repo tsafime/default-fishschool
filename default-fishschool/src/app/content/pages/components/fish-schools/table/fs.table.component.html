@@ -140,13 +140,29 @@
 					[ngStyle]="sort.active == 'food' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[9] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isFoodReadWrite('UPDATE', 'name'); else display">
-						<mat-select name="food" #schoolName="ngModel" [(ngModel)]="row.food"
+					<!--<mat-form-field floatLabel="never" *ngIf="isFoodReadWrite('UPDATE', 'name'); else display">-->
+						<!--<mat-select name="food" #food="ngModel" [(ngModel)]="row.food"
 									placeholder="{{'FOOD.FOOD_TYPE' | translate}}" required [compareWith]="compareObjects">
 							<option [value]="null" disabled>{{'FOOD.CHOOSE_FOOD_TYPE' | translate}}</option>
 							<mat-option *ngFor="let food of foods" [value]="food">{{food.name}}</mat-option>
-						</mat-select>
-					</mat-form-field>
+						</mat-select>-->
+						<div style="width: 300px; margin-bottom: 20px;" *ngIf="isFoodReadWrite('UPDATE', 'name'); else display">
+							<!-- https://github.com/ng-select/ng-select -->
+							<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
+							<ng-select matInput class="custom"
+									   [items]="foods"
+									   bindLabel="name"
+									   notFoundText="Food type not found"
+									   autofocus
+									   [required]="true"
+									   #food="ngModel"
+									   name="food"
+									   [selectableGroup]="true"
+									   [virtualScroll]="true"
+									   [(ngModel)]="row.food">
+							</ng-select>
+						</div>
+					<!--</mat-form-field>-->
 					<ng-template #display>{{row.food.name}}</ng-template>
 				</td>
 			</ng-container>

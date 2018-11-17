@@ -41,7 +41,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 	/** list of school names filtered by search keyword */
 	public filteredSchoolNames: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
 
-	@ViewChild('schooNameSelect') schooNameSelect: MatSelect;
+	@ViewChild('schoolNameSelect') schoolNameSelect: MatSelect;
 
 	/** Subject that emits when the component has been destroyed. */
 	private _onDestroy = new Subject<void>();
@@ -65,7 +65,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 			this.roles = role;
 		});
 
-		// Load the initial schol names list
+		// Load the initial school names list
 		this.filteredSchoolNames.next(this.fishSchoolNames);
 
 		// Listen for search field value changes
@@ -108,8 +108,9 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 			this.panelOpenState = !$event;
 		}
 	}
+
 	/**
-	 * Sets the initial value after the filteredSchoolNames are loaded initially
+	 * Sets the initial value after the filteredFoodNames are loaded initially
 	 */
 	private setInitialValue() {
 		this.filteredSchoolNames
@@ -119,9 +120,9 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit, OnDest
 				// Setting the compareWith property to a comparison function
 				// triggers initializing the selection according to the initial value of
 				// the form control (i.e. _initializeSelection())
-				// this needs to be done after the filteredSchoolNames are loaded initially
+				// this needs to be done after the filteredFoodNames are loaded initially
 				// and after the mat-option elements are available
-				this.schooNameSelect.compareWith = (a: string, b: string) => a === b;
+				this.schoolNameSelect.compareWith = (a: string, b: string) => a === b;
 			});
 	}
 

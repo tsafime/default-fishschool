@@ -74,7 +74,7 @@ export const DD_MM_YYYY_Format = {
 				component: FishSchoolsComponent
 			}
 		]),
-		// NgSelectModule,
+		NgSelectModule,
 		NgxMatSelectSearchModule,
 	],
 	exports: [

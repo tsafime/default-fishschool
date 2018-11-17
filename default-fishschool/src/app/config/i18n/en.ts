@@ -139,6 +139,11 @@ export const locale = {
 				FOOD_TYPE: 'Food Type',
 				MORTALITY: 'Mortality',
 			},
+			FILTERS: {
+				CHOOSE_FOOD_NAME: 'Choose food type',
+				START_TYPING_NAME: 'Start typing food type',
+				FOOD_NAME_NOT_FOUND: 'Food type not found',
+			},
 			RESULTS: {
 				FOOD_UPDATE_SUCCESS: 'Food updated successfully',
 			},
