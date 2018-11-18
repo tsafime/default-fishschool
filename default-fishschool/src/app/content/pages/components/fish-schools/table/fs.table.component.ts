@@ -83,11 +83,9 @@ export class TableComponent extends ToastSupport implements OnInit {
 			if (response.status === 'Success') {
 
 				if (response.data.length === 0) {
-					// this.dataSource = new ResponsiveDataTable<FishSchoolModel>([], this.dataReady);
+					this.dataReady.emit(false);
 					this.showInfo({message: this.translate.instant('VALIDATION.NO_RECORDS'), type: 'info'});
 				} else {
-
-					// Deep copy
 					this.loadData(response.data);
 				}
 			} else {
@@ -153,8 +151,22 @@ export class TableComponent extends ToastSupport implements OnInit {
 		return this.authorization.isFoodReadWrite(action, prop);
 	}
 
+	customFilterPredicate() {
+    	const myFilterPredicate = (data, filter: string) => {
+		const searchString = JSON.parse(filter);
+		return data.position.toString().trim().indexOf(searchString.position) !== -1 &&
+			data.name.toString().trim().toLowerCase().indexOf(searchString.name) !== -1; }
+		return myFilterPredicate;
+	}
+
 	applyFilter(filterValue: string) {
 		if (this.dataSource) {
+			 this.dataSource.filterPredicate = (data, filter: string) => {
+				 const jsonData = JSON.stringify(data).trim();
+				 return jsonData.indexOf(filter) !== -1
+					|| jsonData.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+			 }
+
 			this.dataSource.filter = filterValue.trim().toLowerCase();
 		}
 	}

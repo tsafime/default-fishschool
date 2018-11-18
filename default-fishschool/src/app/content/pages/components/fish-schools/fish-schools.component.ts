@@ -53,6 +53,10 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 		this.loadingStarted = true;
 		this.reloadService.reload(true);
 	}
+
+	onDataReady($event) {
+		this.panelOpenState = ! $event;
+	}
 }
 
 export interface FsRequestModel {
