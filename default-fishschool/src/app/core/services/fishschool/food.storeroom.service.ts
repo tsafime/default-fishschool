@@ -19,9 +19,10 @@ export class FoodStoreroomService {
 
 		const queryFilters: QueryFilter[] = [];
 		queryFilters.push(new QueryFilter('status', ['ACTIVE'], '=', 'AND'));
-		queryFilters.push(new QueryFilter('actionType', [model.action], '=', 'NONE'));
+		queryFilters.push(new QueryFilter('actionType', [model.action], '=', 'AND'));
+		queryFilters.push(new QueryFilter('foodDate', [model.startDate.format('DD/MM/YYYY')], '=', 'NONE'));
 
-		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 400, 0, ['name'], 'ASC');
+		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, model.days, 0, ['name'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
 		return this.http.post<FoodStoreroomsModel>(this.urlsService.foodStoreroomViewUrl, json);
 	}

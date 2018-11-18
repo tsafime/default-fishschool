@@ -30,13 +30,13 @@
 						<mat-datepicker #picker [startAt]="model.startDate"></mat-datepicker>
 					</mat-form-field>
 
-					<!-- Activity type: SELL, SHIPPMENT -->
+					<!-- Activity type: SALE, SHIPPMENT -->
 					<span class="col-sm-1"></span>
 					<div class="mat-form-field">
 						<mat-button-toggle-group name="status" class="form-group" [(ngModel)]="model.action" #status="ngModel">
-							<button class="btn" value="SELL" (click)="model.action = 'SELL'"
-									[class.btn-primary]="model.action === '' || model.action === 'SELL'">
-								{{'FOOD_STOREROOM.FILTERS.STATUS.SELL' | translate}}
+							<button class="btn" value="SALE" (click)="model.action = 'SALE'"
+									[class.btn-primary]="model.action === '' || model.action === 'SALE'">
+								{{'FOOD_STOREROOM.FILTERS.STATUS.SALE' | translate}}
 							</button>
 							<button class="btn" value="SHIPPMENT" (click)="model.action = 'SHIPPMENT'"
 									[class.btn-primary]="model.action === 'SHIPPMENT'">
@@ -70,4 +70,4 @@
 	</mat-accordion>
 </div>
 
-<m-storeroom-table [model]="model" *ngIf="loadingStarted"></m-storeroom-table>
+<m-storeroom-table (dataReady)="onDataReady($event)" [model]="model" *ngIf="loadingStarted"></m-storeroom-table>

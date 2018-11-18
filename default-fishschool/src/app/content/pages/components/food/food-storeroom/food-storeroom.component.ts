@@ -16,7 +16,7 @@ import {ReloadTableDataService} from '../../../../../core/services/fishschool/re
 export class FoodStoreroomComponent extends ToastSupport implements OnInit {
 
 	maxDate: Moment = moment();
-	model: FoodStoreRequestModel = { startDate: moment(), action: 'SELL', days: 10 };
+	model: FoodStoreRequestModel = { startDate: moment(), action: 'SALE', days: 10 };
 	panelOpenState: boolean = true;
 
 	loadingStarted: boolean = false;
@@ -32,10 +32,12 @@ export class FoodStoreroomComponent extends ToastSupport implements OnInit {
 	}
 
 	loadTableData() {
-		this.panelOpenState = false;
 		this.loadingStarted = true;
-
 		this.reloadService.reload(true);
+	}
+
+	onDataReady($event) {
+		this.panelOpenState = ! $event;
 	}
 }
 

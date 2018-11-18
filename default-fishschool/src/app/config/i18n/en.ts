@@ -152,7 +152,7 @@ export const locale = {
 		FOOD_STOREROOM: {
 			FILTERS: {
 				STATUS: {
-					SELL: 'Sell',
+					SALE: 'Sale',
 					SHIPPMENT: 'Shippment'
 				},
 				START_DATE: 'Start date',
