@@ -84,6 +84,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 
 				if (response.data.length === 0) {
 					this.dataReady.emit(false);
+					this.dataSource = new ResponsiveDataTable<FishSchoolModel>([], this.dataReady);
 					this.showInfo({message: this.translate.instant('VALIDATION.NO_RECORDS'), type: 'info'});
 				} else {
 					this.loadData(response.data);
@@ -149,14 +150,6 @@ export class TableComponent extends ToastSupport implements OnInit {
 
 	isFoodReadWrite(action: string, prop: string): boolean {
 		return this.authorization.isFoodReadWrite(action, prop);
-	}
-
-	customFilterPredicate() {
-    	const myFilterPredicate = (data, filter: string) => {
-		const searchString = JSON.parse(filter);
-		return data.position.toString().trim().indexOf(searchString.position) !== -1 &&
-			data.name.toString().trim().toLowerCase().indexOf(searchString.name) !== -1; }
-		return myFilterPredicate;
 	}
 
 	applyFilter(filterValue: string) {

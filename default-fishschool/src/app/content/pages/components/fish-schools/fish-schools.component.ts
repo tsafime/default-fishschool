@@ -49,7 +49,6 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 	}
 
 	loadTableData() {
-		this.panelOpenState = false;
 		this.loadingStarted = true;
 		this.reloadService.reload(true);
 	}
