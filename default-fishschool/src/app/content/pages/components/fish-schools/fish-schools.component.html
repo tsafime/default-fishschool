@@ -39,7 +39,7 @@
 					</mat-form-field>-->
 					<span class="col-sm-1"></span>
 
-					<div style="width: 300px; margin-bottom: 20px;" class="mat-form-field">
+					<div style="width: 300px;" class="mat-form-field">
 						<!-- https://github.com/ng-select/ng-select -->
 						<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
 						<ng-select matInput class="custom"
@@ -48,10 +48,11 @@
 								   notFoundText="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME_NOT_FOUND' | translate }}"
 								   autofocus
 								   required="true"
+								   [multiple]="false"
+								   maxSelectedItems="1"
+								   [virtualScroll]="true"
 								   #schoolName="ngModel"
 								   name="schoolName"
-								   [selectableGroup]="true"
-								   [virtualScroll]="true"
 								   [(ngModel)]="model.schoolName">
 						</ng-select>
 					</div>
