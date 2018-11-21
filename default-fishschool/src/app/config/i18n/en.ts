@@ -166,7 +166,7 @@ export const locale = {
 				STATUS: 'Status',
 				QUANTITY: 'Quantity',
 				ACTION_TYPE: 'Action Type',
-				RECEIPT: 'Receipt',
+				RECEIPT: 'Receipt #',
 				FOOD_DATE: 'Food Date',
 			},
 		},

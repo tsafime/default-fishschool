@@ -10,6 +10,8 @@ import {FishSchoolsAuthorizationService} from '../../../../../../core/services/f
 import {ToastSupport} from '../../../../../../core/models/fishschool/toast.support';
 import {FoodStoreroomService} from '../../../../../../core/services/fishschool/food.storeroom.service';
 import * as moment from 'moment';
+import {FoodService} from '../../../../../../core/services/fishschool/food.service';
+import {FoodModel} from '../../../../../../core/models/food/food.model';
 
 @Component({
 	selector: 'm-storeroom-table',
@@ -21,16 +23,18 @@ export class StoreroomTableComponent extends ToastSupport implements OnInit {
 	@Output() dataReady = new EventEmitter<boolean>();
 	@Input() public model: FoodStoreRequestModel;
 
-	displayedColumns: string[] = ['name', 'quantity', /*'actionType', */'receipt', 'foodDate'];
+	displayedColumns: string[] = ['name', 'quantity', 'receipt', 'foodDate'];
 
 	headers: string[];
 	dataSource: ResponsiveDataTable<FoodStoreroomModel>;
 	originalData: FoodStoreroomModel[] = [];
 	@ViewChild(MatSort) sort: MatSort;
+	foods: FoodModel[];
+	foodNames: string[] = [];
 
 	constructor(private service: FoodStoreroomService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
-				private reloadService: ReloadTableDataService) {
+				private reloadService: ReloadTableDataService, private foodService: FoodService) {
 		super(toastr);
 
 		this.headers = [this.translate.instant('FOOD_STOREROOM.TABLE.NAME'),
@@ -40,12 +44,23 @@ export class StoreroomTableComponent extends ToastSupport implements OnInit {
 			this.translate.instant('FOOD_STOREROOM.TABLE.FOOD_DATE')];
 	}
 
-	ngOnInit() {
-		this.view();
+	async ngOnInit() {
+		await this.foodService.names().toPromise().then(response => {
+			this.foods = response.data;
+
+			for (const food of this.foods) {
+				this.displayedColumns.push(food.name);
+				this.foodNames.push(food.name);
+			}
+
+			return response;
+		});
 
 		this.reloadService.change.subscribe(data => {
 			this.view();
 		});
+
+		await this.view();
 	}
 
 	async view() {
@@ -72,7 +87,7 @@ export class StoreroomTableComponent extends ToastSupport implements OnInit {
 	}
 
 	update() {
-		console.log('Update called...');
+		console.log('Update() called... - temporary message');
 		/*if (this.dataSource) {
 			const httpPost: Observable<FishSchools> = this.service.update(this.originalData, this.dataSource.data);
 
@@ -110,6 +125,10 @@ export class StoreroomTableComponent extends ToastSupport implements OnInit {
 		}*/
 	}
 
+	getFoodColumns() {
+		return this.foodNames;
+	}
+
 	compareObjects(o1: any, o2: any): boolean {
 		return o1.name === o2.name && o1.id === o2.id;
 	}
@@ -118,22 +137,39 @@ export class StoreroomTableComponent extends ToastSupport implements OnInit {
 		return this.authorization.isFishSchoolReadWrite(action, prop);
 	}
 
-	/*isFoodReadWrite(action: string, prop: string): boolean {
-		return this.authorization.isFoodReadWrite(action, prop);
-	}*/
-
 	applyFilter(filterValue: string) {
 		if (this.dataSource) {
 			this.dataSource.filter = filterValue.trim().toLowerCase();
 		}
 	}
 
+	trackByIdentity(index, item) {
+		return item;
+	}
+
 	private loadData(data: FoodStoreroomModel[]) {
+
+		// Enrich JSON
+		for (const foosStoreroom of data) {
+			for (const food of this.foods) {
+				if (foosStoreroom.name === food.name) {
+					foosStoreroom[food.name] = foosStoreroom.quantity;
+				} else {
+					foosStoreroom[food.name] = undefined;
+				}
+			}
+		}
 
 		this.originalData = JSON.parse(JSON.stringify(data));
 		this.dataSource = new ResponsiveDataTable<FoodStoreroomModel>(data, this.dataReady);
 
 		this.dataSource.sortingDataAccessor = (item, property) => {
+			for (const food of this.foods) {
+				if (food.name === property) {
+					return '\'' + item[property] + '\'';
+				}
+			}
+
 			switch (property) {
 				case 'name':
 					return '\'' + item.name + '\'';
