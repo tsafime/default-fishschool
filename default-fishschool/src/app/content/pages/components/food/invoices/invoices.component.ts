@@ -9,14 +9,14 @@ import {FoodService} from '../../../../../core/services/fishschool/food.service'
 import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
 
 @Component({
-	selector: 'm-food-storeroom',
-	templateUrl: './food-storeroom.component.html',
-	styleUrls: ['./food-storeroom.component.scss']
+	selector: 'm-invoices',
+	templateUrl: './invoices.component.html',
+	styleUrls: ['./invoices.component.scss']
 })
-export class FoodStoreroomComponent extends ToastSupport implements OnInit {
+export class InvoicesComponent extends ToastSupport implements OnInit {
 
 	maxDate: Moment = moment();
-	model: FoodStoreRequestModel = { startDate: moment(), action: 'SALE', days: 10 };
+	model: InvoicesRequestModel = { startDate: moment(), action: 'SALE', days: 10 };
 	panelOpenState: boolean = true;
 
 	loadingStarted: boolean = false;
@@ -41,7 +41,7 @@ export class FoodStoreroomComponent extends ToastSupport implements OnInit {
 	}
 }
 
-export interface FoodStoreRequestModel {
+export interface InvoicesRequestModel {
 	startDate: Moment;
 	action: string;
 	days: number;

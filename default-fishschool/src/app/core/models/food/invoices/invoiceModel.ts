@@ -1,6 +1,6 @@
 import {Moment} from 'moment';
 
-export interface FoodStoreroomModel {
+export interface InvoiceModel {
 	id: number;
 	companyId: number;
 	name: string;

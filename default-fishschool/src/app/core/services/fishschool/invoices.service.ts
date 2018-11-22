@@ -3,19 +3,19 @@ import {HttpClient} from '@angular/common/http';
 import {QueryFilter} from '../../models/fishschool/query.filter';
 import {FilteredQuery} from '../../models/fishschool/filtered.query';
 import {FsUrlsService} from './fs.urls';
-import {FoodStoreRequestModel} from '../../../content/pages/components/food/food-storeroom/food-storeroom.component';
+import {InvoicesRequestModel} from '../../../content/pages/components/food/invoices/invoices.component';
 import {Observable} from 'rxjs';
 import * as deepEqual from 'deep-equal';
-import {FoodStoreroomsModel} from '../../models/food/storeroom/food.storerooms.model';
-import {FoodStoreroomModel} from '../../models/food/storeroom/food.storeroom.model';
+import {InvoicesModel} from '../../models/food/invoices/invoicesModel';
+import {InvoiceModel} from '../../models/food/invoices/invoiceModel';
 
 @Injectable()
-export class FoodStoreroomService {
+export class InvoicesService {
 
 	constructor(private http: HttpClient, public urlsService: FsUrlsService) {
 	}
 
-	view(model: FoodStoreRequestModel) {
+	view(model: InvoicesRequestModel) {
 
 		const queryFilters: QueryFilter[] = [];
 		queryFilters.push(new QueryFilter('status', ['ACTIVE'], '=', 'AND'));
@@ -24,18 +24,18 @@ export class FoodStoreroomService {
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, model.days, 0, ['name'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
-		return this.http.post<FoodStoreroomsModel>(this.urlsService.foodStoreroomViewUrl, json);
+		return this.http.post<InvoicesModel>(this.urlsService.invoicesViewUrl, json);
 	}
 
-	update(originalData: FoodStoreroomModel[], editedData: FoodStoreroomModel[]): Observable<FoodStoreroomsModel> {
+	update(originalData: InvoiceModel[], editedData: InvoiceModel[]): Observable<InvoicesModel> {
 
-		const dirty: FoodStoreroomModel[] = editedData.filter((item, index) => {
+		const dirty: InvoiceModel[] = editedData.filter((item, index) => {
 			const deepEqual1 = deepEqual(item, originalData[index]);
 			return ! deepEqual1;
 		});
 
 		if (dirty.length > 0) {
-			return this.http.post<FoodStoreroomsModel>(this.urlsService.foodUpdateViewUrl, {entities: dirty});
+			return this.http.post<InvoicesModel>(this.urlsService.invoicesUpdateUrl, {entities: dirty});
 		}
 
 		return null;

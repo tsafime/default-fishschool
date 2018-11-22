@@ -21,13 +21,13 @@ import {PartialsModule} from '../../../../partials/partials.module';
 import {MaterialPreviewModule} from '../../../../partials/content/general/material-preview/material-preivew.module';
 import {InterceptService} from '../../../../../core/services/intercept.service';
 import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
-import {FoodStoreroomComponent} from './food-storeroom.component';
+import {InvoicesComponent} from './invoices.component';
 import {FoodService} from '../../../../../core/services/fishschool/food.service';
 import {ToastrModule} from 'ng6-toastr-notifications';
 import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
-import {StoreroomTableComponent} from './table/storeroom.table.component';
+import {InvoicesTableComponent} from './table/invoices.table.component';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
-import {FoodStoreroomService} from '../../../../../core/services/fishschool/food.storeroom.service';
+import {InvoicesService} from '../../../../../core/services/fishschool/invoices.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -48,7 +48,7 @@ export const DD_MM_YYYY_Format = {
 const routes: Routes = [
 	{
 		path: '',
-		component: FoodStoreroomComponent,
+		component: InvoicesComponent,
 	},
 ];
 
@@ -95,13 +95,13 @@ const routes: Routes = [
 		FoodService,
 		ReloadTableDataService,
 		FsUrlsService,
-		FoodStoreroomService,
+		InvoicesService,
 	],
 	declarations: [
-		FoodStoreroomComponent,
-		StoreroomTableComponent,
+		InvoicesComponent,
+		InvoicesTableComponent,
 	]
 })
 
-export class FoodStoreroomModule {
+export class InvoicesModule {
 }

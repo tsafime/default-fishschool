@@ -296,11 +296,11 @@ export class MenuConfig implements ConfigModel {
 								translate: 'MENU.FOOD_NAMES',
 							},
 							{
-								title: 'Food Storeroom',
-								desc: 'Food table  operations',
+								title: 'Invoices',
+								desc: 'Food invoices',
 								icon: 'flaticon-lifebuoy',
-								page: '/food-storeroom',
-								translate: 'MENU.FOOD_STOREROOM'
+								page: '/invoices',
+								translate: 'MENU.INVOICES'
 							},
 						]
 					},

@@ -1,47 +1,47 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {FoodStoreRequestModel} from '../food-storeroom.component';
+import {InvoicesRequestModel} from '../invoices.component';
 import {ReloadTableDataService} from '../../../../../../core/services/fishschool/reload-table-data.service';
 import {ResponsiveDataTable} from '../../../../../../core/models/fishschool/table/ResponsiveDataTable';
-import {FoodStoreroomModel} from '../../../../../../core/models/food/storeroom/food.storeroom.model';
+import {InvoiceModel} from '../../../../../../core/models/food/invoices/invoiceModel';
 import {MatSort} from '@angular/material';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {TranslateService} from '@ngx-translate/core';
 import {FishSchoolsAuthorizationService} from '../../../../../../core/services/fishschool/fish-schools.authorization.service';
 import {ToastSupport} from '../../../../../../core/models/fishschool/toast.support';
-import {FoodStoreroomService} from '../../../../../../core/services/fishschool/food.storeroom.service';
+import {InvoicesService} from '../../../../../../core/services/fishschool/invoices.service';
 import * as moment from 'moment';
 import {FoodService} from '../../../../../../core/services/fishschool/food.service';
 import {FoodModel} from '../../../../../../core/models/food/food.model';
 
 @Component({
-	selector: 'm-storeroom-table',
-	templateUrl: './storeroom.table..component.html',
-	styleUrls: ['./storeroom.table.component.scss']
+	selector: 'm-invoices-table',
+	templateUrl: './invoices.table..component.html',
+	styleUrls: ['./invoices.table.component.scss']
 })
-export class StoreroomTableComponent extends ToastSupport implements OnInit {
+export class InvoicesTableComponent extends ToastSupport implements OnInit {
 
 	@Output() dataReady = new EventEmitter<boolean>();
-	@Input() public model: FoodStoreRequestModel;
+	@Input() public model: InvoicesRequestModel;
 
 	displayedColumns: string[] = ['name', 'quantity', 'receipt', 'foodDate'];
 
 	headers: string[];
-	dataSource: ResponsiveDataTable<FoodStoreroomModel>;
-	originalData: FoodStoreroomModel[] = [];
+	dataSource: ResponsiveDataTable<InvoiceModel>;
+	originalData: InvoiceModel[] = [];
 	@ViewChild(MatSort) sort: MatSort;
 	foods: FoodModel[];
 	foodNames: string[] = [];
 
-	constructor(private service: FoodStoreroomService, private translate: TranslateService,
+	constructor(private service: InvoicesService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
 				private reloadService: ReloadTableDataService, private foodService: FoodService) {
 		super(toastr);
 
-		this.headers = [this.translate.instant('FOOD_STOREROOM.TABLE.NAME'),
-			this.translate.instant('FOOD_STOREROOM.TABLE.QUANTITY'),
-			this.translate.instant('FOOD_STOREROOM.TABLE.ACTION_TYPE'),
-			this.translate.instant('FOOD_STOREROOM.TABLE.RECEIPT'),
-			this.translate.instant('FOOD_STOREROOM.TABLE.FOOD_DATE')];
+		this.headers = [this.translate.instant('INVOICES.TABLE.NAME'),
+			this.translate.instant('INVOICES.TABLE.QUANTITY'),
+			this.translate.instant('INVOICES.TABLE.ACTION_TYPE'),
+			this.translate.instant('INVOICES.TABLE.RECEIPT'),
+			this.translate.instant('INVOICES.TABLE.FOOD_DATE')];
 	}
 
 	async ngOnInit() {
@@ -75,7 +75,7 @@ export class StoreroomTableComponent extends ToastSupport implements OnInit {
 					this.loadData(response.data);
 				}
 			} else {
-				this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FOOS_STOREROOM_FAILURE'), type: 'danger'});
+				this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FOOS_INVOICES_FAILURE'), type: 'danger'});
 			}
 		}).catch(response => {
 			if (response !== 'undefined' && response.status === 'Failure') {
@@ -147,21 +147,21 @@ export class StoreroomTableComponent extends ToastSupport implements OnInit {
 		return item;
 	}
 
-	private loadData(data: FoodStoreroomModel[]) {
+	private loadData(data: InvoiceModel[]) {
 
 		// Enrich JSON
-		for (const foosStoreroom of data) {
+		for (const invoice of data) {
 			for (const food of this.foods) {
-				if (foosStoreroom.name === food.name) {
-					foosStoreroom[food.name] = foosStoreroom.quantity;
+				if (invoice.name === food.name) {
+					invoice[food.name] = invoice.quantity;
 				} else {
-					foosStoreroom[food.name] = undefined;
+					invoice[food.name] = undefined;
 				}
 			}
 		}
 
 		this.originalData = JSON.parse(JSON.stringify(data));
-		this.dataSource = new ResponsiveDataTable<FoodStoreroomModel>(data, this.dataReady);
+		this.dataSource = new ResponsiveDataTable<InvoiceModel>(data, this.dataReady);
 
 		this.dataSource.sortingDataAccessor = (item, property) => {
 			for (const food of this.foods) {

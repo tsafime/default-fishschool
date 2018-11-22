@@ -17,8 +17,8 @@ export class FsUrlsService {
 	public foodViewUrl: string = this.baseUrl + 'food/view';
 	public foodUpdateUrl: string = this.baseUrl + 'food/update'
 
-	public foodStoreroomViewUrl = this.baseUrl + 'foodControl/view';
-	public foodUpdateViewUrl = this.baseUrl + 'foodControl/update';
+	public invoicesViewUrl = this.baseUrl + 'foodInvoice/view';
+	public invoicesUpdateUrl = this.baseUrl + 'foodInvoice/update';
 
 	constructor() {
 	}

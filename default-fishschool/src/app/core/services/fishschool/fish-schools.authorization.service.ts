@@ -54,8 +54,8 @@ export class FishSchoolsAuthorizationService {
 		return this.isReadWrite('Food', action, prop);
 	}
 
-	isFoodStoreroomReadWrite(action: string, prop: string): boolean {
-		return this.isReadWrite('FoodControl', action, prop);
+	isFoodInvoicesReadWrite(action: string, prop: string): boolean {
+		return this.isReadWrite('FoodInvoice', action, prop);
 	}
 
 	private isReadWrite(entity: string, action: string, prop: string): boolean {

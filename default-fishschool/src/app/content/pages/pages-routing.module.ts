@@ -34,8 +34,8 @@ const routes: Routes = [
 				loadChildren: './components/food/food-names/food-names.module#FoodNamesModule'
 			},
 			{
-				path: 'food-storeroom',
-				loadChildren: './components/food/food-storeroom/food-storeroom.module#FoodStoreroomModule'
+				path: 'invoices',
+				loadChildren: './components/food/invoices/invoices.module#InvoicesModule'
 			},
             /*{
 				path: 'builder',

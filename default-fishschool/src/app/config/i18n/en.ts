@@ -15,7 +15,7 @@ export const locale = {
 			FISH_SCHOOLS: 'Fish schools',
 			FARM: 'Farm',
 			FOOD_NAMES: 'Food Names',
-			FOOD_STOREROOM: 'Food Storeroom',
+			INVOICES: 'Invoices',
 		},
 		AUTH: {
 			GENERAL: {
@@ -83,7 +83,7 @@ export const locale = {
 		VALIDATION: {
 			LOAD_FS_FAILURE: 'Unable to load Fish School records, please try again later',
 			LOAD_FOOD_FAILURE: 'Unable to load Food records, please try again later',
-			LOAD_FOOS_STOREROOM_FAILURE: 'Unable to load Food storeroom records, please try again later',
+			LOAD_FOOS_INVOICES_FAILURE: 'Unable to load invoices records, please try again later',
 			REQUIRED_FIELD: '{{name}} is required',
 			MIN_LENGTH_FIELD: '{{name}} minimum length is {{min}}',
 			NO_RECORDS: 'No records to display',
@@ -149,7 +149,7 @@ export const locale = {
 				FOOD_UPDATE_SUCCESS: 'Food updated successfully',
 			},
 		},
-		FOOD_STOREROOM: {
+		INVOICES: {
 			FILTERS: {
 				STATUS: {
 					SALE: 'Sale',
@@ -157,8 +157,8 @@ export const locale = {
 				},
 				START_DATE: 'Start date',
 				PANEL: {
-					HEADER: 'Food storeroom filters',
-					DESCRIPTION: 'Choose Food Storeroom'
+					HEADER: 'Invoices filters',
+					DESCRIPTION: 'Choose invoices'
 				},
 			},
 			TABLE: {
