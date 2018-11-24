@@ -87,7 +87,7 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 	}
 
 	update() {
-		console.log('Update() called... - temporary message');
+		console.log('Update() called... - ' + JSON.stringify(this.dataSource.data));
 		/*if (this.dataSource) {
 			const httpPost: Observable<FishSchools> = this.service.update(this.originalData, this.dataSource.data);
 
@@ -133,7 +133,7 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 		return o1.name === o2.name && o1.id === o2.id;
 	}
 
-	isFoodStorageReadWrite(action: string, prop: string): boolean {
+	isFoodInvoiceReadWrite(action: string, prop: string): boolean {
 		return this.authorization.isFishSchoolReadWrite(action, prop);
 	}
 

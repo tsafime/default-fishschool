@@ -28,6 +28,7 @@ import {ReloadTableDataService} from '../../../../../core/services/fishschool/re
 import {InvoicesTableComponent} from './table/invoices.table.component';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 import {InvoicesService} from '../../../../../core/services/fishschool/invoices.service';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -76,6 +77,7 @@ const routes: Routes = [
 		ToastrModule.forRoot(),
 		TranslateModule.forChild(),
 		RouterModule.forChild(routes),
+		NgSelectModule,
 	],
 	exports: [
 		RouterModule,

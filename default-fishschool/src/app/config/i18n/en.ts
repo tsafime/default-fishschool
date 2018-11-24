@@ -153,7 +153,7 @@ export const locale = {
 			FILTERS: {
 				STATUS: {
 					SALE: 'Sale',
-					SHIPPMENT: 'Shippment'
+					SHIPMENT: 'Shipment'
 				},
 				START_DATE: 'Start date',
 				PANEL: {

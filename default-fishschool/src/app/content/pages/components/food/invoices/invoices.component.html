@@ -30,7 +30,7 @@
 						<mat-datepicker #picker [startAt]="model.startDate"></mat-datepicker>
 					</mat-form-field>
 
-					<!-- Activity type: SALE, SHIPPMENT -->
+					<!-- Activity type: SALE, SHIPMENT -->
 					<span class="col-sm-1"></span>
 					<div class="mat-form-field">
 						<mat-button-toggle-group name="status" class="form-group" [(ngModel)]="model.action" #status="ngModel">
@@ -38,9 +38,9 @@
 									[class.btn-primary]="model.action === '' || model.action === 'SALE'">
 								{{'INVOICES.FILTERS.STATUS.SALE' | translate}}
 							</button>
-							<button class="btn" value="SHIPPMENT" (click)="model.action = 'SHIPPMENT'"
-									[class.btn-primary]="model.action === 'SHIPPMENT'">
-								{{'INVOICES.FILTERS.STATUS.SHIPPMENT' | translate}}
+							<button class="btn" value="SHIPMENT" (click)="model.action = 'SHIPMENT'"
+									[class.btn-primary]="model.action === 'SHIPMENT'">
+								{{'INVOICES.FILTERS.STATUS.SHIPMENT' | translate}}
 							</button>
 						</mat-button-toggle-group>
 					</div>

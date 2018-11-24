@@ -13,9 +13,26 @@
 					[ngStyle]="sort.active == 'name' ? {background: 'rgba(0, 0, 0, 0.54)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[0] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isFoodStorageReadWrite('UPDATE', 'name'); else display">
-						<input matInput type="text" [value]="row.name" [(ngModel)]="row.name" required>
-					</mat-form-field>
+					<!--<mat-form-field floatLabel="never" *ngIf="isFoodInvoiceReadWrite('UPDATE', 'name'); else display">-->
+						<!--<input matInput type="text" [value]="row.name" [(ngModel)]="row.name" required>-->
+						<div style="width: 300px" class="mat-form-field" *ngIf="isFoodInvoiceReadWrite('UPDATE', 'name'); else display">
+							<!-- https://github.com/ng-select/ng-select -->
+							<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
+							<ng-select matInput class="custom"
+									   [items]="foods"
+									   bindLabel="name"
+									   notFoundText="{{'FOOD.FILTERS.FOOD_NAME_NOT_FOUND' | translate}}"
+									   [required]="true"
+									   #food="ngModel"
+									   name="name"
+									   [multiple]="false"
+									   maxSelectedItems="1"
+									   [virtualScroll]="true"
+									   [(ngModel)]="row.name">
+							</ng-select>
+						</div>
+						<ng-template #display>{{row.name}}</ng-template>
+					<!--</mat-form-field>-->
 					<ng-template #display>{{row.name}}</ng-template>
 				</td>
 			</ng-container>
@@ -26,7 +43,7 @@
 					[ngStyle]="sort.active == 'quantity' ? {background: 'rgba(0, 0, 0, 0.54)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[1] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isFoodStorageReadWrite('UPDATE', 'quantity'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isFoodInvoiceReadWrite('UPDATE', 'quantity'); else display">
 						<input matInput type="number" [value]="row.quantity" [(ngModel)]="row.quantity" required
 							   step=".01" min="0" class="input-number-format">
 						<label class="label-number-format">{{row.quantity | number}}</label>
@@ -35,26 +52,13 @@
 				</td>
 			</ng-container>
 
-			<!-- actionType Column -->
-			<!--<ng-container matColumnDef="actionType">
-				<td mat-header-cell *matHeaderCellDef mat-sort-header
-					[ngStyle]="sort.active == 'actionType' ? {background: 'rgba(0, 0, 0, 0.54)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
-					{{ headers[2] }}</td>
-				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isFoodStorageReadWrite('UPDATE', 'actionType'); else display">
-						<input matInput type="text" [value]="row.actionType" [(ngModel)]="row.actionType" required>
-					</mat-form-field>
-					<ng-template #display>{{row.actionType}}</ng-template>
-				</td>
-			</ng-container>-->
-
 			<!-- receipt Column -->
 			<ng-container matColumnDef="receipt">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="sort.active == 'receipt' ? {background: 'rgba(0, 0, 0, 0.54)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[3] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isFoodStorageReadWrite('UPDATE', 'receipt'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isFoodInvoiceReadWrite('UPDATE', 'receipt'); else display">
 						<input matInput type="text" [value]="row.receipt" [(ngModel)]="row.receipt" required>
 					</mat-form-field>
 					<ng-template #display>{{row.receipt}}</ng-template>
