@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
@@ -21,6 +21,9 @@ export class InvoicesComponent extends ToastSupport implements OnInit {
 	startLoadingInvoices: boolean = false;
 	isInvoiceLoading = false;
 
+	// This is required since Datatable not visible immediatly until focus id set
+	@ViewChild('days') daysInput: ElementRef;
+
 	constructor(private foodService: FoodService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
 				private reloadService: ReloadTableDataService) {
@@ -35,6 +38,7 @@ export class InvoicesComponent extends ToastSupport implements OnInit {
 		this.startLoadingInvoices = true;
 		this.isInvoiceLoading = true;
 		this.reloadService.reload(true);
+		setTimeout(() => this.daysInput.nativeElement.focus(), 1000);
 	}
 
 	onDataReady($event) {

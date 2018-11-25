@@ -35,6 +35,7 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 	foods: FoodModel[];
 	foodNames: string[] = [];
 	isInvoiceTableLoading = true;
+	havingIvoiceRecords = false;
 
 	constructor(private service: InvoicesService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
@@ -76,6 +77,7 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 
 				if (response.data.length === 0) {
 					this.dataReady.emit(false);
+					this.havingIvoiceRecords = false;
 					this.dataSource = new ResponsiveDataTable<InvoiceModel>([], this.dataReady);
 					this.showInfo({message: this.translate.instant('VALIDATION.NO_RECORDS'), type: 'info'});
 				} else {
@@ -201,5 +203,6 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 		};
 
 		this.dataSource.sort = this.sort;
+		this.havingIvoiceRecords = true;
 	}
 }

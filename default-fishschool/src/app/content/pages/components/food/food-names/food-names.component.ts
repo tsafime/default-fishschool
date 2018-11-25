@@ -10,6 +10,7 @@ import {ToastrManager} from 'ng6-toastr-notifications';
 import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
 import {FoodModel} from '../../../../../core/models/food/food.model';
 import {FoodsModel} from '../../../../../core/models/food/foods.model';
+import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school.model';
 
 @Component({
 	selector: 'm-food-names',
@@ -97,6 +98,19 @@ export class FoodNamesComponent extends ToastSupport implements OnInit {
 		} else {
 			this.showInfo({message: this.translate.instant('VALIDATION.NO_CHANGES'), type: 'info'});
 		}
+	}
+
+	validate(): boolean {
+		if (this.dataSource && this.dataSource.data) {
+			const dirty: FoodModel[] = this.dataSource.data.filter((item, index) => {
+				const deepEqual1 = deepEqual(item, this.originalData[index]);
+				return !deepEqual1;
+			});
+
+			return dirty.length === 0;
+		}
+
+		return false;
 	}
 
 	addNew() {

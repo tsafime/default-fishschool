@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material';
 import {FishSchoolsService} from '../../../../core/services/fishschool/fish-schools.service';
 import * as moment from 'moment';
@@ -28,6 +28,9 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 	startLoadFishSchools: boolean = false;
 	isFishSchoolLoadingStarted = false;
 
+	// This is required since Datatable not visible immediatly until focus id set
+	@ViewChild('days') daysInput: ElementRef;
+
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
 				public toastr: ToastrManager, private reloadService: ReloadTableDataService) {
@@ -52,6 +55,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 		this.isFishSchoolLoadingStarted = true;
 		this.startLoadFishSchools = true;
 		this.reloadService.reload(true);
+		setTimeout(() => this.daysInput.nativeElement.focus(), 1000);
 	}
 
 	onDataReady($event) {

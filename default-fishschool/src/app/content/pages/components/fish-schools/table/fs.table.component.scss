@@ -25,6 +25,16 @@ input.input-number-format:focus + label.label-number-format {
 	display: none;
 }
 
+::ng-deep {
+	.mat-cell {
+		vertical-align: middle !important;
+	}
+
+	.mat-header-cell {
+		vertical-align: middle !important;
+	}
+}
+
 /*::ng-deep {
 	.mat-progress-spinner circle, .mat-spinner circle {
 		stroke: #3fb53f;

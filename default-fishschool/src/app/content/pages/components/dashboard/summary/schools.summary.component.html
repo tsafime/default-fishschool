@@ -7,7 +7,7 @@
 			<mat-form-field>
 				<mat-label>{{'DASHBOARD.SUMMARY_DATE' | translate}}</mat-label>
 				<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="summaryDate"
-					   #startDate="ngModel" minlength="10" required [max]="maxDate" (dateChange)="view()">
+					   #startDate minlength="10" required [max]="maxDate" (dateChange)="view()">
 				<mat-datepicker-toggle matSuffix [for]="picker">
 					<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
 				</mat-datepicker-toggle>

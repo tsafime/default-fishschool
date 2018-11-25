@@ -10,7 +10,7 @@
 			<!-- name Column -->
 			<ng-container matColumnDef="name">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
-					[ngStyle]="sort.active == 'name' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
+					[ngStyle]="sort.active == 'name' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ headers[0] }}</th>
 				<td mat-cell *matCellDef="let row; let n = row">
 					<mat-form-field floatLabel="never" *ngIf="n === undefined && isFoodReadWrite('UPDATE', 'name'); else display">
@@ -23,7 +23,7 @@
 			<!-- quantity Column -->
 			<ng-container matColumnDef="quantity">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
-					[ngStyle]="sort.active == 'quantity' ? {background: 'rgba(0, 0, 0, 0.74)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
+					[ngStyle]="sort.active == 'quantity' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ headers[1] }}</th>
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never" *ngIf="isFoodReadWrite('UPDATE', 'quantity'); else display">
@@ -38,7 +38,7 @@
 			<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 		</table>
-		<span><button class="btn btn-primary" (click)="update()">{{ 'ACTIONS.UPDATE' | translate }}</button></span>
+		<span><button class="btn btn-primary" (click)="update()" [disabled]="validate()">{{ 'ACTIONS.UPDATE' | translate }}</button></span>
 		<span>&nbsp;</span>
 		<span><button class="btn btn-primary" (click)="addNew()">{{ 'ACTIONS.ADD' | translate }}</button></span>
 	</div>

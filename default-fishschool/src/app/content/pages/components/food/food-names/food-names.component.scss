@@ -32,3 +32,13 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
 td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell {
 	padding-left: 3px;
 }
+
+::ng-deep {
+	.mat-cell {
+		vertical-align: middle !important;
+	}
+
+	.mat-header-cell {
+		vertical-align: middle !important;
+	}
+}

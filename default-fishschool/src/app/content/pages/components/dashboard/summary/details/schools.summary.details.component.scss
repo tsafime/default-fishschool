@@ -1,2 +1,11 @@
 @charset "UTF-8";
 
+::ng-deep {
+	.mat-cell {
+		vertical-align: middle !important;
+	}
+
+	.mat-header-cell {
+		vertical-align: middle !important;
+	}
+}

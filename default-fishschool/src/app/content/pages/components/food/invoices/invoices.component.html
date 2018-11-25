@@ -12,7 +12,7 @@
 					<mat-form-field>
 						<mat-label>{{'INVOICES.FILTERS.START_DATE' | translate}}</mat-label>
 						<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="model.startDate"
-							   #startDate="ngModel" minlength="10" required [max]="maxDate">
+							   #startDate minlength="10" required [max]="maxDate">
 						<div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)"
 							 class="text-danger">
 							<div *ngIf="startDate.errors.required">
@@ -50,7 +50,7 @@
 					<mat-form-field>
 						<mat-label>{{'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate}}</mat-label>
 						<input matInput type="text" name="days" placeholder="{{ 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate }}" autocomplete="off"
-							   [(ngModel)]="model.days" #days="ngModel" minlength="1" required>
+							   [(ngModel)]="model.days" #days minlength="1" required>
 						<div *ngIf="days.invalid && (days.dirty || days.touched)" class="text-danger">
 							<div *ngIf="days.errors.required">
 								{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate } }}

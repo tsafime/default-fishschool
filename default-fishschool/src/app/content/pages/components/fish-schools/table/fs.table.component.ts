@@ -45,6 +45,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 	@Output() dataReady = new EventEmitter<boolean>();
 	foods: FoodModel[];
 	isFishSchoolTableLoading = true;
+	havingFishSchoolRecords = false;
 
     constructor(private service: FishSchoolsService, private foodService: FoodService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
@@ -87,6 +88,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 
 				if (response.data.length === 0) {
 					this.dataReady.emit(false);
+					this.havingFishSchoolRecords = false;
 					this.dataSource = new ResponsiveDataTable<FishSchoolModel>([], this.dataReady);
 					this.showInfo({message: this.translate.instant('VALIDATION.NO_RECORDS'), type: 'info'});
 				} else {
@@ -204,5 +206,6 @@ export class TableComponent extends ToastSupport implements OnInit {
 		};
 
 		this.dataSource.sort = this.sort;
+		this.havingFishSchoolRecords = true;
 	}
 }

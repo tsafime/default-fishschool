@@ -24,3 +24,13 @@ input.input-number-format {
 input.input-number-format:focus + label.label-number-format {
 	display: none;
 }
+
+::ng-deep {
+	.mat-cell {
+		vertical-align: middle !important;
+	}
+
+	.mat-header-cell {
+		vertical-align: middle !important;
+	}
+}
