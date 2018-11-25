@@ -1,5 +1,8 @@
 <div class="m-section">
-	<div class="example-container mat-elevation-z8">
+	<mat-card *ngIf="isInvoiceTableLoading" style="display: flex; justify-content: center; align-items: center">
+		<mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+	</mat-card>
+	<div class="example-container mat-elevation-z8" [hidden]="isInvoiceTableLoading">
 		<mat-form-field>
 			<input matInput type="text" (keyup)="applyFilter($event.target.value)"
 				   placeholder="{{'ACTIONS.SEARCH' | translate}}">
@@ -87,7 +90,7 @@
 			<tr mat-row *matRowDef="let row; columns: getFoodColumns()" [ngStyle]="{display: 'none'}"></tr>
 		</table>
 		<span>
-			<button class="btn btn-primary" (click)="update()">{{ 'ACTIONS.UPDATE' | translate }}</button>
+			<button class="btn btn-primary" (click)="update()" [disabled]="validate() && ! isFishSchoolTableLoading">{{ 'ACTIONS.UPDATE' | translate }}</button>
 		</span>
 	</div>
 </div>

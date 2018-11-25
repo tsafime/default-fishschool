@@ -61,7 +61,7 @@
 						</div>
 					</mat-form-field>
 					<span class="col-sm-1"></span>
-					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="! f.form.valid">
+					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="isInvoiceLoading || ! f.form.valid">
 						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
 					</button>
 				</div>
@@ -70,4 +70,4 @@
 	</mat-accordion>
 </div>
 
-<m-invoices-table (dataReady)="onDataReady($event)" [model]="model" *ngIf="loadingStarted"></m-invoices-table>
+<m-invoices-table (dataReady)="onDataReady($event)" [model]="model" *ngIf="startLoadingInvoices"></m-invoices-table>

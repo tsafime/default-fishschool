@@ -9,11 +9,11 @@ export class ResponsiveDataTable<T> extends MatTableDataSource<T> {
 	}
 
 	connect(): BehaviorSubject<T[]> {
-		this.dataReady.emit(true);
 		return super.connect();
 	}
 
 	disconnect(): void {
+		this.dataReady.emit(true);
 		super.disconnect();
 	}
 }

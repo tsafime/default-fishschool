@@ -24,3 +24,9 @@ input.input-number-format {
 input.input-number-format:focus + label.label-number-format {
 	display: none;
 }
+
+/*::ng-deep {
+	.mat-progress-spinner circle, .mat-spinner circle {
+		stroke: #3fb53f;
+	}
+}*/

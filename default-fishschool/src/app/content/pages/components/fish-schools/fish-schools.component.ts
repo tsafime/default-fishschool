@@ -25,8 +25,8 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 	panelOpenState: boolean = true;
 	roles: string;
 	maxDate: Date = new Date();
-
-	loadingStarted: boolean = false;
+	startLoadFishSchools: boolean = false;
+	isFishSchoolLoadingStarted = false;
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
@@ -49,12 +49,14 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 	}
 
 	loadTableData() {
-		this.loadingStarted = true;
+		this.isFishSchoolLoadingStarted = true;
+		this.startLoadFishSchools = true;
 		this.reloadService.reload(true);
 	}
 
 	onDataReady($event) {
 		this.panelOpenState = ! $event;
+		this.isFishSchoolLoadingStarted = false;
 	}
 }
 

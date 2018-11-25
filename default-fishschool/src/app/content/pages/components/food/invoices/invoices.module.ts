@@ -2,12 +2,12 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {
 	DateAdapter,
-	MAT_DATE_FORMATS, MatButtonToggleModule, MatDatepickerModule,
+	MAT_DATE_FORMATS, MatButtonToggleModule, MatCardModule, MatDatepickerModule,
 	MatExpansionModule,
 	MatFormFieldModule,
 	MatIconModule,
 	MatIconRegistry, MatInputModule,
-	MatOptionModule, MatSelectModule, MatSlideToggleModule, MatSortModule, MatTableModule
+	MatOptionModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatSortModule, MatTableModule
 } from '@angular/material';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {NgbAlertConfig, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -78,6 +78,8 @@ const routes: Routes = [
 		TranslateModule.forChild(),
 		RouterModule.forChild(routes),
 		NgSelectModule,
+		MatCardModule,
+		MatProgressSpinnerModule,
 	],
 	exports: [
 		RouterModule,

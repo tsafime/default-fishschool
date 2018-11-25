@@ -34,6 +34,7 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 	@ViewChild(MatSort) sort: MatSort;
 	foods: FoodModel[];
 	foodNames: string[] = [];
+	isInvoiceTableLoading = true;
 
 	constructor(private service: InvoicesService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
@@ -68,11 +69,14 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 
 	async view() {
 
+		this.isInvoiceTableLoading = true;
 		await this.service.view(this.model).toPromise().then(response => {
 
 			if (response.status === 'Success') {
 
 				if (response.data.length === 0) {
+					this.dataReady.emit(false);
+					this.dataSource = new ResponsiveDataTable<InvoiceModel>([], this.dataReady);
 					this.showInfo({message: this.translate.instant('VALIDATION.NO_RECORDS'), type: 'info'});
 				} else {
 					this.loadData(response.data);
@@ -87,9 +91,12 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
+
+		this.isInvoiceTableLoading = false;
 	}
 
 	update() {
+
 		if (this.dataSource) {
 			const httpPost: Observable<InvoicesModel> = this.service.update(this.originalData, this.dataSource.data);
 
@@ -127,6 +134,19 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 		} else {
 			this.showWarning({message: this.translate.instant('INVOICES.UPDATE_WITHOUT_RECORDS'), type: 'warning'});
 		}
+	}
+
+	validate(): boolean {
+		if (! this.isInvoiceTableLoading && this.dataSource && this.dataSource.data) {
+			const dirty: InvoiceModel[] = this.dataSource.data.filter((item, index) => {
+				const deepEqual1 = deepEqual(item, this.originalData[index]);
+				return !deepEqual1;
+			});
+
+			return dirty.length === 0;
+		}
+
+		return false;
 	}
 
 	getFoodColumns() {

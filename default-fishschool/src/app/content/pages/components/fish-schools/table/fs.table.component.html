@@ -1,8 +1,11 @@
 <div class="m-section">
-	<div [hidden]="model.schoolName === ''">
+	<mat-card *ngIf="isFishSchoolTableLoading" style="display: flex; justify-content: center; align-items: center">
+		<mat-progress-spinner  mode="indeterminate"></mat-progress-spinner>
+	</mat-card>
+	<div [hidden]="model.schoolName === '' || isFishSchoolTableLoading">
 		<h5>{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}: {{ model.schoolName }}</h5>
 	</div>
-	<div class="example-container mat-elevation-z8">
+	<div class="example-container mat-elevation-z8" [hidden]="isFishSchoolTableLoading">
 		<mat-form-field>
 			<input matInput type="text" (keyup)="applyFilter($event.target.value)"
 				   placeholder="{{'ACTIONS.SEARCH' | translate}}">
@@ -192,7 +195,7 @@
 			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 		</table>
 		<span>
-			<button class="btn btn-primary" (click)="update()">{{ 'ACTIONS.UPDATE' | translate }}</button>
+			<button class="btn btn-primary" (click)="update()" [disabled]="validate() && ! isFishSchoolTableLoading">{{ 'ACTIONS.UPDATE' | translate }}</button>
 		</span>
 	</div>
 </div>

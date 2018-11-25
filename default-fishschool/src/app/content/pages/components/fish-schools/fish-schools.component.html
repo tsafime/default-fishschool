@@ -98,7 +98,7 @@
 					</mat-form-field>
 
 					<span class="col-sm-1"></span>
-					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="! f.form.valid || model.schoolName === undefined">
+					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="! isFishSchoolLoadingStarted && (! f.form.valid || model.schoolName === undefined)">
 						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
 					</button>
 				</div>
@@ -106,4 +106,4 @@
 		</mat-expansion-panel>
 	</mat-accordion>
 </div>
-<m-fs-table (dataReady)="onDataReady($event)" [model]="model" *ngIf="loadingStarted"></m-fs-table>
+<m-fs-table (dataReady)="onDataReady($event)" [model]="model" *ngIf="startLoadFishSchools"></m-fs-table>

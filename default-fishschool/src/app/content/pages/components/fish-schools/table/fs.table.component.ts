@@ -15,6 +15,7 @@ import {FoodService} from '../../../../../core/services/fishschool/food.service'
 import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
 import {ResponsiveDataTable} from '../../../../../core/models/fishschool/table/ResponsiveDataTable';
 import {FoodModel} from '../../../../../core/models/food/food.model';
+import {InvoiceModel} from '../../../../../core/models/food/invoices/invoiceModel';
 
 @Component({
 	selector: 'm-fs-table',
@@ -43,6 +44,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 
 	@Output() dataReady = new EventEmitter<boolean>();
 	foods: FoodModel[];
+	isFishSchoolTableLoading = true;
 
     constructor(private service: FishSchoolsService, private foodService: FoodService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
@@ -78,6 +80,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 
 	async view() {
 
+		this.isFishSchoolTableLoading = true;
 		await this.service.view(this.model).toPromise().then(response => {
 
 			if (response.status === 'Success') {
@@ -99,6 +102,8 @@ export class TableComponent extends ToastSupport implements OnInit {
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
+
+		this.isFishSchoolTableLoading = false;
 	}
 
 	update() {
@@ -142,9 +147,22 @@ export class TableComponent extends ToastSupport implements OnInit {
 		}
 	}
 
-	compareObjects(o1: any, o2: any): boolean {
-		return o1.name === o2.name && o1.id === o2.id;
+	validate(): boolean {
+		if (! this.isFishSchoolTableLoading && this.dataSource && this.dataSource.data) {
+			const dirty: FishSchoolModel[] = this.dataSource.data.filter((item, index) => {
+				const deepEqual1 = deepEqual(item, this.originalData[index]);
+				return !deepEqual1;
+			});
+
+			return dirty.length === 0;
+		}
+
+		return false;
 	}
+
+	/*compareObjects(o1: any, o2: any): boolean {
+		return o1.name === o2.name && o1.id === o2.id;
+	}*/
 
 	isFishSchoolReadWrite(action: string, prop: string): boolean {
 		return this.authorization.isFishSchoolReadWrite(action, prop);

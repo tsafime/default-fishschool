@@ -18,8 +18,8 @@ export class InvoicesComponent extends ToastSupport implements OnInit {
 	maxDate: Moment = moment();
 	model: InvoicesRequestModel = { startDate: moment(), action: 'SALE', days: 10 };
 	panelOpenState: boolean = true;
-
-	loadingStarted: boolean = false;
+	startLoadingInvoices: boolean = false;
+	isInvoiceLoading = false;
 
 	constructor(private foodService: FoodService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
@@ -32,12 +32,14 @@ export class InvoicesComponent extends ToastSupport implements OnInit {
 	}
 
 	loadTableData() {
-		this.loadingStarted = true;
+		this.startLoadingInvoices = true;
+		this.isInvoiceLoading = true;
 		this.reloadService.reload(true);
 	}
 
 	onDataReady($event) {
 		this.panelOpenState = ! $event;
+		this.isInvoiceLoading = false;
 	}
 }
 

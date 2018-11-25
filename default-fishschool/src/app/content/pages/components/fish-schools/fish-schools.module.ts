@@ -3,12 +3,12 @@ import {FishSchoolsComponent} from './fish-schools.component';
 import {RouterModule} from '@angular/router';
 import {
 	DateAdapter,
-	MAT_DATE_FORMATS, MatButtonToggleModule, MatDatepickerModule,
+	MAT_DATE_FORMATS, MatButtonToggleModule, MatCardModule, MatDatepickerModule,
 	MatExpansionModule,
 	MatFormFieldModule,
 	MatIconModule,
 	MatIconRegistry, MatInputModule,
-	MatOptionModule, MatSelectModule, MatSlideToggleModule, MatSortModule, MatTableModule
+	MatOptionModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatSortModule, MatTableModule
 } from '@angular/material';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {NgbAlertConfig, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -77,6 +77,8 @@ export const DD_MM_YYYY_Format = {
 		]),
 		NgSelectModule,
 		NgxMatSelectSearchModule,
+		MatCardModule,
+		MatProgressSpinnerModule,
 	],
 	exports: [
 		RouterModule,

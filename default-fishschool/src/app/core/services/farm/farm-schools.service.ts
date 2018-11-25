@@ -24,7 +24,7 @@ export class FarmService {
 		}
 
 		queryFilters.push(new QueryFilter('status', [model.status], '=', 'AND'));
-		queryFilters.push(new QueryFilter('feedDate', [model.feedDate.format('DD/MM/YYYY')], '=', 'NONE'));
+		queryFilters.push(new QueryFilter('feedDate', [model.feedDate.clone().format('DD/MM/YYYY')], '=', 'NONE'));
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, model.days, 0, ['feedDate'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
