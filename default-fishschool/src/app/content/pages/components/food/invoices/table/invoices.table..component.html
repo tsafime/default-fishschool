@@ -13,8 +13,6 @@
 					[ngStyle]="sort.active == 'name' ? {background: 'rgba(0, 0, 0, 0.54)', color: 'white'} : {background: 'white', color: 'rgba(0, 0, 0, 0.54)'}">
 					{{ headers[0] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<!--<mat-form-field floatLabel="never" *ngIf="isFoodInvoiceReadWrite('UPDATE', 'name'); else display">-->
-						<!--<input matInput type="text" [value]="row.name" [(ngModel)]="row.name" required>-->
 						<div style="width: 300px" class="mat-form-field" *ngIf="isFoodInvoiceReadWrite('UPDATE', 'name'); else display">
 							<!-- https://github.com/ng-select/ng-select -->
 							<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
@@ -23,8 +21,9 @@
 									   bindLabel="name"
 									   notFoundText="{{'FOOD.FILTERS.FOOD_NAME_NOT_FOUND' | translate}}"
 									   [required]="true"
-									   #food="ngModel"
+									   #name="ngModel"
 									   name="name"
+									   bindValue="name"
 									   [multiple]="false"
 									   maxSelectedItems="1"
 									   [virtualScroll]="true"
@@ -32,7 +31,6 @@
 							</ng-select>
 						</div>
 						<ng-template #display>{{row.name}}</ng-template>
-					<!--</mat-form-field>-->
 					<ng-template #display>{{row.name}}</ng-template>
 				</td>
 			</ng-container>

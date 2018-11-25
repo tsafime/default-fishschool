@@ -117,8 +117,10 @@ export class TableComponent extends ToastSupport implements OnInit {
 							// We might get less data since not all records in table were updated
 							if (data[index]) {
 								const deepEqual1 = deepEqual(item.id, data[index].id);
-								const i = this.dataSource.data.indexOf(item);
-								this.dataSource.data[i] = data[index];
+								if (! deepEqual1) {
+									const i = this.dataSource.data.indexOf(item);
+									this.dataSource.data[i] = data[index];
+								}
 							}
 						});
 

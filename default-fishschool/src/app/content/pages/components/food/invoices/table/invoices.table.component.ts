@@ -9,9 +9,12 @@ import {TranslateService} from '@ngx-translate/core';
 import {FishSchoolsAuthorizationService} from '../../../../../../core/services/fishschool/fish-schools.authorization.service';
 import {ToastSupport} from '../../../../../../core/models/fishschool/toast.support';
 import {InvoicesService} from '../../../../../../core/services/fishschool/invoices.service';
-import * as moment from 'moment';
 import {FoodService} from '../../../../../../core/services/fishschool/food.service';
 import {FoodModel} from '../../../../../../core/models/food/food.model';
+import {Observable} from 'rxjs';
+import * as moment from 'moment';
+import * as deepEqual from 'deep-equal';
+import {InvoicesModel} from '../../../../../../core/models/food/invoices/invoicesModel';
 
 @Component({
 	selector: 'm-invoices-table',
@@ -56,7 +59,7 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 			return response;
 		});
 
-		this.reloadService.change.subscribe(data => {
+		this.reloadService.change.subscribe(() => {
 			this.view();
 		});
 
@@ -75,7 +78,7 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 					this.loadData(response.data);
 				}
 			} else {
-				this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FOOS_INVOICES_FAILURE'), type: 'danger'});
+				this.showError({message: this.translate.instant('VALIDATION.LOAD_FOOD_INVOICES_FAILURE'), type: 'danger'});
 			}
 		}).catch(response => {
 			if (response !== 'undefined' && response.status === 'Failure') {
@@ -87,9 +90,8 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 	}
 
 	update() {
-		console.log('Update() called... - ' + JSON.stringify(this.dataSource.data));
-		/*if (this.dataSource) {
-			const httpPost: Observable<FishSchools> = this.service.update(this.originalData, this.dataSource.data);
+		if (this.dataSource) {
+			const httpPost: Observable<InvoicesModel> = this.service.update(this.originalData, this.dataSource.data);
 
 			if (httpPost !== null) {
 				httpPost.toPromise().then(response => {
@@ -102,13 +104,15 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 							// We might get less data since not all records in table were updated
 							if (data[index]) {
 								const deepEqual1 = deepEqual(item.id, data[index].id);
-								const i = this.dataSource.data.indexOf(item);
-								this.dataSource.data[i] = data[index];
+								if (! deepEqual1) {
+									const i = this.dataSource.data.indexOf(item);
+									this.dataSource.data[i] = data[index];
+								}
 							}
 						});
 
 						this.loadData(this.dataSource.data);
-						this.showSuccess({message: this.translate.instant('FISH_SCHOOL.RESULTS.FISH_SCHOOL_UPDATE_SUCCESS'), type: 'success'});
+						this.showSuccess({message: this.translate.instant('INVOICES.RESULTS.INVOICE_UPDATE_SUCCESS'), type: 'success'});
 					}
 				}).catch(response => {
 					if (response.error !== 'undefined' && response.error.status === 'Failure') {
@@ -121,16 +125,12 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 				this.showInfo({message: this.translate.instant('VALIDATION.NO_CHANGES'), type: 'info'});
 			}
 		} else {
-			this.showWarning({message: this.translate.instant('FISH_SCHOOL.UPDATE_WITHOUT_RECORDS'), type: 'warning'});
-		}*/
+			this.showWarning({message: this.translate.instant('INVOICES.UPDATE_WITHOUT_RECORDS'), type: 'warning'});
+		}
 	}
 
 	getFoodColumns() {
 		return this.foodNames;
-	}
-
-	compareObjects(o1: any, o2: any): boolean {
-		return o1.name === o2.name && o1.id === o2.id;
 	}
 
 	isFoodInvoiceReadWrite(action: string, prop: string): boolean {
@@ -155,7 +155,7 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 				if (invoice.name === food.name) {
 					invoice[food.name] = invoice.quantity;
 				} else {
-					invoice[food.name] = undefined;
+					invoice[food.name] = '';
 				}
 			}
 		}

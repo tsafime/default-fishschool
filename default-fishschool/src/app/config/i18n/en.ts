@@ -83,7 +83,7 @@ export const locale = {
 		VALIDATION: {
 			LOAD_FS_FAILURE: 'Unable to load Fish School records, please try again later',
 			LOAD_FOOD_FAILURE: 'Unable to load Food records, please try again later',
-			LOAD_FOOS_INVOICES_FAILURE: 'Unable to load invoices records, please try again later',
+			LOAD_FOOD_INVOICES_FAILURE: 'Unable to load invoices records, please try again later',
 			REQUIRED_FIELD: '{{name}} is required',
 			MIN_LENGTH_FIELD: '{{name}} minimum length is {{min}}',
 			NO_RECORDS: 'No records to display',
@@ -150,6 +150,7 @@ export const locale = {
 			},
 		},
 		INVOICES: {
+			UPDATE_WITHOUT_RECORDS: 'Your Fish school data not yet visible, update cannot be done',
 			FILTERS: {
 				STATUS: {
 					SALE: 'Sale',
@@ -168,6 +169,9 @@ export const locale = {
 				ACTION_TYPE: 'Action Type',
 				RECEIPT: 'Receipt #',
 				FOOD_DATE: 'Food Date',
+			},
+			RESULTS: {
+				INVOICE_UPDATE_SUCCESS: 'Invoices updated successfully',
 			},
 		},
 		ACTIONS: {
