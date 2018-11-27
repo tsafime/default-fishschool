@@ -3,19 +3,19 @@ import {HttpClient} from '@angular/common/http';
 import {QueryFilter} from '../../models/fishschool/query.filter';
 import {FilteredQuery} from '../../models/fishschool/filtered.query';
 import {FsUrlsService} from './fs.urls';
-import {InvoicesRequestModel} from '../../../content/pages/components/food/invoices/invoices.component';
+import {DeliveryNotesRequestModel} from '../../../content/pages/components/food/delivery-notes/delivery-notes.component';
 import {Observable} from 'rxjs';
 import * as deepEqual from 'deep-equal';
-import {InvoicesModel} from '../../models/food/invoices/invoicesModel';
-import {InvoiceModel} from '../../models/food/invoices/invoiceModel';
+import {DeliveriesNotesModel} from '../../models/food/delivery-notes/deliveriesNotesModel';
+import {DeliveryNotesModel} from '../../models/food/delivery-notes/deliveryNotesModel';
 
 @Injectable()
-export class InvoicesService {
+export class DeliveryNotesService {
 
 	constructor(private http: HttpClient, public urlsService: FsUrlsService) {
 	}
 
-	view(model: InvoicesRequestModel) {
+	view(model: DeliveryNotesRequestModel) {
 
 		const queryFilters: QueryFilter[] = [];
 		queryFilters.push(new QueryFilter('status', ['ACTIVE'], '=', 'AND'));
@@ -25,18 +25,18 @@ export class InvoicesService {
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 400, 0, ['name'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
-		return this.http.post<InvoicesModel>(this.urlsService.invoicesViewUrl, json);
+		return this.http.post<DeliveriesNotesModel>(this.urlsService.invoicesViewUrl, json);
 	}
 
-	update(originalData: InvoiceModel[], editedData: InvoiceModel[]): Observable<InvoicesModel> {
+	update(originalData: DeliveryNotesModel[], editedData: DeliveryNotesModel[]): Observable<DeliveriesNotesModel> {
 
-		const dirty: InvoiceModel[] = editedData.filter((item, index) => {
+		const dirty: DeliveryNotesModel[] = editedData.filter((item, index) => {
 			const deepEqual1 = deepEqual(item, originalData[index]);
 			return ! deepEqual1;
 		});
 
 		if (dirty.length > 0) {
-			return this.http.post<InvoicesModel>(this.urlsService.invoicesUpdateUrl, {entities: dirty});
+			return this.http.post<DeliveriesNotesModel>(this.urlsService.invoicesUpdateUrl, {entities: dirty});
 		}
 
 		return null;

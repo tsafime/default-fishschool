@@ -60,7 +60,7 @@
 			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 		</table>
 		<span>
-			<button class="btn btn-primary" (click)="update()">{{ 'ACTIONS.UPDATE' | translate }}</button>
+			<button class="btn btn-primary" (click)="update()" [disabled]="validate()">{{ 'ACTIONS.UPDATE' | translate }}</button>
 		</span>
 	</div>
 </div>

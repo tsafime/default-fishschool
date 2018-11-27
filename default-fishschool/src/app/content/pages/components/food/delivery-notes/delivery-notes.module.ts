@@ -21,13 +21,13 @@ import {PartialsModule} from '../../../../partials/partials.module';
 import {MaterialPreviewModule} from '../../../../partials/content/general/material-preview/material-preivew.module';
 import {InterceptService} from '../../../../../core/services/intercept.service';
 import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
-import {InvoicesComponent} from './invoices.component';
+import {DeliveryNotesComponent} from './delivery-notes.component';
 import {FoodService} from '../../../../../core/services/fishschool/food.service';
 import {ToastrModule} from 'ng6-toastr-notifications';
 import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
-import {InvoicesTableComponent} from './table/invoices.table.component';
+import {DeliveryNotesTableComponent} from './table/delivery-notes.table.component';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
-import {InvoicesService} from '../../../../../core/services/fishschool/invoices.service';
+import {DeliveryNotesService} from '../../../../../core/services/fishschool/delivery-notes.service';
 import {NgSelectModule} from '@ng-select/ng-select';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -49,7 +49,7 @@ export const DD_MM_YYYY_Format = {
 const routes: Routes = [
 	{
 		path: '',
-		component: InvoicesComponent,
+		component: DeliveryNotesComponent,
 	},
 ];
 
@@ -99,13 +99,13 @@ const routes: Routes = [
 		FoodService,
 		ReloadTableDataService,
 		FsUrlsService,
-		InvoicesService,
+		DeliveryNotesService,
 	],
 	declarations: [
-		InvoicesComponent,
-		InvoicesTableComponent,
+		DeliveryNotesComponent,
+		DeliveryNotesTableComponent,
 	]
 })
 
-export class InvoicesModule {
+export class DeliveryNotesModule {
 }

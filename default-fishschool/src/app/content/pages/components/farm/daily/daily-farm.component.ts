@@ -113,6 +113,19 @@ export class DailyFarmComponent extends ToastSupport implements OnInit {
 		}
 	}
 
+	validate(): boolean {
+		if (this.dataSource && this.dataSource.data) {
+			const dirty: FishSchoolModel[] = this.dataSource.data.filter((item, index) => {
+				const deepEqual1 = deepEqual(item, this.originalData[index]);
+				return !deepEqual1;
+			});
+
+			return dirty.length === 0;
+		}
+
+		return false;
+	}
+
 	applyFilter(filterValue: string) {
 		if (this.dataSource) {
 			this.dataSource.filter = filterValue.trim().toLowerCase();

@@ -15,7 +15,6 @@ import {FoodService} from '../../../../../core/services/fishschool/food.service'
 import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
 import {ResponsiveDataTable} from '../../../../../core/models/fishschool/table/ResponsiveDataTable';
 import {FoodModel} from '../../../../../core/models/food/food.model';
-import {InvoiceModel} from '../../../../../core/models/food/invoices/invoiceModel';
 
 @Component({
 	selector: 'm-fs-table',

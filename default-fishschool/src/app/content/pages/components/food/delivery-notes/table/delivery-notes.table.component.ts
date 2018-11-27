@@ -1,52 +1,52 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {InvoicesRequestModel} from '../invoices.component';
+import {DeliveryNotesRequestModel} from '../delivery-notes.component';
 import {ReloadTableDataService} from '../../../../../../core/services/fishschool/reload-table-data.service';
 import {ResponsiveDataTable} from '../../../../../../core/models/fishschool/table/ResponsiveDataTable';
-import {InvoiceModel} from '../../../../../../core/models/food/invoices/invoiceModel';
+import {DeliveryNotesModel} from '../../../../../../core/models/food/delivery-notes/deliveryNotesModel';
 import {MatSort} from '@angular/material';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {TranslateService} from '@ngx-translate/core';
 import {FishSchoolsAuthorizationService} from '../../../../../../core/services/fishschool/fish-schools.authorization.service';
 import {ToastSupport} from '../../../../../../core/models/fishschool/toast.support';
-import {InvoicesService} from '../../../../../../core/services/fishschool/invoices.service';
+import {DeliveryNotesService} from '../../../../../../core/services/fishschool/delivery-notes.service';
 import {FoodService} from '../../../../../../core/services/fishschool/food.service';
 import {FoodModel} from '../../../../../../core/models/food/food.model';
 import {Observable} from 'rxjs';
 import * as moment from 'moment';
 import * as deepEqual from 'deep-equal';
-import {InvoicesModel} from '../../../../../../core/models/food/invoices/invoicesModel';
+import {DeliveriesNotesModel} from '../../../../../../core/models/food/delivery-notes/deliveriesNotesModel';
 
 @Component({
-	selector: 'm-invoices-table',
-	templateUrl: './invoices.table..component.html',
-	styleUrls: ['./invoices.table.component.scss']
+	selector: 'm-delivery-notes-table',
+	templateUrl: './delivery-notes.table..component.html',
+	styleUrls: ['./delivery-notes.table.component.scss']
 })
-export class InvoicesTableComponent extends ToastSupport implements OnInit {
+export class DeliveryNotesTableComponent extends ToastSupport implements OnInit {
 
 	@Output() dataReady = new EventEmitter<boolean>();
-	@Input() public model: InvoicesRequestModel;
+	@Input() public model: DeliveryNotesRequestModel;
 
-	displayedColumns: string[] = ['name', 'quantity', 'receipt', 'foodDate'];
+	displayedColumns: string[] = ['actionsColumn', 'name', 'quantity', 'receipt', 'foodDate'];
 
 	headers: string[];
-	dataSource: ResponsiveDataTable<InvoiceModel>;
-	originalData: InvoiceModel[] = [];
+	dataSource: ResponsiveDataTable<DeliveryNotesModel>;
+	originalData: DeliveryNotesModel[] = [];
 	@ViewChild(MatSort) sort: MatSort;
 	foods: FoodModel[];
 	foodNames: string[] = [];
-	isInvoiceTableLoading = true;
-	havingIvoiceRecords = false;
+	isDeliveryNotesTableLoading = true;
+	havingDeliveryNotesRecords = false;
 
-	constructor(private service: InvoicesService, private translate: TranslateService,
+	constructor(private service: DeliveryNotesService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
 				private reloadService: ReloadTableDataService, private foodService: FoodService) {
 		super(toastr);
 
-		this.headers = [this.translate.instant('INVOICES.TABLE.NAME'),
-			this.translate.instant('INVOICES.TABLE.QUANTITY'),
-			this.translate.instant('INVOICES.TABLE.ACTION_TYPE'),
-			this.translate.instant('INVOICES.TABLE.RECEIPT'),
-			this.translate.instant('INVOICES.TABLE.FOOD_DATE')];
+		this.headers = [this.translate.instant('DELIVERY_NOTES.TABLE.NAME'),
+			this.translate.instant('DELIVERY_NOTES.TABLE.QUANTITY'),
+			this.translate.instant('DELIVERY_NOTES.TABLE.ACTION_TYPE'),
+			this.translate.instant('DELIVERY_NOTES.TABLE.RECEIPT'),
+			this.translate.instant('DELIVERY_NOTES.TABLE.FOOD_DATE')];
 	}
 
 	async ngOnInit() {
@@ -70,21 +70,21 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 
 	async view() {
 
-		this.isInvoiceTableLoading = true;
+		this.isDeliveryNotesTableLoading = true;
 		await this.service.view(this.model).toPromise().then(response => {
 
 			if (response.status === 'Success') {
 
 				if (response.data.length === 0) {
 					this.dataReady.emit(false);
-					this.havingIvoiceRecords = false;
-					this.dataSource = new ResponsiveDataTable<InvoiceModel>([], this.dataReady);
+					this.havingDeliveryNotesRecords = false;
+					this.dataSource = new ResponsiveDataTable<DeliveryNotesModel>([], this.dataReady);
 					this.showInfo({message: this.translate.instant('VALIDATION.NO_RECORDS'), type: 'info'});
 				} else {
 					this.loadData(response.data);
 				}
 			} else {
-				this.showError({message: this.translate.instant('VALIDATION.LOAD_FOOD_INVOICES_FAILURE'), type: 'danger'});
+				this.showError({message: this.translate.instant('VALIDATION.LOAD_FOOD_DELIVERY_NOTES_FAILURE'), type: 'danger'});
 			}
 		}).catch(response => {
 			if (response !== 'undefined' && response.status === 'Failure') {
@@ -94,13 +94,13 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 			}
 		});
 
-		this.isInvoiceTableLoading = false;
+		this.isDeliveryNotesTableLoading = false;
 	}
 
 	update() {
 
 		if (this.dataSource) {
-			const httpPost: Observable<InvoicesModel> = this.service.update(this.originalData, this.dataSource.data);
+			const httpPost: Observable<DeliveriesNotesModel> = this.service.update(this.originalData, this.dataSource.data);
 
 			if (httpPost !== null) {
 				httpPost.toPromise().then(response => {
@@ -121,7 +121,7 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 						});
 
 						this.loadData(this.dataSource.data);
-						this.showSuccess({message: this.translate.instant('INVOICES.RESULTS.INVOICE_UPDATE_SUCCESS'), type: 'success'});
+						this.showSuccess({message: this.translate.instant('DELIVERY_NOTES.RESULTS.DELIVERY_NOTES_UPDATE_SUCCESS'), type: 'success'});
 					}
 				}).catch(response => {
 					if (response.error !== 'undefined' && response.error.status === 'Failure') {
@@ -134,13 +134,31 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 				this.showInfo({message: this.translate.instant('VALIDATION.NO_CHANGES'), type: 'info'});
 			}
 		} else {
-			this.showWarning({message: this.translate.instant('INVOICES.UPDATE_WITHOUT_RECORDS'), type: 'warning'});
+			this.showWarning({message: this.translate.instant('DELIVERY_NOTES.UPDATE_WITHOUT_RECORDS'), type: 'warning'});
+		}
+	}
+
+	createNew() {
+		const deliveryNotesModel: DeliveryNotesModel = { id: undefined, name: undefined, quantity: undefined, actionType: this.model.action,
+		receipt: undefined, foodDate: undefined, status: undefined, companyId: undefined, creationDate: undefined, updatedDate: undefined };
+		this.enrichSingleJson(deliveryNotesModel);
+		this.dataSource.data.push(deliveryNotesModel);
+
+		this.loadData(this.dataSource.data);
+	}
+
+	delete(row: DeliveryNotesModel) {
+
+		const index = this.dataSource.data.indexOf(row, 0);
+		if (index > -1) {
+			this.dataSource.data.splice(index, 1);
+			this.loadData(this.dataSource.data);
 		}
 	}
 
 	validate(): boolean {
-		if (! this.isInvoiceTableLoading && this.dataSource && this.dataSource.data) {
-			const dirty: InvoiceModel[] = this.dataSource.data.filter((item, index) => {
+		if (! this.isDeliveryNotesTableLoading && this.dataSource && this.dataSource.data) {
+			const dirty: DeliveryNotesModel[] = this.dataSource.data.filter((item, index) => {
 				const deepEqual1 = deepEqual(item, this.originalData[index]);
 				return !deepEqual1;
 			});
@@ -155,7 +173,7 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 		return this.foodNames;
 	}
 
-	isFoodInvoiceReadWrite(action: string, prop: string): boolean {
+	isFoodDeliveryNotesReadWrite(action: string, prop: string): boolean {
 		return this.authorization.isFishSchoolReadWrite(action, prop);
 	}
 
@@ -169,21 +187,28 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 		return item;
 	}
 
-	private loadData(data: InvoiceModel[]) {
+	private encrichJsons(data: DeliveryNotesModel[]) {
+		for (const deliveryNotes of data) {
+			this.enrichSingleJson(deliveryNotes);
+		}
+	}
 
-		// Enrich JSON
-		for (const invoice of data) {
-			for (const food of this.foods) {
-				if (invoice.name === food.name) {
-					invoice[food.name] = invoice.quantity;
-				} else {
-					invoice[food.name] = '';
-				}
+	private enrichSingleJson(deliveryNotes) {
+		for (const food of this.foods) {
+			if (deliveryNotes.name === food.name) {
+				deliveryNotes[food.name] = deliveryNotes.quantity;
+			} else {
+				deliveryNotes[food.name] = '';
 			}
 		}
+	}
+
+	private loadData(data: DeliveryNotesModel[]) {
+
+		this.encrichJsons(data);
 
 		this.originalData = JSON.parse(JSON.stringify(data));
-		this.dataSource = new ResponsiveDataTable<InvoiceModel>(data, this.dataReady);
+		this.dataSource = new ResponsiveDataTable<DeliveryNotesModel>(data, this.dataReady);
 
 		this.dataSource.sortingDataAccessor = (item, property) => {
 			for (const food of this.foods) {
@@ -203,6 +228,6 @@ export class InvoicesTableComponent extends ToastSupport implements OnInit {
 		};
 
 		this.dataSource.sort = this.sort;
-		this.havingIvoiceRecords = true;
+		this.havingDeliveryNotesRecords = true;
 	}
 }

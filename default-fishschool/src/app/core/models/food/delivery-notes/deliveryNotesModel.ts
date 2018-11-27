@@ -1,6 +1,6 @@
 import {Moment} from 'moment';
 
-export interface InvoiceModel {
+export interface DeliveryNotesModel {
 	id: number;
 	companyId: number;
 	name: string;

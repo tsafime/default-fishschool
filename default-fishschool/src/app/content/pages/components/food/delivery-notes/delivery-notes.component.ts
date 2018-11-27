@@ -9,17 +9,17 @@ import {FoodService} from '../../../../../core/services/fishschool/food.service'
 import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
 
 @Component({
-	selector: 'm-invoices',
-	templateUrl: './invoices.component.html',
-	styleUrls: ['./invoices.component.scss']
+	selector: 'm-delivery-notes',
+	templateUrl: './delivery-notes.component.html',
+	styleUrls: ['./delivery-notes.component.scss']
 })
-export class InvoicesComponent extends ToastSupport implements OnInit {
+export class DeliveryNotesComponent extends ToastSupport implements OnInit {
 
 	maxDate: Moment = moment();
-	model: InvoicesRequestModel = { startDate: moment(), action: 'SALE', days: 10 };
+	model: DeliveryNotesRequestModel = { startDate: moment(), action: 'SALE', days: 10 };
 	panelOpenState: boolean = true;
-	startLoadingInvoices: boolean = false;
-	isInvoiceLoading = false;
+	startLoadingDeliveryNotes: boolean = false;
+	isDeliveryNotesLoading = false;
 
 	// This is required since Datatable not visible immediatly until focus id set
 	@ViewChild('days') daysInput: ElementRef;
@@ -35,19 +35,19 @@ export class InvoicesComponent extends ToastSupport implements OnInit {
 	}
 
 	loadTableData() {
-		this.startLoadingInvoices = true;
-		this.isInvoiceLoading = true;
+		this.startLoadingDeliveryNotes = true;
+		this.isDeliveryNotesLoading = true;
 		this.reloadService.reload(true);
 		setTimeout(() => this.daysInput.nativeElement.focus(), 1000);
 	}
 
 	onDataReady($event) {
 		this.panelOpenState = ! $event;
-		this.isInvoiceLoading = false;
+		this.isDeliveryNotesLoading = false;
 	}
 }
 
-export interface InvoicesRequestModel {
+export interface DeliveryNotesRequestModel {
 	startDate: Moment;
 	action: string;
 	days: number;
