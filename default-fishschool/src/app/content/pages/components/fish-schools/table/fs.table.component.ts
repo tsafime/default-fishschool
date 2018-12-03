@@ -150,6 +150,10 @@ export class TableComponent extends ToastSupport implements OnInit {
 
 	validate(): boolean {
 		if (! this.isFishSchoolTableLoading && this.dataSource && this.dataSource.data) {
+			if (this.dataSource.data.length === this.originalData.length) {
+				return false;
+			}
+
 			const dirty: FishSchoolModel[] = this.dataSource.data.filter((item, index) => {
 				const deepEqual1 = deepEqual(item, this.originalData[index]);
 				return !deepEqual1;

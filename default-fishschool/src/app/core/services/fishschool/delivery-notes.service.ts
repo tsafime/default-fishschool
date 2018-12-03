@@ -8,6 +8,9 @@ import {Observable} from 'rxjs';
 import * as deepEqual from 'deep-equal';
 import {DeliveriesNotesModel} from '../../models/food/delivery-notes/deliveriesNotesModel';
 import {DeliveryNotesModel} from '../../models/food/delivery-notes/deliveryNotesModel';
+import {FoodModel} from '../../models/food/food.model';
+import {FsResponse} from '../../models/fishschool/fs.response.model';
+import {RequestOptions} from '@angular/http';
 
 @Injectable()
 export class DeliveryNotesService {
@@ -28,17 +31,28 @@ export class DeliveryNotesService {
 		return this.http.post<DeliveriesNotesModel>(this.urlsService.invoicesViewUrl, json);
 	}
 
-	update(originalData: DeliveryNotesModel[], editedData: DeliveryNotesModel[]): Observable<DeliveriesNotesModel> {
+	update(originalData: DeliveryNotesModel[], editedData: DeliveryNotesModel[], foods: FoodModel[]): Observable<DeliveriesNotesModel> {
 
-		const dirty: DeliveryNotesModel[] = editedData.filter((item, index) => {
-			const deepEqual1 = deepEqual(item, originalData[index]);
-			return ! deepEqual1;
+		let biggestArray = originalData;
+		let smallestArray = editedData;
+		if (editedData.length > originalData.length) {
+			biggestArray = editedData;
+			smallestArray = originalData;
+		}
+
+		const dirtyDeliveryNotesModel: DeliveryNotesModel[] = biggestArray.filter((item, index) => {
+			const deepEqual1 = deepEqual(item, smallestArray[index]);
+			return !deepEqual1;
 		});
 
-		if (dirty.length > 0) {
-			return this.http.post<DeliveriesNotesModel>(this.urlsService.invoicesUpdateUrl, {entities: dirty});
+		if (dirtyDeliveryNotesModel.length > 0) {
+			return this.http.post<DeliveriesNotesModel>(this.urlsService.invoicesUpdateUrl, {entities: dirtyDeliveryNotesModel});
 		}
 
 		return null;
+	}
+
+	delete(data: DeliveryNotesModel): Observable<FsResponse> {
+		return this.http.request<DeliveriesNotesModel>('delete', this.urlsService.invoicesDeleteUrl, {body: {id: data.id}});
 	}
 }

@@ -172,6 +172,7 @@ export const locale = {
 			},
 			RESULTS: {
 				DELIVERY_NOTES_UPDATE_SUCCESS: 'Delivery Notes updated successfully',
+				DELIVERY_NOTES_DELETE_SUCCESS: 'Delivery Note deleted successfully',
 			},
 		},
 		ACTIONS: {

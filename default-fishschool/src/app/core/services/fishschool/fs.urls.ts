@@ -19,6 +19,8 @@ export class FsUrlsService {
 
 	public invoicesViewUrl = this.baseUrl + 'foodInvoice/view';
 	public invoicesUpdateUrl = this.baseUrl + 'foodInvoice/update';
+	public invoicesDeleteUrl = this.baseUrl + 'foodInvoice/delete';
+	public invoicesSlotsViewUrl = this.baseUrl + 'foodInvoiceSlot/view';
 
 	constructor() {
 	}

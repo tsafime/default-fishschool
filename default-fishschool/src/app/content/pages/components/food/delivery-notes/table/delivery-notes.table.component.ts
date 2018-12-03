@@ -15,6 +15,7 @@ import {Observable} from 'rxjs';
 import * as moment from 'moment';
 import * as deepEqual from 'deep-equal';
 import {DeliveriesNotesModel} from '../../../../../../core/models/food/delivery-notes/deliveriesNotesModel';
+import {FoodSlotModel} from '../../../../../../core/models/food/delivery-notes/foodSlotModel';
 
 @Component({
 	selector: 'm-delivery-notes-table',
@@ -26,36 +27,50 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	@Output() dataReady = new EventEmitter<boolean>();
 	@Input() public model: DeliveryNotesRequestModel;
 
-	displayedColumns: string[] = ['actionsColumn', 'name', 'quantity', 'receipt', 'foodDate'];
+	displayedColumns: string[] = ['actionsColumn', 'receipt', 'foodDate'];
 
 	headers: string[];
 	dataSource: ResponsiveDataTable<DeliveryNotesModel>;
 	originalData: DeliveryNotesModel[] = [];
 	@ViewChild(MatSort) sort: MatSort;
 	foods: FoodModel[];
+	foodSlots: FoodSlotModel[];
 	foodNames: string[] = [];
 	isDeliveryNotesTableLoading = true;
 	havingDeliveryNotesRecords = false;
+	foodIndex = 0;
 
 	constructor(private service: DeliveryNotesService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
 				private reloadService: ReloadTableDataService, private foodService: FoodService) {
 		super(toastr);
-
-		this.headers = [this.translate.instant('DELIVERY_NOTES.TABLE.NAME'),
-			this.translate.instant('DELIVERY_NOTES.TABLE.QUANTITY'),
-			this.translate.instant('DELIVERY_NOTES.TABLE.ACTION_TYPE'),
-			this.translate.instant('DELIVERY_NOTES.TABLE.RECEIPT'),
-			this.translate.instant('DELIVERY_NOTES.TABLE.FOOD_DATE')];
 	}
 
 	async ngOnInit() {
+
+		this.headers = [this.translate.instant('DELIVERY_NOTES.TABLE.RECEIPT'),
+			this.translate.instant('DELIVERY_NOTES.TABLE.FOOD_DATE')];
+
 		await this.foodService.names().toPromise().then(response => {
 			this.foods = response.data;
+			let i = 1;
 
 			for (const food of this.foods) {
-				this.displayedColumns.push(food.name);
+				this.displayedColumns.push('food' + i++);
 				this.foodNames.push(food.name);
+			}
+
+			return response;
+		});
+
+		await this.foodService.viewSlots().toPromise().then(response => {
+			this.foodSlots = response.data;
+
+			this.headers = [this.translate.instant('DELIVERY_NOTES.TABLE.RECEIPT'),
+				this.translate.instant('DELIVERY_NOTES.TABLE.FOOD_DATE')];
+
+			for (const slot of this.foodSlots) {
+				this.headers.push(slot.slot);
 			}
 
 			return response;
@@ -100,7 +115,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	update() {
 
 		if (this.dataSource) {
-			const httpPost: Observable<DeliveriesNotesModel> = this.service.update(this.originalData, this.dataSource.data);
+			const httpPost: Observable<DeliveriesNotesModel> = this.service.update(this.originalData, this.dataSource.data, this.foods);
 
 			if (httpPost !== null) {
 				httpPost.toPromise().then(response => {
@@ -111,9 +126,9 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 						this.dataSource.data.forEach((item, index) => {
 
 							// We might get less data since not all records in table were updated
-							if (data[index]) {
-								const deepEqual1 = deepEqual(item.id, data[index].id);
-								if (! deepEqual1) {
+							if (data[index] && item.id === data[index].id) {
+								const deepEqual1 = deepEqual(item, data[index]);
+								if (!deepEqual1) {
 									const i = this.dataSource.data.indexOf(item);
 									this.dataSource.data[i] = data[index];
 								}
@@ -121,7 +136,10 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 						});
 
 						this.loadData(this.dataSource.data);
-						this.showSuccess({message: this.translate.instant('DELIVERY_NOTES.RESULTS.DELIVERY_NOTES_UPDATE_SUCCESS'), type: 'success'});
+						this.showSuccess({
+							message: this.translate.instant('DELIVERY_NOTES.RESULTS.DELIVERY_NOTES_UPDATE_SUCCESS'),
+							type: 'success'
+						});
 					}
 				}).catch(response => {
 					if (response.error !== 'undefined' && response.error.status === 'Failure') {
@@ -138,13 +156,28 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 		}
 	}
 
-	createNew() {
-		const deliveryNotesModel: DeliveryNotesModel = { id: undefined, name: undefined, quantity: undefined, actionType: this.model.action,
-		receipt: undefined, foodDate: undefined, status: undefined, companyId: undefined, creationDate: undefined, updatedDate: undefined };
-		this.enrichSingleJson(deliveryNotesModel);
-		this.dataSource.data.push(deliveryNotesModel);
+	getFood() {
+		return this.foodSlots[this.foodIndex++].name;
+	}
 
-		this.loadData(this.dataSource.data);
+	resetIndex() {
+		this.foodIndex = 0;
+	}
+
+	createNew() {
+		const deliveryNotesModel: DeliveryNotesModel = {
+			id: undefined,
+			actionType: this.model.action,
+			receipt: undefined,
+			foodDate: this.originalData[0].foodDate,
+			status: undefined,
+			companyId: undefined,
+			creationDate: undefined,
+			updatedDate: undefined
+		};
+
+		this.dataSource.data.push(deliveryNotesModel);
+		this.dataSource = new ResponsiveDataTable<DeliveryNotesModel>(this.dataSource.data, this.dataReady);
 	}
 
 	delete(row: DeliveryNotesModel) {
@@ -152,12 +185,31 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 		const index = this.dataSource.data.indexOf(row, 0);
 		if (index > -1) {
 			this.dataSource.data.splice(index, 1);
-			this.loadData(this.dataSource.data);
+
+			this.service.delete(row).toPromise().then(response => {
+				if (response.status === 'Success') {
+					this.loadData(this.dataSource.data);
+					this.showSuccess({
+						message: this.translate.instant('DELIVERY_NOTES.RESULTS.DELIVERY_NOTES_DELETE_SUCCESS'),
+						type: 'success'
+					});
+				}
+			}).catch(response => {
+				if (response.error !== 'undefined' && response.error.status === 'Failure') {
+					this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
+				} else {
+					this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+				}
+			});
 		}
 	}
 
 	validate(): boolean {
-		if (! this.isDeliveryNotesTableLoading && this.dataSource && this.dataSource.data) {
+		if (!this.isDeliveryNotesTableLoading && this.dataSource && this.dataSource.data) {
+			if (this.dataSource.data.length !== this.originalData.length) {
+				return true;
+			}
+
 			const dirty: DeliveryNotesModel[] = this.dataSource.data.filter((item, index) => {
 				const deepEqual1 = deepEqual(item, this.originalData[index]);
 				return !deepEqual1;
@@ -167,10 +219,6 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 		}
 
 		return false;
-	}
-
-	getFoodColumns() {
-		return this.foodNames;
 	}
 
 	isFoodDeliveryNotesReadWrite(action: string, prop: string): boolean {
@@ -187,25 +235,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 		return item;
 	}
 
-	private encrichJsons(data: DeliveryNotesModel[]) {
-		for (const deliveryNotes of data) {
-			this.enrichSingleJson(deliveryNotes);
-		}
-	}
-
-	private enrichSingleJson(deliveryNotes) {
-		for (const food of this.foods) {
-			if (deliveryNotes.name === food.name) {
-				deliveryNotes[food.name] = deliveryNotes.quantity;
-			} else {
-				deliveryNotes[food.name] = '';
-			}
-		}
-	}
-
 	private loadData(data: DeliveryNotesModel[]) {
-
-		this.encrichJsons(data);
 
 		this.originalData = JSON.parse(JSON.stringify(data));
 		this.dataSource = new ResponsiveDataTable<DeliveryNotesModel>(data, this.dataReady);
@@ -217,9 +247,13 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 				}
 			}
 
+			for (const slot of this.foodSlots) {
+				if (slot.slot === property) {
+					return '\'' + item[property] + '\'';
+				}
+			}
+
 			switch (property) {
-				case 'name':
-					return '\'' + item.name + '\'';
 				case 'foodDate':
 					return moment(item.foodDate, 'DD/MM/YYYY');
 				default:

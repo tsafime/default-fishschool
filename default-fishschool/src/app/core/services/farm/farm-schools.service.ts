@@ -9,6 +9,7 @@ import {FsNames} from '../../models/fishschool/fish-school.names.model';
 import * as deepEqual from 'deep-equal';
 import {Observable} from 'rxjs';
 import {FsUrlsService} from '../fishschool/fs.urls';
+import {DeliveryNotesModel} from '../../models/food/delivery-notes/deliveryNotesModel';
 
 @Injectable()
 export class FarmService {
@@ -38,9 +39,16 @@ export class FarmService {
 
 	update(originalData: FishSchoolModel[], editedData: FishSchoolModel[]): Observable<FishSchools> {
 
-		const dirty: FishSchoolModel[] = editedData.filter((item, index) => {
-			const deepEqual1 = deepEqual(item, originalData[index]);
-			return ! deepEqual1;
+		let biggestArray = originalData;
+		let smallestArray = editedData;
+		if (editedData.length > originalData.length) {
+			biggestArray = editedData;
+			smallestArray = originalData;
+		}
+
+		const dirty: FishSchoolModel[] = biggestArray.filter((item, index) => {
+			const deepEqual1 = deepEqual(item, smallestArray[index]);
+			return !deepEqual1;
 		});
 
 		if (dirty.length > 0) {

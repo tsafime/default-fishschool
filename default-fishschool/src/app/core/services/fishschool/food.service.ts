@@ -7,6 +7,9 @@ import {FilteredQuery} from '../../models/fishschool/filtered.query';
 import {FoodsModel} from '../../models/food/foods.model';
 import {FoodModel} from '../../models/food/food.model';
 import {FsUrlsService} from './fs.urls';
+import {FoodSlotModel} from '../../models/food/delivery-notes/foodSlotModel';
+import {FoodSlotsModel} from '../../models/food/delivery-notes/foodSlotsModel';
+import {FishSchoolModel} from '../../models/fishschool/fish-school.model';
 
 @Injectable()
 export class FoodService {
@@ -28,11 +31,27 @@ export class FoodService {
 		return this.http.post<FoodsModel>(this.urlsService.foodViewUrl, json);
 	}
 
+	viewSlots(): Observable<FoodSlotsModel> {
+		const queryFilters: QueryFilter[] = [];
+		queryFilters.push(new QueryFilter('status', ['ACTIVE'], '=', 'NONE'));
+		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 400, 0, undefined, undefined);
+		const json = JSON.stringify(filteredQuery);
+
+		return this.http.post<FoodSlotsModel>(this.urlsService.invoicesSlotsViewUrl, json);
+	}
+
 	update(originalData: FoodModel[], editedData: FoodModel[]): Observable<FoodsModel> {
 
-		const dirty: FoodModel[] = editedData.filter((item, index) => {
-			const deepEqual1 = deepEqual(item, originalData[index]);
-			return ! deepEqual1;
+		let biggestArray = originalData;
+		let smallestArray = editedData;
+		if (editedData.length > originalData.length) {
+			biggestArray = editedData;
+			smallestArray = originalData;
+		}
+
+		const dirty: FoodModel[] = biggestArray.filter((item, index) => {
+			const deepEqual1 = deepEqual(item, smallestArray[index]);
+			return !deepEqual1;
 		});
 
 		if (dirty.length > 0) {
