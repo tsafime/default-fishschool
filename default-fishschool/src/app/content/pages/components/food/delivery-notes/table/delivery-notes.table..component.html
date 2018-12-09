@@ -7,8 +7,9 @@
 			<input matInput type="text" (keyup)="applyFilter($event.target.value)"
 				   placeholder="{{'ACTIONS.SEARCH' | translate}}">
 		</mat-form-field>
-		<table class="table table-bordered table-striped table-hover table-light table-responsive" mat-table matSort multiTemplateDataRows
-			   matSortActive="name" matSortDirection="asc" #table matSortDisableClear [dataSource]="dataSource">
+		<table class="table table-bordered table-striped table-hover table-light table-responsive" mat-table matSort
+			   multiTemplateDataRows  matSortActive="receipt" matSortDirection="asc" #table matSortDisableClear
+			   [dataSource]="dataSource">
 
 			<!-- actions column -->
 			<ng-container matColumnDef="actionsColumn">
@@ -21,6 +22,7 @@
 						<i class="fa flaticon-delete mat-icon mat-icon"></i>
 					</button>
 				</mat-cell>
+				<td mat-footer-cell *matFooterCellDef="let row"></td>
 			</ng-container>
 
 			<!-- receipt Column -->
@@ -34,6 +36,7 @@
 					</mat-form-field>
 					<ng-template #display>{{row.receipt}}</ng-template>
 				</td>
+				<td mat-footer-cell *matFooterCellDef="let row"></td>
 			</ng-container>
 
 			<!-- foodDate Column -->
@@ -41,15 +44,35 @@
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="sort.active == 'foodDate' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ headers[1] }}</th>
-				<td mat-cell *matCellDef="let row"
-					[style.background]="(model.startDate.format('DD/MM/YYYY') === row.foodDate)? 'lightblue' : ''"
-					class="date-width">
-					{{row.foodDate}}
+				<td mat-cell *matCellDef="let row; let i = index" class="date-width">
+
+					<mat-form-field floatLabel="never" *ngIf="isFoodDeliveryNotesReadWrite('UPDATE', 'foodDate'); else display">
+						<mat-label>{{'DELIVERY_NOTES.FILTERS.FOOD_DATE' | translate}}</mat-label>
+						<input matInput [matDatepicker]="i" name="foodDate" [(ngModel)]="row.momentFoodDate"
+							   #foodDate minlength="10" required [max]="maxDate">
+						<div *ngIf="foodDate.invalid && (foodDate.dirty || foodDate.touched)"
+							 class="text-danger">
+							<div *ngIf="foodDate.errors.required">
+								{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'DELIVERY_NOTES.FILTERS.FOOD_DATE' |
+								translate } }}
+							</div>
+							<div *ngIf="foodDate.errors.minlength">
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'DELIVERY_NOTES.FILTERS.FOOD_DATE'
+								| translate, min: 10 } }}
+							</div>
+						</div>
+						<mat-datepicker-toggle matSuffix [for]="i">
+							<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+						</mat-datepicker-toggle>
+						<mat-datepicker #i [startAt]="row.momentFoodDate"></mat-datepicker>
+					</mat-form-field>
+					<ng-template #display>{{row.momentFoodDate.format('DD/MM/YYYY')}}</ng-template>
 				</td>
+				<td mat-footer-cell *matFooterCellDef="let row"></td>
 			</ng-container>
 
 			<!-- food Column -->
-			<ng-container *ngFor="let food of displayedColumns.slice(3); trackBy: trackByIdentity" matColumnDef="{{food}}">
+			<ng-container *ngFor="let food of displayedColumns.slice(3)" matColumnDef="{{food}}">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="sort.active == food ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ getFood() }}</th>
@@ -61,14 +84,16 @@
 					</mat-form-field>
 					<ng-template #display>{{row[food] | number}}</ng-template>
 				</td>
+				<td mat-footer-cell *matFooterCellDef> {{getTotal() | number}} </td>
 			</ng-container>
 
 			<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-			<tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"></tr>
+			<tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+			<tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 		</table>
-		{{resetIndex()}}
+		{{resetIndex()}} {{resetTotalFoodIndex()}}
 		<span>
-			<button class="btn btn-primary" (click)="update()" [disabled]="! validate() || isDeliveryNotesTableLoading">{{ 'ACTIONS.UPDATE' | translate }}</button>
+			<button class="btn btn-primary" (click)="update()" [disabled]="validate() || isDeliveryNotesTableLoading">{{ 'ACTIONS.UPDATE' | translate }}</button>
 		</span>
 	</div>
 </div>

@@ -89,7 +89,7 @@ export class FoodNamesComponent extends ToastSupport implements OnInit {
 					this.showInfo({message: this.translate.instant('FOOD.RESULTS.FOOD_UPDATE_SUCCESS'), type: 'info'});
 				}
 			}).catch(response => {
-				if (response.error !== 'undefined' && response.error.status === 'Failure') {
+				if (response.error && response.error.status && response.error.status === 'Failure') {
 					this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 				} else {
 					this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});

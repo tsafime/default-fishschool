@@ -36,7 +36,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 export const DD_MM_YYYY_Format = {
 	parse: {
-		dateInput: 'DD-MM-YYYY',
+		dateInput: 'DD/MM/YYYY',
 	},
 	display: {
 		dateInput: 'DD/MM/YYYY',

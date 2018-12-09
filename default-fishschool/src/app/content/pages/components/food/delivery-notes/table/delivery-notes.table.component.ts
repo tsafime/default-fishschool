@@ -16,6 +16,7 @@ import * as moment from 'moment';
 import * as deepEqual from 'deep-equal';
 import {DeliveriesNotesModel} from '../../../../../../core/models/food/delivery-notes/deliveriesNotesModel';
 import {FoodSlotModel} from '../../../../../../core/models/food/delivery-notes/foodSlotModel';
+import {Moment} from 'moment';
 
 @Component({
 	selector: 'm-delivery-notes-table',
@@ -39,6 +40,8 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	isDeliveryNotesTableLoading = true;
 	havingDeliveryNotesRecords = false;
 	foodIndex = 0;
+	totalFoodIndex = 1;
+	maxDate: Date = new Date();
 
 	constructor(private service: DeliveryNotesService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
@@ -47,7 +50,6 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	}
 
 	async ngOnInit() {
-
 		this.headers = [this.translate.instant('DELIVERY_NOTES.TABLE.RECEIPT'),
 			this.translate.instant('DELIVERY_NOTES.TABLE.FOOD_DATE')];
 
@@ -112,6 +114,32 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 		this.isDeliveryNotesTableLoading = false;
 	}
 
+	getTotal() {
+		if (this.dataSource && this.dataSource.data) {
+			const reduce = this.dataSource.data.map(t => t['food' + this.totalFoodIndex]).reduce((acc, value) => {
+					const accNan = isNaN(acc);
+					const valueNan = isNaN(value);
+					if (accNan && !valueNan) {
+						return value;
+					}
+					if (!accNan && valueNan) {
+						return acc;
+					}
+					return acc + value;
+				},
+				0);
+
+			this.totalFoodIndex++;
+			return reduce;
+		}
+
+		return 0;
+	}
+
+	resetTotalFoodIndex() {
+		this.totalFoodIndex = 1;
+	}
+
 	update() {
 
 		if (this.dataSource) {
@@ -122,37 +150,55 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 					if (response.status === 'Success') {
 
 						// Response may contain partial data, merge it
-						const data = response.data;
+						const returnedData: DeliveryNotesModel[] = response.data;
 						this.dataSource.data.forEach((item, index) => {
 
 							// We might get less data since not all records in table were updated
-							if (data[index] && item.id === data[index].id) {
-								const deepEqual1 = deepEqual(item, data[index]);
-								if (!deepEqual1) {
-									const i = this.dataSource.data.indexOf(item);
-									this.dataSource.data[i] = data[index];
+							if (returnedData.length > index) {
+								if (returnedData[index] && item.id === returnedData[index].id) {
+
+									console.log('item.foodDate               : ' + item.foodDate);
+									console.log('returnedData[index].foodDate: ' + returnedData[index].foodDate);
+
+									if (returnedData[index].foodDate === item.foodDate) {
+										const deepEqual1 = deepEqual(item, returnedData[index]);
+										if (!deepEqual1) {
+											const i = this.dataSource.data.indexOf(item);
+											this.dataSource.data[i] = returnedData[index];
+										}
+									}
+								} else {
+
+									console.log('item.foodDate               : ' + item.foodDate);
+									console.log('returnedData[index].foodDate: ' + returnedData[index].foodDate);
+
+									const foodDate: Moment = moment(returnedData[index].foodDate, 'DD/MM/YYYY');
+
+									if (foodDate.isBefore(this.model.startDate)
+										|| foodDate.isAfter(this.model.startDate.clone().add(this.model.days, 'days'))) {
+
+										returnedData[index].momentFoodDate = moment(returnedData[index].foodDate, 'DD/MM/YYYY');
+										const idx = this.dataSource.data.findIndex(elem => elem.id === returnedData[index].id);
+
+										if (idx > -1) {
+											this.dataSource.data.splice(idx, 1);
+										}
+									}
 								}
 							}
 						});
 
 						this.loadData(this.dataSource.data);
-						this.showSuccess({
-							message: this.translate.instant('DELIVERY_NOTES.RESULTS.DELIVERY_NOTES_UPDATE_SUCCESS'),
-							type: 'success'
-						});
+						this.showSuccess({message: this.translate.instant('DELIVERY_NOTES.RESULTS.DELIVERY_NOTES_UPDATE_SUCCESS'), type: 'success'});
 					}
 				}).catch(response => {
-					if (response.error !== 'undefined' && response.error.status === 'Failure') {
+					if (response.error && response.error.status && response.error.status === 'Failure') {
 						this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 					} else {
 						this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 					}
 				});
-			} else {
-				this.showInfo({message: this.translate.instant('VALIDATION.NO_CHANGES'), type: 'info'});
 			}
-		} else {
-			this.showWarning({message: this.translate.instant('DELIVERY_NOTES.UPDATE_WITHOUT_RECORDS'), type: 'warning'});
 		}
 	}
 
@@ -165,16 +211,11 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	}
 
 	createNew() {
-		const deliveryNotesModel: DeliveryNotesModel = {
-			id: undefined,
-			actionType: this.model.action,
-			receipt: undefined,
-			foodDate: this.originalData[0].foodDate,
-			status: undefined,
-			companyId: undefined,
-			creationDate: undefined,
-			updatedDate: undefined
-		};
+		const deliveryNotesModel = new DeliveryNotesModel(undefined, undefined, undefined, undefined,
+			this.model.action, undefined, moment(this.dataSource.data[this.dataSource.data.length - 1].foodDate, 'DD/MM/YYYY').format('DD/MM/YYYY'),
+			undefined, undefined, undefined, undefined,
+			undefined, undefined, undefined, undefined, undefined, undefined, undefined,
+			undefined, undefined, undefined, undefined, undefined, undefined, undefined);
 
 		this.dataSource.data.push(deliveryNotesModel);
 		this.dataSource = new ResponsiveDataTable<DeliveryNotesModel>(this.dataSource.data, this.dataReady);
@@ -184,30 +225,59 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 
 		const index = this.dataSource.data.indexOf(row, 0);
 		if (index > -1) {
-			this.dataSource.data.splice(index, 1);
+			let foodDefined = false;
+			for (let i = 0; i < 16; i++) {
+				if (row['food' + i]) {
+					foodDefined = true;
+					break;
+				}
+			}
 
-			this.service.delete(row).toPromise().then(response => {
-				if (response.status === 'Success') {
-					this.loadData(this.dataSource.data);
-					this.showSuccess({
-						message: this.translate.instant('DELIVERY_NOTES.RESULTS.DELIVERY_NOTES_DELETE_SUCCESS'),
-						type: 'success'
+			if (row.receipt && row.foodDate && foodDefined) {
+
+				if (this.originalData.length < this.dataSource.data.length) {
+
+					// There are newly added rows, check if one of them is the deleted row
+					const newlyAdded: DeliveryNotesModel[] = this.dataSource.data.slice(this.originalData.length, this.dataSource.data.length);
+					const dirty: DeliveryNotesModel[] = newlyAdded.filter((item, idx) => {
+						const deepEqual1 = deepEqual(item, this.originalData[idx]);
+						return !deepEqual1;
+					});
+
+					if (dirty.length > 0) {
+						this.dataSource.data.splice(index, 1);
+						this.loadData(this.dataSource.data);
+						this.showSuccess({ message: this.translate.instant('DELIVERY_NOTES.RESULTS.DELIVERY_NOTES_DELETE_SUCCESS'), type: 'success'});
+					}
+				} else {
+					this.dataSource.data.splice(index, 1);
+					this.service.delete(row).toPromise().then(response => {
+						if (response.status === 'Success') {
+							this.loadData(this.dataSource.data);
+							this.showSuccess({
+								message: this.translate.instant('DELIVERY_NOTES.RESULTS.DELIVERY_NOTES_DELETE_SUCCESS'),
+								type: 'success'
+							});
+						}
+					}).catch(response => {
+						if (response.error && response.error.status && response.error.status === 'Failure') {
+							this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
+						} else {
+							this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+						}
 					});
 				}
-			}).catch(response => {
-				if (response.error !== 'undefined' && response.error.status === 'Failure') {
-					this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
-				} else {
-					this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
-				}
-			});
+			} else {
+				this.loadData(this.dataSource.data);
+				this.showSuccess({ message: this.translate.instant('DELIVERY_NOTES.RESULTS.DELIVERY_NOTES_DELETE_SUCCESS'), type: 'success'});
+			}
 		}
 	}
 
 	validate(): boolean {
 		if (!this.isDeliveryNotesTableLoading && this.dataSource && this.dataSource.data) {
 			if (this.dataSource.data.length !== this.originalData.length) {
-				return true;
+				return false;
 			}
 
 			const dirty: DeliveryNotesModel[] = this.dataSource.data.filter((item, index) => {
@@ -221,6 +291,11 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 		return false;
 	}
 
+	dateChanged(row, $event) {
+		row.foodDate = $event.value.format('DD/MM/YYYY');
+		row.momentFoodDate = $event.value;
+	}
+
 	isFoodDeliveryNotesReadWrite(action: string, prop: string): boolean {
 		return this.authorization.isFishSchoolReadWrite(action, prop);
 	}
@@ -231,13 +306,18 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 		}
 	}
 
-	trackByIdentity(index, item) {
-		return item;
-	}
-
 	private loadData(data: DeliveryNotesModel[]) {
 
+		for (const deliveryNotes of data) {
+		 	deliveryNotes.momentFoodDate = moment(deliveryNotes.foodDate, 'DD/MM/YYYY');
+		}
+
 		this.originalData = JSON.parse(JSON.stringify(data));
+		for (const originalNotes of this.originalData) {
+			originalNotes.momentFoodDate = moment(originalNotes.foodDate, 'DD/MM/YYYY');
+		}
+
+		this.dataReady.emit(true); // To take immediate affect
 		this.dataSource = new ResponsiveDataTable<DeliveryNotesModel>(data, this.dataReady);
 
 		this.dataSource.sortingDataAccessor = (item, property) => {
@@ -253,12 +333,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 				}
 			}
 
-			switch (property) {
-				case 'foodDate':
-					return moment(item.foodDate, 'DD/MM/YYYY');
-				default:
-					return item[property];
-			}
+			return item[property];
 		};
 
 		this.dataSource.sort = this.sort;

@@ -105,7 +105,7 @@ export const locale = {
 					INACTIVE: 'Inactive',
 					SOLD: 'Sold'
 				},
-				START_DATE: 'Start date',
+				FOOD_DATE: 'Start date',
 				NUM_OF_DAYS: '# of days',
 				PANEL: {
 					HEADER: 'Fish school filters',
@@ -150,13 +150,13 @@ export const locale = {
 			},
 		},
 		DELIVERY_NOTES: {
-			UPDATE_WITHOUT_RECORDS: 'Your Fish school data not yet visible, update cannot be done',
+			UPDATE_WITHOUT_RECORDS: 'Your Delivery note data not yet visible, update cannot be done',
 			FILTERS: {
 				STATUS: {
 					SALE: 'Sale',
 					SHIPMENT: 'Shipment'
 				},
-				START_DATE: 'Start date',
+				FOOD_DATE: 'Food date',
 				PANEL: {
 					HEADER: 'Delivery Notes Filters',
 					DESCRIPTION: 'Choose Delivery Notes'
@@ -174,6 +174,9 @@ export const locale = {
 				DELIVERY_NOTES_UPDATE_SUCCESS: 'Delivery Notes updated successfully',
 				DELIVERY_NOTES_DELETE_SUCCESS: 'Delivery Note deleted successfully',
 			},
+			VALIDATION: {
+				MANDATORY_DATA_MISSING: 'Please fill all mandatory information: Receipt, Food Date & at least 1 Food Type'
+			}
 		},
 		ACTIONS: {
 			SAVE: 'Save',

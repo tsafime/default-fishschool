@@ -10,18 +10,18 @@
 
 					<!-- Start date -->
 					<mat-form-field>
-						<mat-label>{{'DELIVERY_NOTES.FILTERS.START_DATE' | translate}}</mat-label>
+						<mat-label>{{'DELIVERY_NOTES.FILTERS.FOOD_DATE' | translate}}</mat-label>
 						<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="model.startDate"
 							   #startDate minlength="10" required [max]="maxDate">
 						<div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)"
 							 class="text-danger">
 							<div *ngIf="startDate.errors.required">
 								{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name:
-								'DELIVERY_NOTES.FILTERS.START_DATE' | translate } }}
+								'DELIVERY_NOTES.FILTERS.FOOD_DATE' | translate } }}
 							</div>
 							<div *ngIf="startDate.errors.minlength">
 								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name:
-								'DELIVERY_NOTES.FILTERS.START_DATE' | translate, min: 10 } }}
+								'DELIVERY_NOTES.FILTERS.FOOD_DATE' | translate, min: 10 } }}
 							</div>
 						</div>
 						<mat-datepicker-toggle matSuffix [for]="picker">

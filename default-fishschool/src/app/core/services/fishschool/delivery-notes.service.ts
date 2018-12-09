@@ -10,12 +10,18 @@ import {DeliveriesNotesModel} from '../../models/food/delivery-notes/deliveriesN
 import {DeliveryNotesModel} from '../../models/food/delivery-notes/deliveryNotesModel';
 import {FoodModel} from '../../models/food/food.model';
 import {FsResponse} from '../../models/fishschool/fs.response.model';
-import {RequestOptions} from '@angular/http';
+import {ToastSupport} from '../../models/fishschool/toast.support';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {TranslateService} from '@ngx-translate/core';
+import * as moment from 'moment';
 
 @Injectable()
-export class DeliveryNotesService {
+export class DeliveryNotesService extends ToastSupport {
 
-	constructor(private http: HttpClient, public urlsService: FsUrlsService) {
+	constructor(private http: HttpClient, private translate: TranslateService, public urlsService: FsUrlsService,
+				public toastr: ToastrManager) {
+
+		super(toastr);
 	}
 
 	view(model: DeliveryNotesRequestModel) {
@@ -31,24 +37,37 @@ export class DeliveryNotesService {
 		return this.http.post<DeliveriesNotesModel>(this.urlsService.invoicesViewUrl, json);
 	}
 
-	update(originalData: DeliveryNotesModel[], editedData: DeliveryNotesModel[], foods: FoodModel[]): Observable<DeliveriesNotesModel> {
+	update(originalData: DeliveryNotesModel[], editedData: DeliveryNotesModel[], foods: FoodModel[]): Observable<any> {
 
-		let biggestArray = originalData;
-		let smallestArray = editedData;
-		if (editedData.length > originalData.length) {
-			biggestArray = editedData;
-			smallestArray = originalData;
-		}
-
-		const dirtyDeliveryNotesModel: DeliveryNotesModel[] = biggestArray.filter((item, index) => {
-			const deepEqual1 = deepEqual(item, smallestArray[index]);
+		const dirtyDeliveryNotesModel: DeliveryNotesModel[] = editedData.filter((item, index) => {
+			const deepEqual1 = deepEqual(item, originalData[index]);
 			return !deepEqual1;
 		});
 
 		if (dirtyDeliveryNotesModel.length > 0) {
-			return this.http.post<DeliveriesNotesModel>(this.urlsService.invoicesUpdateUrl, {entities: dirtyDeliveryNotesModel});
+			let passedValidation = false;
+			for (const dirtyDeliveryNotes of dirtyDeliveryNotesModel) {
+				for (let i = 0; i < 16; i++) {
+					if (dirtyDeliveryNotes.receipt && dirtyDeliveryNotes.momentFoodDate && dirtyDeliveryNotes['food' + i]) {
+						passedValidation = true;
+						break;
+					}
+				}
+
+				if (passedValidation) {
+					break;
+				}
+			}
+
+			if (passedValidation) {
+				return this.http.post<DeliveriesNotesModel>(this.urlsService.invoicesUpdateUrl, {entities: dirtyDeliveryNotesModel});
+			}
+
+			this.showWarning({message: this.translate.instant('DELIVERY_NOTES.VALIDATION.MANDATORY_DATA_MISSING'), type: 'warning'});
+			return null;
 		}
 
+		this.showWarning({message: this.translate.instant('DELIVERY_NOTES.UPDATE_WITHOUT_RECORDS'), type: 'warning'});
 		return null;
 	}
 
