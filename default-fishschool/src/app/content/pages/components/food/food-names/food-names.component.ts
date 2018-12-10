@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
 import * as deepEqual from 'deep-equal';
@@ -10,7 +10,7 @@ import {ToastrManager} from 'ng6-toastr-notifications';
 import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
 import {FoodModel} from '../../../../../core/models/food/food.model';
 import {FoodsModel} from '../../../../../core/models/food/foods.model';
-import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school.model';
+import {ConfirmDeleteFoodDialogComponent} from './confirm-delete/confirm-delete.food.dialog.component';
 
 @Component({
 	selector: 'm-food-names',
@@ -19,7 +19,7 @@ import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school
 })
 export class FoodNamesComponent extends ToastSupport implements OnInit {
 
-	displayedColumns: string[] = ['name', 'quantity'];
+	displayedColumns: string[] = ['actionsColumn', 'name', 'quantity'];
 	headers: string[];
 	dataSource: MatTableDataSource<FoodModel>;
 	originalData: FoodModel[] = [];
@@ -27,7 +27,7 @@ export class FoodNamesComponent extends ToastSupport implements OnInit {
 
 	constructor(private foodService: FoodService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
-				public toastr: ToastrManager) {
+				public toastr: ToastrManager, public dialog: MatDialog) {
 
 		super(toastr);
 
@@ -67,36 +67,57 @@ export class FoodNamesComponent extends ToastSupport implements OnInit {
 
 	update() {
 
-		const httpPost: Observable<FoodsModel> = this.foodService.update(this.originalData, this.dataSource.data);
+		if (this.dataSource) {
+			const data: FoodModel[] = JSON.parse(JSON.stringify(this.dataSource.data));
+			data.forEach((item, index) => {
+				if (item.name === undefined || item.quantity === undefined) {
+					data.splice(index, 1);
 
-		if (httpPost !== null) {
-			httpPost.toPromise().then(response => {
-				if (response.status === 'Success') {
-
-					// Response may contain partial data, merge it
-					const data: FoodModel[] = response.data;
-
-					// Deep copy
-					this.originalData = JSON.parse(JSON.stringify(data));
-					data.forEach((item, index) => {
-						const deepEqual1 = deepEqual(item.id, data[index].id);
-						if (deepEqual1) {
-							const i = this.dataSource.data.indexOf(item);
-							this.dataSource[i] = data[index];
-						}
-					});
-
-					this.showInfo({message: this.translate.instant('FOOD.RESULTS.FOOD_UPDATE_SUCCESS'), type: 'info'});
-				}
-			}).catch(response => {
-				if (response.error && response.error.status && response.error.status === 'Failure') {
-					this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
-				} else {
-					this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+					let missingParts = (item.name === undefined) ? '\'' + this.translate.instant('FOOD.TABLE.NAME') + '\'' : '';
+					missingParts += (item.quantity === undefined) ? ', \'' + this.translate.instant('FOOD.TABLE.QUANTITY') + '\'' : '';
+					this.showWarning({
+						message: this.translate.instant('FOOD.VALIDATION.NEW_RECORD_INCOMPLETE', { missingParts: missingParts }),
+						type: 'warning'});
 				}
 			});
-		} else {
-			this.showInfo({message: this.translate.instant('VALIDATION.NO_CHANGES'), type: 'info'});
+
+			const httpPost: Observable<FoodsModel> = this.foodService.update(this.originalData, data);
+
+			if (httpPost !== null) {
+				httpPost.toPromise().then(response => {
+					if (response.status === 'Success') {
+
+						// Response may contain partial data, merge it
+						const returnedData: FoodModel[] = response.data;
+
+						this.dataSource.data.forEach((item, index) => {
+
+							// We might get less data since not all records in table were updated
+							returnedData.forEach((retItem, retIndex) => {
+								if (retItem && item.name === retItem.name) {
+									const deepEqual1 = deepEqual(item, retItem);
+									if (!deepEqual1) {
+										const i = this.dataSource.data.indexOf(retItem);
+										this.dataSource.data[i] = retItem;
+										returnedData.splice(retIndex);
+									}
+								}
+							});
+						});
+
+						this.loadData(this.dataSource.data);
+						this.showSuccess({message: this.translate.instant('FOOD.RESULTS.FOOD_UPDATE_SUCCESS'), type: 'success'});
+					}
+				}).catch(response => {
+					if (response.error && response.error.status && response.error.status === 'Failure') {
+						this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
+					} else {
+						this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+					}
+				});
+			} else {
+				this.showWarning({message: this.translate.instant('VALIDATION.NO_CHANGES'), type: 'warning'});
+			}
 		}
 	}
 
@@ -117,6 +138,60 @@ export class FoodNamesComponent extends ToastSupport implements OnInit {
 		this.dataSource.data.push({id: undefined, companyId: undefined, name: undefined, quantity: undefined,
 			status: 'ACTIVE', creationDate: undefined, updatedDate: undefined});
 		this.loadData(this.dataSource.data);
+	}
+
+	delete(row: FoodModel) {
+
+		const dialogRef = this.dialog.open(ConfirmDeleteFoodDialogComponent, {
+			height: '200px',
+			width: '500px',
+			data: { confirmed: false },
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			if (result === 'true') {
+				const index = this.dataSource.data.indexOf(row, 0);
+
+				if (index > -1) {
+					if (row.name && row.quantity) {
+
+						if (this.originalData.length < this.dataSource.data.length) {
+
+							// There are newly added rows, check if one of them is the deleted row
+							const newlyAdded: FoodModel[] = this.dataSource.data.slice(this.originalData.length, this.dataSource.data.length);
+							const dirty: FoodModel[] = newlyAdded.filter((item, idx) => {
+								const deepEqual1 = deepEqual(item, this.originalData[idx]);
+								return !deepEqual1;
+							});
+
+							if (dirty.length > 0) {
+								this.dataSource.data.splice(index, 1);
+								this.loadData(this.dataSource.data);
+								this.showSuccess({ message: this.translate.instant('FOOD.RESULTS.FOOD_DELETE_SUCCESS'), type: 'success'});
+							}
+						} else {
+							this.foodService.delete(row).toPromise().then(response => {
+								if (response.status === 'Success') {
+									this.dataSource.data.splice(index, 1);
+									this.loadData(this.dataSource.data);
+									this.showSuccess({ message: this.translate.instant('FOOD.RESULTS.FOOD_DELETE_SUCCESS'), type: 'success'});
+								}
+							}).catch(response => {
+								if (response.error && response.error.status && response.error.status === 'Failure') {
+									this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
+								} else {
+									this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+								}
+							});
+						}
+					} else {
+						this.dataSource.data.splice(index, 1);
+						this.loadData(this.dataSource.data);
+						this.showSuccess({message: this.translate.instant('FOOD.RESULTS.FOOD_DELETE_SUCCESS'), type: 'success'});
+					}
+				}
+			}
+		});
 	}
 
 	applyFilter(filterValue: string) {
@@ -150,4 +225,7 @@ export class FoodNamesComponent extends ToastSupport implements OnInit {
 	}
 }
 
+export interface ConfirmDeleteFoodDialogData {
+	confirmed: boolean;
+}
 

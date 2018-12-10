@@ -145,8 +145,17 @@ export const locale = {
 				START_TYPING_NAME: 'Start typing food type',
 				FOOD_NAME_NOT_FOUND: 'Food type not found',
 			},
+			DELETE: {
+				CONFIRM_HEADER: 'Confirm Food Deletion',
+				ARE_U_SURE: 'Are you sure you want to delete a food?',
+				CONFIRM_INFO: 'By choosing \'OK\' you will no longer be able to view it or restore it'
+			},
 			RESULTS: {
 				FOOD_UPDATE_SUCCESS: 'Food updated successfully',
+				FOOD_DELETE_SUCCESS: 'Food deleted successfully'
+			},
+			VALIDATION: {
+				NEW_RECORD_INCOMPLETE: 'New Food is incomplete please add missing information: {{missingParts}} '
 			},
 		},
 		DELIVERY_NOTES: {
@@ -170,6 +179,11 @@ export const locale = {
 				RECEIPT: 'Receipt #',
 				FOOD_DATE: 'Food Date',
 			},
+			DELETE: {
+				CONFIRM_HEADER: 'Confirm Delivery Notes Deletion',
+				ARE_U_SURE: 'Are you sure you want to delete a delivery notes?',
+				CONFIRM_INFO: 'By choosing \'OK\' you will no longer be able to view it or restore it'
+			},
 			RESULTS: {
 				DELIVERY_NOTES_UPDATE_SUCCESS: 'Delivery Notes updated successfully',
 				DELIVERY_NOTES_DELETE_SUCCESS: 'Delivery Note deleted successfully',
@@ -184,6 +198,8 @@ export const locale = {
 			ADD: 'Add new',
 			CLOSE: 'Close',
 			SEARCH: 'Search',
+			OK: 'OK',
+			CANCEL: 'Cancel',
 		},
 		ECOMMERCE: {
 			COMMON: {

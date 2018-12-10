@@ -29,7 +29,7 @@ import {DeliveryNotesTableComponent} from './table/delivery-notes.table.componen
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 import {DeliveryNotesService} from '../../../../../core/services/fishschool/delivery-notes.service';
 import {NgSelectModule} from '@ng-select/ng-select';
-import {ConfirmDeleteDialogComponent} from './table/confirm-delete/confirm-delete.dialog.component';
+import {ConfirmDeleteDeliveryNotesDialogComponent} from './table/confirm-delete/confirm-delete.delivery.notes.dialog.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -87,7 +87,7 @@ const routes: Routes = [
 	exports: [
 		RouterModule,
 	],
-	entryComponents: [ConfirmDeleteDialogComponent],
+	entryComponents: [ConfirmDeleteDeliveryNotesDialogComponent],
 	providers: [
 		InterceptService,
 		{provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true},
@@ -107,7 +107,7 @@ const routes: Routes = [
 	declarations: [
 		DeliveryNotesComponent,
 		DeliveryNotesTableComponent,
-		ConfirmDeleteDialogComponent,
+		ConfirmDeleteDeliveryNotesDialogComponent,
 	]
 })
 

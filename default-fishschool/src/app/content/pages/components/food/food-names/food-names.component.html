@@ -1,11 +1,25 @@
 <div class="m-section">
 	<div class="example-container mat-elevation-z8">
 		<mat-form-field>
-			<input matInput type="text" (keyup)="applyFilter($event.target.value)"
+			<input matInput type="text" #searchFood (keyup)="applyFilter($event.target.value)"
 				   placeholder="{{'ACTIONS.SEARCH' | translate}}">
 		</mat-form-field>
 		<table class="table table-bordered table-striped table-hover table-light table-responsive" mat-table matSort
-			   matSortActive="name" matSortDirection="asc" #table matSortDisableClear [dataSource]="dataSource">
+			   multiTemplateDataRows matSortActive="name" matSortDirection="asc" #table matSortDisableClear [dataSource]="dataSource">
+
+			<!-- actions column -->
+			<ng-container matColumnDef="actionsColumn">
+				<mat-header-cell *matHeaderCellDef>
+					<button mat-icon-button color="accent" (click)="addNew()"><i class="fs flaticon-add mat-icon"></i></button>
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row">
+
+					<button mat-icon-button color="primary" focusable="false" (click)="delete(row)">
+						<i class="fa flaticon-delete mat-icon mat-icon"></i>
+					</button>
+				</mat-cell>
+				<td mat-footer-cell *matFooterCellDef="let row"></td>
+			</ng-container>
 
 			<!-- name Column -->
 			<ng-container matColumnDef="name">
@@ -39,7 +53,5 @@
 			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 		</table>
 		<span><button class="btn btn-primary" (click)="update()" [disabled]="validate()">{{ 'ACTIONS.UPDATE' | translate }}</button></span>
-		<span>&nbsp;</span>
-		<span><button class="btn btn-primary" (click)="addNew()">{{ 'ACTIONS.ADD' | translate }}</button></span>
 	</div>
 </div>

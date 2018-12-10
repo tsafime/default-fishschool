@@ -7,9 +7,8 @@ import {FilteredQuery} from '../../models/fishschool/filtered.query';
 import {FoodsModel} from '../../models/food/foods.model';
 import {FoodModel} from '../../models/food/food.model';
 import {FsUrlsService} from './fs.urls';
-import {FoodSlotModel} from '../../models/food/delivery-notes/foodSlotModel';
 import {FoodSlotsModel} from '../../models/food/delivery-notes/foodSlotsModel';
-import {FishSchoolModel} from '../../models/fishschool/fish-school.model';
+import {FsResponse} from '../../models/fishschool/fs.response.model';
 
 @Injectable()
 export class FoodService {
@@ -42,15 +41,8 @@ export class FoodService {
 
 	update(originalData: FoodModel[], editedData: FoodModel[]): Observable<FoodsModel> {
 
-		let biggestArray = originalData;
-		let smallestArray = editedData;
-		if (editedData.length > originalData.length) {
-			biggestArray = editedData;
-			smallestArray = originalData;
-		}
-
-		const dirty: FoodModel[] = biggestArray.filter((item, index) => {
-			const deepEqual1 = deepEqual(item, smallestArray[index]);
+		const dirty: FoodModel[] = editedData.filter((item, index) => {
+			const deepEqual1 = deepEqual(item, originalData[index]);
 			return !deepEqual1;
 		});
 
@@ -59,5 +51,9 @@ export class FoodService {
 		}
 
 		return null;
+	}
+
+	delete(data: FoodModel): Observable<FsResponse> {
+		return this.http.request<FsResponse>('delete', this.urlsService.foodDeleteUrl, {body: {id: data.id}});
 	}
 }

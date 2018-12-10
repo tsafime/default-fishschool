@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DeliveryNotesRequestModel} from '../delivery-notes.component';
 import {ReloadTableDataService} from '../../../../../../core/services/fishschool/reload-table-data.service';
 import {ResponsiveDataTable} from '../../../../../../core/models/fishschool/table/ResponsiveDataTable';
@@ -17,7 +17,7 @@ import * as deepEqual from 'deep-equal';
 import {DeliveriesNotesModel} from '../../../../../../core/models/food/delivery-notes/deliveriesNotesModel';
 import {FoodSlotModel} from '../../../../../../core/models/food/delivery-notes/foodSlotModel';
 import {Moment} from 'moment';
-import {ConfirmDeleteDialogComponent} from './confirm-delete/confirm-delete.dialog.component';
+import {ConfirmDeleteDeliveryNotesDialogComponent} from './confirm-delete/confirm-delete.delivery.notes.dialog.component';
 
 @Component({
 	selector: 'm-delivery-notes-table',
@@ -43,6 +43,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	foodIndex = 0;
 	totalFoodIndex = 1;
 	maxDate: Date = new Date();
+	@ViewChild('days') daysInput: ElementRef;
 
 	constructor(private service: DeliveryNotesService, private translate: TranslateService, public dialog: MatDialog,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
@@ -152,31 +153,34 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 
 						// Response may contain partial data, merge it
 						const returnedData: DeliveryNotesModel[] = response.data;
+
 						this.dataSource.data.forEach((item, index) => {
 
 							// We might get less data since not all records in table were updated
-							if (returnedData.length > index) {
-								if (returnedData[index] && item.id === returnedData[index].id && returnedData[index].foodDate === item.foodDate) {
-									const deepEqual1 = deepEqual(item, returnedData[index]);
+							returnedData.forEach((retItem, retIndex) => {
+								if (retItem && item.receipt === retItem.receipt && retItem.foodDate === item.foodDate) {
+									const deepEqual1 = deepEqual(item, retItem);
 									if (!deepEqual1) {
-										const i = this.dataSource.data.indexOf(item);
-										this.dataSource.data[i] = returnedData[index];
+										const i = this.dataSource.data.indexOf(retItem);
+										this.dataSource.data[i] = retItem;
+										returnedData.splice(retIndex);
 									}
 								} else {
-									const foodDate: Moment = moment(returnedData[index].foodDate, 'DD/MM/YYYY');
+									const foodDate: Moment = moment(retItem.foodDate, 'DD/MM/YYYY');
 
 									if (foodDate.isBefore(this.model.startDate)
 										|| foodDate.isAfter(this.model.startDate.clone().add(this.model.days, 'days'))) {
 
-										returnedData[index].momentFoodDate = moment(returnedData[index].foodDate, 'DD/MM/YYYY');
-										const idx = this.dataSource.data.findIndex(elem => elem.id === returnedData[index].id);
+										retItem.momentFoodDate = moment(retItem.foodDate, 'DD/MM/YYYY');
+										const idx = this.dataSource.data.findIndex(elem => elem.id === retItem.id);
 
 										if (idx > -1) {
 											this.dataSource.data.splice(idx, 1);
+											returnedData.splice(retIndex);
 										}
 									}
 								}
-							}
+							});
 						});
 
 						this.loadData(this.dataSource.data);
@@ -210,12 +214,12 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 			undefined, undefined, undefined, undefined, undefined, undefined, undefined);
 
 		this.dataSource.data.push(deliveryNotesModel);
-		this.dataSource = new ResponsiveDataTable<DeliveryNotesModel>(this.dataSource.data, this.dataReady);
+		this.loadData(this.dataSource.data);
 	}
 
 	delete(row: DeliveryNotesModel) {
 
-		const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+		const dialogRef = this.dialog.open(ConfirmDeleteDeliveryNotesDialogComponent, {
 			height: '200px',
 			width: '500px',
 			data: { confirmed: false },
@@ -291,11 +295,6 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 		return false;
 	}
 
-	dateChanged(row, $event) {
-		row.foodDate = $event.value.format('DD/MM/YYYY');
-		row.momentFoodDate = $event.value;
-	}
-
 	isFoodDeliveryNotesReadWrite(action: string, prop: string): boolean {
 		return this.authorization.isFishSchoolReadWrite(action, prop);
 	}
@@ -338,9 +337,10 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 
 		this.dataSource.sort = this.sort;
 		this.havingDeliveryNotesRecords = true;
+		setTimeout(() => this.daysInput.nativeElement.focus(), 1000);
 	}
 }
 
-export interface ConfirmDeleteDialogData {
+export interface ConfirmDeleteDeliveryNotesDialogData {
 	confirmed: boolean;
 }

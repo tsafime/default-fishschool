@@ -13,7 +13,6 @@ import {FsResponse} from '../../models/fishschool/fs.response.model';
 import {ToastSupport} from '../../models/fishschool/toast.support';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {TranslateService} from '@ngx-translate/core';
-import * as moment from 'moment';
 
 @Injectable()
 export class DeliveryNotesService extends ToastSupport {

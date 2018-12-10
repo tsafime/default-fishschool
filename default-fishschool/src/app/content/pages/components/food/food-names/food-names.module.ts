@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {
 	DateAdapter,
-	MAT_DATE_FORMATS, MatButtonToggleModule, MatDatepickerModule,
+	MAT_DATE_FORMATS, MatButtonModule, MatButtonToggleModule, MatDatepickerModule, MatDialogModule,
 	MatExpansionModule,
 	MatFormFieldModule,
 	MatIconModule,
@@ -24,6 +24,7 @@ import {FishSchoolsAuthorizationService} from '../../../../../core/services/fish
 import {FoodService} from '../../../../../core/services/fishschool/food.service';
 import {ToastrModule} from 'ng6-toastr-notifications';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
+import {ConfirmDeleteFoodDialogComponent} from './confirm-delete/confirm-delete.food.dialog.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -72,11 +73,13 @@ const routes: Routes = [
 		ToastrModule.forRoot(),
 		TranslateModule.forChild(),
 		RouterModule.forChild(routes),
+		MatDialogModule,
+		MatButtonModule,
 	],
 	exports: [
 		RouterModule,
 	],
-	entryComponents: [],
+	entryComponents: [ConfirmDeleteFoodDialogComponent],
 	providers: [
 		InterceptService,
 		{provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true},
@@ -93,6 +96,7 @@ const routes: Routes = [
 	],
 	declarations: [
 		FoodNamesComponent,
+		ConfirmDeleteFoodDialogComponent,
 	]
 })
 
