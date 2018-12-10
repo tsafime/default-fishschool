@@ -45,7 +45,6 @@ import { DataTableService } from './core/services/datatable.service';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
 };
