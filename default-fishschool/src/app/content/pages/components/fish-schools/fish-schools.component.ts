@@ -29,7 +29,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 	isFishSchoolLoadingStarted = false;
 
 	// This is required since Datatable not visible immediatly until focus id set
-	@ViewChild('searchFood') searchFoodInput: ElementRef;
+	@ViewChild('days') daysInput: ElementRef;
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
@@ -55,7 +55,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 		this.isFishSchoolLoadingStarted = true;
 		this.startLoadFishSchools = true;
 		this.reloadService.reload(true);
-		setTimeout(() => this.searchFoodInput.nativeElement.focus(), 1000);
+		setTimeout(() => this.daysInput.nativeElement.focus(), 1000);
 	}
 
 	onDataReady($event) {
