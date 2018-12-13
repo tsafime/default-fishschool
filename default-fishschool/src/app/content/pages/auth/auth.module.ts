@@ -34,14 +34,13 @@ import {FsUrlsService} from '../../../core/services/fishschool/fs.urls';
 			}
 		])
 	],
-	providers: [],
+	providers: [FsUrlsService],
 	declarations: [
 		AuthComponent,
 		LoginComponent,
 		RegisterComponent,
 		ForgotPasswordComponent,
 		AuthNoticeComponent,
-		FsUrlsService
 	]
 })
 export class AuthModule {}

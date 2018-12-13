@@ -29,12 +29,7 @@
 					[ngStyle]="sort.active == 'age' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ headers[1] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isFishSchoolReadWrite('UPDATE', 'age'); else display">
-						<input matInput type="number" [value]="row.age" [(ngModel)]="row.age" required step=".01"
-							   min="0" class="input-number-format">
-						<label class="label-number-format">{{row.age | number}}</label>
-					</mat-form-field>
-					<ng-template #display>{{row.age | number}}</ng-template>
+					{{row.age | number}}
 				</td>
 			</ng-container>
 

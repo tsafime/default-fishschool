@@ -100,7 +100,7 @@ export class AuthenticationService implements AuthService {
 
 		const json = JSON.stringify(credential);
 
-		const response =  this.http.post<AccessData>(this.API_ENDPOINT_LOGIN, json,
+		const response =  this.http.post<AccessData>(this.API_URL + this.API_ENDPOINT_LOGIN, json,
 			{headers: {'Content-Type': 'application/json;charset=UTF-8'}}).pipe(
 			map((result: any) => {
 				if (result instanceof Array) {
