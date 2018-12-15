@@ -36,6 +36,8 @@ export class SchoolsSummaryComponent implements OnInit {
 		await this.viewSchoolsSummary().then(() => {
 			this.valueChange.emit(this.schoolsSum);
 		});
+
+		// TODO: Catch error and display
 	}
 
 	async viewSchoolsSummary(): Promise<any> {

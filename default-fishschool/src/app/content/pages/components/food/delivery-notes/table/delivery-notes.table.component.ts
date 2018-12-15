@@ -43,7 +43,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	foodIndex = 0;
 	totalFoodIndex = 1;
 	maxDate: Date = new Date();
-	@ViewChild('days') daysInput: ElementRef;
+	@ViewChild('search') searchInput: ElementRef;
 
 	constructor(private service: DeliveryNotesService, private translate: TranslateService, public dialog: MatDialog,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
@@ -337,7 +337,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 
 		this.dataSource.sort = this.sort;
 		this.havingDeliveryNotesRecords = true;
-		setTimeout(() => this.daysInput.nativeElement.focus(), 1000);
+		setTimeout(() => this.searchInput.nativeElement.focus(), 1000);
 	}
 }
 
