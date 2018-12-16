@@ -42,8 +42,12 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 		await this.service.names().toPromise().then(response => {
 			this.fishSchoolNames = response.data;
 			return response;
-		}).catch(error => {
-			this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+		}).catch(response => {
+			if (response !== 'undefined' && response.error && response.error.status === 'Failure') {
+				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
+			} else {
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+			}
 		});
 
 		this.authService.getUserRoles().subscribe(role => {

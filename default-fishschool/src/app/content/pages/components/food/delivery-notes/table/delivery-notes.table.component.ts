@@ -65,6 +65,18 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 			}
 
 			return response;
+		}).catch(response => {
+			if (response !== 'undefined' && response.error && response.error.status === 'Failure') {
+				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
+			} else {
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+			}
+		}).catch(response => {
+			if (response !== 'undefined' && response.error && response.error.status === 'Failure') {
+				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
+			} else {
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+			}
 		});
 
 		await this.foodService.viewSlots().toPromise().then(response => {
@@ -78,6 +90,12 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 			}
 
 			return response;
+		}).catch(response => {
+			if (response !== 'undefined' && response.error && response.error.status === 'Failure') {
+				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
+			} else {
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+			}
 		});
 
 		this.reloadService.change.subscribe(() => {

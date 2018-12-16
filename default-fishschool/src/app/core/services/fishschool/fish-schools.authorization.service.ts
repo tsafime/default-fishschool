@@ -10,41 +10,32 @@ import * as deepEqual from 'deep-equal';
 import {Observable} from 'rxjs';
 import {TokenStorage} from '../../auth/token-storage.service';
 import {FsUrlsService} from './fs.urls';
+import {ToastSupport} from '../../models/fishschool/toast.support';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable()
-export class FishSchoolsAuthorizationService {
+export class FishSchoolsAuthorizationService extends ToastSupport {
 
 	authorizations: string;
 
-	constructor(private http: HttpClient, private tokenStorage: TokenStorage, private urlsService: FsUrlsService) {
+	constructor(private http: HttpClient, private tokenStorage: TokenStorage, private urlsService: FsUrlsService,
+				public toastr: ToastrManager, private translate: TranslateService) {
+
+		super(toastr);
+
 		this.http.post<string>(urlsService.authorizationsUrl, {}).toPromise()
 			.then(response => {
 				this.authorizations = response;
 			})
-			.catch(error => {
-				console.log('Failed: ' + error);
+			.catch(response => {
+				if (response !== 'undefined' && response.error && response.error.status === 'Failure') {
+					this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
+				} else {
+					this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+				}
 			});
 	}
-
-	/*
-	 isFishSchoolReadWrite('Company', 'SAVE', 'creationDate');
-	 JSON example:
-		{
-		  "ADMIN": {
-			"FishSchool": {
-			  "UPDATE": {
-				"companyId": "RO",
-				"foodWeight": "RO",
-				"percentageTsemach": "RO",
-				"deadLastUpdateDate": "RO",
-				"creationDate": "RO",
-				"updatedDate": "RO",
-				"totalGivenFood": "RO",
-				"status": "RO",
-				"totalSale": "RO"
-			  }
-		}
-	 */
 
 	isFishSchoolReadWrite(action: string, prop: string): boolean {
 		return this.isReadWrite('FishSchool', action, prop);

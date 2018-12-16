@@ -12,7 +12,7 @@ export class InterceptService implements HttpInterceptor {
 	constructor(private injector: Injector) {
 	}
 
-	// Intercept request and add token
+	// Intercept HTTP requests and add auth token, on error 401, 403 redirect to login page
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
 		request = request.clone({
@@ -33,7 +33,6 @@ export class InterceptService implements HttpInterceptor {
 
 	private handleAuthError(err: HttpErrorResponse): Observable<any> {
 
-		// Handle your auth error or rethrow
 		if (err.status === 401 || err.status === 403) {
 			this.injector.get(AuthenticationService).logout(true);
 			this.injector.get(ToastSupport).showError({message: err.error.code + ': ' + err.error.message, type: 'danger'});

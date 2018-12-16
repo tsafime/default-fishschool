@@ -9,7 +9,6 @@ import {Router} from '@angular/router';
 import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {TranslateService} from '@ngx-translate/core';
-import {AuthenticationService} from '../../../../../core/auth/authentication.service';
 
 @Component({
 	selector: 'm-schools-summary',
@@ -31,7 +30,7 @@ export class SchoolsSummaryComponent extends ToastSupport implements OnInit {
 	};
 
 	constructor(private summaryService: SchoolsSummaryService, public dialog: MatDialog, private router: Router,
-				public toastr: ToastrManager, private translate: TranslateService,  private authService: AuthenticationService) {
+				public toastr: ToastrManager, private translate: TranslateService) {
 		super(toastr);
 	}
 
@@ -49,8 +48,6 @@ export class SchoolsSummaryComponent extends ToastSupport implements OnInit {
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
-
-		// TODO: Catch error and display
 	}
 
 	async viewSchoolsSummary(): Promise<any> {
