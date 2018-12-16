@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				this.cdr.detectChanges();
 			},
 				response => {
-					if (response !== 'undefined' && response.status === 'Failure') {
+					if (response !== 'undefined' && response.error && response.error.status === 'Failure') {
 						this.authNoticeService.setNotice(response.message, 'error');
 					} else {
 						this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'error');

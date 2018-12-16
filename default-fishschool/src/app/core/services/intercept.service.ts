@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
-import {
-	HttpEvent,
-	HttpInterceptor,
-	HttpHandler,
-	HttpRequest,
-	HttpResponse
-} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import {Injectable, Injector} from '@angular/core';
+import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../auth/authentication.service';
+import {ToastSupport} from '../models/fishschool/toast.support';
 
 @Injectable()
 export class InterceptService implements HttpInterceptor {
+
+	constructor(private injector: Injector) {
+	}
 
 	// Intercept request and add token
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -22,21 +22,24 @@ export class InterceptService implements HttpInterceptor {
 			}
 		});
 
-		return next.handle(request).pipe();
+		return next.handle(request).pipe(
+			tap(event => {},
+				error => {
+					this.handleAuthError(error);
+				}
+			)
+		);
+	}
 
-		// Just for debug do NOT open it will prevent user see errors
-		// return next.handle(request).pipe(
-		// 	tap(event => {
-		// 			if (event instanceof HttpResponse) {
-		// 				console.log('Event status: ' + event.status);
-		// 			}
-		// 		},
-		// 		error => {
-		// 			// http response status code
-		// 			console.error('Error status: ' + error.status);
-		// 			console.error('Error message: ' + error.message);
-		// 		}
-		// 	)
-		// );
+	private handleAuthError(err: HttpErrorResponse): Observable<any> {
+
+		// Handle your auth error or rethrow
+		if (err.status === 401 || err.status === 403) {
+			this.injector.get(AuthenticationService).logout(true);
+			this.injector.get(ToastSupport).showError({message: err.error.code + ': ' + err.error.message, type: 'danger'});
+			this.injector.get(Router).navigateByUrl(`/login`);
+		}
+
+		return throwError(err);
 	}
 }
