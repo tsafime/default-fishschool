@@ -24,17 +24,16 @@ export class FishSchoolsAuthorizationService extends ToastSupport {
 
 		super(toastr);
 
-		this.http.post<string>(urlsService.authorizationsUrl, {}).toPromise()
-			.then(response => {
-				this.authorizations = response;
-			})
-			.catch(response => {
-				if (response !== 'undefined' && response.error && response.error.status === 'Failure') {
-					this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
-				} else {
-					this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
-				}
-			});
+		this.http.post<string>(urlsService.authorizationsUrl, {}).toPromise().then(response => {
+			this.authorizations = response;
+		})
+		.catch(response => {
+			if (response !== 'undefined' && response.error && response.error.status === 'Failure') {
+				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
+			} else {
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+			}
+		});
 	}
 
 	isFishSchoolReadWrite(action: string, prop: string): boolean {

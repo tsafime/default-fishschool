@@ -4,7 +4,6 @@ import {Observable, throwError} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../auth/authentication.service';
-import {ToastSupport} from '../models/fishschool/toast.support';
 
 @Injectable()
 export class InterceptService implements HttpInterceptor {
@@ -31,14 +30,14 @@ export class InterceptService implements HttpInterceptor {
 		);
 	}
 
-	private handleAuthError(err: HttpErrorResponse): Observable<any> {
+	private handleAuthError(response: HttpErrorResponse): Observable<any> {
 
-		if (err.status === 401 || err.status === 403) {
+		if (response.status === 401 || response.status === 403) {
 			this.injector.get(AuthenticationService).logout(true);
-			this.injector.get(ToastSupport).showError({message: err.error.code + ': ' + err.error.message, type: 'danger'});
+			// this.injector.get(ToastSupport).showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			this.injector.get(Router).navigateByUrl(`/login`);
 		}
 
-		return throwError(err);
+		return throwError(response);
 	}
 }

@@ -166,6 +166,8 @@ export class TableComponent extends ToastSupport implements OnInit {
 			});
 
 			return dirty.length === 0;
+		} else if (! this.isFishSchoolTableLoading) {
+			return true;
 		}
 
 		return false;
