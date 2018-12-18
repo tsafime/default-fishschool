@@ -33,6 +33,10 @@ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell 
 	padding-left: 3px;
 }
 
+.mat-row:hover {
+	background-color: #e6e6ff;
+}
+
 ::ng-deep {
 	.mat-cell {
 		vertical-align: middle !important;

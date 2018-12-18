@@ -25,6 +25,10 @@ input.input-number-format:focus + label.label-number-format {
 	display: none;
 }
 
+.mat-row:hover {
+	background-color: #e6e6ff;
+}
+
 ::ng-deep {
 	td.mat-cell {
 		vertical-align: middle !important;

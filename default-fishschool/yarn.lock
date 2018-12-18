@@ -4155,12 +4155,6 @@ ng2-completer@^2.0.8:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/ng2-completer/-/ng2-completer-2.0.8.tgz#36101eb5a796f966897e7894fc437effd88ebdfb"
 
-ng2-smart-table@^1.3.5:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/ng2-smart-table/-/ng2-smart-table-1.3.5.tgz#141b0b71f89273dfda414c4ded2d59390f8238ea"
-  dependencies:
-    lodash "^4.17.10"
-
 ng6-toastr-notifications@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/ng6-toastr-notifications/-/ng6-toastr-notifications-1.0.4.tgz#9a0cb96d915f8fa2f58dffdcfb124d8b0c86b5f6"
