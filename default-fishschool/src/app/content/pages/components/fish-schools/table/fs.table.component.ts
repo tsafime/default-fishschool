@@ -68,7 +68,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 			this.foods = response.data;
 			return response;
 		}).catch(response => {
-			if (response !== 'undefined' && response.error && response.error.status === 'Failure') {
+			if (response && response.error && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
@@ -103,7 +103,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 				this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FS_FAILURE'), type: 'danger'});
 			}
 		}).catch(response => {
-			if (response !== 'undefined' && response.error && response.error.status === 'Failure') {
+			if (response && response.error && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});

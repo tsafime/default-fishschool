@@ -17,18 +17,18 @@ import {ReloadTableDataService} from '../../../../core/services/fishschool/reloa
 })
 export class FishSchoolsComponent extends ToastSupport implements OnInit {
 
-	public model: FsRequestModel = {schoolName: undefined, status: 'ACTIVE', feedDate: moment('2017-06-16'), days: 10};
+	public model: FsRequestModel = {schoolName: undefined, status: 'ACTIVE', feedDate: moment(), days: 10};
 
 	@ViewChild(MatSort) sort: MatSort;
 	fishSchoolNames: string[];
 
 	panelOpenState: boolean = true;
 	roles: string;
-	maxDate: Date = new Date();
+	maxDate: Date = moment().add(400, 'days').toDate();
 	startLoadFishSchools: boolean = false;
 	isFishSchoolLoadingStarted = false;
 
-	// This is required since Datatable not visible immediatly until focus id set
+	// This is required since Datatable not visible immediatly until focus is set
 	@ViewChild('days') daysInput: ElementRef;
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
@@ -43,7 +43,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 			this.fishSchoolNames = response.data;
 			return response;
 		}).catch(response => {
-			if (response !== 'undefined' && response.error && response.error.status === 'Failure') {
+			if (response && response.error && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});

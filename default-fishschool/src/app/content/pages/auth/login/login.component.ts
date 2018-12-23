@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this.spinner.active = true;
 		if (this.validate(this.f)) {
 			this.authService.login(this.model).subscribe(response => {
-				if (response !== 'undefined' && response.status === 'Success') {
+				if (response && response.status === 'Success') {
 					this.authNoticeService.setNotice(response.message, 'success');
 					this.router.navigate(['/']);
 				} else if (response.message) {
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				this.cdr.detectChanges();
 			},
 				response => {
-					if (response !== 'undefined' && response.error && response.error.status === 'Failure') {
+					if (response && response.error && response.error.status === 'Failure') {
 						this.authNoticeService.setNotice(response.message, 'error');
 					} else {
 						this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'error');
