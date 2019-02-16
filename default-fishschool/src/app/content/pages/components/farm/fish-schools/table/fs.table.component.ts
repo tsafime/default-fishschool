@@ -187,7 +187,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 				 const jsonData = JSON.stringify(data).trim();
 				 return jsonData.indexOf(filter) !== -1
 					|| jsonData.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
-			 }
+			 };
 
 			this.dataSource.filter = filterValue.trim().toLowerCase();
 		}
