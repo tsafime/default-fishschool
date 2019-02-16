@@ -24,7 +24,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 
 	panelOpenState: boolean = true;
 	roles: string;
-	maxDate: Date = moment().add(400, 'days').toDate();
+	maxDate: Date = moment().add(365, 'days').toDate();
 	startLoadFishSchools: boolean = false;
 	isFishSchoolLoadingStarted = false;
 

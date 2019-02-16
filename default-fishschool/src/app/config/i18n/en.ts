@@ -62,6 +62,8 @@ export const locale = {
 		},
 		GENERAL: {
 			F_C_R: 'F.C.R.',
+			DEAD: 'Dead',
+			AGE: 'Age',
 		},
 		DASHBOARD: {
 			FARM_SUMMARY: 'Farm summary',
@@ -69,6 +71,7 @@ export const locale = {
 			AVG_WEIGHT: 'Average Weight',
 			NUM_OF_FISH: '# Of Fish',
 			FOOD_WEIGHT: 'Food Weight',
+			GIVEN_FOOD: 'Given Food',
 			PLAN_FOOD: 'Plan Food',
 			QUANTITY: 'Quantity',
 			FEED_DATE: 'Feed Date',

@@ -21,7 +21,7 @@ export class SchoolsSummaryComponent extends ToastSupport implements OnInit {
 	@Output() valueChange = new EventEmitter<SummaryModel>();
 	private isDialogOpened: boolean = false;
 	summaryDate: Moment = moment();
-	maxDate: Moment = moment();
+	maxDate: Date = moment().add(365, 'days').toDate();
 
 	private config = {
 		height: '100%',

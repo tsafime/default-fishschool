@@ -2,21 +2,24 @@ import {SchoolSummaryModel} from './school.summary.model';
 
 export class SummaryModel {
 
+	dead: number;
+	totalPlanFood: number;
 	totalAverageWeight: number;
 	totalNumberOfFish: number;
-	totalFoodWeight: number;
+	totalGivenFood: number;
 	totalFCR: number;
-	totalPlanFood: number;
+
 	schoolSummaries: SchoolSummaryModel[];
 
-	constructor(totalAverageWeight: number, totalNumberOfFish: number, totalFoodWeight: number, totalFCR: number,
-				totalPlanFood: number, schoolSummaries: SchoolSummaryModel[]) {
+	constructor(dead: number, totalPlanFood: number, totalAverageWeight: number, totalNumberOfFish: number, totalGivenFood: number,
+				totalFCR: number, schoolSummaries: SchoolSummaryModel[]) {
 
+		this.dead = dead;
+		this.totalPlanFood = totalPlanFood;
 		this.totalAverageWeight = totalAverageWeight;
 		this.totalNumberOfFish = totalNumberOfFish;
-		this.totalFoodWeight = totalFoodWeight;
+		this.totalGivenFood = totalGivenFood;
 		this.totalFCR = totalFCR;
-		this.totalPlanFood = totalPlanFood;
 		this.schoolSummaries = schoolSummaries;
 	}
 }

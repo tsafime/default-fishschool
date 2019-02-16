@@ -1,9 +1,8 @@
-import {Component, OnInit, Inject, ViewChild, Input} from '@angular/core';
+import {Component, OnInit, Inject, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {SchoolSummaryModel} from '../../../../../../core/models/fishschool/summary/school.summary.model';
 import {PairModel} from '../../../../../../core/models/fishschool/summary/pair.model';
 import * as moment from 'moment';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -14,7 +13,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class SchoolsSummaryDetailsComponent implements OnInit {
 
 	// summaryDisplayedColumns = The JSON names
-	summaryDisplayedColumns: string[] = ['name', 'quantity', 'averageWeight', 'foodWeight', 'fcr', 'feedDate'];
+	summaryDisplayedColumns: string[] = ['name', 'quantity', 'averageWeight', 'foodWeight', 'fcr', 'dead', 'age', 'feedDate'];
 	summaryHeaders: string[];
 	summaryDataSource: MatTableDataSource<SchoolSummaryModel>;
 	@ViewChild(MatSort) summarySort: MatSort;
@@ -29,6 +28,8 @@ export class SchoolsSummaryDetailsComponent implements OnInit {
 			this.translate.instant('DASHBOARD.AVG_WEIGHT'),
 			this.translate.instant('DASHBOARD.FOOD_WEIGHT'),
 			this.translate.instant('GENERAL.F_C_R'),
+			this.translate.instant('GENERAL.DEAD'),
+			this.translate.instant('GENERAL.AGE'),
 			this.translate.instant('DASHBOARD.DETAILS.FEED_DATE')];
 
 		this.summaryDetailsHeaders = [this.translate.instant('DASHBOARD.FOOD_TYPE'),

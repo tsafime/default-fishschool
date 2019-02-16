@@ -11,7 +11,7 @@ import {ToastMessage} from '../../../../core/models/toast/toast.message';
 export class DashboardComponent implements OnInit {
 
 	public config: any;
-	public mySchoolsSum: SummaryModel = new SummaryModel(0, 0, 0, 0, 0, []);
+	public mySchoolsSum: SummaryModel = new SummaryModel(0, 0, 0, 0, 0, 0, []);
 
 	constructor(public toastr: ToastrManager) {
 	}
