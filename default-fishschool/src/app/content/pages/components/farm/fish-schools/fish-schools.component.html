@@ -7,36 +7,6 @@
 			</mat-expansion-panel-header>
 			<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 				<div class="example-container">
-					<!-- School name -->
-					<!--<mat-form-field>-->
-						<!--<mat-select name="schoolName" #schoolName="ngModel" [(ngModel)]="model.schoolName"-->
-									<!--placeholder="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}" required>-->
-							<!--<option [value]="null" disabled selected>{{'FISH_SCHOOL.FILTERS.CHOOSE_SCHOOL_NAME' |-->
-								<!--translate}}-->
-							<!--</option>-->
-							<!--<mat-option *ngFor="let name of fishSchoolNames" [value]="name">{{name}}</mat-option>-->
-						<!--</mat-select>-->
-						<!--<div *ngIf="schoolName.invalid" class="text-danger">-->
-							<!--<div *ngIf="schoolName.errors.required">-->
-								<!--{{ 'FISH_SCHOOL.VALIDATION.REQUIRED_FIELD' | translate: { name:-->
-								<!--'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate } }}-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</mat-form-field>-->
-
-					<!--<mat-form-field>
-						&lt;!&ndash; Source: https://github.com/bithost-gmbh/ngx-mat-select-search &ndash;&gt;
-						<mat-select [formControl]="selectCtrl" required #schoolNameSelect placeholder="{{'FISH_SCHOOL.FILTERS.CHOOSE_SCHOOL_NAME' | translate}}"
-									name="schoolNameSelect" [(ngModel)]="model.schoolName">
-
-							<ngx-mat-select-search [formControl]="schoolNameFilterCtrl" [placeholderLabel]="getSelectSchoolNameLabel()"
-							[noEntriesFoundLabel]="getSelectSchoolNameNotFoundLabel()"></ngx-mat-select-search>
-
-							<mat-option *ngFor="let name of filteredSchoolNames | async" [value]="name">
-								{{name}}
-							</mat-option>
-						</mat-select>
-					</mat-form-field>-->
 					<span class="col-sm-1"></span>
 
 					<div style="width: 300px;" class="mat-form-field">

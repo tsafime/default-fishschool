@@ -1,5 +1,6 @@
 <!-- BEGIN: Horizontal Menu -->
-<!-- <div mMenuHorOffcanvas id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark "> -->
+<div mMenuHorOffcanvas id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas
+m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark ">
 <ul class="m-menu__nav" [ngClass]="classInitService.onClassesUpdated$ | async | mGetObject:'header_menu_nav' | mJoin">
 	<ng-container *ngFor="let item of menuHorService.menuList$ | async">
 		<ng-container *ngIf="item.title" [ngTemplateOutlet]="m_menu" [ngTemplateOutletContext]="{ item: item }">

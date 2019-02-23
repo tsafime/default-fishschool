@@ -1,20 +1,20 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FsRequestModel} from '../fish-schools.component';
-import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school.model';
-import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
+import {FishSchoolModel} from '../../../../../../core/models/fishschool/fish-school.model';
+import {FishSchoolsAuthorizationService} from '../../../../../../core/services/fishschool/fish-schools.authorization.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
-import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
+import {FishSchoolsService} from '../../../../../../core/services/fishschool/fish-schools.service';
+import {ToastSupport} from '../../../../../../core/models/fishschool/toast.support';
 import {Observable} from 'rxjs';
-import {FishSchools} from '../../../../../core/models/fishschool/fish.schools.model';
+import {FishSchools} from '../../../../../../core/models/fishschool/fish.schools.model';
 import * as moment from 'moment';
 import * as deepEqual from 'deep-equal';
 import {MatSort} from '@angular/material';
-import {FoodService} from '../../../../../core/services/fishschool/food.service';
-import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
-import {ResponsiveDataTable} from '../../../../../core/models/fishschool/table/ResponsiveDataTable';
-import {FoodModel} from '../../../../../core/models/food/food.model';
+import {FoodService} from '../../../../../../core/services/fishschool/food.service';
+import {ReloadTableDataService} from '../../../../../../core/services/fishschool/reload-table-data.service';
+import {ResponsiveDataTable} from '../../../../../../core/models/fishschool/table/ResponsiveDataTable';
+import {FoodModel} from '../../../../../../core/models/food/food.model';
 
 @Component({
 	selector: 'm-fs-table',
@@ -172,10 +172,6 @@ export class TableComponent extends ToastSupport implements OnInit {
 
 		return false;
 	}
-
-	/*compareObjects(o1: any, o2: any): boolean {
-		return o1.name === o2.name && o1.id === o2.id;
-	}*/
 
 	isFishSchoolReadWrite(action: string, prop: string): boolean {
 		return this.authorization.isFishSchoolReadWrite(action, prop);

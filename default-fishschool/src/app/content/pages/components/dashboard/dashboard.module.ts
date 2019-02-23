@@ -7,7 +7,7 @@ import { PartialsModule } from '../../../partials/partials.module';
 import { ListTimelineModule } from '../../../partials/layout/quick-sidebar/list-timeline/list-timeline.module';
 import { WidgetChartsModule } from '../../../partials/content/widgets/charts/widget-charts.module';
 import {SchoolsSummaryService} from '../../../../core/services/fishschool/summary/schools.summary.service';
-import {DD_MM_YYYY_Format} from '../fish-schools/fish-schools.module';
+import {DD_MM_YYYY_Format} from '../farm/fish-schools/fish-schools.module';
 import {
 	DateAdapter,
 	MAT_DATE_FORMATS,
@@ -25,6 +25,8 @@ import {SchoolsSummaryDetailsComponent} from './summary/details/schools.summary.
 import {FormsModule} from '@angular/forms';
 import {ToastrModule} from 'ng6-toastr-notifications';
 import {FsUrlsService} from '../../../../core/services/fishschool/fs.urls';
+import {FishSchoolsService} from '../../../../core/services/fishschool/fish-schools.service';
+import {FishSchoolsAuthorizationService} from '../../../../core/services/fishschool/fish-schools.authorization.service';
 
 @NgModule({
 	imports: [
@@ -62,6 +64,8 @@ import {FsUrlsService} from '../../../../core/services/fishschool/fs.urls';
 		{provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format},
 		MatIconRegistry,
 		FsUrlsService,
+		FishSchoolsService,
+		FishSchoolsAuthorizationService,
 	],
 	entryComponents: [
 		SchoolsSummaryDetailsComponent

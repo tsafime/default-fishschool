@@ -6,6 +6,7 @@ export interface FishSchoolModel {
 	id: number;
 	companyId: number;
 	name: string;
+	updateName: string;
 	status: string;
 	creationDate: Moment;
 	updatedDate: Moment;
@@ -27,5 +28,6 @@ export interface FishSchoolModel {
 	fcr: number;
 	salesFcr: number;
 	totalWeight: number;
+	updatedCreationDate: any;
 }
 

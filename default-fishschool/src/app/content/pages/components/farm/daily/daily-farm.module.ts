@@ -5,7 +5,7 @@ import { LayoutModule } from '../../../../layout/layout.module';
 import { PartialsModule } from '../../../../partials/partials.module';
 import { ListTimelineModule } from '../../../../partials/layout/quick-sidebar/list-timeline/list-timeline.module';
 import { WidgetChartsModule } from '../../../../partials/content/widgets/charts/widget-charts.module';
-import {DD_MM_YYYY_Format, FishSchoolsModule} from '../../fish-schools/fish-schools.module';
+import {DD_MM_YYYY_Format, FishSchoolsModule} from '../fish-schools/fish-schools.module';
 import {
 	DateAdapter,
 	MAT_DATE_FORMATS,

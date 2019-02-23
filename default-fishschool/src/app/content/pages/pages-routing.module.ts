@@ -23,11 +23,15 @@ const routes: Routes = [
 			},
 			{
 				path: 'fish-schools',
-				loadChildren: './components/fish-schools/fish-schools.module#FishSchoolsModule'
+				loadChildren: './components/farm/fish-schools/fish-schools.module#FishSchoolsModule'
 			},
 			{
 				path: 'farm',
 				loadChildren: './components/farm/daily/daily-farm.module#DailyFarmModule'
+			},
+			{
+				path: 'fish-schools-actions',
+				loadChildren: './components/farm/fish-schools-actions/fish-schools-actions.module#FishSchoolsActionsModule'
 			},
 			{
 				path: 'food-names',

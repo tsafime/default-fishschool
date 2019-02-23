@@ -4,11 +4,12 @@ import {FishSchoolModel} from '../../models/fishschool/fish-school.model';
 import {FishSchools} from '../../models/fishschool/fish.schools.model';
 import {QueryFilter} from '../../models/fishschool/query.filter';
 import {FilteredQuery} from '../../models/fishschool/filtered.query';
-import {FsRequestModel} from '../../../content/pages/components/fish-schools/fish-schools.component';
+import {FsRequestModel} from '../../../content/pages/components/farm/fish-schools/fish-schools.component';
 import {FsNames} from '../../models/fishschool/fish-school.names.model';
 import * as deepEqual from 'deep-equal';
 import {Observable} from 'rxjs';
 import {FsUrlsService} from './fs.urls';
+import * as moment from 'moment';
 
 @Injectable()
 export class FishSchoolsService {
@@ -52,5 +53,22 @@ export class FishSchoolsService {
 		}
 
 		return null;
+	}
+
+	createNewFishSchool(school: FishSchoolModel) {
+		if (school.updatedCreationDate) {
+			school.updatedCreationDate = school.updatedCreationDate.format('DD/MM/YYYY HH:mm:ss');
+		}
+		return this.http.put<FishSchools>(this.urlsService.fsSaveUrl, {entities: [school]});
+	}
+
+	renameFishSchool(from: string, to: string) {
+		const model = [{ name: from, updateName: to}];
+		return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: model});
+	}
+
+	toggelFishSchoolStatus(name: string, status: string) {
+		const model = [{ name: name, status: status}];
+		return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: model});
 	}
 }

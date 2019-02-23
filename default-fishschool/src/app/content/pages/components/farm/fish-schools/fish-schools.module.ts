@@ -12,23 +12,23 @@ import {
 } from '@angular/material';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {NgbAlertConfig, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {PartialsModule} from '../../../partials/partials.module';
-import {MaterialPreviewModule} from '../../../partials/content/general/material-preview/material-preivew.module';
+import {PartialsModule} from '../../../../partials/partials.module';
+import {MaterialPreviewModule} from '../../../../partials/content/general/material-preview/material-preivew.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {InterceptService} from '../../../../core/services/intercept.service';
+import {InterceptService} from '../../../../../core/services/intercept.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {FishSchoolsService} from '../../../../core/services/fishschool/fish-schools.service';
+import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
-import {FishSchoolsAuthorizationService} from '../../../../core/services/fishschool/fish-schools.authorization.service';
-import {FoodService} from '../../../../core/services/fishschool/food.service';
+import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
+import {FoodService} from '../../../../../core/services/fishschool/food.service';
 import {ToastrModule} from 'ng6-toastr-notifications';
 import { TableComponent } from './table/fs.table.component';
-import {ReloadTableDataService} from '../../../../core/services/fishschool/reload-table-data.service';
+import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {NgSelectModule} from '@ng-select/ng-select';
-import {FsUrlsService} from '../../../../core/services/fishschool/fs.urls';
+import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true

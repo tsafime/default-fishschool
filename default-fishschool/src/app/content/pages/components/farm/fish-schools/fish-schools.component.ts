@@ -1,19 +1,19 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material';
-import {FishSchoolsService} from '../../../../core/services/fishschool/fish-schools.service';
+import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import * as moment from 'moment';
 import {TranslateService} from '@ngx-translate/core';
 import {Moment} from 'moment';
-import {AuthenticationService} from '../../../../core/auth/authentication.service';
-import {FishSchoolsAuthorizationService} from '../../../../core/services/fishschool/fish-schools.authorization.service';
+import {AuthenticationService} from '../../../../../core/auth/authentication.service';
+import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ToastSupport} from '../../../../core/models/fishschool/toast.support';
-import {ReloadTableDataService} from '../../../../core/services/fishschool/reload-table-data.service';
+import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
+import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
 
 @Component({
 	selector: 'm-fish-schools',
 	templateUrl: './fish-schools.component.html',
-	styleUrls: ['./fish-schools.component.scss', '../../../../../../node_modules/@ng-select/ng-select/themes/material.theme.css']
+	styleUrls: ['./fish-schools.component.scss', '../../../../../../../node_modules/@ng-select/ng-select/themes/material.theme.css']
 })
 export class FishSchoolsComponent extends ToastSupport implements OnInit {
 

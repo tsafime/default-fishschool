@@ -13,6 +13,7 @@ export const locale = {
 			APPS: 'Apps',
 			DASHBOARD: 'Dashboard',
 			FISH_SCHOOLS: 'Fish schools',
+			FISH_SCHOOLS_ACTIONS: 'Fish schools actions',
 			FARM: 'Farm',
 			FOOD_NAMES: 'Food Names',
 			DELIVERY_NOTES: 'Delivery Notes',
@@ -82,6 +83,12 @@ export const locale = {
 				FEED_DATE: 'Feed Date',
 			},
 			SUMMARY_DATE: 'Summary Date',
+			QUICK_ACTIONS: {
+				TITLE: 'Quick Actions',
+				NEW_FISH_SCHOOL: 'Create New School',
+				RENAME_FISH_SCHOOL: 'Rename School',
+				SOLD_ACTIVE_FISH_SCHOOL: 'Sold/Active School'
+			}
 		},
 		VALIDATION: {
 			LOAD_FS_FAILURE: 'Unable to load Fish School records, please try again later',
@@ -98,6 +105,7 @@ export const locale = {
 		},
 		FISH_SCHOOL: {
 			UPDATE_WITHOUT_RECORDS: 'Your Fish school data not yet visible, update cannot be done',
+			NEW_FISH_SCHOOL: 'New Fish School',
 			FILTERS: {
 				SCHOOL_NAME: 'School name',
 				CHOOSE_SCHOOL_NAME: 'Choose School Name',
@@ -131,6 +139,12 @@ export const locale = {
 			RESULTS: {
 				FISH_SCHOOL_UPDATE_SUCCESS: 'Fish schools updated successfully',
 			},
+			NAME: 'Name',
+			QUANTITY: 'Quantity',
+			CREATION_DATE: 'Creation Date',
+			PERCENTAGE_TSEMACH: 'Percentage Tsemach',
+			FOOD_NAME: 'Food Name',
+			SPECIE: 'Specie',
 		},
 		FOOD: {
 			FOOD_TYPE: 'Food Type',
