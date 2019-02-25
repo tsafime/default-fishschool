@@ -30,7 +30,7 @@ const routes: Routes = [
 				loadChildren: './components/farm/daily/daily-farm.module#DailyFarmModule'
 			},
 			{
-				path: 'fish-schools-actions',
+				path: 'fs-actions',
 				loadChildren: './components/farm/fish-schools-actions/fish-schools-actions.module#FishSchoolsActionsModule'
 			},
 			{

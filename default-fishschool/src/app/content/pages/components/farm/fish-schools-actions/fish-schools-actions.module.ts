@@ -27,6 +27,8 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 import {FishSchoolsActionsComponent} from './fish-schools-actions.component';
+import { NewSchoolComponent } from './new-school/new-school.component';
+import { ToggleStatusComponent } from './toggle-status/toggle-status.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -99,6 +101,8 @@ export const DD_MM_YYYY_Format = {
 	],
 	declarations: [
 		FishSchoolsActionsComponent,
+		NewSchoolComponent,
+		ToggleStatusComponent,
 	]
 })
 

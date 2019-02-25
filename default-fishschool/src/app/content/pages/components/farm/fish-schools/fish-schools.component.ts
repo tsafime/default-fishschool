@@ -28,7 +28,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 	startLoadFishSchools: boolean = false;
 	isFishSchoolLoadingStarted = false;
 
-	// This is required since Datatable not visible immediatly until focus is set
+	// This is required since Datatable not visible immediately until focus is set
 	@ViewChild('days') daysInput: ElementRef;
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,

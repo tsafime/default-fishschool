@@ -276,15 +276,15 @@ export class MenuConfig implements ConfigModel {
 							{
 								title: 'Fish Schools',
 								desc: 'Fish schools operations',
-								icon: 'flaticon-lifebuoy',
+								icon: 'fa fa-fish',
 								page: '/fish-schools',
 								translate: 'MENU.FISH_SCHOOLS'
 							},
 							{
 								title: 'Fish Schools Actions',
 								desc: 'Fish schools actions, create, SOLD...',
-								icon: 'flaticon-lifebuoy',
-								page: '/fish-schools-actions',
+								icon: 'flaticon-bell',
+								page: '/fs-actions',
 								translate: 'MENU.FISH_SCHOOLS_ACTIONS'
 							},
 						]

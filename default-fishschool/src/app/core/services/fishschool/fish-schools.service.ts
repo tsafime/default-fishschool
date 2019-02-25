@@ -9,7 +9,6 @@ import {FsNames} from '../../models/fishschool/fish-school.names.model';
 import * as deepEqual from 'deep-equal';
 import {Observable} from 'rxjs';
 import {FsUrlsService} from './fs.urls';
-import * as moment from 'moment';
 
 @Injectable()
 export class FishSchoolsService {
@@ -67,7 +66,7 @@ export class FishSchoolsService {
 		return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: model});
 	}
 
-	toggelFishSchoolStatus(name: string, status: string) {
+	toggleFishSchoolStatus(name: string, status: string) {
 		const model = [{ name: name, status: status}];
 		return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: model});
 	}
