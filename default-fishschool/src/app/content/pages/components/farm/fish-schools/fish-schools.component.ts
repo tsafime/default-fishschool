@@ -9,6 +9,7 @@ import {FishSchoolsAuthorizationService} from '../../../../../core/services/fish
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
 import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
+import {NameEntity} from '../../../../../core/models/fishschool/fish-school.names.model';
 
 @Component({
 	selector: 'm-fish-schools',
@@ -20,7 +21,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 	public model: FsRequestModel = {schoolName: undefined, status: 'ACTIVE', feedDate: moment(), days: 10};
 
 	@ViewChild(MatSort) sort: MatSort;
-	fishSchoolNames: string[];
+	fishSchoolNames: NameEntity[];
 
 	panelOpenState: boolean = true;
 	roles: string;
@@ -69,7 +70,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 }
 
 export interface FsRequestModel {
-	schoolName: string;
+	schoolName: NameEntity;
 	status: string;
 	feedDate: Moment;
 	days: number;

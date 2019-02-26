@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {ToastSupport} from '../../../../../../core/models/fishschool/toast.support';
 import {FishSchools} from '../../../../../../core/models/fishschool/fish.schools.model';
 import {FishSchoolModel} from '../../../../../../core/models/fishschool/fish-school.model';
+import {NameEntity} from '../../../../../../core/models/fishschool/fish-school.names.model';
 
 @Component({
 	selector: 'm-toggle-status',
@@ -20,7 +21,8 @@ export class ToggleStatusComponent extends ToastSupport implements OnInit {
 		foodWeight: null, totalGivenFood: null, actualGivenFood: null, percentageTsemach: null, deadLastUpdateDate: null,
 		food: null, feedDate: null, sale: null, totalSale: null, fcr: null, salesFcr: null, totalWeight: null, updatedCreationDate: null
 	};
-	fishSchoolNames: string[];
+	fishSchoolNames: NameEntity[];
+	enableSubmit = false;
 
 	constructor(private fishSchoolService: FishSchoolsService, public toastr: ToastrManager, private translate: TranslateService) {
 		super(toastr);
@@ -52,5 +54,19 @@ export class ToggleStatusComponent extends ToastSupport implements OnInit {
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
+	}
+
+	onSchoolSelect($event) {
+		const nameEntity: NameEntity[] = this.fishSchoolNames.filter(item => {
+			return (item === $event) ? item : null;
+		});
+
+		if (nameEntity !== null && nameEntity.length > 0) {
+			this.school.status = nameEntity[0].status;
+			this.school.name = nameEntity[0].name;
+			this.enableSubmit = true;
+		} else {
+			this.enableSubmit = false;
+		}
 	}
 }

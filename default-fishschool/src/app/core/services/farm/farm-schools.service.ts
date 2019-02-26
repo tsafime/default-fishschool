@@ -21,7 +21,7 @@ export class FarmService {
 
 		const queryFilters: QueryFilter[] = [];
 		if (model.schoolName) {
-			queryFilters.push(new QueryFilter('name', [model.schoolName], '=', 'AND'));
+			queryFilters.push(new QueryFilter('name', [model.schoolName.name], '=', 'AND'));
 		}
 
 		queryFilters.push(new QueryFilter('status', [model.status], '=', 'AND'));

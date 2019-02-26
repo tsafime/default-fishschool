@@ -14,6 +14,8 @@
 						<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
 						<ng-select matInput class="custom"
 								   [items]="fishSchoolNames"
+								   bindLabel="name"
+								   groupBy="status"
 								   placeholder="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}"
 								   notFoundText="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME_NOT_FOUND' | translate }}"
 								   autofocus

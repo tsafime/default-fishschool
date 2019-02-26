@@ -1,5 +1,10 @@
 import {FsResponse} from './fs.response.model';
 
 export interface FsNames extends FsResponse {
-	data: string[];
+	data: NameEntity[];
+}
+
+export interface NameEntity {
+	name: string;
+	status: string;
 }

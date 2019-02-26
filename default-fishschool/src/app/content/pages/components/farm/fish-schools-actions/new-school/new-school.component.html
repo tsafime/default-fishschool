@@ -1,5 +1,5 @@
 <div class="m-portlet">
-	<h3>{{'FISH_SCHOOL.NEW_FISH_SCHOOL' | translate}}</h3>
+	<h3 class="col-sm-12">{{'FISH_SCHOOL.NEW_FISH_SCHOOL' | translate}}</h3>
 	<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 		<div class="example-container">
 			<span class="col-sm-1"></span>
@@ -92,7 +92,7 @@
 			</mat-form-field>
 
 			<!-- food -->
-			<div class="col-md-2 mat-form-field ">
+			<div class="col-md-2 mat-form-field">
 				<!-- https://github.com/ng-select/ng-select -->
 				<mat-label class="mat-form-field-label">{{'FISH_SCHOOL.FOOD_NAME' | translate}}</mat-label>
 				<ng-select matInput class="custom"

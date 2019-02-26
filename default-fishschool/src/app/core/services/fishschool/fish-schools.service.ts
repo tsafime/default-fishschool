@@ -19,7 +19,7 @@ export class FishSchoolsService {
 	view(model: FsRequestModel) {
 
 		const queryFilters: QueryFilter[] = [];
-		queryFilters.push(new QueryFilter('name', [model.schoolName], '=', 'AND'));
+		queryFilters.push(new QueryFilter('name', [model.schoolName.name], '=', 'AND'));
 		queryFilters.push(new QueryFilter('status', [model.status], '=', 'AND'));
 		queryFilters.push(new QueryFilter('feedDate', [model.feedDate.clone().format('DD/MM/YYYY')], '=', 'NONE'));
 
