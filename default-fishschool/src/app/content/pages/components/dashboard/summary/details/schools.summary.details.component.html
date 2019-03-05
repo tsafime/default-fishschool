@@ -75,7 +75,7 @@
 
 			<!-- Expanded Content Column - The detail row is made up of this one column -->
 			<ng-container matColumnDef="expandedDetail">
-				<td mat-cell *matCellDef="let row">
+				<td mat-cell *matCellDef="let row" colspan="3">
 					<table class="table table-bordered table-hover table-success"
 						   [ngStyle]="expandedElement === '' ? {display: 'none'} : {}">
 						<thead>
