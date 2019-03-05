@@ -73,27 +73,33 @@
 				<td mat-cell *matCellDef="let row">{{row.feedDate}}</td>
 			</ng-container>
 
-			<ng-container matColumnDef="foodInnerTable">
+			<!-- Expanded Content Column - The detail row is made up of this one column -->
+			<ng-container matColumnDef="expandedDetail">
 				<td mat-cell *matCellDef="let row">
-					<table class="table table-bordered table-hover table-success">
+					<table class="table table-bordered table-hover table-success"
+						   [ngStyle]="expandedElement === '' ? {display: 'none'} : {}">
 						<thead>
-							<tr>
-								<th *ngFor = "let item of summaryDetailsHeaders">{{item}}</th>
-							</tr>
+						<tr>
+							<th *ngFor = "let item of summaryDetailsHeaders">{{item}}</th>
+						</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor = "let item of row.feedTypes">
-								<td >{{item.key}}</td>
-								<td >{{item.value | number}}</td>
-							</tr>
+						<tr *ngFor = "let item of row.feedTypes">
+							<td >{{item.key}}</td>
+							<td >{{item.value | number}}</td>
+						</tr>
 						</tbody>
 					</table>
 				</td>
 			</ng-container>
 
 			<tr mat-header-row *matHeaderRowDef="summaryDisplayedColumns; sticky: true"></tr>
-			<tr mat-row *matRowDef="let element; columns: summaryDisplayedColumns;" class="example-element-row"></tr>
-			<tr mat-row *matRowDef="let row; columns: ['foodInnerTable']" class="example-element-row"></tr>
+			<tr mat-row *matRowDef="let row; columns: summaryDisplayedColumns;" class="example-element-row"
+				[class.expanded]="expandedElement === row"
+				(click)="(expandedElement !== row) ? expandedElement = row : expandedElement = ''"></tr>
+			<!--<tr mat-row *matRowDef="let row; columns: ['foodInnerTable']" class="example-element-row"></tr>-->
+			<tr mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+					 [@detailExpand]="row === expandedElement ? 'expanded' : 'collapsed'"  style="overflow: hidden">
 		</table>
 	</div>
 </div>

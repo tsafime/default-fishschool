@@ -37,6 +37,10 @@ input.input-number-format:focus + label.label-number-format {
 	.mat-header-cell {
 		vertical-align: middle !important;
 	}
+
+	.mat-form-field-underline {
+		display: none;
+	}
 }
 
 /*::ng-deep {

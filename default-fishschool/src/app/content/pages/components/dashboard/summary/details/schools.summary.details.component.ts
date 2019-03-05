@@ -4,11 +4,19 @@ import {SchoolSummaryModel} from '../../../../../../core/models/fishschool/summa
 import {PairModel} from '../../../../../../core/models/fishschool/summary/pair.model';
 import * as moment from 'moment';
 import {TranslateService} from '@ngx-translate/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
 	selector: 'm-schools-summary-details',
 	templateUrl: './schools.summary.details.component.html',
-	styleUrls: ['./schools.summary.details.component.scss']
+	styleUrls: ['./schools.summary.details.component.scss'],
+	animations: [
+		trigger('detailExpand', [
+			state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
+			state('expanded', style({ height: '*', visibility: 'visible' })),
+			transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+		]),
+	],
 })
 export class SchoolsSummaryDetailsComponent implements OnInit {
 
@@ -19,6 +27,9 @@ export class SchoolsSummaryDetailsComponent implements OnInit {
 	@ViewChild(MatSort) summarySort: MatSort;
 
 	summaryDetailsHeaders: string[];
+	expandedElement: any;
+	// isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('key');
+	isExpansionDetailRow = (i: number, row: Object) => true;
 
 	constructor(public dialogRef: MatDialogRef<SchoolsSummaryDetailsComponent>, private translate: TranslateService,
 				@Inject(MAT_DIALOG_DATA) public schoolsSum: SchoolSummaryModel[]) {

@@ -11,7 +11,7 @@ import {DD_MM_YYYY_Format} from '../farm/fish-schools/fish-schools.module';
 import {
 	DateAdapter,
 	MAT_DATE_FORMATS,
-	MAT_DIALOG_DEFAULT_OPTIONS, MatDatepickerModule, MatDialog,
+	MAT_DIALOG_DEFAULT_OPTIONS, MatDatepickerModule,
 	MatDialogModule,
 	MatFormFieldModule, MatIconModule, MatIconRegistry,
 	MatInputModule, MatSortModule, MatTableModule
@@ -51,7 +51,7 @@ import {FishSchoolsAuthorizationService} from '../../../../core/services/fishsch
 				path: '',
 				component: DashboardComponent
 			}
-		])
+		]),
 	],
 	providers: [
 		InterceptService,
