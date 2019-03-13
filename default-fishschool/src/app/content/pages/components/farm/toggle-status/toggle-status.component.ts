@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FishSchoolsService} from '../../../../../../core/services/fishschool/fish-schools.service';
+import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
-import {ToastSupport} from '../../../../../../core/models/fishschool/toast.support';
-import {FishSchools} from '../../../../../../core/models/fishschool/fish.schools.model';
-import {FishSchoolModel} from '../../../../../../core/models/fishschool/fish-school.model';
-import {NameEntity} from '../../../../../../core/models/fishschool/fish-school.names.model';
+import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
+import {FishSchools} from '../../../../../core/models/fishschool/fish.schools.model';
+import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school.model';
+import {NameEntity} from '../../../../../core/models/fishschool/fish-school.names.model';
 
 @Component({
 	selector: 'm-toggle-status',

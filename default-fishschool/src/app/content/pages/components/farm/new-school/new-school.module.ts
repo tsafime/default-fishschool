@@ -2,12 +2,21 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {
 	DateAdapter,
-	MAT_DATE_FORMATS, MatButtonToggleModule, MatCardModule, MatDatepickerModule,
+	MAT_DATE_FORMATS,
+	MatButtonToggleModule,
+	MatCardModule,
+	MatDatepickerModule,
 	MatExpansionModule,
 	MatFormFieldModule,
 	MatIconModule,
-	MatIconRegistry, MatInputModule,
-	MatOptionModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatSortModule, MatTableModule
+	MatIconRegistry,
+	MatInputModule,
+	MatOptionModule,
+	MatProgressSpinnerModule,
+	MatSelectModule,
+	MatSlideToggleModule,
+	MatSortModule,
+	MatTableModule
 } from '@angular/material';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {NgbAlertConfig, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -26,9 +35,8 @@ import {ToastrModule} from 'ng6-toastr-notifications';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
-import {FishSchoolsActionsComponent} from './fish-schools-actions.component';
-import { NewSchoolComponent } from './new-school/new-school.component';
-import { ToggleStatusComponent } from './toggle-status/toggle-status.component';
+import {NewSchoolComponent} from './new-school.component';
+import {ToggleStatusComponent} from '../toggle-status/toggle-status.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -72,7 +80,7 @@ export const DD_MM_YYYY_Format = {
 		RouterModule.forChild([
 			{
 				path: '',
-				component: FishSchoolsActionsComponent
+				component: NewSchoolComponent
 			}
 		]),
 		NgSelectModule,
@@ -100,11 +108,9 @@ export const DD_MM_YYYY_Format = {
 		FsUrlsService,
 	],
 	declarations: [
-		FishSchoolsActionsComponent,
 		NewSchoolComponent,
-		ToggleStatusComponent,
 	]
 })
 
-export class FishSchoolsActionsModule {
+export class FishSchoolsNewSchoolModule {
 }

@@ -281,11 +281,18 @@ export class MenuConfig implements ConfigModel {
 								translate: 'MENU.FISH_SCHOOLS'
 							},
 							{
-								title: 'Fish Schools Actions',
-								desc: 'Fish schools actions, create, SOLD...',
+								title: 'New',
+								desc: 'New Fish school',
 								icon: 'flaticon-bell',
-								page: '/fs-actions',
-								translate: 'MENU.FISH_SCHOOLS_ACTIONS'
+								page: '/fs-new',
+								translate: 'MENU.FISH_SCHOOLS_NEW'
+							},
+							{
+								title: 'Toggle Status',
+								desc: 'Fish schools toggle status',
+								icon: 'flaticon-layers',
+								page: '/fs-toggle-status',
+								translate: 'MENU.FISH_SCHOOLS_TOGGLE_STATUS'
 							},
 						]
 					},

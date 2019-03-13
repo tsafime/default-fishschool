@@ -1,15 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {FishSchools} from '../../../../../../core/models/fishschool/fish.schools.model';
-import {FishSchoolModel} from '../../../../../../core/models/fishschool/fish-school.model';
+import {FishSchools} from '../../../../../core/models/fishschool/fish.schools.model';
+import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school.model';
 import * as moment from 'moment';
-import {FoodModel} from '../../../../../../core/models/food/food.model';
-import {FishSchoolsService} from '../../../../../../core/services/fishschool/fish-schools.service';
+import {FoodModel} from '../../../../../core/models/food/food.model';
+import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import {TranslateService} from '@ngx-translate/core';
-import {ToastSupport} from '../../../../../../core/models/fishschool/toast.support';
+import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {FishSchoolsAuthorizationService} from '../../../../../../core/services/fishschool/fish-schools.authorization.service';
-import {FoodService} from '../../../../../../core/services/fishschool/food.service';
+import {FoodService} from '../../../../../core/services/fishschool/food.service';
 
 @Component({
 	selector: 'm-new-school',
