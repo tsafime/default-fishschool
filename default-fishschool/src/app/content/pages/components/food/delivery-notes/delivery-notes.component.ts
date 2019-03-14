@@ -32,6 +32,7 @@ export class DeliveryNotesComponent extends ToastSupport implements OnInit {
 	}
 
 	async ngOnInit() {
+		this.startLoadingDeliveryNotes = true;
 	}
 
 	loadTableData() {
@@ -42,7 +43,8 @@ export class DeliveryNotesComponent extends ToastSupport implements OnInit {
 	}
 
 	onDataReady($event) {
-		this.panelOpenState = ! $event;
+		// Disable close panel
+		// this.panelOpenState = ! $event;
 		this.isDeliveryNotesLoading = false;
 	}
 }

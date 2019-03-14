@@ -69,5 +69,5 @@
 		</mat-expansion-panel>
 	</mat-accordion>
 </div>
-
+<!-- TODO: Below line throws console error since table is not ready yet -->
 <m-delivery-notes-table (dataReady)="onDataReady($event)" [model]="model" *ngIf="startLoadingDeliveryNotes"></m-delivery-notes-table>

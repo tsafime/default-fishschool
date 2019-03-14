@@ -2,7 +2,8 @@
 	<mat-card *ngIf="isDeliveryNotesTableLoading" style="display: flex; justify-content: center; align-items: center">
 		<mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 	</mat-card>
-	<div class="example-container mat-elevation-z8" [hidden]="isDeliveryNotesTableLoading || ! havingDeliveryNotesRecords">
+	<div class="example-container mat-elevation-z8">
+	<!--<div class="example-container mat-elevation-z8" [hidden]="isDeliveryNotesTableLoading || ! havingDeliveryNotesRecords">-->
 		<mat-form-field>
 			<input matInput type="text" #search (keyup)="applyFilter($event.target.value)"
 				   placeholder="{{'ACTIONS.SEARCH' | translate}}">
@@ -71,8 +72,21 @@
 				<td mat-footer-cell *matFooterCellDef="let row"></td>
 			</ng-container>
 
+			<!-- actionType Column -->
+			<ng-container matColumnDef="actionType">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header
+					[ngStyle]="sort.active == 'actionType' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
+					{{ headers[2] }}</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-slide-toggle #toggle [checked]="true" (change)="($event.checked) ? row.actionType = 'SALE' : row.actionType = 'SHIPMENT'"
+					[disabled]="row.id">
+						{{row.actionType}}</mat-slide-toggle>
+				</td>
+				<td mat-footer-cell *matFooterCellDef="let row"></td>
+			</ng-container>
+
 			<!-- food Column -->
-			<ng-container *ngFor="let food of displayedColumns.slice(3)" matColumnDef="{{food}}">
+			<ng-container *ngFor="let food of displayedColumns.slice(4)" matColumnDef="{{food}}">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="sort.active == food ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ getFood() }}</th>

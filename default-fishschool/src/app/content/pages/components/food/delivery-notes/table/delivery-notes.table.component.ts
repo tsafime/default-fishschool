@@ -29,7 +29,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	@Output() dataReady = new EventEmitter<boolean>();
 	@Input() public model: DeliveryNotesRequestModel;
 
-	displayedColumns: string[] = ['actionsColumn', 'receipt', 'foodDate'];
+	displayedColumns: string[] = ['actionsColumn', 'receipt', 'foodDate', 'actionType'];
 
 	headers: string[];
 	dataSource: ResponsiveDataTable<DeliveryNotesModel>;
@@ -38,7 +38,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	foods: FoodModel[];
 	foodSlots: FoodSlotModel[];
 	foodNames: string[] = [];
-	isDeliveryNotesTableLoading = true;
+	isDeliveryNotesTableLoading = false;
 	havingDeliveryNotesRecords = false;
 	foodIndex = 0;
 	totalFoodIndex = 1;
@@ -53,7 +53,8 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 
 	async ngOnInit() {
 		this.headers = [this.translate.instant('DELIVERY_NOTES.TABLE.RECEIPT'),
-			this.translate.instant('DELIVERY_NOTES.TABLE.FOOD_DATE')];
+			this.translate.instant('DELIVERY_NOTES.TABLE.FOOD_DATE'),
+			this.translate.instant('DELIVERY_NOTES.TABLE.ACTION_TYPE')];
 
 		await this.foodService.names().toPromise().then(response => {
 			this.foods = response.data;
@@ -75,9 +76,6 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 
 		await this.foodService.viewSlots().toPromise().then(response => {
 			this.foodSlots = response.data;
-
-			this.headers = [this.translate.instant('DELIVERY_NOTES.TABLE.RECEIPT'),
-				this.translate.instant('DELIVERY_NOTES.TABLE.FOOD_DATE')];
 
 			for (const slot of this.foodSlots) {
 				this.headers.push(slot.slot);
@@ -102,6 +100,20 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	async view() {
 
 		this.isDeliveryNotesTableLoading = true;
+
+		if (! this.dataSource) {
+			const deliveryNotesModel = new DeliveryNotesModel(undefined, undefined, '', 'ACTIVE', 'SALE',
+				undefined, moment().format('DD/MM/YYYY'), undefined, undefined,
+				undefined, undefined, undefined, undefined, undefined, undefined, undefined,
+				undefined, undefined, undefined, undefined, undefined, undefined, undefined,
+				undefined, undefined);
+			// this.havingDeliveryNotesRecords = true;
+			// this.dataSource = new ResponsiveDataTable<DeliveryNotesModel>([ deliveryNotesModel ], this.dataReady);
+			 this.loadData([ deliveryNotesModel ]);
+			this.isDeliveryNotesTableLoading = false;
+			return;
+		}
+
 		await this.service.view(this.model).toPromise().then(response => {
 
 			if (response.status === 'Success') {
@@ -109,7 +121,8 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 				if (response.data.length === 0) {
 					this.dataReady.emit(false);
 					this.havingDeliveryNotesRecords = false;
-					this.dataSource = new ResponsiveDataTable<DeliveryNotesModel>([], this.dataReady);
+
+					this.loadData(response.data);
 					this.showInfo({message: this.translate.instant('VALIDATION.NO_RECORDS'), type: 'info'});
 				} else {
 					this.loadData(response.data);
@@ -210,7 +223,11 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	}
 
 	getFood() {
-		return this.foodSlots[this.foodIndex++].name;
+		if (this.foodSlots) {
+			return this.foodSlots[this.foodIndex++].name;
+		}
+
+		return '';
 	}
 
 	resetIndex() {
@@ -218,10 +235,11 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	}
 
 	createNew() {
-		const deliveryNotesModel = new DeliveryNotesModel(undefined, undefined, undefined, undefined,
-			this.model.action, undefined,
-			moment(this.dataSource.data[this.dataSource.data.length - 1].foodDate, 'DD/MM/YYYY').format('DD/MM/YYYY'),
-			undefined, undefined, undefined, undefined,
+        const foodData = (this.dataSource.data[this.dataSource.data.length - 1]) ?
+			moment(this.dataSource.data[this.dataSource.data.length - 1].foodDate, 'DD/MM/YYYY').format('DD/MM/YYYY') : moment().format('DD/MM/YYYY')
+
+		const deliveryNotesModel = new DeliveryNotesModel(undefined, undefined, '', 'ACTIVE', this.model.action,
+			this.model.action, foodData, undefined, undefined, undefined, undefined,
 			undefined, undefined, undefined, undefined, undefined, undefined, undefined,
 			undefined, undefined, undefined, undefined, undefined, undefined, undefined);
 
@@ -291,6 +309,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	}
 
 	validate(): boolean {
+		// if (this.dataSource && this.dataSource.data) {
 		if (!this.isDeliveryNotesTableLoading && this.dataSource && this.dataSource.data) {
 			if (this.dataSource.data.length !== this.originalData.length) {
 				return false;

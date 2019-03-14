@@ -4,6 +4,7 @@ import * as moment from 'moment';
 export class DeliveryNotesModel {
 	id: number;
 	companyId: number;
+	name: string;
 	status: string;
 	actionType: string;
 	receipt: string;
@@ -28,13 +29,14 @@ export class DeliveryNotesModel {
 	food15: number;
 	food16: number;
 
-	constructor(id: number, companyId: number, status: string, quantity: number, actionType: string, receipt: string,
+	constructor(id: number, companyId: number, name: string, status: string, actionType: string, receipt: string,
 				foodDate: string, creationDate: Moment, updatedDate: Moment, food1: number, food2: number, food3: number,
 				food4: number, food5: number, food6: number, food7: number, food8: number, food9: number, food10: number,
 				food11: number, food12: number, food13: number, food14: number, food15: number, food16: number) {
 
 		this.id = id;
 		this.companyId = companyId;
+		this.name = name;
 		this.status = status;
 		this.actionType = actionType;
 		this.receipt = receipt;

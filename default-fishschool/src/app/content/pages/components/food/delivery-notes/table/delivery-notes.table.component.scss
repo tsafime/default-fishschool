@@ -45,6 +45,10 @@ input.input-number-format:focus + label.label-number-format {
 	td.mat-footer-cell {
 		font-weight: bold !important;
 	}
+
+	.mat-slide-toggle {
+		padding-right: 10px;
+	}
 }
 
 /*::ng-deep {
