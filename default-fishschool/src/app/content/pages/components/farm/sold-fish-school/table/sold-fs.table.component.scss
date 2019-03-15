@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+// Remove input number arrows, example taken from: https://css-tricks.com/snippets/css/turn-off-number-input-spinners/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+label.label-number-format {
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: .4375em 0;
+	background: white;
+	border: none;
+}
+
+input.input-number-format {
+	position: relative;
+}
+
+// Display on/off label to show formatted number
+input.input-number-format:focus + label.label-number-format {
+	display: none;
+}
+
+.mat-row:hover {
+	background-color: #e6e6ff;
+}
+
+.mat-cell {
+	vertical-align: middle !important;
+	padding-right: 20px;
+}
+
+::ng-deep {
+
+	.mat-header-cell {
+		vertical-align: middle !important;
+	}
+
+	.mat-form-field-underline {
+		display: none;
+	}
+
+	td.mat-footer-cell {
+		font-weight: bold !important;
+	}
+}
+
+/*::ng-deep {
+	.mat-progress-spinner circle, .mat-spinner circle {
+		stroke: #3fb53f;
+	}
+}*/

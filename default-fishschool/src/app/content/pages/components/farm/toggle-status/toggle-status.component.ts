@@ -17,7 +17,7 @@ export class ToggleStatusComponent extends ToastSupport implements OnInit {
 
 	school: FishSchoolModel = {
 		id: null, companyId: null, name: null, updateName: null, status: null, creationDate: null,
-		updatedDate: null, age: null, specie: null, quantity: null, dead: null, menualAvgWeight: null, averageWeight: null,
+		updatedDate: null, age: null, specie: null, quantity: null, dead: null, menualAvgWeight: null, averageWeight: null, soldFish: null,
 		foodWeight: null, totalGivenFood: null, actualGivenFood: null, percentageTsemach: null, deadLastUpdateDate: null,
 		food: null, feedDate: null, sale: null, totalSale: null, fcr: null, salesFcr: null, totalWeight: null, updatedCreationDate: null
 	};

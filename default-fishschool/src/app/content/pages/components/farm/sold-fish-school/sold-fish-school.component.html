@@ -1,0 +1,41 @@
+<div class="m-section">
+	<mat-accordion class="example-headers-align">
+		<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+							 [expanded]="panelOpenState === true">
+			<mat-expansion-panel-header>
+				<mat-panel-title>{{'FISH_SCHOOL.FILTERS.PANEL.SOLD_HEADER' | translate}}</mat-panel-title>
+			</mat-expansion-panel-header>
+			<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+				<div class="example-container">
+					<span class="col-sm-1"></span>
+
+					<div style="width: 300px;" class="mat-form-field">
+						<!-- https://github.com/ng-select/ng-select -->
+						<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
+						<ng-select matInput class="custom"
+								   [items]="fishSchoolNames"
+								   bindLabel="name"
+								   groupBy="status"
+								   placeholder="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}"
+								   notFoundText="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME_NOT_FOUND' | translate }}"
+								   autofocus
+								   required="true"
+								   [multiple]="false"
+								   maxSelectedItems="1"
+								   [virtualScroll]="true"
+								   #schoolName
+								   name="schoolName"
+								   [(ngModel)]="model.schoolName">
+						</ng-select>
+					</div>
+
+					<span class="col-sm-1"></span>
+					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="isFishSchoolLoadingStarted || ! f.form.valid || model.schoolName === undefined">
+						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
+					</button>
+				</div>
+			</form>
+		</mat-expansion-panel>
+	</mat-accordion>
+</div>
+<m-sold-fs-table (dataReady)="onDataReady($event)" [model]="model" *ngIf="startLoadFishSchools"></m-sold-fs-table>

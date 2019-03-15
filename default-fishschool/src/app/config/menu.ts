@@ -294,6 +294,13 @@ export class MenuConfig implements ConfigModel {
 								page: '/fs-toggle-status',
 								translate: 'MENU.FISH_SCHOOLS_TOGGLE_STATUS'
 							},
+							{
+								title: 'Sold',
+								desc: 'Sold Fish School',
+								icon: 'flaticon-graph',
+								page: '/sold-fs',
+								translate: 'MENU.SOLD_FISH_SCHOOL'
+							},
 						]
 					},
 					{

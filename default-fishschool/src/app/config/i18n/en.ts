@@ -15,6 +15,7 @@ export const locale = {
 			FISH_SCHOOLS: 'Fish schools',
 			FISH_SCHOOLS_NEW: 'New',
 			FISH_SCHOOLS_TOGGLE_STATUS: 'Toggle Status',
+			SOLD_FISH_SCHOOL: 'Sold',
 			FARM: 'Farm',
 			FOOD_NAMES: 'Food Names',
 			DELIVERY_NOTES: 'Delivery Notes',
@@ -105,6 +106,7 @@ export const locale = {
 			SOLD_ACTIVE_FISH_SCHOOL: 'Sold/Active School',
 			FILTERS: {
 				SCHOOL_NAME: 'School name',
+				SOLD_SCHOOL_NAME: 'Sold School name',
 				CHOOSE_SCHOOL_NAME: 'Choose School Name',
 				START_TYPING_NAME: 'Start typing name',
 				SCHOOL_NAME_NOT_FOUND: 'School name not found',
@@ -117,7 +119,8 @@ export const locale = {
 				NUM_OF_DAYS: '# of days',
 				PANEL: {
 					HEADER: 'Fish school filters',
-					DESCRIPTION: 'Choose Filters'
+					DESCRIPTION: 'Choose Filters',
+					SOLD_HEADER: 'Sold Fish school filters',
 				}
 			},
 			TABLE: {
@@ -132,6 +135,15 @@ export const locale = {
 				TOTAL_FOOD: 'Total Food',
 				FOOD_TYPE: 'Food Type',
 				MORTALITY: 'Mortality',
+			},
+			SOLD: {
+				FEED_DATE: 'Feed Date',
+				SOLD_FISH: 'Sold Fish',
+				AVERAGE_WEIGHT: 'Average Weight',
+				SALE: 'Sale',
+				TOTAL_WEIGHT: 'Total Weight',
+				FCR: 'FCR',
+				TOTAL_GIVEN_FOOD: 'Total Given Food',
 			},
 			RESULTS: {
 				FISH_SCHOOL_UPDATE_SUCCESS: 'Fish schools updated successfully',

@@ -16,6 +16,7 @@ export interface FishSchoolModel {
 	dead: number;
 	menualAvgWeight: boolean;
 	averageWeight: number;
+	soldFish: number;
 	foodWeight: number;
 	totalGivenFood: number;
 	actualGivenFood: number;

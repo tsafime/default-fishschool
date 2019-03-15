@@ -9,6 +9,7 @@ import {FsNames} from '../../models/fishschool/fish-school.names.model';
 import * as deepEqual from 'deep-equal';
 import {Observable} from 'rxjs';
 import {FsUrlsService} from './fs.urls';
+import {SoldFsRequestModel} from '../../../content/pages/components/farm/sold-fish-school/sold-fish-school.component';
 
 @Injectable()
 export class FishSchoolsService {
@@ -27,6 +28,17 @@ export class FishSchoolsService {
 		const json = JSON.stringify(filteredQuery);
 		return this.http.post<FishSchools>(this.urlsService.fsViewUrl, json);
 	}
+
+	sold(model: SoldFsRequestModel) {
+
+		const queryFilters: QueryFilter[] = [];
+		queryFilters.push(new QueryFilter('name', [model.schoolName.name], '=', 'AND'));
+
+		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 400, 0, ['feedDate'], 'ASC');
+		const json = JSON.stringify(filteredQuery);
+		return this.http.post<FishSchools>(this.urlsService.fsSoldUrl, json);
+	}
+
 
 	names() {
 		const json = {};

@@ -40,6 +40,10 @@ const routes: Routes = [
 				loadChildren: './components/farm/toggle-status/toggle-status.module#FishSchoolsToggleStatusModule'
 			},
 			{
+				path: 'sold-fs',
+				loadChildren: './components/farm/sold-fish-school/sold-fish-school.module#SoldFishSchoolModule'
+			},
+			{
 				path: 'food-names',
 				loadChildren: './components/food/food-names/food-names.module#FoodNamesModule'
 			},
