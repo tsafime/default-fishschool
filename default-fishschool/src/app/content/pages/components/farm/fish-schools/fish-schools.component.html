@@ -9,7 +9,7 @@
 				<div class="example-container">
 					<span class="col-sm-1"></span>
 
-					<div style="width: 300px;" class="mat-form-field">
+					<div class="mat-form-field">
 						<!-- https://github.com/ng-select/ng-select -->
 						<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
 						<ng-select matInput class="custom"
@@ -23,7 +23,7 @@
 								   [multiple]="false"
 								   maxSelectedItems="1"
 								   [virtualScroll]="true"
-								   #schoolName="ngModel"
+								   #schoolName
 								   name="schoolName"
 								   [(ngModel)]="model.schoolName">
 						</ng-select>
@@ -50,7 +50,6 @@
 						</mat-datepicker-toggle>
 						<mat-datepicker #picker [startAt]="model.feedDate"></mat-datepicker>
 					</mat-form-field>
-					<span class="col-sm-1"></span>
 
 					<!-- # of days -->
 					<mat-form-field class="col-md-2">
