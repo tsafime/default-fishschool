@@ -111,9 +111,11 @@
 			</div>
 
 			<span class="col-sm-1"></span>
-			<button class="btn btn-primary" (click)="createNewFishSchool()" [disabled]="! f.form.valid" #newSchool>
-				{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
-			</button>
+			<div class="col-md-2 mat-form-field">
+				<button class="btn btn-primary" (click)="createNewFishSchool()" [disabled]="! f.form.valid" #newSchool>
+					{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
+				</button>
+			</div>
 		</div>
 	</form>
 </div>

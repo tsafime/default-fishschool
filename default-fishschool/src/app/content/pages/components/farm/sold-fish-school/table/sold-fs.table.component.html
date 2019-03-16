@@ -2,8 +2,8 @@
 	<mat-card *ngIf="isFishSchoolTableLoading" style="display: flex; justify-content: center; align-items: center">
 		<mat-progress-spinner  mode="indeterminate"></mat-progress-spinner>
 	</mat-card>
-	<div [hidden]="model.schoolName.name === '' || isFishSchoolTableLoading || ! havingFishSchoolRecords">
-		<h5>{{'FISH_SCHOOL.FILTERS.SOLD_SCHOOL_NAME' | translate}}: {{ model.schoolName.name }}</h5>
+	<div [hidden]="isFishSchoolTableLoading || ! havingFishSchoolRecords">
+		<h5>{{'FISH_SCHOOL.FILTERS.SOLD_SCHOOL_NAME' | translate}}: {{ (model.schoolName) ? model.schoolName.name : 'FISH_SCHOOL.FILTERS.SCHOOL_NAME_NOT_SELECTED' | translate}}</h5>
 	</div>
 	<div class="example-container mat-elevation-z8" [hidden]="isFishSchoolTableLoading || ! havingFishSchoolRecords">
 		<mat-form-field>

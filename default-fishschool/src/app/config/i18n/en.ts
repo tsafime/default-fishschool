@@ -110,6 +110,7 @@ export const locale = {
 				CHOOSE_SCHOOL_NAME: 'Choose School Name',
 				START_TYPING_NAME: 'Start typing name',
 				SCHOOL_NAME_NOT_FOUND: 'School name not found',
+				SCHOOL_NAME_NOT_SELECTED: 'Not selected',
 				STATUS: {
 					ACTIVE: 'Active',
 					INACTIVE: 'Inactive',

@@ -28,14 +28,9 @@
 								   [(ngModel)]="model.schoolName">
 						</ng-select>
 					</div>
-					<div class="mat-form-field">
-						<span class="col-sm-1"></span>
-					</div>
-					<div class="mat-form-field">
-						<button class="btn btn-primary" (click)="loadTableData()" [disabled]="isFishSchoolLoadingStarted || ! f.form.valid || model.schoolName === undefined">
-							{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
-						</button>
-					</div>
+					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="isFishSchoolLoadingStarted || ! f.form.valid || model.schoolName === undefined">
+						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
+					</button>
 				</div>
 			</form>
 		</mat-expansion-panel>

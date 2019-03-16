@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.btn.btn-primary {
+	color: #fff;
+}
+
+::ng-deep {
+
+	ng-select.custom {
+		border: 0px;
+		min-height: 0px;
+		border-radius: 0;
+	}
+
+	.ng-select.custom .ng-select-container  {
+		min-height: 0px;
+		border-radius: 0;
+	}
+
+	.ng-select.custom ::ng-deep .ng-select-container  {
+		min-height: 0px;
+		border-radius: 0;
+	}
+
+	.ng-placeholder {
+		position: inherit;
+	}
+
+	ng-select.ng-invalid.ng-touched .ng-select-container {
+		box-shadow: 0px 1px 0px #dc322f;
+	}
+
+	ng-select.custom {
+		width: 300px;
+	}
+}

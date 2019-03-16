@@ -3,8 +3,7 @@
 	<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 		<div class="example-container">
 			<span class="col-sm-1"></span>
-
-			<div class="col-md-2 mat-form-field">
+			<div class="mat-form-field">
 				<!-- https://github.com/ng-select/ng-select -->
 				<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
 				<ng-select matInput class="custom"
@@ -18,25 +17,24 @@
 						   [multiple]="false"
 						   maxSelectedItems="1"
 						   [virtualScroll]="true"
+						   #schoolName
 						   name="schoolName"
 						   (change)="onSchoolSelect($event)">
 				</ng-select>
 			</div>
 
-			<!-- School status -->
-			<div class="col-md-2 mat-form-field">
-                <mat-button-toggle-group name="status" class="form-group" [(ngModel)]="school.status"
-                                         #status="ngModel">
-                    <button class="btn" value="ACTIVE" (click)="school.status = 'ACTIVE'"
-                            [class.btn-primary]="school.status === '' || school.status === 'ACTIVE'">
-                        {{'FISH_SCHOOL.FILTERS.STATUS.ACTIVE' | translate}}
-                    </button>
-                    <button class="btn" value="SOLD" (click)="school.status = 'SOLD'"
-                            [class.btn-primary]="school.status === 'SOLD'">
-                        {{'FISH_SCHOOL.FILTERS.STATUS.SOLD' | translate}}
-                    </button>
-                </mat-button-toggle-group>
-            </div>
+		<!-- School status -->
+			<mat-button-toggle-group name="status" class="form-group" [(ngModel)]="school.status"
+									 #status="ngModel">
+				<button class="btn" value="ACTIVE" (click)="school.status = 'ACTIVE'"
+						[class.btn-primary]="school.status === '' || school.status === 'ACTIVE'">
+					{{'FISH_SCHOOL.FILTERS.STATUS.ACTIVE' | translate}}
+				</button>
+				<button class="btn" value="SOLD" (click)="school.status = 'SOLD'"
+						[class.btn-primary]="school.status === 'SOLD'">
+					{{'FISH_SCHOOL.FILTERS.STATUS.SOLD' | translate}}
+				</button>
+			</mat-button-toggle-group>
 			<span class="col-sm-1"></span>
 			<button class="btn btn-primary" (click)="toggleFishSchoolStatus()" [disabled]="! enableSubmit" #toggleStatus>
 				{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
