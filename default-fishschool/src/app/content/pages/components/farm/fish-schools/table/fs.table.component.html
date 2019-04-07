@@ -180,6 +180,21 @@
 				<td mat-cell *matCellDef="let row"> {{row.fcr | number}}</td>
 			</ng-container>
 
+			<!-- sale (sold) column -->
+			<ng-container matColumnDef="sale">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header
+					[ngStyle]="sort.active == 'sale' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
+					{{ headers[12] }}</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-form-field floatLabel="never" *ngIf="isFishSchoolReadWrite('UPDATE', 'sale') && row.id; else display">
+						<input matInput type="number" [value]="row.sale" [(ngModel)]="row.sale" required
+							   step=".01" min="0" class="input-number-format">
+						<label class="label-number-format">{{row.sale | number}}</label>
+					</mat-form-field>
+					<ng-template #display>{{row.sale | number}}</ng-template>
+				</td>
+			</ng-container>
+
 			<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 		</table>

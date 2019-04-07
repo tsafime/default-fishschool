@@ -106,6 +106,7 @@ export const locale = {
 			SOLD_ACTIVE_FISH_SCHOOL: 'Sold/Active School',
 			FILTERS: {
 				SCHOOL_NAME: 'School name',
+				SELECT_SCHOOL_NAME: 'Select School name',
 				SOLD_SCHOOL_NAME: 'Sold School name',
 				CHOOSE_SCHOOL_NAME: 'Choose School Name',
 				START_TYPING_NAME: 'Start typing name',
@@ -136,6 +137,7 @@ export const locale = {
 				TOTAL_FOOD: 'Total Food',
 				FOOD_TYPE: 'Food Type',
 				MORTALITY: 'Mortality',
+				SOLD: 'Sold',
 			},
 			SOLD: {
 				FEED_DATE: 'Feed Date',
