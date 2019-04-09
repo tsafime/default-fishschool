@@ -37,8 +37,8 @@
 			<!-- quantity -->
 			<mat-form-field class="col-md-2">
 				<mat-label>{{'FISH_SCHOOL.QUANTITY' | translate}}</mat-label>
-				<input matInput type="number" #quantity name="school.quantity" placeholder="{{ 'FISH_SCHOOL.QUANTITY' | translate }}" autocomplete="off"
-					   [(ngModel)]="school.quantity" minlength="1" required min="0" step="1" class="input-number-format">
+				<input matInput currencyMask type="text" #quantity name="school.quantity" placeholder="{{ 'FISH_SCHOOL.QUANTITY' | translate }}" autocomplete="off"
+					   [(ngModel)]="school.quantity" required>
 				<div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)" class="text-danger">
 					<div *ngIf="quantity.errors.required">
 						{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name:
@@ -77,10 +77,9 @@
 			<!-- percentageTsemach -->
 			<mat-form-field class="col-md-2">
 				<mat-label>{{'FISH_SCHOOL.PERCENTAGE_TSEMACH' | translate}}</mat-label>
-				<input matInput type="number" #percentageTsemach name="school.percentageTsemach"
+				<input matInput currencyMask type="text" #percentageTsemach name="school.percentageTsemach"
 					   placeholder="{{ 'FISH_SCHOOL.PERCENTAGE_TSEMACH' | translate }}" autocomplete="off"
-					   [(ngModel)]="school.percentageTsemach" minlength="1" required step=".01"
-					   min="0" class="input-number-format">
+					   [(ngModel)]="school.percentageTsemach">
 				<div *ngIf="percentageTsemach.invalid && (percentageTsemach.dirty || percentageTsemach.touched)" class="text-danger">
 					<div *ngIf="percentageTsemach.errors.required">
 						{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.PERCENTAGE_TSEMACH' | translate } }}

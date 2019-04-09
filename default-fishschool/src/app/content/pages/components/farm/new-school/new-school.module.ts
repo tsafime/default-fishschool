@@ -36,7 +36,8 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 import {NewSchoolComponent} from './new-school.component';
-import {ToggleStatusComponent} from '../toggle-status/toggle-status.component';
+import {CurrencyMaskModule} from 'ng2-currency-mask';
+import {CurrencyMaskConfig, CURRENCY_MASK_CONFIG} from 'ng2-currency-mask/src/currency-mask.config';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -52,6 +53,16 @@ export const DD_MM_YYYY_Format = {
 		dateA11yLabel: 'LL',
 		monthYearA11yLabel: 'MMMM YYYY',
 	},
+};
+
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+	align: 'right',
+	allowNegative: false,
+	decimal: '.',
+	precision: 0,
+	prefix: '',
+	suffix: '',
+	thousands: ','
 };
 
 @NgModule({
@@ -87,6 +98,7 @@ export const DD_MM_YYYY_Format = {
 		NgxMatSelectSearchModule,
 		MatCardModule,
 		MatProgressSpinnerModule,
+		CurrencyMaskModule,
 	],
 	exports: [
 		RouterModule,
@@ -106,6 +118,7 @@ export const DD_MM_YYYY_Format = {
 		FishSchoolsAuthorizationService,
 		FoodService,
 		FsUrlsService,
+		{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
 	],
 	declarations: [
 		NewSchoolComponent,

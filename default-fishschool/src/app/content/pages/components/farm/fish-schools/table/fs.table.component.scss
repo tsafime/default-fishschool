@@ -1,43 +1,10 @@
 @charset "UTF-8";
 
-// Remove input number arrows, example taken from: https://css-tricks.com/snippets/css/turn-off-number-input-spinners/
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
-
-label.label-number-format {
-	position: absolute;
-	left: 0;
-	top: 0;
-	padding: .4375em 0;
-	background: white;
-	border: none;
-}
-
-input.input-number-format {
-	position: relative;
-}
-
-// Display on/off label to show formatted number
-input.input-number-format:focus + label.label-number-format {
-	display: none;
-}
-
 .mat-row:hover {
 	background-color: #e6e6ff;
 }
 
 ::ng-deep {
-	.mat-cell {
-		vertical-align: middle !important;
-	}
-
-	.mat-header-cell {
-		vertical-align: middle !important;
-	}
-
 	.mat-form-field-underline {
 		display: none;
 	}
@@ -74,7 +41,7 @@ input.input-number-format:focus + label.label-number-format {
 
 	.table.table-striped thead th {
 		/* row padding */
-		padding: 12px 0 12px 0;
+		padding: 4px 0 4px 0;
 		/* row border */
 		border: 1px solid #000000;
 		border-top: 1px solid #000000;
@@ -82,7 +49,7 @@ input.input-number-format:focus + label.label-number-format {
 
 	td.mat-cell {
 		/* row padding */
-		padding: 12px 0 12px 0;
+		padding: 4px 0 4px 0;
 		/* row border */
 		border: 1px solid #000000;
 		border-top: 1px solid #000000;

@@ -30,6 +30,8 @@ import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 import {DeliveryNotesService} from '../../../../../core/services/fishschool/delivery-notes.service';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {ConfirmDeleteDeliveryNotesDialogComponent} from './table/confirm-delete/confirm-delete.delivery.notes.dialog.component';
+import {CurrencyMaskModule} from 'ng2-currency-mask';
+import {CurrencyMaskConfig, CURRENCY_MASK_CONFIG} from 'ng2-currency-mask/src/currency-mask.config';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -53,6 +55,16 @@ const routes: Routes = [
 		component: DeliveryNotesComponent,
 	},
 ];
+
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+	align: 'left',
+	allowNegative: false,
+	decimal: '.',
+	precision: 0,
+	prefix: '',
+	suffix: '',
+	thousands: ','
+};
 
 @NgModule({
 	imports: [
@@ -83,6 +95,7 @@ const routes: Routes = [
 		MatProgressSpinnerModule,
 		MatDialogModule,
 		MatButtonModule,
+		CurrencyMaskModule,
 	],
 	exports: [
 		RouterModule,
@@ -103,6 +116,7 @@ const routes: Routes = [
 		ReloadTableDataService,
 		FsUrlsService,
 		DeliveryNotesService,
+		{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
 	],
 	declarations: [
 		DeliveryNotesComponent,

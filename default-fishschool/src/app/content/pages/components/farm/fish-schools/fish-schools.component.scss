@@ -14,6 +14,7 @@
 		display: -webkit-inline-flex;
 		top: -10px;
 	}
+
 	.vertical-align-middle {
 			 text-align: center;
 			 vertical-align: middle;
@@ -37,7 +38,7 @@
 
 	.table.table-striped thead th {
 		/* row padding */
-		padding: 12px 0 12px 0;
+		padding: 4px 0 4px 0;
 		/* row border */
 		border: 1px solid #000000;
 		border-top: 1px solid #000000;
@@ -45,7 +46,7 @@
 
 	td.mat-cell {
 		/* row padding */
-		padding: 12px 0 12px 0;
+		padding: 4px 0 4px 0;
 		/* row border */
 		border: 1px solid #000000;
 		border-top: 1px solid #000000;

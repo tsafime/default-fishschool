@@ -27,9 +27,21 @@ import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-per
 import {ToastrModule} from 'ng6-toastr-notifications';
 import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
+import {CurrencyMaskModule} from 'ng2-currency-mask';
+import {CurrencyMaskConfig, CURRENCY_MASK_CONFIG} from 'ng2-currency-mask/src/currency-mask.config';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
+};
+
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+	align: 'right',
+	allowNegative: false,
+	decimal: '.',
+	precision: 0,
+	prefix: '',
+	suffix: '',
+	thousands: ','
 };
 
 @NgModule({
@@ -56,7 +68,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 				path: '',
 				component: DailyFarmComponent
 			}
-		])
+		]),
+		CurrencyMaskModule,
 	],
 	providers: [
 		InterceptService,
@@ -75,6 +88,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		FarmService,
 		FishSchoolsService,
 		FsUrlsService,
+		{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
 	],
 	entryComponents: [
 	],

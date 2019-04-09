@@ -1,48 +1,53 @@
-@charset "UTF-8";
+@charset "utf-8";
 
-// Remove input number arrows, example taken from: https://css-tricks.com/snippets/css/turn-off-number-input-spinners/
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
-
-label.label-number-format {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	padding: .4375em 0;
-	background: white;
-	border: none;
-}
-
-input.input-number-format {
-	position: relative;
-}
-
-// Display on/off label to show formatted number
-input.input-number-format:focus + label.label-number-format {
-	display: none;
-}
-
-td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
-	padding-left: 3px;
-}
-
-td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell {
-	padding-left: 3px;
-}
 
 .mat-row:hover {
 	background-color: #e6e6ff;
 }
 
-::ng-deep {
-	.mat-cell {
-		vertical-align: middle !important;
-	}
+tr, td {
+	border: 1px solid #000000;
+	border-top: 1px solid #000000;
+}
 
-	.mat-header-cell {
-		vertical-align: middle !important;
+.table.table-striped thead th {
+	border: 1px solid #000000;
+	border-top: 1px solid #000000;
+}
+
+td.mat-cell {
+	border: 1px solid #000000;
+	border-top: 1px solid #000000;
+}
+
+td.mat-cell:first-child {
+	border-left: 1px solid #000000;
+}
+
+td.mat-cell:last-child {
+	border-right: 1px solid #000000;
+}
+
+table {
+	border-spacing: 0 4px !important;
+}
+
+.mat-cell:first-of-type, .mat-footer-cell:first-of-type, .mat-header-cell:first-of-type, .mat-cell, .mat-footer-cell, .mat-header-cell {
+	padding-left: 4px !important;
+	padding-right: 4px !important;
+}
+
+.mat-form-field-infix {
+	width: max-content !important;
+}
+
+/* Cells display shorten */
+.mat-form-field {
+	width: 70px;
+}
+
+::ng-deep {
+	.mat-form-field-underline {
+		display: none;
 	}
 }
