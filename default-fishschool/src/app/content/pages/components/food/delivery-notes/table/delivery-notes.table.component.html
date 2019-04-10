@@ -95,7 +95,7 @@
 					</mat-form-field>
 					<ng-template #display>{{row[food] | number:'1.2-2'}}</ng-template>
 				</td>
-				<td mat-footer-cell *matFooterCellDef> {{getTotal() | number:'1.2-2'}} </td>
+				<td mat-footer-cell *matFooterCellDef><div class="bold">{{getTotal() | number:'1.2-2'}}</div></td>
 			</ng-container>
 
 			<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

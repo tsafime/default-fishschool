@@ -5,7 +5,7 @@
 }
 
 ::ng-deep {
-	.mat-form-field-underline {
+	.mat-form-field-underline, .ng-select .ng-select-container:after {
 		display: none;
 	}
 
@@ -16,6 +16,7 @@
 		width: 110px;
 		display: -webkit-inline-flex;
 		top: -10px;
+		height: 8px;
 	}
 
 	.vertical-align-middle {
