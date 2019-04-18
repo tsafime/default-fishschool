@@ -4158,6 +4158,7 @@ ng2-completer@^2.0.8:
 ng2-currency-mask@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/ng2-currency-mask/-/ng2-currency-mask-5.3.1.tgz#d73e27bf60ea423dfc0040106c8ea17316d07aab"
+  integrity sha1-1z4nv2DqQj38AEAQbI6hcxbQeqs=
 
 ng6-toastr-notifications@^1.0.4:
   version "1.0.4"
