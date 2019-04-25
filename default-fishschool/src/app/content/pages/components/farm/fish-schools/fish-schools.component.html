@@ -8,9 +8,15 @@
 			<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 				<div class="example-container">
 					<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
+					<div>
+						<mat-radio-group [value]="source" (change)="selectSource($event)">
+							<mat-radio-button value="ACTIVE">Active</mat-radio-button>
+							<mat-radio-button value="SOLD">Sold</mat-radio-button>
+						</mat-radio-group>
+					</div>
 					<!-- https://github.com/ng-select/ng-select -->
 					<ng-select matInput class="custom"
-							   [items]="fishSchoolNames"
+							   [items]="fishSchoolNames | source:source"
 							   bindLabel="name"
 							   groupBy="status"
 							   placeholder="{{'FISH_SCHOOL.FILTERS.SELECT_SCHOOL_NAME' | translate}}"
@@ -33,10 +39,13 @@
 						<div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)"
 							 class="text-danger">
 							<div *ngIf="startDate.errors.required">
-								{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.FOOD_DATE' | translate } }}
+								{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.FOOD_DATE' | translate} }}
 							</div>
 							<div *ngIf="startDate.errors.minlength">
-								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.FOOD_DATE' | translate, min: 10 } }}
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {
+								name: 'FISH_SCHOOL.FILTERS.FOOD_DATE' | translate,
+								min: 10
+							} }}
 							</div>
 						</div>
 						<mat-datepicker-toggle matSuffix [for]="picker">
@@ -48,20 +57,25 @@
 					<!-- # of days -->
 					<mat-form-field class="col-md-2">
 						<mat-label>{{'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate}}</mat-label>
-						<input matInput type="text" #days name="days" placeholder="{{ 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate }}" autocomplete="off"
+						<input matInput type="text" #days name="days"
+							   placeholder="{{ 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate }}" autocomplete="off"
 							   [(ngModel)]="model.days" #days="ngModel" minlength="1" required>
 						<div *ngIf="days.invalid && (days.dirty || days.touched)" class="text-danger">
 							<div *ngIf="days.errors.required">
-								{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate } }}
+								{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate} }}
 							</div>
 							<div *ngIf="days.errors.minlength">
-								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate, min: 1 } }}
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {
+								name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate,
+								min: 1
+							} }}
 							</div>
 						</div>
 					</mat-form-field>
 
 					<span class="col-sm-1"></span>
-					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="isFishSchoolLoadingStarted || ! f.form.valid || model.schoolName === undefined">
+					<button class="btn btn-primary" (click)="loadTableData()"
+							[disabled]="isFishSchoolLoadingStarted || ! f.form.valid || model.schoolName === undefined">
 						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
 					</button>
 				</div>

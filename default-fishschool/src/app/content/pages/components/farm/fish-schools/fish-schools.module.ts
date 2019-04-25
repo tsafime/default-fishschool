@@ -3,12 +3,22 @@ import {FishSchoolsComponent} from './fish-schools.component';
 import {RouterModule} from '@angular/router';
 import {
 	DateAdapter,
-	MAT_DATE_FORMATS, MatButtonToggleModule, MatCardModule, MatDatepickerModule,
+	MAT_DATE_FORMATS,
+	MatButtonToggleModule,
+	MatCardModule,
+	MatDatepickerModule,
 	MatExpansionModule,
 	MatFormFieldModule,
 	MatIconModule,
-	MatIconRegistry, MatInputModule,
-	MatOptionModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatSortModule, MatTableModule
+	MatIconRegistry,
+	MatInputModule,
+	MatOptionModule,
+	MatProgressSpinnerModule,
+	MatRadioModule,
+	MatSelectModule,
+	MatSlideToggleModule,
+	MatSortModule,
+	MatTableModule
 } from '@angular/material';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {NgbAlertConfig, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -31,6 +41,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {CurrencyMaskConfig, CURRENCY_MASK_CONFIG} from 'ng2-currency-mask/src/currency-mask.config';
+import {SourcePipe} from "./pipes/source.pipe";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -92,6 +103,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 		MatCardModule,
 		MatProgressSpinnerModule,
 		CurrencyMaskModule,
+		MatRadioModule,
 	],
 	exports: [
 		RouterModule,
@@ -117,6 +129,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 	declarations: [
 		FishSchoolsComponent,
 		TableComponent,
+		SourcePipe
 	]
 })
 

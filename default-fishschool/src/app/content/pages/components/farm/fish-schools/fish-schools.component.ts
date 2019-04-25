@@ -17,7 +17,7 @@ import {NameEntity} from '../../../../../core/models/fishschool/fish-school.name
 	styleUrls: ['./fish-schools.component.scss', '../../../../../../../node_modules/@ng-select/ng-select/themes/material.theme.css']
 })
 export class FishSchoolsComponent extends ToastSupport implements OnInit {
-
+	source = 'ACTIVE';
 	public model: FsRequestModel = {schoolName: undefined, status: 'ACTIVE', feedDate: moment(), days: 10};
 
 	@ViewChild(MatSort) sort: MatSort;
@@ -61,6 +61,10 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 		this.startLoadFishSchools = true;
 		this.reloadService.reload(true);
 		// setTimeout(() => this.daysInput.nativeElement.focus(), 1000);
+	}
+
+	selectSource(e) {
+		this.source = e.value;
 	}
 
 	onDataReady($event) {
