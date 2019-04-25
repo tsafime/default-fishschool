@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FsRequestModel} from '../fish-schools.component';
 import {FishSchoolModel} from '../../../../../../core/models/fishschool/fish-school.model';
 import {FishSchoolsAuthorizationService} from '../../../../../../core/services/fishschool/fish-schools.authorization.service';
@@ -48,7 +48,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 
     constructor(private service: FishSchoolsService, private foodService: FoodService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
-				private reloadService: ReloadTableDataService) {
+				private reloadService: ReloadTableDataService, private changeDetector: ChangeDetectorRef) {
 		super(toastr);
 
 		this.headers = [this.translate.instant('FISH_SCHOOL.TABLE.SELECTED_DATE'),
@@ -89,7 +89,6 @@ export class TableComponent extends ToastSupport implements OnInit {
 
 		this.isFishSchoolTableLoading = true;
 		await this.service.view(this.model).toPromise().then(response => {
-
 			if (response.status === 'Success') {
 
 				if (response.data.length === 0) {
@@ -103,6 +102,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 			} else {
 				this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FS_FAILURE'), type: 'danger'});
 			}
+			this.changeDetector.detectChanges();
 		}).catch(response => {
 			if (response && response.error && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
@@ -192,6 +192,14 @@ export class TableComponent extends ToastSupport implements OnInit {
 
 			this.dataSource.filter = filterValue.trim().toLowerCase();
 		}
+	}
+
+	onFoodSelect(row, e) {
+		row.food = e.value;
+	}
+
+	getDefaultFood(row) {
+		return this.foods.find(f => f.name === row.food.name);
 	}
 
 	private loadData(data: FishSchoolModel[]) {

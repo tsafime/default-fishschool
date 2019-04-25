@@ -7,14 +7,15 @@
 			<!-- name -->
 			<mat-form-field class="col-md-2">
 				<mat-label>{{'FISH_SCHOOL.NAME' | translate}}</mat-label>
-				<input matInput type="text" #fsName name="fsName" placeholder="{{ 'FISH_SCHOOL.NAME' | translate }}" autocomplete="off"
+				<input matInput type="text" #fsName name="fsName" placeholder="{{ 'FISH_SCHOOL.NAME' | translate }}"
+					   autocomplete="off"
 					   [(ngModel)]="school.name" minlength="1" required>
 				<div *ngIf="fsName.invalid && (fsName.dirty || fsName.touched)" class="text-danger">
 					<div *ngIf="fsName.errors.required">
-						{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.NAME' | translate } }}
+						{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.NAME' | translate} }}
 					</div>
 					<div *ngIf="fsName.errors.minlength">
-						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FISH_SCHOOL.NAME' | translate, min: 1 } }}
+						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.NAME' | translate, min: 1} }}
 					</div>
 				</div>
 			</mat-form-field>
@@ -22,14 +23,18 @@
 			<!-- specie -->
 			<mat-form-field class="col-md-2">
 				<mat-label>{{'FISH_SCHOOL.SPECIE' | translate}}</mat-label>
-				<input matInput type="text" #specie name="specie" placeholder="{{ 'FISH_SCHOOL.SPECIE' | translate }}" autocomplete="off"
+				<input matInput type="text" #specie name="specie" placeholder="{{ 'FISH_SCHOOL.SPECIE' | translate }}"
+					   autocomplete="off"
 					   [(ngModel)]="school.specie" minlength="1" required>
 				<div *ngIf="specie.invalid && (specie.dirty || specie.touched)" class="text-danger">
 					<div *ngIf="specie.errors.required">
-						{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.SPECIE' | translate } }}
+						{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.SPECIE' | translate} }}
 					</div>
 					<div *ngIf="specie.errors.minlength">
-						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FISH_SCHOOL.SPECIE' | translate, min: 1 } }}
+						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {
+						name: 'FISH_SCHOOL.SPECIE' | translate,
+						min: 1
+					} }}
 					</div>
 				</div>
 			</mat-form-field>
@@ -37,16 +42,21 @@
 			<!-- quantity -->
 			<mat-form-field class="col-md-2">
 				<mat-label>{{'FISH_SCHOOL.QUANTITY' | translate}}</mat-label>
-				<input matInput currencyMask type="text" #quantity name="school.quantity" placeholder="{{ 'FISH_SCHOOL.QUANTITY' | translate }}" autocomplete="off"
+				<input matInput currencyMask type="text" #quantity name="school.quantity"
+					   placeholder="{{ 'FISH_SCHOOL.QUANTITY' | translate }}" autocomplete="off"
 					   [(ngModel)]="school.quantity" required>
 				<div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)" class="text-danger">
 					<div *ngIf="quantity.errors.required">
-						{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name:
-						'FISH_SCHOOL.QUANTITY' | translate } }}
+						{{ 'VALIDATION.REQUIRED_FIELD' | translate: {
+						name:
+							'FISH_SCHOOL.QUANTITY' | translate
+					} }}
 					</div>
 					<div *ngIf="quantity.errors.minlength">
-						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name:
-						'FISH_SCHOOL.QUANTITY' | translate, min: 1 } }}
+						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {
+						name:
+							'FISH_SCHOOL.QUANTITY' | translate, min: 1
+					} }}
 					</div>
 				</div>
 			</mat-form-field>
@@ -59,12 +69,16 @@
 				<div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)"
 					 class="text-danger">
 					<div *ngIf="startDate.errors.required">
-						{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name:
-						'FISH_SCHOOL.CREATION_DATE' | translate } }}
+						{{ 'VALIDATION.REQUIRED_FIELD' | translate: {
+						name:
+							'FISH_SCHOOL.CREATION_DATE' | translate
+					} }}
 					</div>
 					<div *ngIf="startDate.errors.minlength">
-						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name:
-						'FISH_SCHOOL.CREATION_DATE' | translate, min: 10 } }}
+						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {
+						name:
+							'FISH_SCHOOL.CREATION_DATE' | translate, min: 10
+					} }}
 					</div>
 				</div>
 				<mat-datepicker-toggle matSuffix [for]="picker">
@@ -80,12 +94,16 @@
 				<input matInput currencyMask type="text" #percentageTsemach name="school.percentageTsemach"
 					   placeholder="{{ 'FISH_SCHOOL.PERCENTAGE_TSEMACH' | translate }}" autocomplete="off"
 					   [(ngModel)]="school.percentageTsemach">
-				<div *ngIf="percentageTsemach.invalid && (percentageTsemach.dirty || percentageTsemach.touched)" class="text-danger">
+				<div *ngIf="percentageTsemach.invalid && (percentageTsemach.dirty || percentageTsemach.touched)"
+					 class="text-danger">
 					<div *ngIf="percentageTsemach.errors.required">
-						{{ 'VALIDATION.REQUIRED_FIELD' | translate: { name: 'FISH_SCHOOL.PERCENTAGE_TSEMACH' | translate } }}
+						{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.PERCENTAGE_TSEMACH' | translate} }}
 					</div>
 					<div *ngIf="percentageTsemach.errors.minlength">
-						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: { name: 'FISH_SCHOOL.PERCENTAGE_TSEMACH' | translate, min: 1 } }}
+						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {
+						name: 'FISH_SCHOOL.PERCENTAGE_TSEMACH' | translate,
+						min: 1
+					} }}
 					</div>
 				</div>
 			</mat-form-field>
@@ -94,19 +112,15 @@
 			<div class="col-md-2 mat-form-field">
 				<!-- https://github.com/ng-select/ng-select -->
 				<mat-label class="mat-form-field-label">{{'FISH_SCHOOL.FOOD_NAME' | translate}}</mat-label>
-				<ng-select matInput class="custom"
-						   [items]="foods"
-						   placeholder="{{'FISH_SCHOOL.FOOD_NAME' | translate}}"
-						   notFoundText="{{'FOOD.FILTERS.FOOD_NAME_NOT_FOUND' | translate}}"
-						   [multiple]="false"
-						   required="true"
-						   maxSelectedItems="1"
-						   [virtualScroll]="false"
-						   #food="ngModel"
-						   name="name"
-						   bindLabel="name"
-						   [(ngModel)]="school.food">
-				</ng-select>
+				<mat-form-field class="margin-15 food-type-select">
+					<mat-select required (selectionChange)="onFoodSelect(school, $event)"
+								placeholder="{{'FISH_SCHOOL.FOOD_NAME' | translate}}"
+					>
+						<mat-option *ngFor="let food of foods" [value]="food">
+							{{food.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
 			</div>
 
 			<span class="col-sm-1"></span>

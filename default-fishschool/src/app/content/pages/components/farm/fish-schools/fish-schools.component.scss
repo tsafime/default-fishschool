@@ -5,6 +5,10 @@
 }
 
 ::ng-deep {
+	.school-names-select {
+		width: 200px;
+	}
+
 	.margin-15 {
 		margin: 0 15px;
 	}
@@ -13,7 +17,7 @@
 		margin-bottom: 20px;
 	}
 
-	.my-container{
+	.my-container {
 		display: flex;
 		flex-direction: column;
 
@@ -28,12 +32,12 @@
 	}
 
 	ng-select.custom {
-	//	border: 0px;
-	//	min-height: 0px;
-	//	border-radius: 0;
+		//	border: 0px;
+		//	min-height: 0px;
+		//	border-radius: 0;
 		width: 200px;
-	//	display: -webkit-inline-flex;
-	//	//top: -10px;
+		//	display: -webkit-inline-flex;
+		//	//top: -10px;
 	}
 
 	.vertical-align-middle {

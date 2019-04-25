@@ -14,21 +14,15 @@
 							<mat-radio-button value="SOLD">Sold</mat-radio-button>
 						</mat-radio-group>
 					</div>
-					<!-- https://github.com/ng-select/ng-select -->
-					<ng-select matInput class="custom margin-15"
-							   [items]="fishSchoolNames | source:source"
-							   bindLabel="name"
-							   groupBy="status"
-							   placeholder="{{'FISH_SCHOOL.FILTERS.SELECT_SCHOOL_NAME' | translate}}"
-							   notFoundText="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME_NOT_FOUND' | translate }}"
-							   required="true"
-							   [multiple]="false"
-							   maxSelectedItems="1"
-							   [virtualScroll]="true"
-							   #schoolName
-							   name="schoolName"
-							   [(ngModel)]="model.schoolName">
-					</ng-select>
+					<mat-form-field class="margin-15 school-names-select">
+						<mat-label>{{'FISH_SCHOOL.FILTERS.SELECT_SCHOOL_NAME' | translate}}</mat-label>
+						<mat-select required
+									(selectionChange)="model.schoolName = $event.value;">
+							<mat-option *ngFor="let name of fishSchoolNames | source:source" [value]="name">
+								{{name.name}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
 
 					<!-- Start date -->
 					<mat-form-field class="col-md-2">

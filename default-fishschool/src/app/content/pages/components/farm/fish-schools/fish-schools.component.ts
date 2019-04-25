@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material';
 import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import * as moment from 'moment';
@@ -39,8 +39,8 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 		super(toastr);
 	}
 
-	async ngOnInit() {
-		await this.service.names().toPromise().then(response => {
+	ngOnInit() {
+		this.service.names().toPromise().then(response => {
 			this.fishSchoolNames = response.data;
 			return response;
 		}).catch(response => {
@@ -60,7 +60,6 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 		this.isFishSchoolLoadingStarted = true;
 		this.startLoadFishSchools = true;
 		this.reloadService.reload(true);
-		// setTimeout(() => this.daysInput.nativeElement.focus(), 1000);
 	}
 
 	selectSource(e) {
@@ -68,7 +67,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 	}
 
 	onDataReady($event) {
-		this.panelOpenState = ! $event;
+		this.panelOpenState = !$event;
 		this.isFishSchoolLoadingStarted = false;
 	}
 }

@@ -46,6 +46,10 @@ export class NewSchoolComponent extends ToastSupport implements OnInit {
 		});
 	}
 
+	onFoodSelect(row, e) {
+		row.food = e.value;
+	}
+
 	createNewFishSchool() {
 		const httpPost: Observable<FishSchools> = this.fishSchoolService.createNewFishSchool(this.school);
 		httpPost.toPromise().then(response => {
