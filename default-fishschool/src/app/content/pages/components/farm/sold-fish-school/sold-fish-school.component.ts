@@ -53,7 +53,7 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 		this.isFishSchoolLoadingStarted = true;
 		this.startLoadFishSchools = true;
 		this.reloadService.reload(true);
-		setTimeout(() => this.select.focus(), 1000);
+		// setTimeout(() => this.select.focus(), 1000);
 	}
 
 	onDataReady($event) {
