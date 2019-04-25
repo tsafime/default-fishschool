@@ -21,7 +21,7 @@
 	<li class="m-menu__item" [ngClass]="{ 'm-menu__item--submenu': item.submenu, 'm-menu__item--active' : !item.submenu && isMenuItemIsActive(item), 'm-menu__item--open' : item.submenu && isMenuItemIsActive(item) }" aria-haspopup="true">
 
 		<!-- if menu item hasn't submenu -->
-		<a *ngIf="!item.submenu" [routerLink]="item.page" class="m-menu__link m-menu__toggle" [matTooltip]="item.tooltip" matTooltipPosition="left">
+		<a *ngIf="!item.submenu" (click)="closeMenu()" [routerLink]="item.page" class="m-menu__link m-menu__toggle" [matTooltip]="item.tooltip" matTooltipPosition="left">
 			<ng-container [ngTemplateOutlet]="mMenuItemText" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>
 		</a>
 		<!-- if menu item has sumnenu child  -->

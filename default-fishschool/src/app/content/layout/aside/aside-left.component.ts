@@ -132,4 +132,8 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 			}, 500);
 		}
 	}
+
+	closeMenu() {
+		this.mMenuAsideOffcanvas.menuOffcanvas.hide();
+	}
 }
