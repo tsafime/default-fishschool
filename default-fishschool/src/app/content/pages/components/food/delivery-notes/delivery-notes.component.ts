@@ -39,10 +39,10 @@ export class DeliveryNotesComponent extends ToastSupport implements OnInit {
 		this.startLoadingDeliveryNotes = true;
 		this.isDeliveryNotesLoading = true;
 		this.reloadService.reload(true);
-		setTimeout(() => this.daysInput.nativeElement.focus(), 1000);
+		// setTimeout(() => this.daysInput.nativeElement.focus(), 1000);
 	}
 
-	onDataReady($event) {
+	onDataReady() {
 		// Disable close panel
 		// this.panelOpenState = ! $event;
 		this.isDeliveryNotesLoading = false;

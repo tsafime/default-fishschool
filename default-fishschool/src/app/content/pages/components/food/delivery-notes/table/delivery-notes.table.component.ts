@@ -370,7 +370,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 
 		this.dataSource.sort = this.sort;
 		this.havingDeliveryNotesRecords = true;
-		setTimeout(() => this.searchInput.nativeElement.focus(), 1000);
+		// setTimeout(() => this.searchInput.nativeElement.focus(), 1000);
 	}
 }
 
