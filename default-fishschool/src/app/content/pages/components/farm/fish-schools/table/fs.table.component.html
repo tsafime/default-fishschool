@@ -129,7 +129,7 @@
 						<div class="mat-form-field" *ngIf="isFoodReadWrite('UPDATE', 'name') && row.id; else display">
 							<!-- https://github.com/ng-select/ng-select -->
 							<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
-							<ng-select matInput class="custom"
+							<ng-select matInput class="custom food-type-select"
 									   [items]="foods"
 									   bindLabel="name"
 									   notFoundText="{{'FOOD.FILTERS.FOOD_NAME_NOT_FOUND' | translate}}"

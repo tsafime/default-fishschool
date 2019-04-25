@@ -13,7 +13,7 @@ import {FsUrlsService} from '../services/fishschool/fs.urls';
 
 @Injectable()
 export class AuthenticationService implements AuthService {
-	API_URL = 'http://54.213.24.142:51120';
+	API_URL = 'http://localhost:51120';
 	API_ENDPOINT_LOGIN = '/login';
 	API_ENDPOINT_REFRESH = '/refresh';
 	API_ENDPOINT_REGISTER = '/register';

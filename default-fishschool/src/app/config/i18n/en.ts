@@ -128,7 +128,7 @@ export const locale = {
 			TABLE: {
 				SELECTED_DATE: 'Selected Date',
 				AGE: 'Age',
-				MANUAL_WEIGHT: 'Manual Weight',
+				MANUAL_WEIGHT: 'MW',
 				AVERAGE_GRAMS: 'Avg. Grams',
 				NUMBER_OF_FISH: '# Fish',
 				TOTAL_KG: 'Total KG',

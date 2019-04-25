@@ -1,2 +1,12 @@
 @charset "UTF-8";
 
+.my-container{
+	display: flex;
+	flex-direction: column;
+
+	.row-container {
+		display: flex;
+		align-items: flex-end;
+	}
+}
+

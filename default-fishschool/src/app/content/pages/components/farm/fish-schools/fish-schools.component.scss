@@ -5,27 +5,37 @@
 }
 
 ::ng-deep {
-	div.ng-optgroup:nth-child(1n) {
-		background-color: #5867dd;
+	.custom-btn {
+		margin-bottom: 20px;
 	}
 
-	div.ng-optgroup:nth-child(2n) ~ * {
-		background-color: #00bcd2;
+	.my-container{
+		display: flex;
+		flex-direction: column;
+
+		.row-container {
+			display: flex;
+			align-items: flex-end;
+		}
+	}
+
+	.source {
+		margin-bottom: 10px;
 	}
 
 	ng-select.custom {
-		border: 0px;
-		min-height: 0px;
-		border-radius: 5;
-		width: 300px;
-		display: -webkit-inline-flex;
-		top: -10px;
+	//	border: 0px;
+	//	min-height: 0px;
+	//	border-radius: 0;
+		width: 200px;
+	//	display: -webkit-inline-flex;
+	//	//top: -10px;
 	}
 
 	.vertical-align-middle {
-			 text-align: center;
-			 vertical-align: middle;
-		 }
+		text-align: center;
+		vertical-align: middle;
+	}
 
 	td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
 		padding-left: 3px;
@@ -35,13 +45,9 @@
 		padding-left: 3px;
 	}
 
-	ng-select.ng-invalid.ng-touched .ng-select-container {
-		box-shadow: 0px 1px 0px #dc322f;
-	}
-
-	.ng-select .ng-select-container .ng-value-container .ng-placeholder {
-		position: relative;
-	}
+	//ng-select.ng-invalid.ng-touched .ng-select-container {
+	//	box-shadow: 0px 1px 0px #dc322f;
+	//}
 
 	.table.table-striped thead th {
 		/* row padding */
