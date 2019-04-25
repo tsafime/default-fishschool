@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import * as moment from 'moment';
 import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school.model';
@@ -26,7 +26,7 @@ export class DailyFarmComponent extends ToastSupport implements OnInit {
 	@ViewChild(MatSort) sort: MatSort;
 
 	constructor(private service: FarmService, private fsService: FishSchoolsService, private translate: TranslateService,
-				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager) {
+				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager, private changeDetector: ChangeDetectorRef) {
 
 		super(toastr);
 
@@ -137,7 +137,6 @@ export class DailyFarmComponent extends ToastSupport implements OnInit {
 	}
 
 	private loadData(data: FishSchoolModel[]) {
-
 		this.originalData = JSON.parse(JSON.stringify(data));
 		this.dataSource = new MatTableDataSource<FishSchoolModel>(data);
 
@@ -153,6 +152,8 @@ export class DailyFarmComponent extends ToastSupport implements OnInit {
 		};
 
 		this.dataSource.sort = this.sort;
+
+		this.changeDetector.detectChanges();
 	}
 }
 
