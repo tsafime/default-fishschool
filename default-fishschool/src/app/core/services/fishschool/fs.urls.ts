@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class FsUrlsService {
 
-	public baseUrl: string = 'http://localhost:51120/';
+	public baseUrl: string = 'http://54.213.24.142:51120/';
 	public loginUrl: string = this.baseUrl + 'login';
 	public authorizationsUrl: string = this.baseUrl + 'user/authorizations';
 
