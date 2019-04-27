@@ -5,6 +5,13 @@
 }
 
 ::ng-deep {
+	div.ng-optgroup:nth-child(1n) {
+		background-color: #5867dd;
+	}
+
+	div.ng-optgroup:nth-child(2n) ~ * {
+		background-color: #00bcd2;
+	}
 
 	ng-select.custom {
 		border: 0px;
