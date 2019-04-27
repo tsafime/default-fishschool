@@ -5,6 +5,8 @@
 /dist-server
 /tmp
 /out-tsc
+/dir/
+/fishgui/
 
 # dependencies
 /node_modules
