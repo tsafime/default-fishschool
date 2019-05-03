@@ -8,7 +8,7 @@ import {
 	MatFormFieldModule,
 	MatIconModule,
 	MatIconRegistry, MatInputModule,
-	MatOptionModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatSortModule, MatTableModule
+	MatOptionModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule, MatSlideToggleModule, MatSortModule, MatTableModule
 } from '@angular/material';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {NgbAlertConfig, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -29,6 +29,7 @@ import {ReloadTableDataService} from '../../../../../core/services/fishschool/re
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
+import {FarmModule} from '../farm.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -79,6 +80,8 @@ export const DD_MM_YYYY_Format = {
 		NgxMatSelectSearchModule,
 		MatCardModule,
 		MatProgressSpinnerModule,
+		MatRadioModule,
+		FarmModule,
 	],
 	exports: [
 		RouterModule,

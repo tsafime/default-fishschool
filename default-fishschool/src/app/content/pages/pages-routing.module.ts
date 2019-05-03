@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 import { ErrorPageComponent } from './snippets/error-page/error-page.component';
-import {FishSchoolsNewSchoolModule} from './components/farm/new-school/new-school.module';
-import {FishSchoolsToggleStatusModule} from './components/farm/toggle-status/toggle-status.module';
 
 const routes: Routes = [
 	{

@@ -28,6 +28,7 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 
 	// This is required since Datatable not visible immediately until focus is set
 	@ViewChild('schoolName') select: NgSelectComponent;
+	source = 'SOLD';
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
@@ -36,8 +37,8 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 		super(toastr);
 	}
 
-	async ngOnInit() {
-		await this.service.names().toPromise().then(response => {
+	ngOnInit() {
+		this.service.names().toPromise().then(response => {
 			this.fishSchoolNames = response.data;
 			return response;
 		}).catch(response => {
@@ -53,12 +54,15 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 		this.isFishSchoolLoadingStarted = true;
 		this.startLoadFishSchools = true;
 		this.reloadService.reload(true);
-		// setTimeout(() => this.select.focus(), 1000);
 	}
 
 	onDataReady($event) {
 		this.panelOpenState = ! $event;
 		this.isFishSchoolLoadingStarted = false;
+	}
+
+	onSchoolSelect($event) {
+		this.model.schoolName = { name: $event.value.name, status: undefined };
 	}
 }
 

@@ -4,87 +4,68 @@
 	color: #fff;
 }
 
-::ng-deep {
-	.school-names-select {
-		width: 200px;
-	}
+.margin-15 {
+	margin: 0 15px;
+}
 
-	.margin-15 {
-		margin: 0 15px;
-	}
+.custom-btn {
+	margin-bottom: 20px;
+}
 
-	.custom-btn {
-		margin-bottom: 20px;
-	}
+.my-container {
+	display: flex;
+	flex-direction: column;
 
-	.my-container {
+	.row-container {
 		display: flex;
-		flex-direction: column;
-
-		.row-container {
-			display: flex;
-			align-items: flex-end;
-		}
+		align-items: flex-end;
 	}
+}
 
-	.source {
-		margin-bottom: 10px;
-	}
+.source {
+	margin-bottom: 10px;
+}
 
-	ng-select.custom {
-		//	border: 0px;
-		//	min-height: 0px;
-		//	border-radius: 0;
-		width: 200px;
-		//	display: -webkit-inline-flex;
-		//	//top: -10px;
-	}
+.vertical-align-middle {
+	text-align: center;
+	vertical-align: middle;
+}
 
-	.vertical-align-middle {
-		text-align: center;
-		vertical-align: middle;
-	}
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+	padding-left: 3px;
+}
 
-	td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
-		padding-left: 3px;
-	}
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell {
+	padding-left: 3px;
+}
 
-	td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell {
-		padding-left: 3px;
-	}
+.table.table-striped thead th {
+	/* row padding */
+	padding: 4px 0 4px 0;
+	/* row border */
+	border: 1px solid #000000;
+	border-top: 1px solid #000000;
+}
 
-	//ng-select.ng-invalid.ng-touched .ng-select-container {
-	//	box-shadow: 0px 1px 0px #dc322f;
-	//}
+td.mat-cell {
+	/* row padding */
+	padding: 4px 0 4px 0;
+	/* row border */
+	border: 1px solid #000000;
+	border-top: 1px solid #000000;
+}
 
-	.table.table-striped thead th {
-		/* row padding */
-		padding: 4px 0 4px 0;
-		/* row border */
-		border: 1px solid #000000;
-		border-top: 1px solid #000000;
-	}
+td.mat-cell:first-child {
+	/* row border */
+	border-left: 1px solid #000000;
+}
 
-	td.mat-cell {
-		/* row padding */
-		padding: 4px 0 4px 0;
-		/* row border */
-		border: 1px solid #000000;
-		border-top: 1px solid #000000;
-	}
+td.mat-cell:last-child {
+	/* row border */
+	border-right: 1px solid #000000;
+}
 
-	td.mat-cell:first-child {
-		/* row border */
-		border-left: 1px solid #000000;
-	}
-
-	td.mat-cell:last-child {
-		/* row border */
-		border-right: 1px solid #000000;
-	}
-
-	table {
-		/* row spacing / margin */
-		border-spacing: 0 4px !important;
-	}
+table {
+	/* row spacing / margin */
+	border-spacing: 0 4px !important;
 }

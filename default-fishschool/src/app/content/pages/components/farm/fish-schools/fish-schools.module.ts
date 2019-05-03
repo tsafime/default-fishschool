@@ -41,7 +41,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {CurrencyMaskConfig, CURRENCY_MASK_CONFIG} from 'ng2-currency-mask/src/currency-mask.config';
-import {SourcePipe} from "./pipes/source.pipe";
+import {FarmModule} from '../farm.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -104,6 +104,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 		MatProgressSpinnerModule,
 		CurrencyMaskModule,
 		MatRadioModule,
+		FarmModule,
 	],
 	exports: [
 		RouterModule,
@@ -129,7 +130,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 	declarations: [
 		FishSchoolsComponent,
 		TableComponent,
-		SourcePipe
 	]
 })
 

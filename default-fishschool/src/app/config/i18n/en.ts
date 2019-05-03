@@ -98,6 +98,8 @@ export const locale = {
 		FARM: {
 			ACTUAL_GIVEN_FOOD: 'Actual Given Food',
 			MORTALITY: 'Mortality',
+			SOLD: 'Sold',
+			ACTIVE: 'Active',
 		},
 		FISH_SCHOOL: {
 			UPDATE_WITHOUT_RECORDS: 'Your Fish school data not yet visible, update cannot be done',
@@ -220,6 +222,10 @@ export const locale = {
 			VALIDATION: {
 				MANDATORY_DATA_MISSING: 'Please fill all mandatory information: Receipt, Food Date & at least 1 Food Type'
 			}
+		},
+		TOGGLE_STATUS: {
+			TOGGLE_ACTIVE: 'Toggle Active',
+			TOGGLE_SOLD: 'Toggle Sold',
 		},
 		ACTIONS: {
 			SAVE: 'Save',

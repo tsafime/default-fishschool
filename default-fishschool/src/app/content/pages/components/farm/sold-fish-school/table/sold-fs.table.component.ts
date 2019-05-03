@@ -149,6 +149,27 @@ export class SoldTableComponent extends ToastSupport implements OnInit {
 		return 0;
 	}
 
+	getAvgTotal(row, prop) {
+		if (this.dataSource && this.dataSource.data) {
+			const reduce = this.dataSource.data.map(t => t[prop]).reduce((acc, value) => {
+					const accNan = isNaN(acc);
+					const valueNan = isNaN(value);
+					if (accNan && !valueNan) {
+						return value;
+					}
+					if (!accNan && valueNan) {
+						return acc;
+					}
+					return acc + value;
+				},
+				0);
+
+			return reduce / this.dataSource.data.length;
+		}
+
+		return 0;
+	}
+
 	private loadData(data: FishSchoolModel[]) {
 
 		this.originalData = JSON.parse(JSON.stringify(data));

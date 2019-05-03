@@ -23,12 +23,16 @@ export class ToggleStatusComponent extends ToastSupport implements OnInit {
 	};
 	fishSchoolNames: NameEntity[];
 	enableSubmit = false;
+	source = 'ACTIVE'; // If changing to SOLD change ngOnInit() to set ACTIVE
+	submitText = '';
 
 	constructor(private fishSchoolService: FishSchoolsService, public toastr: ToastrManager, private translate: TranslateService) {
 		super(toastr);
 	}
 
 	async ngOnInit() {
+		this.submitText = this.translate.instant('TOGGLE_STATUS.TOGGLE_SOLD');
+
 		await this.fishSchoolService.names().toPromise().then(response => {
 			this.fishSchoolNames = response.data;
 			return response;
@@ -42,6 +46,7 @@ export class ToggleStatusComponent extends ToastSupport implements OnInit {
 	}
 
 	toggleFishSchoolStatus() {
+		(this.school.status === 'ACTIVE') ? this.school.status = 'SOLD' : this.school.status = 'ACTIVE';
 		const httpPost: Observable<FishSchools> = this.fishSchoolService.toggleFishSchoolStatus(this.school.name, this.school.status);
 		httpPost.toPromise().then(response => {
 			if (response.status === 'Success') {
@@ -58,7 +63,7 @@ export class ToggleStatusComponent extends ToastSupport implements OnInit {
 
 	onSchoolSelect($event) {
 		const nameEntity: NameEntity[] = this.fishSchoolNames.filter(item => {
-			return (item === $event) ? item : null;
+			return (item.name === $event.value.name) ? item : null;
 		});
 
 		if (nameEntity !== null && nameEntity.length > 0) {
@@ -67,6 +72,15 @@ export class ToggleStatusComponent extends ToastSupport implements OnInit {
 			this.enableSubmit = true;
 		} else {
 			this.enableSubmit = false;
+		}
+	}
+
+	selectSource(e) {
+		this.source = e.value;
+		if (this.source === 'SOLD') {
+			this.submitText = this.translate.instant('TOGGLE_STATUS.TOGGLE_ACTIVE');
+		} else {
+			this.submitText = this.translate.instant('TOGGLE_STATUS.TOGGLE_SOLD');
 		}
 	}
 }

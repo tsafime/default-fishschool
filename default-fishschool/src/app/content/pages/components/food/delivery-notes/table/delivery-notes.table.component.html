@@ -91,7 +91,7 @@
 					{{ getFood() }}</th>
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never" *ngIf="isFoodDeliveryNotesReadWrite('UPDATE', food); else display">
-						<input matInput currencyMask type="text" [value]="row[food]" [(ngModel)]="row[food]" required>
+						<input matInput type="number" [value]="row[food]" [(ngModel)]="row[food]" required>
 					</mat-form-field>
 					<ng-template #display>{{row[food] | number:'1.2-2'}}</ng-template>
 				</td>

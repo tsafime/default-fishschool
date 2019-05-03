@@ -8,16 +8,15 @@
 			<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 				<div class="example-container my-container">
 					<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
-					<div class="source margin-15">
+					<div class="source">
 						<mat-radio-group [value]="source" (change)="selectSource($event)">
-							<mat-radio-button value="ACTIVE">Active</mat-radio-button>
-							<mat-radio-button value="SOLD">Sold</mat-radio-button>
+							<mat-radio-button value="ACTIVE">{{ 'FARM.ACTIVE' | translate }}</mat-radio-button>
+							<mat-radio-button value="SOLD">{{ 'FARM.SOLD' | translate }}</mat-radio-button>
 						</mat-radio-group>
 					</div>
-					<mat-form-field class="margin-15 school-names-select">
+					<mat-form-field class="school-names-select">
 						<mat-label>{{'FISH_SCHOOL.FILTERS.SELECT_SCHOOL_NAME' | translate}}</mat-label>
-						<mat-select required
-									(selectionChange)="model.schoolName = $event.value;">
+						<mat-select required (selectionChange)="model.schoolName = $event.value;">
 							<mat-option *ngFor="let name of fishSchoolNames | source:source" [value]="name">
 								{{name.name}}
 							</mat-option>
@@ -25,7 +24,7 @@
 					</mat-form-field>
 
 					<!-- Start date -->
-					<mat-form-field class="col-md-2">
+					<mat-form-field>
 						<mat-label>{{'FISH_SCHOOL.FILTERS.FOOD_DATE' | translate}}</mat-label>
 						<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="model.feedDate"
 							   #startDate minlength="10" required [max]="maxDate">
@@ -48,7 +47,7 @@
 					</mat-form-field>
 
 					<!-- # of days -->
-					<mat-form-field class="col-md-2">
+					<mat-form-field>
 						<mat-label>{{'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate}}</mat-label>
 						<input matInput type="text" #days name="days"
 							   placeholder="{{ 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate }}" autocomplete="off"

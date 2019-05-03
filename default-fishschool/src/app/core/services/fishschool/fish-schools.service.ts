@@ -32,7 +32,7 @@ export class FishSchoolsService {
 	sold(model: SoldFsRequestModel) {
 
 		const queryFilters: QueryFilter[] = [];
-		queryFilters.push(new QueryFilter('name', [model.schoolName.name], '=', 'AND'));
+		queryFilters.push(new QueryFilter('name', [model.schoolName.name], '=', 'NONE'));
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 400, 0, ['feedDate'], 'ASC');
 		const json = JSON.stringify(filteredQuery);

@@ -9,37 +9,60 @@
 	vertical-align: middle;
 }
 
-td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
-	padding-left: 3px;
-}
-
-td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell {
-	padding-left: 3px;
-}
-
 ::ng-deep {
-	div.ng-optgroup:nth-child(1n) {
-		background-color: #5867dd;
+	td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+		padding-left: 3px;
 	}
 
-	div.ng-optgroup:nth-child(2n) ~ * {
-		background-color: #00bcd2;
+	td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell {
+		padding-left: 3px;
 	}
 
-	ng-select.custom {
-		border: 0px;
-		min-height: 0px;
-		border-radius: 0;
-		width: 300px;
-		display: -webkit-inline-flex;
-		top: -10px;
+
+	.table.table-striped thead th {
+		/* row padding */
+		padding: 4px 0 4px 0;
+		/* row border */
+		border: 1px solid #000000;
+		border-top: 1px solid #000000;
 	}
 
-	ng-select.ng-invalid.ng-touched .ng-select-container {
-		box-shadow: 0px 1px 0px #dc322f;
+	td.mat-cell {
+		/* row padding */
+		padding: 4px 0 4px 0;
+		/* row border */
+		border: 1px solid #000000;
+		border-top: 1px solid #000000;
 	}
 
-	.ng-select .ng-select-container .ng-value-container .ng-placeholder {
-		position: relative;
+	td.mat-cell:first-child {
+		/* row border */
+		border-left: 1px solid #000000;
+	}
+
+	td.mat-cell:last-child {
+		/* row border */
+		border-right: 1px solid #000000;
+	}
+
+	table {
+		/* row spacing / margin */
+		border-spacing: 0 4px !important;
+	}
+
+	td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type, td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+		padding-left: 4px !important;
+		padding-right: 4px !important;
 	}
 }
+
+.my-container {
+	display: flex;
+	flex-direction: column;
+
+	.row-container {
+		display: flex;
+		align-items: flex-end;
+	}
+}
+

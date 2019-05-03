@@ -29,4 +29,9 @@
 	.ng-select .ng-select-container .ng-value-container .ng-placeholder {
 		position: relative;
 	}
+
+	.my-container{
+		display: flex;
+		flex-direction: column;
+	}
 }

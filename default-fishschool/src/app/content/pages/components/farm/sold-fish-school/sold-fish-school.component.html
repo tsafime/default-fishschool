@@ -6,25 +6,16 @@
 				<mat-panel-title>{{'FISH_SCHOOL.FILTERS.PANEL.SOLD_HEADER' | translate}}</mat-panel-title>
 			</mat-expansion-panel-header>
 			<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
-				<div class="example-container">
-					<span class="col-sm-1"></span>
+				<div class="example-container my-container">
 					<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
-					<!-- https://github.com/ng-select/ng-select -->
-					<ng-select matInput class="custom"
-							   [items]="fishSchoolNames"
-							   bindLabel="name"
-							   groupBy="status"
-							   placeholder="{{'FISH_SCHOOL.FILTERS.SELECT_SCHOOL_NAME' | translate}}"
-							   notFoundText="{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME_NOT_FOUND' | translate }}"
-							   required="true"
-							   [multiple]="false"
-							   maxSelectedItems="1"
-							   [virtualScroll]="false"
-							   #schoolName
-							   name="schoolName"
-							   [(ngModel)]="model.schoolName">
-					</ng-select>
-					<span class="col-sm-1"></span>
+					<mat-form-field class="school-names-select">
+						<mat-label>{{'FISH_SCHOOL.FILTERS.SELECT_SCHOOL_NAME' | translate}}</mat-label>
+						<mat-select required (selectionChange)="onSchoolSelect($event)">
+							<mat-option *ngFor="let name of fishSchoolNames | source:source" [value]="name">
+								{{name.name}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
 					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="isFishSchoolLoadingStarted || ! f.form.valid || model.schoolName === undefined">
 						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
 					</button>
