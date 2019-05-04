@@ -8,9 +8,9 @@
 	</div>
 	<div class="example-container mat-elevation-z8" [hidden]="isFishSchoolTableLoading || ! havingFishSchoolRecords">
 		<mat-form-field>
-			<input matInput type="text" (keyup)="applyFilter($event.target.value)"
-				   placeholder="{{'ACTIONS.SEARCH' | translate}}">
-		</mat-form-field>
+		<input matInput type="text" (keyup)="applyFilter($event.target.value)"
+			   placeholder="{{'ACTIONS.SEARCH' | translate}}">
+	</mat-form-field>
 		<table class="table table-bordered table-striped table-hover table-light table-responsive" mat-table matSort
 			   matSortActive="menualAvgWeight" matSortDirection="desc" #table matSortDisableClear
 			   [dataSource]="dataSource">
@@ -21,9 +21,8 @@
 					[ngStyle]="sort.active == 'feedDate' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ headers[0] }}</th>
 				<td mat-cell *matCellDef="let row"
-					[style.background]="(model.feedDate.format('DD/MM/YYYY') === row.feedDate)? 'lightblue' : ''"
-					class="date-width">
-					{{row.feedDate}}
+					[style.background]="(model.feedDate.format('DD/MM/YYYY') === row.feedDate)? 'lightblue' : ''" class="date-width">
+					<div class="top-align">{{row.feedDate}}</div>
 				</td>
 			</ng-container>
 
@@ -33,7 +32,7 @@
 					[ngStyle]="sort.active == 'age' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ headers[1] }}</th>
 				<td mat-cell *matCellDef="let row">
-					{{row.age | number:'1.2-2'}}
+					<div class="top-align">{{row.age | number:'1.2-2'}}</div>
 				</td>
 			</ng-container>
 
@@ -62,7 +61,7 @@
 						<input matInput type="number" [value]="row.averageWeight"
 							   [(ngModel)]="row.averageWeight">
 					</mat-form-field>
-					<ng-template #display>{{row.averageWeight | number:'1.2-2'}}</ng-template>
+					<ng-template #display><div class="top-align">{{row.averageWeight | number:'1.2-2'}}</div></ng-template>
 				</td>
 			</ng-container>
 
@@ -74,10 +73,9 @@
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never"
 									*ngIf="isFishSchoolReadWrite('UPDATE', 'quantity') && row.id; else display">
-						<input matInput type="number" [value]="row.quantity" [(ngModel)]="row.quantity"
-							   required>
+						<input matInput type="number" [value]="row.quantity" [(ngModel)]="row.quantity" required>
 					</mat-form-field>
-					<ng-template #display>{{row.quantity | number:'1.2-2'}}</ng-template>
+					<ng-template #display><div class="top-align">{{row.quantity | number:'1.2-2'}}</div></ng-template>
 				</td>
 			</ng-container>
 
@@ -92,7 +90,7 @@
 						<input matInput type="number" [value]="row.totalWeight" [(ngModel)]="row.totalWeight"
 							   required>
 					</mat-form-field>
-					<ng-template #display>{{row.totalWeight | number:'1.2-2'}}</ng-template>
+					<ng-template #display><div class="top-align">{{row.totalWeight | number:'1.2-2'}}</div></ng-template>
 				</td>
 			</ng-container>
 
@@ -101,7 +99,7 @@
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="sort.active == 'totalGivenFood' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ headers[6] }}</th>
-				<td mat-cell *matCellDef="let row"> {{row.totalGivenFood | number:'1.2-2'}}</td>
+				<td mat-cell *matCellDef="let row"><div class="top-align">{{row.totalGivenFood | number:'1.2-2'}}</div></td>
 			</ng-container>
 
 			<!-- actualGivenFood Column -->
@@ -114,7 +112,7 @@
 									*ngIf="isFishSchoolReadWrite('UPDATE', 'actualGivenFood') && row.id; else display">
 						<input matInput type="number" [value]="row.actualGivenFood" [(ngModel)]="row.actualGivenFood">
 					</mat-form-field>
-					<ng-template #display>{{row.actualGivenFood | number:'1.2-2'}}</ng-template>
+					<ng-template #display><div class="top-align">{{row.actualGivenFood | number:'1.2-2'}}</div></ng-template>
 				</td>
 			</ng-container>
 
@@ -129,7 +127,7 @@
 						<input matInput type="number" [value]="row.foodWeight" [(ngModel)]="row.foodWeight"
 							   required>
 					</mat-form-field>
-					<ng-template #display>{{row.foodWeight | number:'1.2-2'}}</ng-template>
+					<ng-template #display><div class="top-align">{{row.foodWeight | number:'1.2-2'}}</div></ng-template>
 				</td>
 			</ng-container>
 
@@ -148,7 +146,7 @@
 							</mat-select>
 						</mat-form-field>
 					</div>
-					<ng-template #display>{{row.food.name}}</ng-template>
+					<ng-template #display><div class="top-align">{{row.food.name}}</div></ng-template>
 				</td>
 			</ng-container>
 
@@ -162,7 +160,7 @@
 									*ngIf="isFishSchoolReadWrite('UPDATE', 'dead') && row.id; else display">
 						<input matInput type="number" [value]="row.dead" [(ngModel)]="row.dead" required>
 					</mat-form-field>
-					<ng-template #display>{{row.dead | number:'1.2-2'}}</ng-template>
+					<ng-template #display><div class="top-align">{{row.dead | number:'1.2-2'}}</div></ng-template>
 				</td>
 			</ng-container>
 
@@ -171,7 +169,7 @@
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="sort.active == 'fcr' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ headers[11] }}</th>
-				<td mat-cell *matCellDef="let row"> {{row.fcr | number:'1.2-2'}}</td>
+				<td mat-cell *matCellDef="let row"><div class="top-align">{{row.fcr | number:'1.2-2'}}</div></td>
 			</ng-container>
 
 			<!-- sale (sold) column -->
@@ -182,7 +180,7 @@
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never"
 									*ngIf="isFishSchoolReadWrite('UPDATE', 'sale') && row.id; else display">
-						<input matInput type="number" [value]="row.sale" [(ngModel)]="row.sale" required>
+						<input matInput type="number" class="sold-fs" [value]="row.sale" [(ngModel)]="row.sale" required>
 					</mat-form-field>
 					<ng-template #display>{{row.sale | number:'1.2-2'}}</ng-template>
 				</td>

@@ -5,6 +5,7 @@ export class FsUrlsService {
 
 	public baseUrl: string = 'http://localhost:51120/';
 	public loginUrl: string = this.baseUrl + 'login';
+	public authorizationUrl: string = this.baseUrl + 'user/authorization';
 	public authorizationsUrl: string = this.baseUrl + 'user/authorizations';
 
 	public farmViewUrl: string = this.baseUrl + 'farm/view';

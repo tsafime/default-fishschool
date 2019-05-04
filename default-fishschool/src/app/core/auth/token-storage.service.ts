@@ -30,6 +30,11 @@ export class TokenStorage {
 		return of(role);
 	}
 
+	public getUserName(): Observable<string> {
+		const username = localStorage.getItem('username');
+		return of(username);
+	}
+
 	/**
 	 * Set access token
 	 * @returns {TokenStorage}
@@ -63,6 +68,14 @@ export class TokenStorage {
 		return this;
 	}
 
+	public setUserName(name: string): any {
+		if (name != null) {
+			localStorage.setItem('username', name);
+		}
+
+		return this;
+	}
+
 	/**
 	 * Remove tokens
 	 */
@@ -70,5 +83,6 @@ export class TokenStorage {
 		localStorage.removeItem('token');
 		localStorage.removeItem('refreshToken');
 		localStorage.removeItem('userRole');
+		localStorage.removeItem('username');
 	}
 }

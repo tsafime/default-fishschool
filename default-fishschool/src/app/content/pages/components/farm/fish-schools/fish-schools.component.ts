@@ -24,7 +24,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 	fishSchoolNames: NameEntity[];
 
 	panelOpenState: boolean = true;
-	roles: string;
+	role: string;
 	maxDate: Date = moment().add(365, 'days').toDate();
 	startLoadFishSchools: boolean = false;
 	isFishSchoolLoadingStarted = false;
@@ -52,7 +52,7 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 		});
 
 		this.authService.getUserRoles().subscribe(role => {
-			this.roles = role;
+			this.role = role;
 		});
 	}
 

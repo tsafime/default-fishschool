@@ -46,6 +46,22 @@ table {
 	width: 70px;
 }
 
+// Remove number arrows
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/*.editable {
+	position: absolute;
+	top: 50%;
+	right: -5px;
+	margin-top: -10px;
+	width: 5px;
+	height: 5px;
+}*/
+
 ::ng-deep {
 	.mat-form-field-underline {
 		display: none;

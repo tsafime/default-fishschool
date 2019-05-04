@@ -11,10 +11,14 @@ export class AclModel implements AclInterface, ConfigModel {
 	// default permissions
 	public permissions: any = {
 		ADMIN: ['canDoAnything'],
-		USER: ['canDoLimitedThings']
+		FEEDING_FORMAN: ['canDoAnything'],
+		FARM_MANAGER: ['canDoAnything'],
+		OWNER_READ: ['canDoAnything'],
+		ADMINISTRATIVE_MANAGER: ['canDoAnything'],
+		// USER: ['canDoLimitedThings']
 	};
 
-	// store an object of current user roles
+	// store an object of current username role
 	public currentUserRoles: any = {};
 
 	constructor() {}

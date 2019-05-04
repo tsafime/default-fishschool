@@ -20,6 +20,10 @@ export const locale = {
 			FOOD_NAMES: 'Food Names',
 			DELIVERY_NOTES: 'Delivery Notes',
 		},
+		TOP_BAR: {
+			LOGOUT: 'Logout',
+			HELLO: 'Hello ',
+		},
 		AUTH: {
 			GENERAL: {
 				OR: 'Or',
@@ -130,7 +134,7 @@ export const locale = {
 			TABLE: {
 				SELECTED_DATE: 'Selected Date',
 				AGE: 'Age',
-				MANUAL_WEIGHT: 'MW',
+				MANUAL_WEIGHT: 'M Weight',
 				AVERAGE_GRAMS: 'Avg. Grams',
 				NUMBER_OF_FISH: '# Fish',
 				TOTAL_KG: 'Total KG',

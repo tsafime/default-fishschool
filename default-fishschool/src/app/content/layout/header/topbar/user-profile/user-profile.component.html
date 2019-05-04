@@ -1,5 +1,7 @@
 <div class="m-nav__item">
-	<button mat-button (click)="logout()">Logout</button>
+	<div class="m-card-user m-card-user&#45;&#45;skin-dark">
+		{{'TOP_BAR.HELLO' | translate}} {{username}} <button mat-button (click)="logout()">{{'TOP_BAR.LOGOUT' | translate}}</button>
+	</div>
 </div>
 
 <!-- <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click"> -->
@@ -12,7 +14,7 @@
 	<span class="m-dropdown__arrow m-dropdown__arrow&#45;&#45;right m-dropdown__arrow&#45;&#45;adjust"></span>
 	<div class="m-dropdown__inner">
 		<div class="m-dropdown__header m&#45;&#45;align-center" #mProfileDropdown style="background-size: cover;" [style.background-image]="avatarBg">
-			<div class="m-card-user m-card-user&#45;&#45;skin-dark">
+			<div class="m-card-username m-card-username&#45;&#45;skin-dark">
 				<div class="m-card-user__pic">
 					<img src="{{avatar}}" class="m&#45;&#45;img-rounded m&#45;&#45;marginless" alt="" />
 				</div>

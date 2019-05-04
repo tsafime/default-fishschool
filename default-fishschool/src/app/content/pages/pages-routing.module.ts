@@ -11,7 +11,7 @@ const routes: Routes = [
 		canActivate: [NgxPermissionsGuard],
 		data: {
 			permissions: {
-				only: ['ADMIN', 'USER'],
+				only: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER'],
 				except: ['GUEST'],
 				redirectTo: '/login'
 			}
@@ -73,7 +73,7 @@ const routes: Routes = [
 		loadChildren: './auth/auth.module#AuthModule',
 		data: {
 			permissions: {
-				except: 'ADMIN'
+				except: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER']
 			}
 		},
 	},

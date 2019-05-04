@@ -51,6 +51,10 @@ export class AuthenticationService implements AuthService {
 		return this.tokenStorage.getUserRole();
 	}
 
+	public getUserName(): Observable<string> {
+		return this.tokenStorage.getUserName();
+	}
+
 	/**
 	 * Function, that should perform refresh token verifyTokenRequest
 	 * @description Should be successfully completed so interceptor
@@ -149,10 +153,10 @@ export class AuthenticationService implements AuthService {
 	 */
 	private saveAccessData(accessData: AccessData) {
 		if (typeof accessData !== 'undefined') {
-			this.tokenStorage
-				.setAccessToken(accessData.token)
+			this.tokenStorage.setAccessToken(accessData.token)
 			// .setRefreshToken(accessData.refreshToken)
-			.setUserRole(accessData.role);
+				.setUserRole(accessData.role)
+				.setUserName(accessData.name);
 			this.onCredentialUpdated$.next(accessData);
 		}
 	}

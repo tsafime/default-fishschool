@@ -130,13 +130,17 @@ export class TableComponent extends ToastSupport implements OnInit {
 							// We might get less data since not all records in table were updated
 							if (data[index]) {
 								const deepEqual1 = deepEqual(item.id, data[index].id);
-								if (! deepEqual1) {
+								if (deepEqual1) {
 									const i = this.dataSource.data.indexOf(item);
 									this.dataSource.data[i] = data[index];
+									console.log('index: ' + index)
+									console.log('this.dataSource.data[i].id: ' + this.dataSource.data[i].id);
+									console.log('data[index].id: ' + data[index].id);
+									console.log('this.dataSource.data.length: ' + this.dataSource.data.length);
 								}
 							}
 						});
-
+						console.log('1111this.dataSource.data.length: ' + this.dataSource.data.length);
 						this.loadData(this.dataSource.data);
 						this.showSuccess({message: this.translate.instant('FISH_SCHOOL.RESULTS.FISH_SCHOOL_UPDATE_SUCCESS'), type: 'success'});
 					}

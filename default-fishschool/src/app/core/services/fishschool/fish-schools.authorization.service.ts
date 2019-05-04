@@ -13,21 +13,33 @@ import {FsUrlsService} from './fs.urls';
 import {ToastSupport} from '../../models/fishschool/toast.support';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {TranslateService} from '@ngx-translate/core';
+import {AuthenticationService} from '../../auth/authentication.service';
 
 @Injectable()
 export class FishSchoolsAuthorizationService extends ToastSupport {
 
 	authorizations: string;
+	role: string;
 
 	constructor(private http: HttpClient, private tokenStorage: TokenStorage, private urlsService: FsUrlsService,
-				public toastr: ToastrManager, private translate: TranslateService) {
+				public toastr: ToastrManager, private translate: TranslateService, private authService: AuthenticationService) {
 
 		super(toastr);
 		this.load();
 	}
 
 	async load() {
-		await this.http.post<string>(this.urlsService.authorizationsUrl, {}).toPromise().then(response => {
+
+		this.authService.getUserRoles().subscribe(role => {
+			this.role = role;
+		});
+
+		let url = this.urlsService.authorizationsUrl;
+		if (this.role !== 'ADMIN') {
+			url = this.urlsService.authorizationUrl;
+		}
+
+		await this.http.post<string>(url, {}).toPromise().then(response => {
 			this.authorizations = response;
 		})
 			.catch(response => {
@@ -59,15 +71,21 @@ export class FishSchoolsAuthorizationService extends ToastSupport {
 		});
 
 		// If exists it is RO otherwise it is enabled
-		const authByRole = this.authorizations[role];
-		if (authByRole) {
-			const authByEntity = authByRole[entity];
-			if (authByEntity) {
-				const authByAction = authByEntity[action];
-				if (authByAction) {
-					const property = authByAction[prop];
-					return !property;
-				}
+		let authByEntity;
+		if (role === 'ADMIN') {
+			const authByRole = this.authorizations[role];
+			if (authByRole) {
+				authByEntity = authByRole[entity];
+			}
+		} else {
+			authByEntity = this.authorizations[entity];
+		}
+
+		if (authByEntity) {
+			const authByAction = authByEntity[action];
+			if (authByAction) {
+				const property = authByAction[prop];
+				return !property;
 			}
 		}
 

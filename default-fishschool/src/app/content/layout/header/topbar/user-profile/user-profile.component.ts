@@ -20,6 +20,8 @@ export class UserProfileComponent implements OnInit {
 
 	@ViewChild('mProfileDropdown') mProfileDropdown: ElementRef;
 
+	username: string;
+
 	constructor (
 		private router: Router,
 		private authService: AuthenticationService,
@@ -30,6 +32,10 @@ export class UserProfileComponent implements OnInit {
 		if (!this.avatarBg) {
 			this.avatarBg = this.sanitizer.bypassSecurityTrustStyle('url(./assets/app/media/img/misc/user_profile_bg.jpg)');
 		}
+
+		this.authService.getUserName().subscribe(username => {
+			this.username = username;
+		});
 	}
 
 	public logout () {

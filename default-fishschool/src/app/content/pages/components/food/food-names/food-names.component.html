@@ -42,6 +42,9 @@
 				<td mat-cell *matCellDef="let row">
 					<mat-form-field floatLabel="never" *ngIf="isFoodReadWrite('UPDATE', 'quantity'); else display">
 						<input matInput type="number" [value]="row.quantity" [(ngModel)]="row.quantity" required>
+						<!--<i class="material-icons editable">
+							announcement
+						</i>-->
 					</mat-form-field>
 					<ng-template #display>{{row.quantity | number:'1.2-2'}}</ng-template>
 				</td>

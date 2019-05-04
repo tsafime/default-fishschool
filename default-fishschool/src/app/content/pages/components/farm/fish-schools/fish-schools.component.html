@@ -34,10 +34,7 @@
 								{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.FOOD_DATE' | translate} }}
 							</div>
 							<div *ngIf="startDate.errors.minlength">
-								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {
-								name: 'FISH_SCHOOL.FILTERS.FOOD_DATE' | translate,
-								min: 10
-							} }}
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.FOOD_DATE' | translate, min: 10} }}
 							</div>
 						</div>
 						<mat-datepicker-toggle matSuffix [for]="picker">
@@ -57,10 +54,7 @@
 								{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate} }}
 							</div>
 							<div *ngIf="days.errors.minlength">
-								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {
-								name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate,
-								min: 1
-							} }}
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate, min: 1} }}
 							</div>
 						</div>
 					</mat-form-field>

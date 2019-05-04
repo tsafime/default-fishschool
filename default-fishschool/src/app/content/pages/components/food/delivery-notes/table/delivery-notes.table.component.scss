@@ -18,6 +18,17 @@ tr, td {
 		border: 1px solid #000000;
 		border-top: 1px solid #000000;
 	}
+
+	// Remove number arrows
+	input[type=number]::-webkit-inner-spin-button,
+	input[type=number]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	.mat-form-field-underline {
+		display: none;
+	}
 }
 
 td.mat-cell {
@@ -56,8 +67,3 @@ table {
 	width: 100px;
 }
 
-::ng-deep {
-	.mat-form-field-underline {
-		display: none;
-	}
-}
