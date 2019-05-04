@@ -29,6 +29,7 @@ import {FishSchoolsAuthorizationService} from '../../../../../core/services/fish
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {CurrencyMaskConfig, CURRENCY_MASK_CONFIG} from 'ng2-currency-mask/src/currency-mask.config';
+import {AuthGuard} from '../../../../../core/services/fishschool/auth.guard';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -66,7 +67,10 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 		RouterModule.forChild([
 			{
 				path: '',
-				component: DailyFarmComponent
+				component: DailyFarmComponent,
+				// Source taken from here: https://jasonwatmore.com/post/2018/11/22/angular-7-role-based-authorization-tutorial-with-example]
+				// canActivate: [AuthGuard],
+				// data: { roles: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER'] }
 			}
 		]),
 		CurrencyMaskModule,

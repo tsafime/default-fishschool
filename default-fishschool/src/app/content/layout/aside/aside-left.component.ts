@@ -7,6 +7,7 @@ import { LayoutConfigService } from '../../../core/services/layout-config.servic
 import { LayoutRefService } from '../../../core/services/layout/layout-ref.service';
 import { MenuAsideService } from '../../../core/services/layout/menu-aside.service';
 import { DOCUMENT } from '@angular/common';
+import {AuthenticationService} from '../../../core/auth/authentication.service';
 
 @Component({
 	selector: 'm-aside-left',
@@ -31,6 +32,7 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 		public layoutConfigService: LayoutConfigService,
 		private router: Router,
 		private layoutRefService: LayoutRefService,
+		private authService: AuthenticationService,
 		@Inject(DOCUMENT) private document: Document
 	) {
 		// subscribe to menu classes update
@@ -77,12 +79,24 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 
 	isMenuRootItemIsActive(item): boolean {
 		let result: boolean = false;
+		let userRole;
+		this.authService.getUserRoles().subscribe(currentRole => {
+			userRole = currentRole;
+		});
 
+		let i = 0;
 		for (const subItem of item.submenu) {
-			result = this.isMenuItemIsActive(subItem);
-			if (result) {
-				return true;
+
+			if (subItem.authorizations.find(role => role === userRole)) {
+				result = this.isMenuItemIsActive(subItem);
+				if (result) {
+					return true;
+				}
+			} else {
+				item.submenu.splice(i, 1);
 			}
+
+			i++;
 		}
 
 		return false;

@@ -49,22 +49,6 @@ const routes: Routes = [
 				path: 'delivery-notes',
 				loadChildren: './components/food/delivery-notes/delivery-notes.module#DeliveryNotesModule'
 			},
-            /*{
-				path: 'builder',
-				loadChildren: './builder/builder.module#BuilderModule'
-			},
-			{
-				path: 'header/actions',
-				component: ActionComponent
-			},
-			{
-				path: 'profile',
-				component: ProfileComponent
-			},
-			{
-				path: 'inner',
-				component: InnerComponent
-			},*/
 		]
 	},
 	{
