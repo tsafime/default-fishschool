@@ -133,10 +133,6 @@ export class TableComponent extends ToastSupport implements OnInit {
 								if (deepEqual1) {
 									const i = this.dataSource.data.indexOf(item);
 									this.dataSource.data[i] = data[index];
-									console.log('index: ' + index)
-									console.log('this.dataSource.data[i].id: ' + this.dataSource.data[i].id);
-									console.log('data[index].id: ' + data[index].id);
-									console.log('this.dataSource.data.length: ' + this.dataSource.data.length);
 								}
 							}
 						});
