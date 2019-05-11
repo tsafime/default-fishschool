@@ -53,31 +53,40 @@
 				<td mat-footer-cell *matFooterCellDef="let row">{{getTotal(row, 'sale') | number:'1.2-2'}}</td>
 			</ng-container>
 
+			<!-- totalSale Column -->
+			<ng-container matColumnDef="totalSale">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header
+					[ngStyle]="sort.active == 'totalSale' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
+					{{ headers[4] }}</th>
+				<td mat-cell *matCellDef="let row">{{row.totalSale | number:'1.2-2'}}</td>
+				<td mat-footer-cell *matFooterCellDef="let row"></td>
+			</ng-container>
+
 			<!-- totalWeight Column -->
 			<ng-container matColumnDef="totalWeight">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="sort.active == 'totalWeight' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ headers[4] }}</th>
+					{{ headers[5] }}</th>
 				<td mat-cell *matCellDef="let row">{{row.totalWeight | number:'1.2-2'}}</td>
-				<td mat-footer-cell *matFooterCellDef="let row">{{getTotal(row, 'totalWeight') | number:'1.2-2'}}</td>
+				<td mat-footer-cell *matFooterCellDef="let row"></td>
 			</ng-container>
 
 			<!-- fcr Column -->
 			<ng-container matColumnDef="fcr">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="sort.active == 'fcr' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ headers[5] }}</th>
+					{{ headers[6] }}</th>
 				<td mat-cell *matCellDef="let row">{{row.fcr | number:'1.2-2'}}</td>
-				<td mat-footer-cell *matFooterCellDef="let row">{{getAvgTotal(row, 'fcr') | number:'1.2-2'}}</td>
+				<td mat-footer-cell *matFooterCellDef="let row"></td>
 			</ng-container>
 
 			<!-- totalGivenFood Column -->
 			<ng-container matColumnDef="totalGivenFood">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="sort.active == 'totalGivenFood' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ headers[6] }}</th>
+					{{ headers[7] }}</th>
 				<td mat-cell *matCellDef="let row">{{row.totalGivenFood | number:'1.2-2'}}</td>
-				<td mat-footer-cell *matFooterCellDef="let row">{{getTotal(row, 'totalGivenFood') | number:'1.2-2'}}</td>
+				<td mat-footer-cell *matFooterCellDef="let row"></td>
 			</ng-container>
 
 			<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

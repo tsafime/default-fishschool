@@ -18,12 +18,26 @@
 				</div>
 			</mat-form-field>
 
+			<!-- averageWeight -->
+			<mat-form-field>
+				<mat-label>{{'FISH_SCHOOL.AVERAGE_WEIGHT' | translate}}</mat-label>
+				<input matInput type="text" #averageWeight name="averageWeight" placeholder="{{ 'FISH_SCHOOL.AVERAGE_WEIGHT' | translate }}"
+					   autocomplete="off" [(ngModel)]="school.averageWeight" minlength="1" required>
+				<div *ngIf="averageWeight.invalid && (averageWeight.dirty || averageWeight.touched)" class="text-danger">
+					<div *ngIf="averageWeight.errors.required">
+						{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.AVERAGE_WEIGHT' | translate} }}
+					</div>
+					<div *ngIf="averageWeight.errors.minlength">
+						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.AVERAGE_WEIGHT' | translate, min: 1} }}
+					</div>
+				</div>
+			</mat-form-field>
+
 			<!-- specie -->
 			<mat-form-field>
 				<mat-label>{{'FISH_SCHOOL.SPECIE' | translate}}</mat-label>
 				<input matInput type="text" #specie name="specie" placeholder="{{ 'FISH_SCHOOL.SPECIE' | translate }}"
-					   autocomplete="off"
-					   [(ngModel)]="school.specie" minlength="1" required>
+					   autocomplete="off" [(ngModel)]="school.specie" minlength="1" required>
 				<div *ngIf="specie.invalid && (specie.dirty || specie.touched)" class="text-danger">
 					<div *ngIf="specie.errors.required">
 						{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.SPECIE' | translate} }}

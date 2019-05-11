@@ -53,7 +53,8 @@ export class FishSchoolsService {
 		});
 
 		if (dirty.length > 0) {
-			return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: dirty});
+			return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: editedData});
+			// return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: dirty});
 		}
 
 		return null;

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {SoldFsRequestModel} from '../sold-fish-school.component';
 import {FishSchoolModel} from '../../../../../../core/models/fishschool/fish-school.model';
 import {FishSchoolsAuthorizationService} from '../../../../../../core/services/fishschool/fish-schools.authorization.service';
@@ -21,7 +21,7 @@ import {FoodModel} from '../../../../../../core/models/food/food.model';
 })
 export class SoldTableComponent extends ToastSupport implements OnInit {
 
-	displayedColumns: string[] = ['feedDate', 'soldFish', 'averageWeight', 'sale', 'totalWeight', 'fcr', 'totalGivenFood'];
+	displayedColumns: string[] = ['feedDate', 'soldFish', 'averageWeight', 'sale', 'totalSale', 'totalWeight', 'fcr', 'totalGivenFood'];
 
 	headers: string[];
 	dataSource: ResponsiveDataTable<FishSchoolModel>;
@@ -37,13 +37,14 @@ export class SoldTableComponent extends ToastSupport implements OnInit {
 
     constructor(private service: FishSchoolsService, private foodService: FoodService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
-				private reloadService: ReloadTableDataService) {
+				private reloadService: ReloadTableDataService, private changeDetector: ChangeDetectorRef) {
 		super(toastr);
 
 		this.headers = [this.translate.instant('FISH_SCHOOL.SOLD.FEED_DATE'),
 			this.translate.instant('FISH_SCHOOL.SOLD.SOLD_FISH'),
 			this.translate.instant('FISH_SCHOOL.SOLD.AVERAGE_WEIGHT'),
 			this.translate.instant('FISH_SCHOOL.SOLD.SALE'),
+			this.translate.instant('FISH_SCHOOL.SOLD.TOTAL_SALE'),
 			this.translate.instant('FISH_SCHOOL.SOLD.TOTAL_WEIGHT'),
 			this.translate.instant('FISH_SCHOOL.SOLD.FCR'),
 			this.translate.instant('FISH_SCHOOL.SOLD.TOTAL_GIVEN_FOOD')];
@@ -174,6 +175,7 @@ export class SoldTableComponent extends ToastSupport implements OnInit {
 
 		this.originalData = JSON.parse(JSON.stringify(data));
 		this.dataSource = new ResponsiveDataTable<FishSchoolModel>(data, this.dataReady);
+		this.changeDetector.detectChanges();
 
 		this.dataSource.sortingDataAccessor = (item, property) => {
 			switch (property) {
