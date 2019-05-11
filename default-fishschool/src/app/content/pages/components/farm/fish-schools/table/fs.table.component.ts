@@ -65,7 +65,11 @@ export class TableComponent extends ToastSupport implements OnInit {
 			this.translate.instant('GENERAL.F_C_R'),
 			this.translate.instant('FISH_SCHOOL.TABLE.SOLD')];
 
-		this.foodService.names().toPromise().then(response => {
+		this.loadFood();
+	}
+
+	async loadFood() {
+		await this.foodService.names().toPromise().then(response => {
 			this.foods = response.data;
 			return response;
 		}).catch(response => {
@@ -124,7 +128,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 					if (response.status === 'Success') {
 
 						// Response may contain partial data, merge it
-						const data = response.data;
+						/*const data = response.data;
 						this.dataSource.data.forEach((item, index) => {
 
 							// We might get less data since not all records in table were updated
@@ -135,9 +139,9 @@ export class TableComponent extends ToastSupport implements OnInit {
 									this.dataSource.data[i] = data[index];
 								}
 							}
-						});
-						console.log('1111this.dataSource.data.length: ' + this.dataSource.data.length);
-						this.loadData(this.dataSource.data);
+						});*/
+
+						this.loadData(response.data);
 						this.showSuccess({message: this.translate.instant('FISH_SCHOOL.RESULTS.FISH_SCHOOL_UPDATE_SUCCESS'), type: 'success'});
 					}
 				}).catch(response => {
@@ -206,6 +210,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 
 		this.originalData = JSON.parse(JSON.stringify(data));
 		this.dataSource = new ResponsiveDataTable<FishSchoolModel>(data, this.dataReady);
+		this.changeDetector.detectChanges();
 
 		this.dataSource.sortingDataAccessor = (item, property) => {
 			switch (property) {

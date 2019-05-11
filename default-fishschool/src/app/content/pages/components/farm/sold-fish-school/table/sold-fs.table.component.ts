@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {SoldFsRequestModel} from '../sold-fish-school.component';
 import {FishSchoolModel} from '../../../../../../core/models/fishschool/fish-school.model';
 import {FishSchoolsAuthorizationService} from '../../../../../../core/services/fishschool/fish-schools.authorization.service';
@@ -37,7 +37,7 @@ export class SoldTableComponent extends ToastSupport implements OnInit {
 
     constructor(private service: FishSchoolsService, private foodService: FoodService, private translate: TranslateService,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
-				private reloadService: ReloadTableDataService) {
+				private reloadService: ReloadTableDataService, private changeDetector: ChangeDetectorRef) {
 		super(toastr);
 
 		this.headers = [this.translate.instant('FISH_SCHOOL.SOLD.FEED_DATE'),
@@ -174,6 +174,7 @@ export class SoldTableComponent extends ToastSupport implements OnInit {
 
 		this.originalData = JSON.parse(JSON.stringify(data));
 		this.dataSource = new ResponsiveDataTable<FishSchoolModel>(data, this.dataReady);
+		this.changeDetector.detectChanges();
 
 		this.dataSource.sortingDataAccessor = (item, property) => {
 			switch (property) {
