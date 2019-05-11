@@ -21,7 +21,7 @@ import {FoodModel} from '../../../../../../core/models/food/food.model';
 })
 export class SoldTableComponent extends ToastSupport implements OnInit {
 
-	displayedColumns: string[] = ['feedDate', 'soldFish', 'averageWeight', 'sale', 'totalWeight', 'fcr', 'totalGivenFood'];
+	displayedColumns: string[] = ['feedDate', 'soldFish', 'averageWeight', 'sale', 'totalSale', 'totalWeight', 'fcr', 'totalGivenFood'];
 
 	headers: string[];
 	dataSource: ResponsiveDataTable<FishSchoolModel>;
@@ -44,6 +44,7 @@ export class SoldTableComponent extends ToastSupport implements OnInit {
 			this.translate.instant('FISH_SCHOOL.SOLD.SOLD_FISH'),
 			this.translate.instant('FISH_SCHOOL.SOLD.AVERAGE_WEIGHT'),
 			this.translate.instant('FISH_SCHOOL.SOLD.SALE'),
+			this.translate.instant('FISH_SCHOOL.SOLD.TOTAL_SALE'),
 			this.translate.instant('FISH_SCHOOL.SOLD.TOTAL_WEIGHT'),
 			this.translate.instant('FISH_SCHOOL.SOLD.FCR'),
 			this.translate.instant('FISH_SCHOOL.SOLD.TOTAL_GIVEN_FOOD')];

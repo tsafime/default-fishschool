@@ -150,6 +150,7 @@ export const locale = {
 				SOLD_FISH: 'Sold Fish',
 				AVERAGE_WEIGHT: 'Average Weight',
 				SALE: 'Sale',
+				TOTAL_SALE: 'Total Sale',
 				TOTAL_WEIGHT: 'Total Weight',
 				FCR: 'FCR',
 				TOTAL_GIVEN_FOOD: 'Total Given Food',
@@ -163,6 +164,7 @@ export const locale = {
 			PERCENTAGE_TSEMACH: 'Percentage Tsemach',
 			FOOD_NAME: 'Food Name',
 			SPECIE: 'Specie',
+			AVERAGE_WEIGHT: 'Average Weight',
 		},
 		FOOD: {
 			FOOD_TYPE: 'Food Type',
