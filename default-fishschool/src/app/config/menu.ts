@@ -34,7 +34,7 @@ export class MenuConfig implements ConfigModel {
 								icon: 'flaticon-list',
 								page: '/farm',
 								translate: 'MENU.FARM',
-								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER'],
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ'],
 							},
 							{
 								title: 'Fish Schools',
@@ -42,7 +42,7 @@ export class MenuConfig implements ConfigModel {
 								icon: 'fa fa-fish',
 								page: '/fish-schools',
 								translate: 'MENU.FISH_SCHOOLS',
-								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER'],
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ'],
 							},
 							{
 								title: 'New',
@@ -50,7 +50,7 @@ export class MenuConfig implements ConfigModel {
 								icon: 'flaticon-bell',
 								page: '/fs-new',
 								translate: 'MENU.FISH_SCHOOLS_NEW',
-								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER'],
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ'],
 							},
 							{
 								title: 'Toggle Status',
@@ -58,7 +58,7 @@ export class MenuConfig implements ConfigModel {
 								icon: 'flaticon-layers',
 								page: '/fs-toggle-status',
 								translate: 'MENU.FISH_SCHOOLS_TOGGLE_STATUS',
-								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER'],
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ'],
 							},
 							{
 								title: 'Sold',
@@ -66,7 +66,7 @@ export class MenuConfig implements ConfigModel {
 								icon: 'flaticon-graph',
 								page: '/sold-fs',
 								translate: 'MENU.SOLD_FISH_SCHOOL',
-								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER'],
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ'],
 							},
 						]
 					},
