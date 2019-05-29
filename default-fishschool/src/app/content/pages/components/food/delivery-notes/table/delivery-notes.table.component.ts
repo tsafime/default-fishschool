@@ -329,7 +329,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	}
 
 	isFoodDeliveryNotesReadWrite(action: string, prop: string): boolean {
-		return this.authorization.isFishSchoolReadWrite(action, prop);
+		return this.authorization.isFoodInvoicesReadWrite(action, prop);
 	}
 
 	applyFilter(filterValue: string) {

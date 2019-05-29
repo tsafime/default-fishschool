@@ -84,7 +84,6 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 			userRole = currentRole;
 		});
 
-		let i = 0;
 		for (const subItem of item.submenu) {
 
 			if (subItem.authorizations.find(role => role === userRole)) {
@@ -93,10 +92,11 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 					return true;
 				}
 			} else {
-				item.submenu.splice(i, 1);
+				const index = item.submenu.indexOf(subItem, 0);
+				if (index > -1) {
+					item.submenu.splice(index, 1);
+				}
 			}
-
-			i++;
 		}
 
 		return false;

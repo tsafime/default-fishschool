@@ -132,8 +132,8 @@ export class DailyFarmComponent extends ToastSupport implements OnInit {
 		}
 	}
 
-	isFishSchoolReadWrite(prop: string): boolean {
-		return this.authorization.isFishSchoolReadWrite('UPDATE', prop);
+	isFoodInvoiceReadWrite(prop: string): boolean {
+		return this.authorization.isFoodInvoicesReadWrite('UPDATE', prop);
 	}
 
 	private loadData(data: FishSchoolModel[]) {
