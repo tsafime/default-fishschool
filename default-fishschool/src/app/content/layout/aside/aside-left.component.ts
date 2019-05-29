@@ -84,21 +84,24 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 			userRole = currentRole;
 		});
 
+		let toRemove = [];
 		for (const subItem of item.submenu) {
-
 			if (subItem.authorizations.find(role => role === userRole)) {
 				result = this.isMenuItemIsActive(subItem);
 				if (result) {
 					return true;
 				}
 			} else {
-				const index = item.submenu.indexOf(subItem, 0);
-				if (index > -1) {
-					item.submenu.splice(index, 1);
-				}
+				toRemove.push(subItem);
 			}
 		}
 
+		for (const subItem of toRemove) {
+			const index = item.submenu.indexOf(subItem, 0);
+			if (index > -1) {
+				item.submenu.splice(index, 1);
+			}
+		}
 		return false;
 	}
 
