@@ -34,7 +34,7 @@ export class MenuConfig implements ConfigModel {
 								icon: 'flaticon-list',
 								page: '/farm',
 								translate: 'MENU.FARM',
-								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ'],
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER'],
 							},
 							{
 								title: 'Fish Schools',
@@ -50,7 +50,7 @@ export class MenuConfig implements ConfigModel {
 								icon: 'flaticon-bell',
 								page: '/fs-new',
 								translate: 'MENU.FISH_SCHOOLS_NEW',
-								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ'],
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER'],
 							},
 							{
 								title: 'Toggle Status',
@@ -58,7 +58,7 @@ export class MenuConfig implements ConfigModel {
 								icon: 'flaticon-layers',
 								page: '/fs-toggle-status',
 								translate: 'MENU.FISH_SCHOOLS_TOGGLE_STATUS',
-								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ'],
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER'],
 							},
 							{
 								title: 'Sold',
