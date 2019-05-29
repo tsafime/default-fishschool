@@ -92,7 +92,10 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 					return true;
 				}
 			} else {
-				item.submenu.splice(0, 1);
+				const index = item.submenu.indexOf(subItem, 0);
+				if (index > -1) {
+					item.submenu.splice(index, 1);
+				}
 			}
 		}
 
