@@ -94,17 +94,12 @@ input[type=number]::-webkit-outer-spin-button {
 		width: 100px !important;
 	}
 
-	input {
+	input.editable {
 		box-sizing: border-box;
 		border: 0px solid #ccc;
- 		border-radius: 25px;
-		/* font-size: 16px; */
-		/* background-color: antiquewhite; */
-		background-image: url(https://www.freecodecamp.org/forum/user_avatar/www.freecodecamp.org/egodominusvos/120/34387_2.png);
-		background-position: 10px 10px;
+		background-image: url(../../../../../../assets/app/media/img/logos/gold-fish-logo.png);
+		background-position: right top;
 		background-repeat: no-repeat;
-		padding: 12px 20px 12px 40px;
-		-webkit-transition: width 0.3s ease-in-out;
-		transition: width 0.3s ease-in-out;
+		background-size: contain;
 	}
 }
