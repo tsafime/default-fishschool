@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material';
 import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import * as moment from 'moment';
