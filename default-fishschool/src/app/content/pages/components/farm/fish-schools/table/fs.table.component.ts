@@ -106,7 +106,10 @@ export class TableComponent extends ToastSupport implements OnInit {
 			} else {
 				this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FS_FAILURE'), type: 'danger'});
 			}
-			this.changeDetector.detectChanges();
+
+			if (!this.changeDetector['destroyed']) {
+				this.changeDetector.detectChanges();
+			}
 		}).catch(response => {
 			if (response && response.error && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
@@ -210,7 +213,9 @@ export class TableComponent extends ToastSupport implements OnInit {
 
 		this.originalData = JSON.parse(JSON.stringify(data));
 		this.dataSource = new ResponsiveDataTable<FishSchoolModel>(data, this.dataReady);
-		this.changeDetector.detectChanges();
+		if (!this.changeDetector['destroyed']) {
+			this.changeDetector.detectChanges();
+		}
 
 		this.dataSource.sortingDataAccessor = (item, property) => {
 			switch (property) {

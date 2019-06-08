@@ -39,15 +39,8 @@ export class FarmService {
 
 	update(originalData: FishSchoolModel[], editedData: FishSchoolModel[]): Observable<FishSchools> {
 
-		let biggestArray = originalData;
-		let smallestArray = editedData;
-		if (editedData.length > originalData.length) {
-			biggestArray = editedData;
-			smallestArray = originalData;
-		}
-
-		const dirty: FishSchoolModel[] = biggestArray.filter((item, index) => {
-			const deepEqual1 = deepEqual(item, smallestArray[index]);
+		const dirty: FishSchoolModel[] = editedData.filter((item, index) => {
+			const deepEqual1 = deepEqual(item, originalData[index]);
 			return !deepEqual1;
 		});
 
