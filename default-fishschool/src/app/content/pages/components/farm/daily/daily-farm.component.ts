@@ -66,14 +66,7 @@ export class DailyFarmComponent extends ToastSupport implements OnInit {
 		});
 	}
 
-	async viewDailySchools(): Promise<any> {
-
-		const promise = await this.service.view({feedDate: moment(), days: 400, status: 'ACTIVE', schoolName: undefined}).toPromise();
-		return promise.data;
-	}
-
 	update() {
-
 		if (this.dataSource) {
 			const httpPost: Observable<FishSchools> = this.service.update(this.originalData, this.dataSource.data);
 
@@ -132,8 +125,8 @@ export class DailyFarmComponent extends ToastSupport implements OnInit {
 		}
 	}
 
-	isFoodInvoiceReadWrite(prop: string): boolean {
-		return this.authorization.isFoodInvoicesReadWrite('UPDATE', prop);
+	isFishSchoolReadWrite(prop: string): boolean {
+		return this.authorization.isFishSchoolReadWrite('UPDATE', prop);
 	}
 
 	private loadData(data: FishSchoolModel[]) {
