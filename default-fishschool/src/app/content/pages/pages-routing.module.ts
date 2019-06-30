@@ -22,6 +22,10 @@ const routes: Routes = [
 				loadChildren: './components/dashboard/dashboard.module#DashboardModule'
 			},
 			{
+				path: 'authorization',
+				loadChildren: './components/authorization/authorization.module#AuthorizationModule'
+			},
+			{
 				path: 'fish-schools',
 				loadChildren: './components/farm/fish-schools/fish-schools.module#FishSchoolsModule'
 			},
