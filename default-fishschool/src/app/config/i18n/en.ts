@@ -12,6 +12,7 @@ export const locale = {
 			REPORTS: 'Reports',
 			APPS: 'Apps',
 			DASHBOARD: 'Dashboard',
+			AUTHORIZATION: 'Authorization',
 			FISH_SCHOOLS: 'Fish schools',
 			FISH_SCHOOLS_NEW: 'New',
 			FISH_SCHOOLS_TOGGLE_STATUS: 'Toggle Status',
@@ -98,6 +99,7 @@ export const locale = {
 			MIN_LENGTH_FIELD: '{{name}} minimum length is {{min}}',
 			NO_RECORDS: 'No records to display',
 			NO_CHANGES: 'No changes detected, will not update records',
+			LOAD_AUTHORIZATIONS_FAILURE: 'Unable to load authroizations records, please try again later',
 		},
 		FARM: {
 			ACTUAL_GIVEN_FOOD: 'Actual Given Food',

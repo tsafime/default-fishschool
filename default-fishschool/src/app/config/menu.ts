@@ -24,6 +24,14 @@ export class MenuConfig implements ConfigModel {
 						authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER'],
 					},
 					{
+						title: 'Authorization',
+						desc: 'Authorization settings',
+						icon: 'flaticon-cogwheel',
+						page: '/authorization',
+						translate: 'MENU.AUTHORIZATION',
+						authorizations: ['ADMIN'],
+					},
+					{
 						title: 'Farm',
 						icon: 'fa fa-fish',
 						root: true,
