@@ -7,6 +7,7 @@ export class FsUrlsService {
 	public loginUrl: string = this.baseUrl + 'login';
 	public authorizationUrl: string = this.baseUrl + 'user/authorization';
 	public authorizationsUrl: string = this.baseUrl + 'user/authorizations';
+	public authorizationViewUrl = this.baseUrl + 'authorization/view';
 
 	public farmViewUrl: string = this.baseUrl + 'farm/view';
 	public farmSummaryUrl = this.baseUrl + 'farm/summary';

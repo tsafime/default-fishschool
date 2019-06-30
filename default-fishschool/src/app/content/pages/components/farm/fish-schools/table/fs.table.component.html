@@ -32,7 +32,7 @@
 					[ngStyle]="sort.active == 'age' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ headers[1] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<div class="top-align">{{row.age | number:'1.2-2'}}</div>
+					<div class="top-align">{{row.age}}</div>
 				</td>
 			</ng-container>
 
@@ -74,7 +74,7 @@
 									*ngIf="isFishSchoolReadWrite('UPDATE', 'quantity') && row.id; else display">
 						<input matInput type="number" class="editable" [value]="row.quantity" [(ngModel)]="row.quantity" required>
 					</mat-form-field>
-					<ng-template #display><div class="top-align">{{row.quantity | number:'1.2-2'}}</div></ng-template>
+					<ng-template #display><div class="top-align">{{row.quantity}}</div></ng-template>
 				</td>
 			</ng-container>
 
