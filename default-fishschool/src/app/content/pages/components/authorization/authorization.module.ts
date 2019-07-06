@@ -8,7 +8,7 @@ import { WidgetChartsModule } from '../../../partials/content/widgets/charts/wid
 import {
 	MatDialogModule,
 	MatFormFieldModule, MatIconModule, MatIconRegistry,
-	MatInputModule, MatSortModule, MatTableModule
+	MatInputModule, MatRadioModule, MatSelectModule, MatSortModule, MatTableModule
 } from '@angular/material';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {InterceptService} from '../../../../core/services/intercept.service';
@@ -18,6 +18,7 @@ import {ToastrModule} from 'ng6-toastr-notifications';
 import {FsUrlsService} from '../../../../core/services/fishschool/fs.urls';
 import {AuthorizationComponent} from './authorization.component';
 import {AuthorizationService} from '../../../../core/services/fishschool/authorization.service';
+import {TokenStorage} from '../../../../core/auth/token-storage.service';
 
 @NgModule({
 	imports: [
@@ -34,6 +35,8 @@ import {AuthorizationService} from '../../../../core/services/fishschool/authori
 		MatTableModule,
 		MatSortModule,
 		MatIconModule,
+		MatSelectModule,
+		MatRadioModule,
 		ToastrModule.forRoot(),
 		TranslateModule.forChild(),
 		RouterModule.forChild([
@@ -43,12 +46,15 @@ import {AuthorizationService} from '../../../../core/services/fishschool/authori
 			}
 		]),
 	],
+	exports: [
+	],
 	providers: [
 		InterceptService,
 		{provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true},
 		MatIconRegistry,
 		FsUrlsService,
 		AuthorizationService,
+		TokenStorage,
 	],
 	entryComponents: [
 	],

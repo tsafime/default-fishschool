@@ -21,10 +21,10 @@ const routes: Routes = [
 				path: '',
 				loadChildren: './components/dashboard/dashboard.module#DashboardModule'
 			},
-			{
+			/*{
 				path: 'authorization',
 				loadChildren: './components/authorization/authorization.module#AuthorizationModule'
-			},
+			},*/
 			{
 				path: 'fish-schools',
 				loadChildren: './components/farm/fish-schools/fish-schools.module#FishSchoolsModule'
