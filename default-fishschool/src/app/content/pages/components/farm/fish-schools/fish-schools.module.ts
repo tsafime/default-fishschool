@@ -37,7 +37,6 @@ import {ToastrModule} from 'ng6-toastr-notifications';
 import { TableComponent } from './table/fs.table.component';
 import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
-import {NgSelectModule} from '@ng-select/ng-select';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {CurrencyMaskConfig, CURRENCY_MASK_CONFIG} from 'ng2-currency-mask/src/currency-mask.config';
@@ -98,7 +97,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 				component: FishSchoolsComponent
 			}
 		]),
-		NgSelectModule,
 		NgxMatSelectSearchModule,
 		MatCardModule,
 		MatProgressSpinnerModule,

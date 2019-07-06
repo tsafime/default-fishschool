@@ -5,6 +5,8 @@ import {FsUrlsService} from '../../../../core/services/fishschool/fs.urls';
 import {AuthorizationService} from '../../../../core/services/fishschool/authorization.service';
 import {AuthorizationsModel} from '../../../../core/models/fishschool/foods.model';
 import {TranslateService} from '@ngx-translate/core';
+import {AuthorizationModel} from '../../../../core/models/fishschool/food.model';
+import {TokenStorage} from '../../../../core/auth/token-storage.service';
 
 @Component({
 	selector: 'm-authorization',
@@ -14,10 +16,28 @@ import {TranslateService} from '@ngx-translate/core';
 export class AuthorizationComponent extends ToastSupport implements OnInit {
 
 	private authorizations: AuthorizationsModel;
+	private model: AuthorizationModel;
+	names: string[];
+	actions: string[];
 
 	constructor(public toastr: ToastrManager, private urlsService: FsUrlsService, private service: AuthorizationService,
-				private translate: TranslateService, private changeDetector: ChangeDetectorRef) {
+				private translate: TranslateService, private tokenStorage: TokenStorage, private changeDetector: ChangeDetectorRef) {
 		super(toastr);
+
+		let role;
+		this.tokenStorage.getUserRole().subscribe(userRole => {
+			role = userRole;
+		});
+
+		this.model = { id: undefined, role: role, status: 'ACTIVE', name: this.translate.instant('AUTHORIZATIONS.FISH_SCHOOL'),
+			action: this.translate.instant('AUTHORIZATIONS.ACTION_VIEW'), prop: '', auth: 'RO' };
+
+		this.names = [ this.translate.instant('AUTHORIZATIONS.COMPANY') , this.translate.instant('AUTHORIZATIONS.USER'),
+			this.translate.instant('AUTHORIZATIONS.FISH_SCHOOL'), this.translate.instant('AUTHORIZATIONS.FOOD'),
+			this.translate.instant('AUTHORIZATIONS.FOOD_INVOICE'), this.translate.instant('AUTHORIZATIONS.FOOD_INVOICE_SLOT') ];
+
+		this.actions = [ this.translate.instant('AUTHORIZATIONS.ACTION_VIEW'), this.translate.instant('AUTHORIZATIONS.ACTION_SAVE'),
+			this.translate.instant('AUTHORIZATIONS.ACTION_UPDATE'), this.translate.instant('AUTHORIZATIONS.ACTION_DELETE') ];
 	}
 
 	async ngOnInit() {
