@@ -1,3 +1,49 @@
-<p>
-	Name: {{ authorizations.data[0].name }}
-</p>
+<div class="m-section">
+	<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+		<div class="example-container my-container">
+			<!-- Authorization name: Company, FishSchool, user... -->
+			<mat-form-field class="authroization-name-select">
+				<mat-label>{{'AUTHORIZATIONS.NAME' | translate}}</mat-label>
+				<mat-select required (selectionChange)="model.name = $event.value;">
+					<mat-option *ngFor="let name of names" [value]="name">
+						{{ name }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<!-- Authorization action: VIEW, SAVE... -->
+			<mat-form-field>
+				<mat-form-field class="authroization-action-select">
+					<mat-label>{{'AUTHORIZATIONS.ACTION' | translate}}</mat-label>
+					<mat-select required (selectionChange)="model.name = $event.value;">
+						<mat-option *ngFor="let action of actions" [value]="action">
+							{{action}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</mat-form-field>
+
+			<!-- Authorization prop: totalGivenFood, totalSale... -->
+			<!--<mat-form-field>
+				<mat-label>{{'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate}}</mat-label>
+				<input matInput type="text" #days name="days"
+					   placeholder="{{ 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate }}" autocomplete="off"
+					   [(ngModel)]="model.days" #days="ngModel" minlength="1" required>
+				<div *ngIf="days.invalid && (days.dirty || days.touched)" class="text-danger">
+					<div *ngIf="days.errors.required">
+						{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate} }}
+					</div>
+					<div *ngIf="days.errors.minlength">
+						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate, min: 1} }}
+					</div>
+				</div>
+			</mat-form-field>-->
+
+			<span class="col-sm-1"></span>
+			<!--<button class="btn btn-primary custom-btn" (click)="loadTableData()"
+					[disabled]="isFishSchoolLoadingStarted || ! f.form.valid || model.schoolName === undefined">
+				{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
+			</button>-->
+		</div>
+	</form>
+</div>
