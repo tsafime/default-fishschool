@@ -154,8 +154,6 @@ export class TableComponent extends ToastSupport implements OnInit {
 						this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 					}
 				});
-			} else {
-				this.showInfo({message: this.translate.instant('VALIDATION.NO_CHANGES'), type: 'info'});
 			}
 		} else {
 			this.showWarning({message: this.translate.instant('FISH_SCHOOL.UPDATE_WITHOUT_RECORDS'), type: 'warning'});

@@ -10,11 +10,16 @@ import * as deepEqual from 'deep-equal';
 import {Observable} from 'rxjs';
 import {FsUrlsService} from './fs.urls';
 import {SoldFsRequestModel} from '../../../content/pages/components/farm/sold-fish-school/sold-fish-school.component';
+import {ToastSupport} from '../../models/fishschool/toast.support';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable()
-export class FishSchoolsService {
+export class FishSchoolsService extends ToastSupport {
 
-	constructor(private http: HttpClient, private urlsService: FsUrlsService) {
+	constructor(private http: HttpClient, private urlsService: FsUrlsService, private translate: TranslateService,
+				public toastr: ToastrManager) {
+		super(toastr);
 	}
 
 	view(model: FsRequestModel) {
@@ -52,9 +57,15 @@ export class FishSchoolsService {
 			return !deepEqual1;
 		});
 
-		if (dirty.length > 0) {
+		if (dirty.length === 1) {
 			return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: editedData});
 			// return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: dirty});
+		}
+
+		if (dirty.length > 1) {
+			this.showError({message: this.translate.instant('VALIDATION.FISH_SCHOOL_MULTI_UPDATE'), type: 'info'});
+		} else {
+			this.showInfo({message: this.translate.instant('VALIDATION.NO_CHANGES'), type: 'info'});
 		}
 
 		return null;

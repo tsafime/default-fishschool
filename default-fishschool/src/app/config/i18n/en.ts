@@ -100,6 +100,7 @@ export const locale = {
 			NO_RECORDS: 'No records to display',
 			NO_CHANGES: 'No changes detected, will not update records',
 			LOAD_AUTHORIZATIONS_FAILURE: 'Unable to load authroizations records, please try again later',
+			FISH_SCHOOL_MULTI_UPDATE: 'You may update only 1 day at the time',
 		},
 		FARM: {
 			ACTUAL_GIVEN_FOOD: 'Actual Given Food',
