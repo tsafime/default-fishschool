@@ -4,7 +4,7 @@
 		<div class="example-container my-container">
 			<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
 			<div class="source margin-15">
-				<mat-radio-group [value]="source" (change)="selectSource($event)">
+				<mat-radio-group [value]="source" [(ngModel)]="source" name="source" (change)="selectSource($event)">
 					<mat-radio-button value="ACTIVE">{{ 'FARM.ACTIVE' | translate }}</mat-radio-button>
 					<mat-radio-button value="SOLD">{{ 'FARM.SOLD' | translate }}</mat-radio-button>
 				</mat-radio-group>

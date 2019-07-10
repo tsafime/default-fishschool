@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {TranslateService} from '@ngx-translate/core';
@@ -26,7 +26,8 @@ export class ToggleStatusComponent extends ToastSupport implements OnInit {
 	source = 'ACTIVE'; // If changing to SOLD change ngOnInit() to set ACTIVE
 	submitText = '';
 
-	constructor(private fishSchoolService: FishSchoolsService, public toastr: ToastrManager, private translate: TranslateService) {
+	constructor(private fishSchoolService: FishSchoolsService, public toastr: ToastrManager, private translate: TranslateService,
+				private changeDetector: ChangeDetectorRef) {
 		super(toastr);
 	}
 
@@ -50,7 +51,19 @@ export class ToggleStatusComponent extends ToastSupport implements OnInit {
 		const httpPost: Observable<FishSchools> = this.fishSchoolService.toggleFishSchoolStatus(this.school.name, this.school.status);
 		httpPost.toPromise().then(response => {
 			if (response.status === 'Success') {
+				this.fishSchoolNames.find(item => item.name === this.school.name).status = this.school.status;
+				this.source = this.school.status;
+
+				if (this.source === 'SOLD') {
+					this.submitText = this.translate.instant('TOGGLE_STATUS.TOGGLE_ACTIVE');
+				} else {
+					this.submitText = this.translate.instant('TOGGLE_STATUS.TOGGLE_SOLD');
+				}
+
 				this.showSuccess({message: this.translate.instant('FISH_SCHOOL.RESULTS.FISH_SCHOOL_UPDATE_SUCCESS'), type: 'success'});
+				if (!this.changeDetector['destroyed']) {
+					this.changeDetector.detectChanges();
+				}
 			}
 		}).catch(response => {
 			if (response.error && response.error.status && response.error.status === 'Failure') {
