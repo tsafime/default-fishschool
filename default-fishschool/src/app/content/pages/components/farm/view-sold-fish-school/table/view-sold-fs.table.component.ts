@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {SoldFsRequestModel} from '../sold-fish-school.component';
+import {SoldFsRequestModel} from '../view-sold-fish-school.component';
 import {FishSchoolModel} from '../../../../../../core/models/fishschool/fish-school.model';
 import {FishSchoolsAuthorizationService} from '../../../../../../core/services/fishschool/fish-schools.authorization.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -15,11 +15,11 @@ import {ResponsiveDataTable} from '../../../../../../core/models/fishschool/tabl
 import {FoodModel} from '../../../../../../core/models/food/food.model';
 
 @Component({
-	selector: 'm-sold-fs-table',
-	templateUrl: './sold-fs.table.component.html',
-	styleUrls: ['./sold-fs.table.component.scss']
+	selector: 'm-view-sold-fs-table',
+	templateUrl: './view-sold-fs.table.component.html',
+	styleUrls: ['./view-sold-fs.table.component.scss']
 })
-export class SoldTableComponent extends ToastSupport implements OnInit {
+export class ViewSoldTableComponent extends ToastSupport implements OnInit {
 
 	displayedColumns: string[] = ['feedDate', 'soldFish', 'averageWeight', 'sale', 'totalSale', 'totalWeight', 'fcr', 'totalGivenFood'];
 
@@ -40,14 +40,14 @@ export class SoldTableComponent extends ToastSupport implements OnInit {
 				private reloadService: ReloadTableDataService, private changeDetector: ChangeDetectorRef) {
 		super(toastr);
 
-		this.headers = [this.translate.instant('FISH_SCHOOL.SOLD.FEED_DATE'),
-			this.translate.instant('FISH_SCHOOL.SOLD.SOLD_FISH'),
-			this.translate.instant('FISH_SCHOOL.SOLD.AVERAGE_WEIGHT'),
-			this.translate.instant('FISH_SCHOOL.SOLD.SALE'),
-			this.translate.instant('FISH_SCHOOL.SOLD.TOTAL_SALE'),
-			this.translate.instant('FISH_SCHOOL.SOLD.TOTAL_WEIGHT'),
-			this.translate.instant('FISH_SCHOOL.SOLD.FCR'),
-			this.translate.instant('FISH_SCHOOL.SOLD.TOTAL_GIVEN_FOOD')];
+		this.headers = [this.translate.instant('FISH_SCHOOL.VIEW_SOLD.FEED_DATE'),
+			this.translate.instant('FISH_SCHOOL.VIEW_SOLD.VIEW_SOLD_FISH'),
+			this.translate.instant('FISH_SCHOOL.VIEW_SOLD.AVERAGE_WEIGHT'),
+			this.translate.instant('FISH_SCHOOL.VIEW_SOLD.SALE'),
+			this.translate.instant('FISH_SCHOOL.VIEW_SOLD.TOTAL_SALE'),
+			this.translate.instant('FISH_SCHOOL.VIEW_SOLD.TOTAL_WEIGHT'),
+			this.translate.instant('FISH_SCHOOL.VIEW_SOLD.FCR'),
+			this.translate.instant('FISH_SCHOOL.VIEW_SOLD.TOTAL_GIVEN_FOOD')];
 
 		this.foodService.names().toPromise().then(response => {
 			this.foods = response.data;
@@ -72,7 +72,7 @@ export class SoldTableComponent extends ToastSupport implements OnInit {
 	async view() {
 
 		this.isFishSchoolTableLoading = true;
-		await this.service.sold(this.model).toPromise().then(response => {
+		await this.service.viewSold(this.model).toPromise().then(response => {
 
 			if (response.status === 'Success') {
 

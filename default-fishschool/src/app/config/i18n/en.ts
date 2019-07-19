@@ -16,7 +16,8 @@ export const locale = {
 			FISH_SCHOOLS: 'Fish schools',
 			FISH_SCHOOLS_NEW: 'New',
 			FISH_SCHOOLS_TOGGLE_STATUS: 'Toggle Status',
-			SOLD_FISH_SCHOOL: 'Sold',
+			VIEW_SOLD_FISH_SCHOOL: 'View Sold',
+			SALE_FISH_SCHOOL: 'Sale',
 			FARM: 'Farm',
 			FOOD_NAMES: 'Food Names',
 			DELIVERY_NOTES: 'Delivery Notes',
@@ -116,6 +117,8 @@ export const locale = {
 			FILTERS: {
 				SCHOOL_NAME: 'School name',
 				SELECT_SCHOOL_NAME: 'Select School name',
+				SELECT_FROM_SCHOOL_NAME: 'Select From School name',
+				SELECT_TO_SCHOOL_NAME: 'Select To School name',
 				SOLD_SCHOOL_NAME: 'Sold School name',
 				CHOOSE_SCHOOL_NAME: 'Choose School Name',
 				START_TYPING_NAME: 'Start typing name',
@@ -131,7 +134,10 @@ export const locale = {
 				PANEL: {
 					HEADER: 'Fish school filters',
 					DESCRIPTION: 'Choose Filters',
+					VIEW_SOLD_HEADER: 'View Sold Fish school filters',
 					SOLD_HEADER: 'Sold Fish school filters',
+					SOLD_FROM: 'Sold From',
+					SOLD_TO: 'Sold To',
 				}
 			},
 			TABLE: {
@@ -148,9 +154,9 @@ export const locale = {
 				MORTALITY: 'Mortality',
 				SOLD: 'Sold',
 			},
-			SOLD: {
+			VIEW_SOLD: {
 				FEED_DATE: 'Feed Date',
-				SOLD_FISH: 'Sold Fish',
+				VIEW_SOLD_FISH: 'View Sold Fish',
 				AVERAGE_WEIGHT: 'Average Weight',
 				SALE: 'Sale',
 				TOTAL_SALE: 'Total Sale',
@@ -158,8 +164,20 @@ export const locale = {
 				FCR: 'FCR',
 				TOTAL_GIVEN_FOOD: 'Total Given Food',
 			},
+			SOLD: {
+				FEED_DATE: 'Feed Date',
+				SOLD_FISH: 'Sold Fish',
+				SALE_AVG_WEIGHT: 'Sale Avg Weight',
+				SALE_TO_QUANTITY: 'Quantity',
+				SALE_TO_AVG_WEIGHT: 'Avg Weight',
+			},
 			RESULTS: {
 				FISH_SCHOOL_UPDATE_SUCCESS: 'Fish schools updated successfully',
+				SOLD_FISH_SCHOOL_UPDATE_SUCCESS: 'Sold Fish schools have been updated successfully',
+			},
+			VALIDATION: {
+				// SOLD_DUPLICATE_SCHOOL_NAME: 'You have selected same school name in Sold From and in Sold To: {{name}}',
+				SOLD_DUPLICATE_SCHOOL_NAME: 'You have selected same school name in Sold From and in Sold To',
 			},
 			NAME: 'Name',
 			QUANTITY: 'Quantity',

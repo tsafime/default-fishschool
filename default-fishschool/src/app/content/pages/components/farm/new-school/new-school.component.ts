@@ -21,7 +21,8 @@ export class NewSchoolComponent extends ToastSupport implements OnInit {
 		id: null, companyId: null, name: null, updateName: null, status: null, creationDate: null,
 		updatedDate: null, age: null, specie: 'Telipa', quantity: null, dead: null, menualAvgWeight: null, averageWeight: null, soldFish: null,
 		foodWeight: null, totalGivenFood: null, actualGivenFood: null, percentageTsemach: 100, deadLastUpdateDate: null,
-		food: null, feedDate: null, sale: null, totalSale: null, fcr: null, salesFcr: null, totalWeight: null, updatedCreationDate: moment()
+		food: null, feedDate: null, sale: null, totalSale: null, fcr: null, salesFcr: null, totalWeight: null, activityLog: null,
+		soldAvgWeight: null, updatedCreationDate: moment()
 	};
 
 	maxDate: Date = moment().add(365, 'days').toDate();

@@ -9,7 +9,7 @@ import {FsNames} from '../../models/fishschool/fish-school.names.model';
 import * as deepEqual from 'deep-equal';
 import {Observable} from 'rxjs';
 import {FsUrlsService} from './fs.urls';
-import {SoldFsRequestModel} from '../../../content/pages/components/farm/sold-fish-school/sold-fish-school.component';
+import {SoldFsRequestModel} from '../../../content/pages/components/farm/view-sold-fish-school/view-sold-fish-school.component';
 import {ToastSupport} from '../../models/fishschool/toast.support';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {TranslateService} from '@ngx-translate/core';
@@ -34,16 +34,20 @@ export class FishSchoolsService extends ToastSupport {
 		return this.http.post<FishSchools>(this.urlsService.fsViewUrl, json);
 	}
 
-	sold(model: SoldFsRequestModel) {
+	viewSold(model: SoldFsRequestModel) {
 
 		const queryFilters: QueryFilter[] = [];
 		queryFilters.push(new QueryFilter('name', [model.schoolName.name], '=', 'NONE'));
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 400, 0, ['feedDate'], 'ASC');
 		const json = JSON.stringify(filteredQuery);
-		return this.http.post<FishSchools>(this.urlsService.fsSoldUrl, json);
+		return this.http.post<FishSchools>(this.urlsService.fsViewSoldUrl, json);
 	}
 
+	sold(from: FishSchoolModel, entities: FishSchoolModel[]): Observable<FishSchools> {
+		entities.unshift(from);
+		return this.http.post<FishSchools>(this.urlsService.fsViewSoldUrl, {entities: entities});
+	}
 
 	names() {
 		const json = {};
@@ -70,6 +74,7 @@ export class FishSchoolsService extends ToastSupport {
 
 		return null;
 	}
+
 
 	createNewFishSchool(school: FishSchoolModel) {
 		if (school.updatedCreationDate) {

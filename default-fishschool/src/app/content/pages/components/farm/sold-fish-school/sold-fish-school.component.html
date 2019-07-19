@@ -1,27 +1,122 @@
-<div class="m-section">
-	<mat-accordion class="example-headers-align">
-		<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
-							 [expanded]="panelOpenState === true">
-			<mat-expansion-panel-header>
-				<mat-panel-title>{{'FISH_SCHOOL.FILTERS.PANEL.SOLD_HEADER' | translate}}</mat-panel-title>
-			</mat-expansion-panel-header>
-			<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+<div class="m-portlet">
+	<h3>{{'FISH_SCHOOL.FILTERS.PANEL.SOLD_FROM' | translate}}</h3>
+	<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+		<div class="example-container my-container">
+			<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SELECT_FROM_SCHOOL_NAME' | translate}}</label>
+			<mat-form-field class="school-names-select">
+				<mat-label>{{'FISH_SCHOOL.FILTERS.SELECT_FROM_SCHOOL_NAME' | translate}}</mat-label>
+				<mat-select required (selectionChange)="onFromSchoolSelect($event)">
+					<mat-option *ngFor="let name of fishSchoolNames | source:source" [value]="name">
+						{{name.name}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<!-- Feed date -->
+			<mat-form-field>
+				<mat-label>{{'FISH_SCHOOL.SOLD.FEED_DATE' | translate}}</mat-label>
+				<input matInput [matDatepicker]="picker" name="feedDate" [(ngModel)]="soldFrom.feedDate"
+					   #feedDate minlength="10" required [max]="maxDate">
+				<div *ngIf="feedDate.invalid && (feedDate.dirty || feedDate.touched)"
+					 class="text-danger">
+					<div *ngIf="feedDate.errors.required">
+						{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOLSOLD.FEED_DATE' | translate} }}
+					</div>
+					<div *ngIf="startDate.errors.minlength">
+						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.FEED_DATE' | translate, min: 10} }}
+					</div>
+				</div>
+				<mat-datepicker-toggle matSuffix [for]="picker">
+					<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+				</mat-datepicker-toggle>
+				<mat-datepicker #picker [startAt]="soldFrom.feedDate"></mat-datepicker>
+			</mat-form-field>
+
+			<!-- Sold fish -->
+			<mat-form-field>
+				<mat-label>{{'FISH_SCHOOL.SOLD.SOLD_FISH' | translate}}</mat-label>
+				<input matInput type="text" #soldFish name="soldFish" placeholder="{{ 'FISH_SCHOOL.SOLD.SOLD_FISH' | translate }}"
+					   autocomplete="off" [(ngModel)]="soldFrom.soldFish" minlength="1" required>
+				<div *ngIf="soldFish.invalid && (soldFish.dirty || soldFish.touched)" class="text-danger">
+					<div *ngIf="soldFish.errors.required">
+						{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SOLD_FISH' | translate} }}
+					</div>
+					<div *ngIf="soldFish.errors.minlength">
+						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SOLD_FISH' | translate, min: 1} }}
+					</div>
+				</div>
+			</mat-form-field>
+
+			<!-- Sale average weight -->
+			<mat-form-field>
+				<mat-label>{{'FISH_SCHOOL.SOLD.SALE_AVG_WEIGHT' | translate}}</mat-label>
+				<input matInput type="text" #soldAvgWeight name="soldAvgWeight" placeholder="{{ 'FISH_SCHOOL.SOLD.SALE_AVG_WEIGHT' | translate }}"
+					   autocomplete="off" [(ngModel)]="soldFrom.soldAvgWeight" minlength="1" required>
+				<div *ngIf="soldAvgWeight.invalid && (soldAvgWeight.dirty || soldAvgWeight.touched)" class="text-danger">
+					<div *ngIf="soldAvgWeight.errors.required">
+						{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SALE_AVG_WEIGHT' | translate} }}
+					</div>
+					<div *ngIf="soldAvgWeight.errors.minlength">
+						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SALE_AVG_WEIGHT' | translate, min: 1} }}
+					</div>
+				</div>
+			</mat-form-field>
+
+			<div class="col-md-12">&nbsp;</div>
+			<h3>{{'FISH_SCHOOL.FILTERS.PANEL.SOLD_TO' | translate}}</h3>
+
+			<div class="toSchools" *ngFor="let toSchool of soldTo">
 				<div class="example-container my-container">
-					<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
+					<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SELECT_TO_SCHOOL_NAME' | translate}}</label>
 					<mat-form-field class="school-names-select">
-						<mat-label>{{'FISH_SCHOOL.FILTERS.SELECT_SCHOOL_NAME' | translate}}</mat-label>
-						<mat-select required (selectionChange)="onSchoolSelect($event)">
+						<mat-label>{{'FISH_SCHOOL.FILTERS.SELECT_TO_SCHOOL_NAME' | translate}}</mat-label>
+						<mat-select required (selectionChange)="onToSchoolSelect($event, toSchool)">
 							<mat-option *ngFor="let name of fishSchoolNames | source:source" [value]="name">
 								{{name.name}}
 							</mat-option>
 						</mat-select>
 					</mat-form-field>
-					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="isFishSchoolLoadingStarted || ! f.form.valid || model.schoolName === undefined">
-						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
-					</button>
+
+					<!-- Quantity -->
+					<mat-form-field>
+						<mat-label>{{'FISH_SCHOOL.SOLD.SALE_TO_QUANTITY' | translate}}</mat-label>
+						<input matInput type="text" #quantity name="quantity" placeholder="{{ 'FISH_SCHOOL.SOLD.SALE_TO_QUANTITY' | translate }}"
+							   autocomplete="off" [(ngModel)]="toSchool.quantity" [value]="toSchool.quantity" minlength="1" required>
+						<div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)" class="text-danger">
+							<div *ngIf="quantity.errors.required">
+								{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SALE_TO_QUANTITY' | translate} }}
+							</div>
+							<div *ngIf="quantity.errors.minlength">
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SALE_TO_QUANTITY' | translate, min: 1} }}
+							</div>
+						</div>
+					</mat-form-field>
+
+					<!-- Average weight -->
+					<mat-form-field>
+						<mat-label>{{'FISH_SCHOOL.SOLD.SALE_TO_AVG_WEIGHT' | translate}}</mat-label>
+						<input matInput type="text" #averageWeight name="averageWeight" placeholder="{{ 'FISH_SCHOOL.SOLD.SALE_TO_AVG_WEIGHT' | translate }}"
+							   autocomplete="off" [(ngModel)]="toSchool.averageWeight" [value]="toSchool.averageWeight" minlength="1" required>
+						<div *ngIf="averageWeight.invalid && (averageWeight.dirty || averageWeight.touched)" class="text-danger">
+							<div *ngIf="averageWeight.errors.required">
+								{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SALE_TO_AVG_WEIGHT' | translate} }}
+							</div>
+							<div *ngIf="averageWeight.errors.minlength">
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SALE_TO_AVG_WEIGHT' | translate, min: 1} }}
+							</div>
+						</div>
+					</mat-form-field>
 				</div>
-			</form>
-		</mat-expansion-panel>
-	</mat-accordion>
+				<div class="col-md-12">&nbsp;</div>
+			</div>
+
+			<div class="col-md-12">&nbsp;</div>
+			<button mat-icon-button color="accent" (click)="addNew()"><i class="fs flaticon-add mat-icon"></i></button>
+
+			<div class="col-md-12">&nbsp;</div>
+			<button class="btn btn-primary" (click)="update()" [disabled]="! f.form.valid">
+				{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
+			</button>
+		</div>
+	</form>
 </div>
-<m-sold-fs-table (dataReady)="onDataReady($event)" [model]="model" *ngIf="startLoadFishSchools"></m-sold-fs-table>

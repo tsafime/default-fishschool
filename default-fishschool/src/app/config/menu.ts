@@ -69,12 +69,20 @@ export class MenuConfig implements ConfigModel {
 								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER'],
 							},
 							{
+								title: 'View Sold',
+								desc: 'View Sold Fish School',
+								icon: 'flaticon-graph',
+								page: '/view-sold-fs',
+								translate: 'MENU.VIEW_SOLD_FISH_SCHOOL',
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ'],
+							},
+							{
 								title: 'Sold',
 								desc: 'Sold Fish School',
 								icon: 'flaticon-graph',
 								page: '/sold-fs',
-								translate: 'MENU.SOLD_FISH_SCHOOL',
-								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ'],
+								translate: 'MENU.SALE_FISH_SCHOOL',
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER'],
 							},
 						]
 					},

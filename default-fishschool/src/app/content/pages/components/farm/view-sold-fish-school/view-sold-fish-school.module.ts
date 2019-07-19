@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {ViewSoldFishSchoolComponent} from './view-sold-fish-school.component';
 import {RouterModule} from '@angular/router';
 import {
 	DateAdapter,
@@ -23,12 +24,12 @@ import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-per
 import {FishSchoolsAuthorizationService} from '../../../../../core/services/fishschool/fish-schools.authorization.service';
 import {FoodService} from '../../../../../core/services/fishschool/food.service';
 import {ToastrModule} from 'ng6-toastr-notifications';
+import {ViewSoldTableComponent} from './table/view-sold-fs.table.component';
 import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 import {FarmModule} from '../farm.module';
-import {SoldFishSchoolComponent} from './sold-fish-school.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -72,7 +73,7 @@ export const DD_MM_YYYY_Format = {
 		RouterModule.forChild([
 			{
 				path: '',
-				component: SoldFishSchoolComponent
+				component: ViewSoldFishSchoolComponent
 			}
 		]),
 		NgSelectModule,
@@ -103,9 +104,10 @@ export const DD_MM_YYYY_Format = {
 		FsUrlsService,
 	],
 	declarations: [
-		SoldFishSchoolComponent,
+		ViewSoldFishSchoolComponent,
+		ViewSoldTableComponent,
 	]
 })
 
-export class SoldFishSchoolModule {
+export class ViewSoldFishSchoolModule {
 }

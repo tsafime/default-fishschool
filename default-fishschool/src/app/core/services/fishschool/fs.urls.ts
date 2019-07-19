@@ -14,9 +14,10 @@ export class FsUrlsService {
 
 	public fsNamesUrl: string = this.baseUrl + 'fishschool/names';
 	public fsViewUrl: string = this.baseUrl + 'fishschool/view';
-	public fsSoldUrl: string = this.baseUrl + 'fishschool/sold';
+	public fsViewSoldUrl: string = this.baseUrl + 'fishschool/viewSold';
 	public fsSaveUrl: string = this.baseUrl + 'fishschool/save';
 	public fsUpdateUrl: string = this.baseUrl + 'fishschool/update';
+	public fsSold1Url: string = this.baseUrl + 'fishschool/sold';
 
 	public foodViewUrl: string = this.baseUrl + 'food/view';
 	public foodUpdateUrl: string = this.baseUrl + 'food/update'

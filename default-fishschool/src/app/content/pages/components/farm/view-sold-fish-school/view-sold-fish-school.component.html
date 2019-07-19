@@ -1,0 +1,27 @@
+<div class="m-section">
+	<mat-accordion class="example-headers-align">
+		<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+							 [expanded]="panelOpenState === true">
+			<mat-expansion-panel-header>
+				<mat-panel-title>{{'FISH_SCHOOL.FILTERS.PANEL.VIEW_SOLD_HEADER' | translate}}</mat-panel-title>
+			</mat-expansion-panel-header>
+			<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+				<div class="example-container my-container">
+					<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
+					<mat-form-field class="school-names-select">
+						<mat-label>{{'FISH_SCHOOL.FILTERS.SELECT_SCHOOL_NAME' | translate}}</mat-label>
+						<mat-select required (selectionChange)="onSchoolSelect($event)">
+							<mat-option *ngFor="let name of fishSchoolNames | source:source" [value]="name">
+								{{name.name}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="isFishSchoolLoadingStarted || ! f.form.valid || model.schoolName === undefined">
+						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
+					</button>
+				</div>
+			</form>
+		</mat-expansion-panel>
+	</mat-accordion>
+</div>
+<m-view-sold-fs-table (dataReady)="onDataReady($event)" [model]="model" *ngIf="startLoadFishSchools"></m-view-sold-fs-table>

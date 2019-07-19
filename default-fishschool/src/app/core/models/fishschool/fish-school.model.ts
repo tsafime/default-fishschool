@@ -29,6 +29,8 @@ export interface FishSchoolModel {
 	fcr: number;
 	salesFcr: number;
 	totalWeight: number;
+	activityLog: string;
+	soldAvgWeight: number;
 	updatedCreationDate: any;
 }
 
