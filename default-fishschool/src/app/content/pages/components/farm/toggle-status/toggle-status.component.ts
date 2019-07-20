@@ -16,11 +16,12 @@ import {NameEntity} from '../../../../../core/models/fishschool/fish-school.name
 export class ToggleStatusComponent extends ToastSupport implements OnInit {
 
 	school: FishSchoolModel = {
-		id: null, companyId: null, name: null, updateName: null, status: null, creationDate: null,
-		updatedDate: null, age: null, specie: null, quantity: null, dead: null, menualAvgWeight: null, averageWeight: null, soldFish: null,
-		foodWeight: null, totalGivenFood: null, actualGivenFood: null, percentageTsemach: null, deadLastUpdateDate: null,
-		food: null, feedDate: null, sale: null, totalSale: null, fcr: null, salesFcr: null, totalWeight: null, activityLog: null,
-		soldAvgWeight: null, updatedCreationDate: null
+		id: undefined, companyId: undefined, name: undefined, updateName: undefined, status: undefined, creationDate: undefined,
+		updatedDate: undefined, age: undefined, specie: undefined, quantity: undefined, dead: undefined, menualAvgWeight: undefined,
+		averageWeight: null, soldFish: undefined, foodWeight: undefined, totalGivenFood: undefined, actualGivenFood: undefined,
+		percentageTsemach: undefined, deadLastUpdateDate: null, food: undefined, feedDate: undefined, sale: undefined,
+		totalSale: undefined, fcr: undefined, salesFcr: undefined, totalWeight: undefined, activityLog: undefined,
+		saleWeight: undefined, updatedCreationDate: undefined
 	};
 
 	fishSchoolNames: NameEntity[];

@@ -23,14 +23,14 @@ export interface FishSchoolModel {
 	percentageTsemach: number;
 	deadLastUpdateDate: Moment;
 	food: FoodModel;
-	feedDate: Moment;
+	feedDate: any;
 	sale: number;
 	totalSale: number;
 	fcr: number;
 	salesFcr: number;
 	totalWeight: number;
 	activityLog: string;
-	soldAvgWeight: number;
+	saleWeight: number;
 	updatedCreationDate: any;
 }
 

@@ -18,11 +18,12 @@ import {FoodService} from '../../../../../core/services/fishschool/food.service'
 export class NewSchoolComponent extends ToastSupport implements OnInit {
 
 	school: FishSchoolModel = {
-		id: null, companyId: null, name: null, updateName: null, status: null, creationDate: null,
-		updatedDate: null, age: null, specie: 'Telipa', quantity: null, dead: null, menualAvgWeight: null, averageWeight: null, soldFish: null,
-		foodWeight: null, totalGivenFood: null, actualGivenFood: null, percentageTsemach: 100, deadLastUpdateDate: null,
-		food: null, feedDate: null, sale: null, totalSale: null, fcr: null, salesFcr: null, totalWeight: null, activityLog: null,
-		soldAvgWeight: null, updatedCreationDate: moment()
+		id: undefined, companyId: undefined, name: undefined, updateName: undefined, status: undefined, creationDate: undefined,
+		updatedDate: undefined, age: undefined, specie: 'Telipa', quantity: undefined, dead: undefined, menualAvgWeight: undefined,
+		averageWeight: undefined, soldFish: undefined, foodWeight: undefined, totalGivenFood: undefined, actualGivenFood: undefined,
+		percentageTsemach: 100, deadLastUpdateDate: undefined, food: undefined, feedDate: undefined, sale: undefined,
+		totalSale: undefined, fcr: undefined, salesFcr: undefined, totalWeight: undefined, activityLog: undefined,
+		saleWeight: undefined, updatedCreationDate: moment()
 	};
 
 	maxDate: Date = moment().add(365, 'days').toDate();

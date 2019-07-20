@@ -47,16 +47,16 @@
 				</div>
 			</mat-form-field>
 
-			<!-- Sale average weight -->
+			<!-- Sale weight -->
 			<mat-form-field>
 				<mat-label>{{'FISH_SCHOOL.SOLD.SALE_AVG_WEIGHT' | translate}}</mat-label>
-				<input matInput type="text" #soldAvgWeight name="soldAvgWeight" placeholder="{{ 'FISH_SCHOOL.SOLD.SALE_AVG_WEIGHT' | translate }}"
-					   autocomplete="off" [(ngModel)]="soldFrom.soldAvgWeight" minlength="1" required>
-				<div *ngIf="soldAvgWeight.invalid && (soldAvgWeight.dirty || soldAvgWeight.touched)" class="text-danger">
-					<div *ngIf="soldAvgWeight.errors.required">
+				<input matInput type="text" #saleWeight name="saleWeight" placeholder="{{ 'FISH_SCHOOL.SOLD.SALE_AVG_WEIGHT' | translate }}"
+					   autocomplete="off" [(ngModel)]="soldFrom.saleWeight" minlength="1" required>
+				<div *ngIf="saleWeight.invalid && (saleWeight.dirty || saleWeight.touched)" class="text-danger">
+					<div *ngIf="saleWeight.errors.required">
 						{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SALE_AVG_WEIGHT' | translate} }}
 					</div>
-					<div *ngIf="soldAvgWeight.errors.minlength">
+					<div *ngIf="saleWeight.errors.minlength">
 						{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SALE_AVG_WEIGHT' | translate, min: 1} }}
 					</div>
 				</div>

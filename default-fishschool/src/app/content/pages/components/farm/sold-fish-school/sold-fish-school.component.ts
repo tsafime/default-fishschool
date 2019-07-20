@@ -7,7 +7,6 @@ import {ToastrManager} from 'ng6-toastr-notifications';
 import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
 import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
 import {NameEntity} from '../../../../../core/models/fishschool/fish-school.names.model';
-import {NgSelectComponent} from '@ng-select/ng-select';
 import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school.model';
 import {FishSchools} from '../../../../../core/models/fishschool/fish.schools.model';
 import {Observable} from 'rxjs';
@@ -126,7 +125,7 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 			averageWeight: undefined, soldFish: undefined, foodWeight: undefined, totalGivenFood: undefined, actualGivenFood: undefined,
 			percentageTsemach: undefined, deadLastUpdateDate: undefined, food: undefined, feedDate: undefined, sale: undefined,
 			totalSale: undefined, fcr: undefined, salesFcr: undefined, totalWeight: undefined, activityLog: undefined,
-			soldAvgWeight: undefined, updatedCreationDate: undefined
+			saleWeight: undefined, updatedCreationDate: undefined
 		};
 	}
 }
