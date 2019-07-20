@@ -178,8 +178,8 @@ export const locale = {
 				SOLD_FISH_SCHOOL_UPDATE_SUCCESS: 'Sold Fish schools have been updated successfully',
 			},
 			VALIDATION: {
-				SOLD_DUPLICATE_SCHOOL_NAME: 'You have selected same school name: {{name}} in both |Sold From| and |Sold To|',
-				SOLD_DUPLICATE_SOLD_TO_SCHOOL_NAME: 'You have selected same school name: {{name}} in |Sold To|',
+				SOLD_DUPLICATE_SCHOOL_NAME: 'You have selected same school name: {{name}} in both "Sold From" and "Sold To"',
+				SOLD_DUPLICATE_SOLD_TO_SCHOOL_NAME: 'You have selected same school name: {{name}} in "Sold To"',
 			},
 			NAME: 'Name',
 			QUANTITY: 'Quantity',

@@ -25,14 +25,10 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 	maxDate: Moment = moment();
 	soldFrom: FishSchoolModel = this.getEmptyFishSchool();
 	soldTo: FishSchoolModel[] = [this.getEmptyFishSchool()];
-
-	// This is required since Datatable not visible immediately until focus is set
-	@ViewChild('schoolName') select: NgSelectComponent;
 	source = 'SOLD';
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
-				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
-				public toastr: ToastrManager, private reloadService: ReloadTableDataService) {
+				private translate: TranslateService, public toastr: ToastrManager) {
 
 		super(toastr);
 	}
@@ -119,7 +115,7 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 			return item.name === undefined || item.quantity === undefined || item.averageWeight === undefined;
 		});
 
-		return incompleteTo.length > 0 || this.soldFrom.name === undefined || this.soldFrom.feedDate === undefined
+		return this.soldTo.length === 0 || incompleteTo.length > 0 || this.soldFrom.name === undefined || this.soldFrom.feedDate === undefined
 			|| this.soldFrom.soldFish === undefined || this.soldFrom.soldAvgWeight === undefined;
 	}
 
@@ -133,8 +129,4 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 			soldAvgWeight: undefined, updatedCreationDate: undefined
 		};
 	}
-}
-
-export interface SoldFsRequestModel {
-	schoolName: NameEntity;
 }
