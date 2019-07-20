@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSort} from '@angular/material';
 import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthenticationService} from '../../../../../core/auth/authentication.service';
@@ -12,6 +11,8 @@ import {NgSelectComponent} from '@ng-select/ng-select';
 import {FishSchoolModel} from '../../../../../core/models/fishschool/fish-school.model';
 import {FishSchools} from '../../../../../core/models/fishschool/fish.schools.model';
 import {Observable} from 'rxjs';
+import {Moment} from 'moment';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'm-sold-fish-school',
@@ -20,11 +21,10 @@ import {Observable} from 'rxjs';
 })
 export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 
-	@ViewChild(MatSort) sort: MatSort;
 	fishSchoolNames: NameEntity[];
-
+	maxDate: Moment = moment();
 	soldFrom: FishSchoolModel = this.getEmptyFishSchool();
-	soldTo: FishSchoolModel[] = [];
+	soldTo: FishSchoolModel[] = [this.getEmptyFishSchool()];
 
 	// This is required since Datatable not visible immediately until focus is set
 	@ViewChild('schoolName') select: NgSelectComponent;
@@ -48,26 +48,47 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
-
-		this.soldTo.push(this.getEmptyFishSchool());
 	}
 
 	update() {
 
-		const results = this.soldTo.filter((item, index) => {
+		// No selection of same school name as in soldFrom
+		let results = this.soldTo.filter((item, index) => {
 			return item.name === this.soldFrom.name;
 		});
 
 		if (results.length > 0) {
-			this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.SOLD_DUPLICATE_SCHOOL_NAME'), type: 'danger'});
+			this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.SOLD_DUPLICATE_SCHOOL_NAME',
+					{ name: results[0].name }), type: 'danger'});
 			return;
 		}
+
+		// No selection of same school name as in soldTo
+		results = this.soldTo.filter((item, index) =>
+			index === this.soldTo.findIndex((findTest) => findTest.name === item.name)
+		);
+
+		if (results.length > 0) {
+			this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.SOLD_DUPLICATE_SOLD_TO_SCHOOL_NAME',
+					{ name:  results[0].name }), type: 'danger'});
+			return;
+		}
+
+		// Remove empty soldTo is not fulfilled
+		this.soldTo.forEach((item, index) => {
+			if (item.name === undefined || item.quantity === undefined || item.averageWeight === undefined) {
+				this.soldTo.splice(index);
+			}
+		});
 
 		const httpPost: Observable<FishSchools> = this.service.sold(this.soldFrom, this.soldTo);
 		httpPost.toPromise().then(response => {
 			if (response.status === 'Success') {
 				this.showSuccess({message: this.translate.instant('FISH_SCHOOL.RESULTS.SOLD_FISH_SCHOOL_UPDATE_SUCCESS'), type: 'success'});
 			}
+
+			this.soldFrom = this.getEmptyFishSchool();
+			this.soldTo = [this.getEmptyFishSchool()];
 		}).catch(response => {
 			if (response.error && response.error.status && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
@@ -87,6 +108,19 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 
 	addNew() {
 		this.soldTo.push(this.getEmptyFishSchool());
+	}
+
+	deleteLast() {
+		this.soldTo.splice(this.soldTo.length - 1);
+	}
+
+	validate() {
+		const incompleteTo = this.soldTo.filter((item, index) => {
+			return item.name === undefined || item.quantity === undefined || item.averageWeight === undefined;
+		});
+
+		return incompleteTo.length > 0 || this.soldFrom.name === undefined || this.soldFrom.feedDate === undefined
+			|| this.soldFrom.soldFish === undefined || this.soldFrom.soldAvgWeight === undefined;
 	}
 
 	getEmptyFishSchool() {

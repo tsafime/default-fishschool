@@ -170,14 +170,16 @@ export const locale = {
 				SALE_AVG_WEIGHT: 'Sale Avg Weight',
 				SALE_TO_QUANTITY: 'Quantity',
 				SALE_TO_AVG_WEIGHT: 'Avg Weight',
+				ADD_NEW_TITLE: 'Add new "sold to" school',
+				DELETE_LAST_TITLE: 'Delete last "sold to" school',
 			},
 			RESULTS: {
 				FISH_SCHOOL_UPDATE_SUCCESS: 'Fish schools updated successfully',
 				SOLD_FISH_SCHOOL_UPDATE_SUCCESS: 'Sold Fish schools have been updated successfully',
 			},
 			VALIDATION: {
-				// SOLD_DUPLICATE_SCHOOL_NAME: 'You have selected same school name in Sold From and in Sold To: {{name}}',
-				SOLD_DUPLICATE_SCHOOL_NAME: 'You have selected same school name in Sold From and in Sold To',
+				SOLD_DUPLICATE_SCHOOL_NAME: 'You have selected same school name: {{name}} in both |Sold From| and |Sold To|',
+				SOLD_DUPLICATE_SOLD_TO_SCHOOL_NAME: 'You have selected same school name: {{name}} in |Sold To|',
 			},
 			NAME: 'Name',
 			QUANTITY: 'Quantity',

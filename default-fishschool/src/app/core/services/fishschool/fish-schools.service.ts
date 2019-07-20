@@ -45,8 +45,10 @@ export class FishSchoolsService extends ToastSupport {
 	}
 
 	sold(from: FishSchoolModel, entities: FishSchoolModel[]): Observable<FishSchools> {
-		entities.unshift(from);
-		return this.http.post<FishSchools>(this.urlsService.fsViewSoldUrl, {entities: entities});
+		entities.unshift(from); // Temporary add soldFrom
+		const results = this.http.post<FishSchools>(this.urlsService.fsViewSoldUrl, {entities: entities});
+		entities.shift(); // Remove temporary soldFrom
+		return results;
 	}
 
 	names() {
