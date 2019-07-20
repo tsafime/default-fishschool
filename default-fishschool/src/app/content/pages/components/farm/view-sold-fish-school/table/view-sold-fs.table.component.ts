@@ -175,7 +175,9 @@ export class ViewSoldTableComponent extends ToastSupport implements OnInit {
 
 		this.originalData = JSON.parse(JSON.stringify(data));
 		this.dataSource = new ResponsiveDataTable<FishSchoolModel>(data, this.dataReady);
-		this.changeDetector.detectChanges();
+		if (!this.changeDetector['destroyed']) {
+			this.changeDetector.detectChanges();
+		}
 
 		this.dataSource.sortingDataAccessor = (item, property) => {
 			switch (property) {

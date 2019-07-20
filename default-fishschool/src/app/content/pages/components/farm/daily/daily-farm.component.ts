@@ -145,8 +145,9 @@ export class DailyFarmComponent extends ToastSupport implements OnInit {
 		};
 
 		this.dataSource.sort = this.sort;
-
-		this.changeDetector.detectChanges();
+		if (!this.changeDetector['destroyed']) {
+			this.changeDetector.detectChanges();
+		}
 	}
 }
 

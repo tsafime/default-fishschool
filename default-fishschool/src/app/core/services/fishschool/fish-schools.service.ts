@@ -44,16 +44,12 @@ export class FishSchoolsService extends ToastSupport {
 		return this.http.post<FishSchools>(this.urlsService.fsViewSoldUrl, json);
 	}
 
-	sold(from: FishSchoolModel, entities: FishSchoolModel[]): Observable<FishSchools> {
-		entities.unshift(from); // Temporary add soldFrom
-		const results = this.http.post<FishSchools>(this.urlsService.fsSoldUrl, {entities: entities});
-		entities.shift(); // Remove temporary soldFrom
-		return results;
+	sold(entities: FishSchoolModel[]): Observable<FishSchools> {
+		return this.http.post<FishSchools>(this.urlsService.fsSoldUrl, {entities: entities});
 	}
 
 	names() {
-		const json = {};
-		return this.http.post<FsNames>(this.urlsService.fsNamesUrl, json);
+		return this.http.post<FsNames>(this.urlsService.fsNamesUrl, {});
 	}
 
 	update(originalData: FishSchoolModel[], editedData: FishSchoolModel[]): Observable<FishSchools> {
@@ -65,7 +61,6 @@ export class FishSchoolsService extends ToastSupport {
 
 		if (dirty.length === 1) {
 			return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: editedData});
-			// return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: dirty});
 		}
 
 		if (dirty.length > 1) {

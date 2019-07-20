@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthenticationService} from '../../../../../core/auth/authentication.service';
@@ -24,10 +24,10 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 	maxDate: Moment = moment();
 	soldFrom: FishSchoolModel = this.getEmptyFishSchool();
 	soldTo: FishSchoolModel[] = [this.getEmptyFishSchool()];
-	source = 'SOLD';
+	source = 'ACTIVE';
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
-				private translate: TranslateService, public toastr: ToastrManager) {
+				private translate: TranslateService, public toastr: ToastrManager, private changeDetector: ChangeDetectorRef) {
 
 		super(toastr);
 	}
@@ -60,7 +60,7 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 
 		// No selection of same school name as in soldTo
 		results = this.soldTo.filter((item, index) =>
-			index === this.soldTo.findIndex((findTest) => findTest.name === item.name)
+			index === this.soldTo.findIndex((findTest, i) => findTest.name === item.name && index !== i)
 		);
 
 		if (results.length > 0) {
@@ -76,14 +76,26 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 			}
 		});
 
-		const httpPost: Observable<FishSchools> = this.service.sold(this.soldFrom, this.soldTo);
-		httpPost.toPromise().then(response => {
+		this.soldFrom.feedDate = this.soldFrom.feedDate.format('DD/MM/YYYY');
+
+		// Temporary add soldFrom
+		this.soldTo.unshift(this.soldFrom);
+
+		this.service.sold(this.soldTo).toPromise().then(response => {
 			if (response.status === 'Success') {
 				this.showSuccess({message: this.translate.instant('FISH_SCHOOL.RESULTS.SOLD_FISH_SCHOOL_UPDATE_SUCCESS'), type: 'success'});
 			}
 
+			this.fishSchoolNames = this.fishSchoolNames.filter((item, index) => {
+				return item.name !== this.soldFrom.name;
+			});
+
 			this.soldFrom = this.getEmptyFishSchool();
 			this.soldTo = [this.getEmptyFishSchool()];
+
+			if (!this.changeDetector['destroyed']) {
+				this.changeDetector.detectChanges();
+			}
 		}).catch(response => {
 			if (response.error && response.error.status && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
@@ -91,6 +103,9 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
+
+		// Remove temporary soldFrom
+		this.soldTo.shift();
 	}
 
 	onFromSchoolSelect($event) {
@@ -115,7 +130,7 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 		});
 
 		return this.soldTo.length === 0 || incompleteTo.length > 0 || this.soldFrom.name === undefined || this.soldFrom.feedDate === undefined
-			|| this.soldFrom.soldFish === undefined || this.soldFrom.soldAvgWeight === undefined;
+			|| this.soldFrom.soldFish === undefined || this.soldFrom.saleWeight === undefined;
 	}
 
 	getEmptyFishSchool() {
