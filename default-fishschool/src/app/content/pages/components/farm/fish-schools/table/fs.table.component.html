@@ -64,6 +64,7 @@
 				</td>
 			</ng-container>
 
+
 			<!-- quantity Column -->
 			<ng-container matColumnDef="quantity">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
@@ -161,7 +162,7 @@
 				</td>
 			</ng-container>
 
-			<!-- averageWeight Column -->
+			<!-- fcr Column -->
 			<ng-container matColumnDef="fcr">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="sort.active == 'fcr' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
@@ -180,6 +181,20 @@
 						<input matInput type="number" class="editable" class="sold-fs" [value]="row.sale" [(ngModel)]="row.sale" required>
 					</mat-form-field>
 					<ng-template #display>{{row.sale | number:'1.2-2'}}</ng-template>
+				</td>
+			</ng-container>
+
+			<!-- saleWeight Column -->
+			<ng-container matColumnDef="saleWeight">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header
+					[ngStyle]="sort.active == 'saleWeight' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
+					{{ headers[13] }}</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-form-field floatLabel="never"
+									*ngIf="isFishSchoolReadWrite('UPDATE', 'saleWeight') && row.id; else display">
+						<input matInput type="number" class="editable" [value]="row.saleWeight" [(ngModel)]="row.saleWeight">
+					</mat-form-field>
+					<ng-template #display><div class="top-align">{{row.saleWeight | number:'1.2-2'}}</div></ng-template>
 				</td>
 			</ng-container>
 

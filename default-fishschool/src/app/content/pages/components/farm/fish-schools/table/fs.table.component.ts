@@ -32,7 +32,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 	// the relevant cases
 	// displayedColumns = The JSON names
 	displayedColumns: string[] = ['feedDate', 'age', 'menualAvgWeight', 'averageWeight', 'quantity', 'totalWeight', 'totalGivenFood',
-		'actualGivenFood', 'foodWeight', 'food', 'dead', 'fcr', 'sale'];
+		'actualGivenFood', 'foodWeight', 'food', 'dead', 'fcr', 'sale', 'saleWeight'];
 
 	headers: string[];
 	dataSource: ResponsiveDataTable<FishSchoolModel>;
@@ -62,8 +62,9 @@ export class TableComponent extends ToastSupport implements OnInit {
 			this.translate.instant('FISH_SCHOOL.TABLE.FEED_PLAN'),
 			this.translate.instant('FISH_SCHOOL.TABLE.FOOD_TYPE'),
 			this.translate.instant('FISH_SCHOOL.TABLE.MORTALITY'),
-			this.translate.instant('GENERAL.F_C_R'),
-			this.translate.instant('FISH_SCHOOL.TABLE.SOLD')];
+			this.translate.instant('FISH_SCHOOL.TABLE.FCR'),
+			this.translate.instant('FISH_SCHOOL.TABLE.SOLD'),
+			this.translate.instant('FISH_SCHOOL.TABLE.SOLD_WEIGHT')];
 
 		this.loadFood();
 	}

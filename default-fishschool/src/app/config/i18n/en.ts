@@ -152,7 +152,9 @@ export const locale = {
 				TOTAL_FOOD: 'Total Food',
 				FOOD_TYPE: 'Food Type',
 				MORTALITY: 'Mortality',
+				FCR: 'FCR',
 				SOLD: 'Sold',
+				SOLD_WEIGHT: 'Sold Weight',
 			},
 			VIEW_SOLD: {
 				FEED_DATE: 'Feed Date',
