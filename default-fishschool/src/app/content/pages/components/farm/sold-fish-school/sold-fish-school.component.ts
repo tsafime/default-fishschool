@@ -76,7 +76,7 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 			}
 		});
 
-		this.soldFrom.feedDate = this.soldFrom.feedDate.format('DD/MM/YYYY');
+		//this.soldFrom.feedDate = this.soldFrom.feedDate.format('DD/MM/YYYY');
 
 		// Temporary add soldFrom
 		this.soldTo.unshift(this.soldFrom);
@@ -129,7 +129,7 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 			return item.name === undefined || item.quantity === undefined || item.averageWeight === undefined;
 		});
 
-		return this.soldTo.length === 0 || incompleteTo.length > 0 || this.soldFrom.name === undefined || this.soldFrom.feedDate === undefined
+		return this.soldTo.length === 0 || incompleteTo.length > 0 || this.soldFrom.name === undefined
 			|| this.soldFrom.soldFish === undefined || this.soldFrom.saleWeight === undefined;
 	}
 
