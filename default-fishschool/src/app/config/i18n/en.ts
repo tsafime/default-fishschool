@@ -137,7 +137,7 @@ export const locale = {
 					VIEW_SOLD_HEADER: 'View Sold Fish school filters',
 					SOLD_HEADER: 'Sold Fish school filters',
 					SOLD_FROM: 'Sold From',
-					SOLD_TO: 'Sold To',
+					SOLD_TO: 'Move To',
 				}
 			},
 			TABLE: {
@@ -154,7 +154,7 @@ export const locale = {
 				MORTALITY: 'Mortality',
 				FCR: 'FCR',
 				SOLD: 'Sold',
-				SOLD_WEIGHT: 'Sold Weight',
+				SOLD_WEIGHT: 'Avg. Sold',
 			},
 			VIEW_SOLD: {
 				FEED_DATE: 'Feed Date',
@@ -180,8 +180,8 @@ export const locale = {
 				SOLD_FISH_SCHOOL_UPDATE_SUCCESS: 'Sold Fish schools have been updated successfully',
 			},
 			VALIDATION: {
-				SOLD_DUPLICATE_SCHOOL_NAME: 'You have selected same school name: {{name}} in both "Sold From" and "Sold To"',
-				SOLD_DUPLICATE_SOLD_TO_SCHOOL_NAME: 'You have selected same school name: {{name}} in "Sold To"',
+				SOLD_DUPLICATE_SCHOOL_NAME: 'You have selected same school name: {{name}} in both "Sold From" and "Move To"',
+				SOLD_DUPLICATE_SOLD_TO_SCHOOL_NAME: 'You have selected same school name: {{name}} in "Move To"',
 			},
 			NAME: 'Name',
 			QUANTITY: 'Quantity',
