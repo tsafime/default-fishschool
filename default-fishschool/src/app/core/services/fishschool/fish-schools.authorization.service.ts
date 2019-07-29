@@ -70,6 +70,7 @@ export class FishSchoolsAuthorizationService extends ToastSupport {
 			role = userRole;
 		});
 
+
 		// If exists it is RO otherwise it is enabled
 		let authByEntity;
 		if (role === 'ADMIN') {
