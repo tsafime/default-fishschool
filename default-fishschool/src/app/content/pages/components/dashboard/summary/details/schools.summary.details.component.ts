@@ -21,7 +21,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class SchoolsSummaryDetailsComponent implements OnInit {
 
 	// summaryDisplayedColumns = The JSON names
-	summaryDisplayedColumns: string[] = ['name', 'quantity', 'averageWeight', 'foodWeight', 'fcr', 'dead', 'age', 'feedDate'];
+	summaryDisplayedColumns: string[] = ['name', 'quantity', 'averageWeight', 'foodWeight', 'fcr', 'totalGivenFood', 'age', 'feedDate'];
 	summaryHeaders: string[];
 	summaryDataSource: MatTableDataSource<SchoolSummaryModel>;
 	@ViewChild(MatSort) summarySort: MatSort;
@@ -39,7 +39,7 @@ export class SchoolsSummaryDetailsComponent implements OnInit {
 			this.translate.instant('DASHBOARD.AVG_WEIGHT'),
 			this.translate.instant('DASHBOARD.FOOD_WEIGHT'),
 			this.translate.instant('GENERAL.F_C_R'),
-			this.translate.instant('GENERAL.DEAD'),
+			this.translate.instant('GENERAL.ACTUAL_GIVEN_FOOD'),
 			this.translate.instant('GENERAL.AGE'),
 			this.translate.instant('DASHBOARD.DETAILS.FEED_DATE')];
 

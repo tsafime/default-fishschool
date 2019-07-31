@@ -71,7 +71,7 @@ export const locale = {
 		},
 		GENERAL: {
 			F_C_R: 'F.C.R.',
-			DEAD: 'Dead',
+			ACTUAL_GIVEN_FOOD: 'Total Food',
 			AGE: 'Age',
 		},
 		DASHBOARD: {
