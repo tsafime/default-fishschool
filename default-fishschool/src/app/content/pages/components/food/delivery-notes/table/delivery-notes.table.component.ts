@@ -170,6 +170,11 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 	update() {
 
 		if (this.dataSource) {
+
+			this.dataSource.data.forEach((item, index) => {
+				item.foodDate = item.momentFoodDate.format('DD/MM/YYYY');
+			});
+
 			const httpPost: Observable<DeliveriesNotesModel> = this.service.update(this.originalData, this.dataSource.data, this.foods);
 
 			if (httpPost !== null) {
@@ -186,7 +191,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 								if (retItem && item.receipt === retItem.receipt && retItem.foodDate === item.foodDate) {
 									const deepEqual1 = deepEqual(item, retItem);
 									if (!deepEqual1) {
-										const i = this.dataSource.data.indexOf(retItem);
+										const i = this.dataSource.data.indexOf(item);
 										this.dataSource.data[i] = retItem;
 										returnedData.splice(retIndex);
 									}
