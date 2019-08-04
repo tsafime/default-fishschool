@@ -21,7 +21,7 @@ export class DeliveryNotesComponent extends ToastSupport implements OnInit {
 	startLoadingDeliveryNotes: boolean = false;
 	isDeliveryNotesLoading = false;
 
-	// This is required since Datatable not visible immediatly until focus id set
+	// This is required since Datatable not visible immediately until focus id set
 	@ViewChild('days') daysInput: ElementRef;
 
 	constructor(private foodService: FoodService, private translate: TranslateService,
@@ -39,7 +39,6 @@ export class DeliveryNotesComponent extends ToastSupport implements OnInit {
 		this.startLoadingDeliveryNotes = true;
 		this.isDeliveryNotesLoading = true;
 		this.reloadService.reload(true);
-		// setTimeout(() => this.daysInput.nativeElement.focus(), 1000);
 	}
 
 	onDataReady() {

@@ -90,7 +90,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 			}
 		});
 
-		this.reloadService.change.subscribe(() => {
+		await this.reloadService.change.subscribe(() => {
 			this.view();
 		});
 
