@@ -3,7 +3,6 @@
 		<mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 	</mat-card>
 	<div class="example-container mat-elevation-z8">
-	<!--<div class="example-container mat-elevation-z8" [hidden]="isDeliveryNotesTableLoading || ! havingDeliveryNotesRecords">-->
 		<mat-form-field>
 			<input matInput type="text" #search (keyup)="applyFilter($event.target.value)"
 				   placeholder="{{'ACTIONS.SEARCH' | translate}}">

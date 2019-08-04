@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DeliveryNotesRequestModel} from '../delivery-notes.component';
 import {ReloadTableDataService} from '../../../../../../core/services/fishschool/reload-table-data.service';
 import {ResponsiveDataTable} from '../../../../../../core/models/fishschool/table/ResponsiveDataTable';
@@ -47,7 +47,8 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 
 	constructor(private service: DeliveryNotesService, private translate: TranslateService, public dialog: MatDialog,
 				private authorization: FishSchoolsAuthorizationService, public toastr: ToastrManager,
-				private reloadService: ReloadTableDataService, private foodService: FoodService) {
+				private reloadService: ReloadTableDataService, private foodService: FoodService,
+				private changeDetector: ChangeDetectorRef) {
 		super(toastr);
 	}
 
@@ -97,7 +98,7 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 		await this.view();
 	}
 
-	async view() {
+	view() {
 
 		this.isDeliveryNotesTableLoading = true;
 
@@ -107,14 +108,13 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 				undefined, undefined, undefined, undefined, undefined, undefined, undefined,
 				undefined, undefined, undefined, undefined, undefined, undefined, undefined,
 				undefined, undefined);
-			// this.havingDeliveryNotesRecords = true;
-			// this.dataSource = new ResponsiveDataTable<DeliveryNotesModel>([ deliveryNotesModel ], this.dataReady);
-			 this.loadData([ deliveryNotesModel ]);
+
+			this.loadData([ deliveryNotesModel ]);
 			this.isDeliveryNotesTableLoading = false;
 			return;
 		}
 
-		await this.service.view(this.model).toPromise().then(response => {
+		this.service.view(this.model).toPromise().then(response => {
 
 			if (response.status === 'Success') {
 
@@ -375,7 +375,10 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 
 		this.dataSource.sort = this.sort;
 		this.havingDeliveryNotesRecords = true;
-		// setTimeout(() => this.searchInput.nativeElement.focus(), 1000);
+
+		if (!this.changeDetector['destroyed']) {
+			this.changeDetector.detectChanges();
+		}
 	}
 }
 
