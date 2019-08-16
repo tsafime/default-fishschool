@@ -53,8 +53,6 @@ export class NewSchoolComponent extends ToastSupport implements OnInit {
 	}
 
 	createNewFishSchool() {
-		this.school.updatedCreationDate = moment.utc(this.school.updatedCreationDate);
-
 		const httpPost: Observable<FishSchools> = this.fishSchoolService.createNewFishSchool(this.school);
 		httpPost.toPromise().then(response => {
 			if (response.status === 'Success') {

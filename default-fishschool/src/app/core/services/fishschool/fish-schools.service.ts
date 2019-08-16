@@ -13,6 +13,7 @@ import {SoldFsRequestModel} from '../../../content/pages/components/farm/view-so
 import {ToastSupport} from '../../models/fishschool/toast.support';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {TranslateService} from '@ngx-translate/core';
+import * as moment from 'moment';
 
 @Injectable()
 export class FishSchoolsService extends ToastSupport {
@@ -75,8 +76,11 @@ export class FishSchoolsService extends ToastSupport {
 
 	createNewFishSchool(school: FishSchoolModel) {
 		if (school.updatedCreationDate) {
-			school.updatedCreationDate = school.updatedCreationDate.format('DD/MM/YYYY HH:mm:ss');
+			const nowTime = moment().format('HH:mm:ss');
+			const chosenDate = school.updatedCreationDate.format('DD/MM/YYYY');
+			school.updatedCreationDate = moment(chosenDate + ' ' + nowTime, 'DD/MM/YYYY HH:mm:ss').utc().format('DD/MM/YYYY HH:mm:ss');
 		}
+
 		return this.http.put<FishSchools>(this.urlsService.fsSaveUrl, {entities: [school]});
 	}
 
