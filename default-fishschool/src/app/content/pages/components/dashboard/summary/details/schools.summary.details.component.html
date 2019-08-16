@@ -1,4 +1,5 @@
-<h1 mat-dialog-title>{{'DASHBOARD.DETAILS.SUMMARY_HEADER' | translate}}</h1>
+<h1 mat-dialog-title>{{'DASHBOARD.DETAILS.SUMMARY_HEADER'| translate}} {{summaryDataSource.data[0].feedDate}}</h1>
+<td mat-cell *matCellDef="let row">{{row.feedDate}}</td>
 <mat-form-field class="position-relative">
 	<input matInput type="text" (keyup)="applyFilter($event.target.value)"
 		   placeholder="{{'ACTIONS.SEARCH' | translate}}">
@@ -17,11 +18,19 @@
 				<td mat-cell *matCellDef="let row" class="date-width">{{row.name}}</td>
 			</ng-container>
 
+			<!-- age Column -->
+			<ng-container matColumnDef="age">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header
+					[ngStyle]="summarySort.active == 'fcr' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
+					{{ summaryHeaders[1] }}</th>
+				<td mat-cell *matCellDef="let row">{{row.age | number:'1.2-2'}}</td>
+			</ng-container>
+
 			<!-- quantity Column -->
 			<ng-container matColumnDef="quantity">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="summarySort.active == 'quantity' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ summaryHeaders[1] }}</th>
+					{{ summaryHeaders[2] }}</th>
 				<td mat-cell *matCellDef="let row">{{row.quantity | number:'1.2-2'}}</td>
 			</ng-container>
 
@@ -29,7 +38,7 @@
 			<ng-container matColumnDef="averageWeight">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="summarySort.active == 'averageWeight' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ summaryHeaders[2] }}</th>
+					{{ summaryHeaders[3] }}</th>
 				<td mat-cell *matCellDef="let row">{{row.averageWeight | number:'1.2-2'}}</td>
 			</ng-container>
 
@@ -37,15 +46,23 @@
 			<ng-container matColumnDef="foodWeight">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="summarySort.active == 'foodWeight' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ summaryHeaders[3] }}</th>
+					{{ summaryHeaders[4] }}</th>
 				<td mat-cell *matCellDef="let row">{{row.foodWeight | number:'1.2-2'}}</td>
+			</ng-container>
+
+			<!-- givenFood Column  -->
+			<ng-container matColumnDef="givenFood">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header
+					[ngStyle]="summarySort.active == 'givenFood' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
+					{{ summaryHeaders[5] }}</th>
+				<td mat-cell *matCellDef="let row">{{row.givenFood | number:'1.2-2'}}</td>
 			</ng-container>
 
 			<!-- fcr Column -->
 			<ng-container matColumnDef="fcr">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="summarySort.active == 'fcr' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ summaryHeaders[4] }}</th>
+					{{ summaryHeaders[6] }}</th>
 				<td mat-cell *matCellDef="let row">{{row.fcr | number:'1.2-2'}}</td>
 			</ng-container>
 
@@ -53,24 +70,8 @@
 			<ng-container matColumnDef="totalGivenFood">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="summarySort.active == 'fcr' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ summaryHeaders[5] }}</th>
-				<td mat-cell *matCellDef="let row">{{row.totalGivenFood | number:'1.2-2'}}</td>
-			</ng-container>
-
-			<!-- age Column -->
-			<ng-container matColumnDef="age">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header
-					[ngStyle]="summarySort.active == 'fcr' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ summaryHeaders[6] }}</th>
-				<td mat-cell *matCellDef="let row">{{row.age | number:'1.2-2'}}</td>
-			</ng-container>
-
-			<!-- feedDate Column -->
-			<ng-container matColumnDef="feedDate">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header
-					[ngStyle]="summarySort.active == 'feedDate' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ summaryHeaders[7] }}</th>
-				<td mat-cell *matCellDef="let row">{{row.feedDate}}</td>
+				<td mat-cell *matCellDef="let row">{{row.totalGivenFood | number:'1.2-2'}}</td>
 			</ng-container>
 
 			<!-- Expanded Content Column - The detail row is made up of this one column -->

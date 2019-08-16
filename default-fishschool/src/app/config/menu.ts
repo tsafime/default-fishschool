@@ -24,7 +24,7 @@ export class MenuConfig implements ConfigModel {
 						authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER'],
 					},
 					/*{
-						title: 'Authorization',
+						title: 'Authorization',w
 						desc: 'Authorization settings',
 						icon: 'flaticon-cogwheel',
 						page: '/authorization',
@@ -77,7 +77,8 @@ export class MenuConfig implements ConfigModel {
 								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ'],
 							},
 							{
-								title: 'Sold',
+								title: '' +
+								'Sale & Marge',
 								desc: 'Sold Fish School',
 								icon: 'flaticon-graph',
 								page: '/sold-fs',

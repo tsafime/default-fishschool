@@ -21,7 +21,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class SchoolsSummaryDetailsComponent implements OnInit {
 
 	// summaryDisplayedColumns = The JSON names
-	summaryDisplayedColumns: string[] = ['name', 'quantity', 'averageWeight', 'foodWeight', 'fcr', 'totalGivenFood', 'age', 'feedDate'];
+	summaryDisplayedColumns: string[] = ['name', 'age', 'quantity', 'averageWeight', 'foodWeight','givenFood', 'totalGivenFood', 'fcr'];
 	summaryHeaders: string[];
 	summaryDataSource: MatTableDataSource<SchoolSummaryModel>;
 	@ViewChild(MatSort) summarySort: MatSort;
@@ -35,13 +35,13 @@ export class SchoolsSummaryDetailsComponent implements OnInit {
 				@Inject(MAT_DIALOG_DATA) public schoolsSum: SchoolSummaryModel[]) {
 
 		this.summaryHeaders = [this.translate.instant('DASHBOARD.DETAILS.NAME'),
+			this.translate.instant('GENERAL.AGE'),
 			this.translate.instant('DASHBOARD.NUM_OF_FISH'),
 			this.translate.instant('DASHBOARD.AVG_WEIGHT'),
-			this.translate.instant('DASHBOARD.FOOD_WEIGHT'),
+			this.translate.instant('DASHBOARD.PLAN_FOOD'),
+			this.translate.instant('DASHBOARD.GIVEN_FOOD'),
 			this.translate.instant('GENERAL.F_C_R'),
-			this.translate.instant('GENERAL.ACTUAL_GIVEN_FOOD'),
-			this.translate.instant('GENERAL.AGE'),
-			this.translate.instant('DASHBOARD.DETAILS.FEED_DATE')];
+			this.translate.instant('GENERAL.ACTUAL_GIVEN_FOOD')];
 
 		this.summaryDetailsHeaders = [this.translate.instant('DASHBOARD.FOOD_TYPE'),
 			this.translate.instant('DASHBOARD.QUANTITY')];

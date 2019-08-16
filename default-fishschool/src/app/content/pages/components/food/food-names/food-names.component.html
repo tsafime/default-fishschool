@@ -27,7 +27,7 @@
 					[ngStyle]="sort.active == 'name' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ headers[0] }}</th>
 				<td mat-cell *matCellDef="let row; let n = row">
-					<mat-form-field floatLabel="never" *ngIf="n === undefined && isFoodReadWrite('UPDATE', 'name'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isFoodReadWrite('UPDATE', 'name', row) && row.id; else display">
 						<input matInput type="text" class="editable" [value]="row.name" [(ngModel)]="row.name" required>
 					</mat-form-field>
 					<ng-template #display>{{row.name}}</ng-template>
@@ -40,7 +40,7 @@
 					[ngStyle]="sort.active == 'quantity' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ headers[1] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<mat-form-field floatLabel="never" *ngIf="isFoodReadWrite('UPDATE', 'quantity'); else display">
+					<mat-form-field floatLabel="never" *ngIf="isFoodReadWrite('UPDATE', 'quantity', row) && row.id; else display">
 						<input matInput type="number" class="editable" [value]="row.quantity" [(ngModel)]="row.quantity" required>
 						<!--<i class="material-icons editable">
 							announcement

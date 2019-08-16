@@ -136,7 +136,7 @@ export const locale = {
 					DESCRIPTION: 'Choose Filters',
 					VIEW_SOLD_HEADER: 'View Sold Fish school filters',
 					SOLD_HEADER: 'Sold Fish school filters',
-					SOLD_FROM: 'Sold From',
+					SOLD_FROM: 'Sale From',
 					SOLD_TO: 'Move To',
 				}
 			},
@@ -168,10 +168,10 @@ export const locale = {
 			},
 			SOLD: {
 				FEED_DATE: 'Feed Date',
-				SOLD_FISH: 'Sold Fish',
-				SALE_AVG_WEIGHT: 'Sale Avg Weight',
-				SALE_TO_MOVED_QUANTITY: 'Moved Quantity',
-				SALE_TO_MOVED_AVG_WEIGHT: 'Moved Avg Weight',
+				SOLD_FISH: 'Sold Fish in Kg',
+				SALE_AVG_WEIGHT: 'Sale Avg Weight in grams',
+				SALE_TO_MOVED_QUANTITY: 'Moved Quantity in Kg',
+				SALE_TO_MOVED_AVG_WEIGHT: 'Moved Avg Weight in grams',
 				ADD_NEW_TITLE: 'Add new "sold to" school',
 				DELETE_LAST_TITLE: 'Delete last "sold to" school',
 			},

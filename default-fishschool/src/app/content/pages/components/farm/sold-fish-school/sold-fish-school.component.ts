@@ -76,7 +76,7 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 			}
 		});
 
-		//this.soldFrom.feedDate = this.soldFrom.feedDate.format('DD/MM/YYYY');
+		this.soldFrom.feedDate = this.soldFrom.feedDate.format('DD/MM/YYYY');
 
 		// Temporary add soldFrom
 		this.soldTo.unshift(this.soldFrom);
