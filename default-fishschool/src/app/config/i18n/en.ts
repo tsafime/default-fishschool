@@ -137,6 +137,7 @@ export const locale = {
 					VIEW_SOLD_HEADER: 'View Sold Fish school filters',
 					SOLD_HEADER: 'Sold Fish school filters',
 					SOLD_FROM: 'Sale From',
+					SALE_DATE: 'Sale Date',
 					SOLD_TO: 'Move To',
 				}
 			},
