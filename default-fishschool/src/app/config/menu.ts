@@ -21,7 +21,7 @@ export class MenuConfig implements ConfigModel {
 						icon: 'flaticon-line-graph',
 						page: '/',
 						translate: 'MENU.DASHBOARD',
-						authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER'],
+						authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER','NEW_SCHOOLS_MAN'],
 					},
 					/*{
 						title: 'Authorization',w
@@ -58,7 +58,7 @@ export class MenuConfig implements ConfigModel {
 								icon: 'flaticon-bell',
 								page: '/fs-new',
 								translate: 'MENU.FISH_SCHOOLS_NEW',
-								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER'],
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER','NEW_SCHOOLS_MAN'],
 							},
 							{
 								title: 'Toggle Status',
@@ -98,7 +98,7 @@ export class MenuConfig implements ConfigModel {
 								icon: 'flaticon-list',
 								page: '/food-names',
 								translate: 'MENU.FOOD_NAMES',
-								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER'],
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER','NEW_SCHOOLS_MAN'],
 							},
 							{
 								title: 'Delivery Notes',
@@ -106,7 +106,7 @@ export class MenuConfig implements ConfigModel {
 								icon: 'flaticon-lifebuoy',
 								page: '/delivery-notes',
 								translate: 'MENU.DELIVERY_NOTES',
-								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER']
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ', 'ADMINISTRATIVE_MANAGER','NEW_SCHOOLS_MAN']
 							},
 						]
 					},

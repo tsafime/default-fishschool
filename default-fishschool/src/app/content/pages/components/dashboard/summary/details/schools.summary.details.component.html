@@ -43,10 +43,18 @@
 			</ng-container>
 
 			<!-- foodWeight Column -->
+			<ng-container matColumnDef="totalWeight">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header
+					[ngStyle]="summarySort.active == 'totalWeight' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
+					{{ summaryHeaders[4] }}</th>
+				<td mat-cell *matCellDef="let row">{{((row.averageWeight * row.quantity)/1000) | number:'1.2-2'}}</td>
+			</ng-container>
+
+			<!-- foodWeight Column -->
 			<ng-container matColumnDef="foodWeight">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="summarySort.active == 'foodWeight' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ summaryHeaders[4] }}</th>
+					{{ summaryHeaders[5] }}</th>
 				<td mat-cell *matCellDef="let row">{{row.foodWeight | number:'1.2-2'}}</td>
 			</ng-container>
 
@@ -54,15 +62,15 @@
 			<ng-container matColumnDef="givenFood">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="summarySort.active == 'givenFood' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ summaryHeaders[5] }}</th>
-				<td mat-cell *matCellDef="let row">{{row.givenFood | number:'1.2-2'}}</td>
+					{{ summaryHeaders[6] }}</th>
+				<td mat-cell *matCellDef="let row">{{ row.givenFood | number:'1.2-2'}}</td>
 			</ng-container>
 
 			<!-- fcr Column -->
 			<ng-container matColumnDef="fcr">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="summarySort.active == 'fcr' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ summaryHeaders[6] }}</th>
+					{{ summaryHeaders[7] }}</th>
 				<td mat-cell *matCellDef="let row">{{row.fcr | number:'1.2-2'}}</td>
 			</ng-container>
 
@@ -70,7 +78,7 @@
 			<ng-container matColumnDef="totalGivenFood">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
 					[ngStyle]="summarySort.active == 'fcr' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
-					{{ summaryHeaders[7] }}</th>
+					{{ summaryHeaders[8] }}</th>
 				<td mat-cell *matCellDef="let row">{{row.totalGivenFood | number:'1.2-2'}}</td>
 			</ng-container>
 

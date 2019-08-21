@@ -40,6 +40,17 @@
 		<div class="m-widget1__item">
 			<div class="row m-row--no-padding align-items-center">
 				<div class="col">
+					<h3 class="m-widget1__title">{{'DASHBOARD.PLAN_FOOD' | translate}}</h3>
+					<span class="m-widget1__desc"></span>
+				</div>
+				<div class="col m--align-right">
+					<span class="m-widget1__number m--font-brand">{{ schoolsSum.totalPlanFood | number:'1.2-2' }}</span>
+				</div>
+			</div>
+		</div>
+		<div class="m-widget1__item">
+			<div class="row m-row--no-padding align-items-center">
+				<div class="col">
 					<h3 class="m-widget1__title">{{'DASHBOARD.GIVEN_FOOD' | translate}}</h3>
 					<span class="m-widget1__desc"></span>
 				</div>
@@ -56,17 +67,6 @@
 				</div>
 				<div class="col m--align-right">
 					<span class="m-widget1__number m--font-brand">{{ schoolsSum.totalFCR | number:'1.2-2' }}</span>
-				</div>
-			</div>
-		</div>
-		<div class="m-widget1__item">
-			<div class="row m-row--no-padding align-items-center">
-				<div class="col">
-					<h3 class="m-widget1__title">{{'DASHBOARD.PLAN_FOOD' | translate}}</h3>
-					<span class="m-widget1__desc"></span>
-				</div>
-				<div class="col m--align-right">
-					<span class="m-widget1__number m--font-brand">{{ schoolsSum.totalPlanFood | number:'1.2-2' }}</span>
 				</div>
 			</div>
 		</div>
