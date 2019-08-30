@@ -40,7 +40,8 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 			if (response && response.error && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
-				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.SOLD_FS') + ' - '
+						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
 	}
@@ -100,7 +101,8 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 			if (response.error && response.error.status && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
-				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.UPDATE_SOLD_FS') + ' - '
+						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
 

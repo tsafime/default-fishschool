@@ -60,7 +60,8 @@ export class FoodNamesComponent extends ToastSupport implements OnInit {
 			if (response && response.error && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
-				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.FOOD') + ' - '
+						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
 	}
@@ -112,7 +113,8 @@ export class FoodNamesComponent extends ToastSupport implements OnInit {
 					if (response.error && response.error.status && response.error.status === 'Failure') {
 						this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 					} else {
-						this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+						this.showError({message: this.translate.instant('AUTH.VALIDATION.UPDATE_FOOD') + ' - '
+								+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 					}
 				});
 			} else {
@@ -180,7 +182,8 @@ export class FoodNamesComponent extends ToastSupport implements OnInit {
 								if (response.error && response.error.status && response.error.status === 'Failure') {
 									this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 								} else {
-									this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+									this.showError({message: this.translate.instant('AUTH.VALIDATION.DELETE_FOOD') + ' - '
+											+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 								}
 							});
 						}

@@ -71,7 +71,8 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 			if (response && response.error && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
-				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.FOOD_NAMES') + ' - '
+						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
 
@@ -87,7 +88,8 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 			if (response && response.error && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
-				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.FOOD_SOLTS') + ' - '
+						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
 
@@ -134,7 +136,8 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 			if (response && response.error && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
-				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.DELIVERY_NOTES') + ' - '
+						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
 
@@ -220,7 +223,8 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 					if (response.error && response.error.status && response.error.status === 'Failure') {
 						this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 					} else {
-						this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+						this.showError({message: this.translate.instant('AUTH.VALIDATION.UPDTAE_DELIVERY_NOTES') + ' - '
+								+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 					}
 				});
 			}
@@ -299,7 +303,8 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 								if (response.error && response.error.status && response.error.status === 'Failure') {
 									this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 								} else {
-									this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+									this.showError({message: this.translate.instant('AUTH.VALIDATION.DELETE_DELIVERY_NOTES') + ' - '
+											+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 								}
 							});
 						}

@@ -47,7 +47,8 @@ export class FishSchoolsComponent extends ToastSupport implements OnInit {
 			if (response && response.error && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
-				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.FS_NAMES') + ' - '
+						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
 

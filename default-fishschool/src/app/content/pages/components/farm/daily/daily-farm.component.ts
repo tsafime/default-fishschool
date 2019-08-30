@@ -61,7 +61,8 @@ export class DailyFarmComponent extends ToastSupport implements OnInit {
 				if (response && response.error && response.error.status === 'Failure') {
 				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 			} else {
-				this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+				this.showError({message: this.translate.instant('AUTH.VALIDATION.DAILY_FARM') + ' - '
+						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
 	}
@@ -95,7 +96,8 @@ export class DailyFarmComponent extends ToastSupport implements OnInit {
 					if (response.error !== 'undefined' && response.error.status && response.error.status === 'Failure') {
 						this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
 					} else {
-						this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+						this.showError({message: this.translate.instant('AUTH.VALIDATION.UPDATE_FAILY_FARM') + ' - '
+								+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 					}
 				});
 			} else {

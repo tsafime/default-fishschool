@@ -41,14 +41,15 @@ export class FishSchoolsAuthorizationService extends ToastSupport {
 
 		await this.http.post<string>(url, {}).toPromise().then(response => {
 			this.authorizations = response;
-		})
-			.catch(response => {
-				if (response && response.error && response.error.status === 'Failure') {
-					this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
-				} else {
-					this.showError({message: this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
-				}
-			});
+		}).catch(response => {
+			if (response && response.error && response.error.status === 'Failure') {
+				this.showError({message: response.error.code + ': ' + response.error.message, type: 'danger'});
+			} else {
+				this.showError({
+					message: this.translate.instant('AUTH.VALIDATION.AUTHORIZATION') + ' - '
+						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
+			}
+		});
 	}
 
 	isFishSchoolReadWrite(action: string, prop: string): boolean {
@@ -69,7 +70,6 @@ export class FishSchoolsAuthorizationService extends ToastSupport {
 		this.tokenStorage.getUserRole().subscribe(userRole => {
 			role = userRole;
 		});
-
 
 		// If exists it is RO otherwise it is enabled
 		let authByEntity;
