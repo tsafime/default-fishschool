@@ -1,0 +1,13 @@
+[Unit]
+Description = Fishschool UI
+After = network.target
+
+[Service]
+Type=forking
+Restart=on-abnormal
+User = ec2-user
+ExecStart=/usr/fishschool/ui/fishui start
+ExecStop=/usr/fishschool/ui/fishui stop
+
+[Install]
+WantedBy = multi-user.target

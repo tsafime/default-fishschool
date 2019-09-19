@@ -1,0 +1,74 @@
+#!/bin/bash
+
+APP_NAME="Fish school UI"
+
+log() {
+    echo "`date '+%F %T'` [$1]: $2"
+}
+
+start() {
+    PID=`netstat -nalp | grep 4200 | head -2 | awk '{printf $7}' | awk -F"/" '{printf $1}'`
+    if [ -z ${PID} ]; then
+        cd /usr/fishschool/ui/default-fishschool
+        nohup npm run ng serve -- --host 0.0.0.0 --port 4200 &
+    else
+        log "INFO" "${APP_NAME} already running"
+    fi
+}
+
+stop() {
+    PID=`netstat -nalp | grep 4200 | head -2 | awk '{printf $7}' | awk -F"/" '{printf $1}'`
+    if [ ! -z ${PID} ]; then
+        kill -9 ${PID}
+        log "INFO" "${APP_NAME} is now down"
+    else
+        log "INFO" "${APP_NAME} already down"
+    fi
+}
+
+version() {
+    log "INFO" "${APP_NAME} 1.0.0.0"
+}
+
+status() {
+    
+    PID=`netstat -nalp | grep 4200 | head -2 | awk '{printf $7}' | awk -F"/" '{printf $1}'`
+    if [ -z ${PID} ]; then
+        log "INFO" "${APP_NAME} is down"
+    else
+        log "INFO" "${APP_NAME} is up and running"
+    fi
+}
+
+restart() {
+    stop
+    RET_VAL=$?
+    if [ ${RET_VAL} -eq 0 ]; then
+        sleep 5
+        start
+    else
+        log "INFO" "${APP_NAME} failed to stop, return value = ${RET_VAL}"
+    fi
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    version)
+        version
+        ;;
+    status)
+        status
+        ;;
+    *)
+    log "INFO" "Usage: $0 {start|stop|restart|version|status}"
+    exit 1
+esac
+exit $?
