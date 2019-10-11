@@ -19,7 +19,6 @@ import {FsRequestModel} from '../fish-schools/fish-schools.component';
 })
 export class ViewSoldFishSchoolComponent extends ToastSupport implements OnInit {
 
-	// public model: SoldFsRequestModel = {schoolName: undefined};
 	source = 'SOLD';
 	public model: FsRequestModel = {schoolName: undefined, status: 'SOLD', feedDate: moment(), days: 10};
 
@@ -32,7 +31,6 @@ export class ViewSoldFishSchoolComponent extends ToastSupport implements OnInit 
 
 	// This is required since Datatable not visible immediately until focus is set
 	@ViewChild('schoolName') select: NgSelectComponent;
-	// source = 'SOLD';
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
@@ -76,7 +74,7 @@ export class ViewSoldFishSchoolComponent extends ToastSupport implements OnInit 
 
 	selectSource(e) {
 		this.source = e.value;
-
+		this.fishSchoolNames[0].status = e.value;
 	}
 }
 
