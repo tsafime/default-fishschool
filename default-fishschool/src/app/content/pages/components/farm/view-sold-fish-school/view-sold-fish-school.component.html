@@ -8,15 +8,59 @@
 			<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 				<div class="example-container my-container">
 					<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SCHOOL_NAME' | translate}}</label>
+					<div class="source">
+						<mat-radio-group [value]="source" (change)="selectSource($event)">
+							<mat-radio-button value="ACTIVE">{{ 'FARM.ACTIVE' | translate }}</mat-radio-button>
+							<mat-radio-button value="SOLD">{{ 'FARM.SOLD' | translate }}</mat-radio-button>
+						</mat-radio-group>
+					</div>
 					<mat-form-field class="school-names-select">
 						<mat-label>{{'FISH_SCHOOL.FILTERS.SELECT_SCHOOL_NAME' | translate}}</mat-label>
-						<mat-select required (selectionChange)="onSchoolSelect($event)">
+						<mat-select required (selectionChange)="model.schoolName = $event.value;" >
 							<mat-option *ngFor="let name of fishSchoolNames | source:source" [value]="name">
 								{{name.name}}
 							</mat-option>
 						</mat-select>
 					</mat-form-field>
-					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="isFishSchoolLoadingStarted || ! f.form.valid || model.schoolName === undefined">
+
+					<!-- Start date -->
+					<mat-form-field>
+						<mat-label>{{'FISH_SCHOOL.FILTERS.FOOD_DATE' | translate}}</mat-label>
+						<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="model.feedDate"
+                               #startDate minlength="10" required [max]="maxDate">
+						<div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)"
+							 class="text-danger">
+							<div *ngIf="startDate.errors.required">
+								{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.FOOD_DATE' | translate} }}
+							</div>
+							<div *ngIf="startDate.errors.minlength">
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.FOOD_DATE' | translate, min: 10} }}
+							</div>
+						</div>
+						<mat-datepicker-toggle matSuffix [for]="picker">
+							<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+						</mat-datepicker-toggle>
+						<mat-datepicker #picker [startAt]="model.feedDate"></mat-datepicker>
+					</mat-form-field>
+
+					<!-- # of days -->
+					<mat-form-field>
+						<mat-label>{{'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate}}</mat-label>
+						<input matInput type="text" #days name="days"
+							   placeholder="{{ 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate }}" autocomplete="off"
+							   [(ngModel)]="model.days" #days="ngModel" minlength="1" required>
+						<div *ngIf="days.invalid && (days.dirty || days.touched)" class="text-danger">
+							<div *ngIf="days.errors.required">
+								{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate} }}
+							</div>
+							<div *ngIf="days.errors.minlength">
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate, min: 1} }}
+							</div>
+						</div>
+					</mat-form-field>
+					<button class="btn btn-primary" (click)="loadTableData()" [disabled]="isFishSchoolLoadingStarted || ! f.form.valid ">
+						<!--<button class="btn btn-primary" (click)="loadTableData()" [disabled]="isFishSchoolLoadingStarted || ! f.form.valid || model.schoolName === undefined">-->
+
 						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
 					</button>
 				</div>

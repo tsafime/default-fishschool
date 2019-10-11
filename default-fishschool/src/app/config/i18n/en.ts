@@ -180,6 +180,7 @@ export const locale = {
 				SOLD_WEIGHT: 'Avg. Sold',
 			},
 			VIEW_SOLD: {
+				NAME: 'name',
 				FEED_DATE: 'Feed Date',
 				VIEW_SOLD_FISH: 'View Sold Fish',
 				AVERAGE_WEIGHT: 'Average Weight',

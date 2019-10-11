@@ -9,6 +9,8 @@ import {ToastSupport} from '../../../../../core/models/fishschool/toast.support'
 import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
 import {NameEntity} from '../../../../../core/models/fishschool/fish-school.names.model';
 import {NgSelectComponent} from '@ng-select/ng-select';
+import {default as moment, Moment} from 'moment';
+import {FsRequestModel} from '../fish-schools/fish-schools.component';
 
 @Component({
 	selector: 'm-view-sold-fish-school',
@@ -17,7 +19,9 @@ import {NgSelectComponent} from '@ng-select/ng-select';
 })
 export class ViewSoldFishSchoolComponent extends ToastSupport implements OnInit {
 
-	public model: SoldFsRequestModel = {schoolName: undefined};
+	// public model: SoldFsRequestModel = {schoolName: undefined};
+	source = 'SOLD';
+	public model: FsRequestModel = {schoolName: undefined, status: 'SOLD', feedDate: moment(), days: 10};
 
 	@ViewChild(MatSort) sort: MatSort;
 	fishSchoolNames: NameEntity[];
@@ -28,7 +32,7 @@ export class ViewSoldFishSchoolComponent extends ToastSupport implements OnInit 
 
 	// This is required since Datatable not visible immediately until focus is set
 	@ViewChild('schoolName') select: NgSelectComponent;
-	source = 'SOLD';
+	// source = 'SOLD';
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
@@ -40,6 +44,7 @@ export class ViewSoldFishSchoolComponent extends ToastSupport implements OnInit 
 	ngOnInit() {
 		this.service.names().toPromise().then(response => {
 			this.fishSchoolNames = response.data;
+			this.fishSchoolNames.splice(0, 0, { name: '', status: 'SOLD' });
 			return response;
 		}).catch(response => {
 			if (response && response.error && response.error.status === 'Failure') {
@@ -49,6 +54,9 @@ export class ViewSoldFishSchoolComponent extends ToastSupport implements OnInit 
 						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
 		});
+
+		this.model.schoolName = { name: '', status: undefined };
+
 	}
 
 	loadTableData() {
@@ -65,8 +73,15 @@ export class ViewSoldFishSchoolComponent extends ToastSupport implements OnInit 
 	onSchoolSelect($event) {
 		this.model.schoolName = { name: $event.value.name, status: undefined };
 	}
+
+	selectSource(e) {
+		this.source = e.value;
+
+	}
 }
 
 export interface SoldFsRequestModel {
 	schoolName: NameEntity;
+	feedDate: Moment;
+	days: number;
 }
