@@ -184,17 +184,10 @@ export class TableComponent extends ToastSupport implements OnInit {
 	}
 
 	isFishSchoolReadWrite(action: string, prop: string, school: FishSchoolModel): boolean {
-    	if(school.status === 'SOLD') {
+    	if (school.status === 'SOLD') {
     		return false;
 		}
 		return this.authorization.isFishSchoolReadWrite(action, prop);
-	}
-
-	isFoodReadWrite(action: string, prop: string, school: FishSchoolModel): boolean {
-		if(school.status === 'SOLD') {
-			return false;
-		}
-		return this.authorization.isFoodReadWrite(action, prop);
 	}
 
 	applyFilter(filterValue: string) {
