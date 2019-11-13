@@ -85,6 +85,14 @@ export class MenuConfig implements ConfigModel {
 								translate: 'MENU.SALE_FISH_SCHOOL',
 								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER'],
 							},
+							{
+								title: 'Reports',
+								desc: 'Reports operations',
+								icon: 'fa fa-fish',
+								page: '/reports',
+								translate: 'MENU.REPORTS',
+								authorizations: ['ADMIN', 'FEEDING_FORMAN', 'FARM_MANAGER', 'OWNER_READ'],
+							},
 						]
 					},
 					{

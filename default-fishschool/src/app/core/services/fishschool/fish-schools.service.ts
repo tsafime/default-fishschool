@@ -35,13 +35,30 @@ export class FishSchoolsService extends ToastSupport {
 		return this.http.post<FishSchools>(this.urlsService.fsViewUrl, json);
 	}
 
-	viewSold(model: SoldFsRequestModel) {
+	viewReports(queryFilters: QueryFilter[]) {
+
+		queryFilters.forEach((filter, index) => {
+			if (queryFilters.length - 1 !== index) {
+				filter.variant = 'AND';
+			} else {
+				filter.variant = 'NONE';
+			}
+		});
+
+		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 4000, 0, ['feedDate'], 'ASC');
+		const json = JSON.stringify(filteredQuery);
+		return this.http.post<FishSchools>(this.urlsService.fsReportsUrl, json);
+	}
+
+	  viewSold(model: SoldFsRequestModel) {
 
 		const queryFilters: QueryFilter[] = [];
 
 		queryFilters.push(new QueryFilter('name', [model.schoolName.name], '=', 'AND'));
 		// queryFilters.push(new QueryFilter('status', [model.schoolName.status], '=', 'AND'));
-		queryFilters.push(new QueryFilter('feedDate', [model.feedDate.clone().format('DD/MM/YYYY')], '=', 'NONE'));
+		queryFilters.push(new QueryFilter('sale', ['is not null'], 'STRING', 'AND'));
+		queryFilters.push(new QueryFilter('status', ['NO'], 'STATUS', 'AND'));
+		queryFilters.push(new QueryFilter('feedDate', [model.feedDate.clone().format('DD/MM/YYYY')], 'BETWEEN', 'NONE'));
 
 
 		// const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 400, 0, ['feedDate'], 'ASC');

@@ -30,6 +30,10 @@ const routes: Routes = [
 				loadChildren: './components/farm/fish-schools/fish-schools.module#FishSchoolsModule'
 			},
 			{
+				path: 'reports',
+				loadChildren: './components/farm/reports/reports.module#ReportsModule'
+			},
+			{
 				path: 'farm',
 				loadChildren: './components/farm/daily/daily-farm.module#DailyFarmModule'
 			},

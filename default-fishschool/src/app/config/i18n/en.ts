@@ -215,6 +215,12 @@ export const locale = {
 			SPECIE: 'Specie',
 			AVERAGE_WEIGHT: 'Average Weight',
 		},
+		REPORTS: {
+			FILTERS_TITLE: 'Reports',
+			KEY: 'Key',
+			VALUES: 'Values',
+			OPERATOR: 'Operator',
+		},
 		AUTHORIZATIONS: {
 			NAME: 'Name',
 			ACTION: 'Action',

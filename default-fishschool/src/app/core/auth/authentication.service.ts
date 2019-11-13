@@ -9,12 +9,11 @@ import {TokenStorage} from './token-storage.service';
 import {UtilsService} from '../services/utils.service';
 import {AccessData} from './access-data';
 import {Credential} from './credential';
-import {FsUrlsService} from '../services/fishschool/fs.urls';
 
 @Injectable()
 export class AuthenticationService implements AuthService {
 	API_URL = 'http://localhost:51120';
-	//API_URL = 'https://agrodeafrica.com';
+	// API_URL = 'https://agrodeafrica.com';
 	// API_URL = 'https://54.213.24.142';
 	API_ENDPOINT_LOGIN = '/login';
 	API_ENDPOINT_REFRESH = '/refresh';

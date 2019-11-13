@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 export class FsUrlsService {
 
 	public baseUrl: string = 'http://localhost:51120/';
-	//public baseUrl: string = 'https://agrodeafrica.com/';
+	// public baseUrl: string = 'https://agrodeafrica.com/';
 	// public baseUrl: string = 'https://54.213.24.142/';
 	public loginUrl: string = this.baseUrl + 'login';
 	public authorizationUrl: string = this.baseUrl + 'user/authorization';
@@ -20,6 +20,7 @@ export class FsUrlsService {
 	public fsSaveUrl: string = this.baseUrl + 'fishschool/save';
 	public fsUpdateUrl: string = this.baseUrl + 'fishschool/update';
 	public fsSoldUrl: string = this.baseUrl + 'fishschool/sold';
+	public fsReportsUrl: string = this.baseUrl + 'fishschool/reports';
 
 	public foodViewUrl: string = this.baseUrl + 'food/view';
 	public foodUpdateUrl: string = this.baseUrl + 'food/update'
