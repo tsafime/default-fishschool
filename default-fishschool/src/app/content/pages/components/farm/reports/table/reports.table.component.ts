@@ -247,4 +247,25 @@ export class TableComponent extends ToastSupport implements OnInit {
 		this.dataSource.sort = this.sort;
 		this.havingFishSchoolRecords = true;
 	}
+
+	private getTotal(row, prop) {
+		if (this.dataSource && this.dataSource.data) {
+			const reduce = this.dataSource.data.map(t => t[prop]).reduce((acc, value) => {
+					const accNan = isNaN(acc);
+					const valueNan = isNaN(value);
+					if (accNan && !valueNan) {
+						return value;
+					}
+					if (!accNan && valueNan) {
+						return acc;
+					}
+					return acc + value;
+				},
+				0);
+
+			return reduce;
+		}
+
+		return 0;
+	}
 }

@@ -20,7 +20,7 @@ import {XQueryFilter} from '../../../../../core/models/fishschool/xquery.filter'
 })
 export class ReportsComponent extends ToastSupport implements OnInit {
 	source = 'ACTIVE';
-	public filters: QueryFilter[] = [new XQueryFilter('', [''], '', '', '', undefined)];
+	public filters: XQueryFilter[] = [new XQueryFilter('', [''], '', '', '', undefined)];
 	public model: FsRequestModel = {schoolName: undefined, status: 'ACTIVE', feedDate: moment(), days: 10};
 	@ViewChild(MatSort) sort: MatSort;
 	fishSchoolNames: NameEntity[];
@@ -30,13 +30,13 @@ export class ReportsComponent extends ToastSupport implements OnInit {
 	maxDate: Date = moment().add(365, 'days').toDate();
 	startLoadReports: boolean = false;
 	isReportslLoadingStarted = false;
-	keys = ['name', 'feedDate', 'specie', 'age', 'dead', 'menualAvgWeight', 'averageWeight', 'totalGivenFood', ' foodWeight',
-		'actualGivenFood', 'percentageTsemach', 'deadLastUpdateDate', 'food', 'feedDate', 'sale', 'totalSale', 'activityLog',
+	keys = ['name', 'feedDate', 'status', 'specie', 'age', 'dead', 'menualAvgWeight', 'averageWeight', 'totalGivenFood', ' foodWeight',
+		'actualGivenFood', 'percentageTsemach', 'deadLastUpdateDate', 'food_id', 'feedDate', 'sale', 'totalSale', 'activityLog',
 		'fcr', 'salesFcr', 'totalWeight', 'soldFish', 'saleWeight', 'updatedName', 'updatedCreationDate'];
 	operators = ['=', '>', '<', 'IS NOT NULL', 'IS NULL', 'BETWEEN'];
 
 	// This is required since Datatable not visible immediately until focus is set
-	@ViewChild('days') daysInput: ElementRef;
+	// @ViewChild('days') daysInput: ElementRef;
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,

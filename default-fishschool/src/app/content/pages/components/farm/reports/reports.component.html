@@ -84,7 +84,7 @@
 							<mat-label>{{'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate}}</mat-label>
 							<input matInput type="text" #days name="days{{i}}"
 								   placeholder="{{ 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate }}" autocomplete="off"
-								   [(ngModel)]="filter.numOfDays" #days="ngModel" minlength="1" required>
+								   [(ngModel)]="filter.values[1]" #days="ngModel" minlength="1" required>
 							<div *ngIf="days.invalid && (days.dirty || days.touched)" class="text-danger">
 								<div *ngIf="days.errors.required">
 									{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.FILTERS.NUM_OF_DAYS' | translate} }}
@@ -94,6 +94,7 @@
 								</div>
 							</div>
 						</mat-form-field>
+						<hr class="new5">
 					</div>
 					<button mat-icon-button color="accent" (click)="addNew()" title="{{ 'FISH_SCHOOL.SOLD.ADD_NEW_TITLE' | translate}}">
 						<i class="fs flaticon-add mat-icon"></i>
