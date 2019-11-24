@@ -245,7 +245,8 @@ export class DeliveryNotesTableComponent extends ToastSupport implements OnInit 
 
 	createNew() {
         const foodData = (this.dataSource.data[this.dataSource.data.length - 1]) ?
-			moment(this.dataSource.data[this.dataSource.data.length - 1].foodDate, 'DD/MM/YYYY').format('DD/MM/YYYY') : moment().format('DD/MM/YYYY')
+			moment(this.dataSource.data[this.dataSource.data.length - 1].foodDate, 'DD/MM/YYYY')
+				.format('DD/MM/YYYY') : moment().format('DD/MM/YYYY');
 
 		const deliveryNotesModel = new DeliveryNotesModel(undefined, undefined, '', 'ACTIVE',
 			this.model.action, undefined, foodData, undefined, undefined, undefined, undefined,
