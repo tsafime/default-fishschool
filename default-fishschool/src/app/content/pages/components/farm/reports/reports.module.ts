@@ -41,6 +41,7 @@ import {FsUrlsService} from '../../../../../core/services/fishschool/fs.urls';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {CurrencyMaskConfig, CURRENCY_MASK_CONFIG} from 'ng2-currency-mask/src/currency-mask.config';
 import {FarmModule} from '../farm.module';
+import {ReportsService} from '../../../../../core/services/fishschool/reports.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
@@ -119,6 +120,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 			useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
 		},
 		FishSchoolsService,
+		ReportsService,
 		FishSchoolsAuthorizationService,
 		FoodService,
 		ReloadTableDataService,

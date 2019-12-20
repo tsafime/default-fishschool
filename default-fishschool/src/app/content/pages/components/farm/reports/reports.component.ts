@@ -9,9 +9,10 @@ import {ToastrManager} from 'ng6-toastr-notifications';
 import {ToastSupport} from '../../../../../core/models/fishschool/toast.support';
 import {ReloadTableDataService} from '../../../../../core/services/fishschool/reload-table-data.service';
 import {NameEntity} from '../../../../../core/models/fishschool/fish-school.names.model';
-import {QueryFilter} from '../../../../../core/models/fishschool/query.filter';
 import {FsRequestModel} from '../fish-schools/fish-schools.component';
 import {XQueryFilter} from '../../../../../core/models/fishschool/xquery.filter';
+import {ReportsService} from '../../../../../core/services/fishschool/reports.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
 	selector: 'm-reports',
@@ -32,16 +33,16 @@ export class ReportsComponent extends ToastSupport implements OnInit {
 	isReportslLoadingStarted = false;
 	keys = ['name', 'feedDate', 'status', 'specie', 'age', 'dead', 'menualAvgWeight', 'averageWeight', 'totalGivenFood', ' foodWeight',
 		'actualGivenFood', 'percentageTsemach', 'deadLastUpdateDate', 'food_id', 'feedDate', 'sale', 'totalSale', 'activityLog',
-		'fcr', 'salesFcr', 'totalWeight', 'soldFish', 'saleWeight', 'updatedName', 'updatedCreationDate'];
-	operators = ['=', '>', '<', 'IS NOT NULL', 'IS NULL', 'BETWEEN'];
+		'fcr', 'salesFcr', 'totalWeight', 'sale', 'saleWeight'];
+	operators = ['=', '>', '<', '<>', 'IS NOT NULL', 'IS NULL', 'BETWEEN'];
 
 	// This is required since Datatable not visible immediately until focus is set
 	// @ViewChild('days') daysInput: ElementRef;
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
-				public toastr: ToastrManager, private reloadService: ReloadTableDataService,
-				private changeDetector: ChangeDetectorRef) {
+				private reportsService: ReportsService, public toastr: ToastrManager,
+	            private reloadService: ReloadTableDataService, private changeDetector: ChangeDetectorRef) {
 
 		super(toastr);
 	}
@@ -66,7 +67,7 @@ export class ReportsComponent extends ToastSupport implements OnInit {
 		});
 	}
 
-	loadTableData() {
+	loadTableData(f: NgForm) {
 		this.isReportslLoadingStarted = true;
 		this.startLoadReports = true;
 		this.reloadService.reload(true);
@@ -94,7 +95,9 @@ export class ReportsComponent extends ToastSupport implements OnInit {
 
 	updateDynamicFilter(filter: XQueryFilter) {
 
-		if (filter.key !== 'feedDate') {
+		if (filter.key !== 'feedDate' && filter.operator === 'BETWEEN') {
+			filter.selection = 'value & between';
+		} else if (filter.key !== 'feedDate') {
 			filter.selection = 'value';
 		} else if (filter.operator === 'BETWEEN' && filter.key === 'feedDate') {
 			filter.selection = 'date & days';

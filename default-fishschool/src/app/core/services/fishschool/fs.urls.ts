@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 export class FsUrlsService {
 
 	public baseUrl: string = 'http://localhost:51120/';
+	// public baseUrl: string = 'https://agrodevelopmentafrica.com/';
 	// public baseUrl: string = 'https://agrodeafrica.com/';
 	// public baseUrl: string = 'https://54.213.24.142/';
 	public loginUrl: string = this.baseUrl + 'login';

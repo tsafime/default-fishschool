@@ -1,7 +1,7 @@
 yarn global add cordova
 Download and install https://developer.android.com/studio
 Start studio and follow wizard
-Add to Windows path: 
+Add to Windows path:
 C:\Users\Me\AppData\Local\Android\Sdk\platform-tools
 C:\Users\Me\AppData\Local\Android\Sdk\tools
 
@@ -10,7 +10,7 @@ cd mobile
 Copy these lines overriding package.jspn:
 {
     "name": "helloworld",
-    "displayName": "HelloCordova",
+    "displayName": "DevApp",
     "version": "1.0.0",
     "description": "A sample Apache Cordova application that responds to the deviceready event.",
     "main": "index.js",

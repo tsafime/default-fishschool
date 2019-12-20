@@ -51,11 +51,10 @@ export class FishSchoolsService extends ToastSupport {
 	}
 
 	  viewSold(model: SoldFsRequestModel) {
-
 		const queryFilters: QueryFilter[] = [];
 
 		queryFilters.push(new QueryFilter('name', [model.schoolName.name], '=', 'AND'));
-		queryFilters.push(new QueryFilter('status', [model.schoolName.status], '=', 'AND'));
+		// queryFilters.push(new QueryFilter('status', [model.schoolName.status], '=', 'AND'));
 		queryFilters.push(new QueryFilter('sale', ['is not null'], 'STRING', 'AND'));
 		queryFilters.push(new QueryFilter('feedDate', [model.feedDate.clone().format('DD/MM/YYYY')], 'BETWEEN', 'NONE'));
 
@@ -115,4 +114,5 @@ export class FishSchoolsService extends ToastSupport {
 		const model = [{ name: name, status: status}];
 		return this.http.post<FishSchools>(this.urlsService.fsUpdateUrl, {entities: model});
 	}
+
 }

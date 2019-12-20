@@ -3,7 +3,7 @@
 		<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
 							 [expanded]="panelOpenState === true">
 			<mat-expansion-panel-header>
-				<mat-panel-title>{{'FISH_SCHOOL.FILTERS.PANEL.HEADER' | translate}}</mat-panel-title>
+				<mat-panel-title>{{'FISH_SCHOOL.FILTERS.PANEL.REPORTS_HEADER' | translate}}</mat-panel-title>
 			</mat-expansion-panel-header>
 			<form class="m-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 				<div class="example-container my-container">
@@ -38,6 +38,19 @@
 							<input matInput type="text" #values name="values{{i}}" placeholder="{{ 'REPORTS.VALUES' | translate }}"
 								   autocomplete="off" [(ngModel)]="filter.values[0]" minlength="0">
 						</mat-form-field>
+
+						<!-- Filter values between -->
+						<mat-form-field *ngIf="filter.selection === 'value & between'" class="max_width">
+							<mat-label>{{'REPORTS.VALUES' | translate}}</mat-label>
+							<input matInput type="text" #values name="values{{i}}" placeholder="{{ 'REPORTS.VALUES' | translate }}"
+								   autocomplete="off" [(ngModel)]="filter.values[0]" minlength="0">
+						</mat-form-field>
+						<mat-form-field *ngIf="filter.selection === 'value & between'" class="max_width">
+							<mat-label>{{'REPORTS.VALUES' | translate}}</mat-label>
+							<input matInput type="text" #values name="values{{i}}" placeholder="{{ 'REPORTS.VALUES' | translate }}"
+								   autocomplete="off" [(ngModel)]="filter.values[1]" minlength="0">
+						</mat-form-field>
+
 						<!-- Feed date -->
 						<mat-form-field *ngIf="filter.selection === 'date'" class="max_width">
 							<mat-label>{{'FISH_SCHOOL.FILTERS.FOOD_DATE' | translate}}</mat-label>
@@ -104,7 +117,7 @@
 						<i class="fa flaticon-delete mat-icon mat-icon"></i>
 					</button>
 					<div class="col-md-12">&nbsp;</div>
-					<button class="btn btn-primary custom-btn" (click)="loadTableData()"  [disabled]="isReportslLoadingStarted || ! f.form.valid">
+					<button class="btn btn-primary custom-btn" (click)="loadTableData(f)"  [disabled]="isReportslLoadingStarted || ! f.form.valid">
 
 						{{'AUTH.GENERAL.SUBMIT_BUTTON' | translate}}
 					</button>

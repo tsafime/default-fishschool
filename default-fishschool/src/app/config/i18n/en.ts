@@ -93,6 +93,7 @@ export const locale = {
 		GENERAL: {
 			F_C_R: 'F.C.R.',
 			ACTUAL_GIVEN_FOOD: 'Total Food',
+			FOOD_NAME: 'Food Name',
 			AGE: 'Age',
 		},
 		DASHBOARD: {
@@ -156,7 +157,8 @@ export const locale = {
 				PANEL: {
 					HEADER: 'Fish school filters',
 					DESCRIPTION: 'Choose Filters',
-					VIEW_SOLD_HEADER: 'View Sold Fish school filters',
+					VIEW_SOLD_HEADER: 'VIEW SOLD',
+					REPORTS_HEADER: 'REPORTS',
 					SOLD_HEADER: 'Sold Fish school filters',
 					SOLD_FROM: 'Sale From',
 					SALE_DATE: 'Sale Date',
