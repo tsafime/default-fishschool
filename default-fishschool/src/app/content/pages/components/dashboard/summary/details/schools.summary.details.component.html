@@ -66,18 +66,18 @@
 				<td mat-cell *matCellDef="let row">{{ row.givenFood | number:'1.1-1'}}</td>
 			</ng-container>
 
-			<!-- fcr Column -->
-			<ng-container matColumnDef="fcr">
+			<!-- foodTypeName Column -->
+			<ng-container matColumnDef="foodTypeName">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
-					[ngStyle]="summarySort.active == 'fcr' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
+					[ngStyle]="summarySort.active == 'foodTypeName' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ summaryHeaders[7] }}</th>
-				<td mat-cell *matCellDef="let row">{{row.fcr | number:'1.2-2'}}</td>
+				<td mat-cell *matCellDef="let row">{{row.foodTypeName}}</td>
 			</ng-container>
 
 			<!-- dead Column -->
 			<ng-container matColumnDef="totalGivenFood">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header
-					[ngStyle]="summarySort.active == 'fcr' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
+					[ngStyle]="summarySort.active == 'totalGivenFood' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ summaryHeaders[8] }}</th>
 				<td mat-cell *matCellDef="let row">{{row.totalGivenFood | number:'1.0-0'}}</td>
 			</ng-container>

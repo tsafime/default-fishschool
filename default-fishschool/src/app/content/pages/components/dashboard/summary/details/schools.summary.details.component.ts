@@ -22,7 +22,7 @@ export class SchoolsSummaryDetailsComponent implements OnInit {
 
 	// summaryDisplayedColumns = The JSON names
     summaryDisplayedColumns: string[] = ['name', 'age', 'quantity', 'averageWeight', 'totalWeight', 'foodWeight', 'givenFood',
-		                                 'totalGivenFood', 'fcr'];
+		                                 'totalGivenFood', 'foodTypeName'];
 	summaryHeaders: string[];
 	summaryDataSource: MatTableDataSource<SchoolSummaryModel>;
 	@ViewChild(MatSort) summarySort: MatSort;
@@ -42,7 +42,7 @@ export class SchoolsSummaryDetailsComponent implements OnInit {
 			this.translate.instant('DASHBOARD.TOTAL_WEIGHT'),
 			this.translate.instant('DASHBOARD.PLAN_FOOD'),
 			this.translate.instant('DASHBOARD.GIVEN_FOOD'),
-			this.translate.instant('GENERAL.F_C_R'),
+			this.translate.instant('GENERAL.FOOD_NAME'),
 			this.translate.instant('GENERAL.ACTUAL_GIVEN_FOOD')];
 
 		this.summaryDetailsHeaders = [this.translate.instant('DASHBOARD.FOOD_TYPE'),
