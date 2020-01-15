@@ -33,8 +33,8 @@ export class ReportsComponent extends ToastSupport implements OnInit {
 	isReportslLoadingStarted = false;
 	keys = ['name', 'feedDate', 'status', 'specie', 'age', 'dead', 'menualAvgWeight', 'averageWeight', 'totalGivenFood', ' foodWeight',
 		'actualGivenFood', 'percentageTsemach', 'deadLastUpdateDate', 'food_id', 'feedDate', 'sale', 'totalSale', 'activityLog',
-		'fcr', 'salesFcr', 'totalWeight', 'sale', 'saleWeight'];
-	operators = ['=', '>', '<', '<>', 'IS NOT NULL', 'IS NULL', 'BETWEEN'];
+		'fcr', 'salesFcr', 'totalWeight', 'sale', 'saleWeight', 'quantity'];
+	operators = ['=', '>', '<', '<>', 'IS NOT NULL', 'IS NULL', 'BETWEEN', 'ALL NULL'];
 
 	// This is required since Datatable not visible immediately until focus is set
 	// @ViewChild('days') daysInput: ElementRef;

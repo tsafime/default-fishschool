@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{'DASHBOARD.DETAILS.SUMMARY_HEADER'| translate}} {{summaryDataSource.data[0].feedDate}}</h1>
+<h1 mat-dialog-title>{{'DASHBOARD.DETAILS.SUMMARY_HEADER'| translate}} {{(summaryDataSource.data[0]) ? summaryDataSource.data[0].feedDate : ''}}</h1>
 <td mat-cell *matCellDef="let row">{{row.feedDate}}</td>
 <mat-form-field class="position-relative">
 	<input matInput type="text" (keyup)="applyFilter($event.target.value)"

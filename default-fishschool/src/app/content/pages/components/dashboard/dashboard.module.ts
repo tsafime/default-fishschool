@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { LayoutModule } from '../../../layout/layout.module';
 import { PartialsModule } from '../../../partials/partials.module';
 import { ListTimelineModule } from '../../../partials/layout/quick-sidebar/list-timeline/list-timeline.module';
-import { WidgetChartsModule } from '../../../partials/content/widgets/charts/widget-charts.module';
 import {SchoolsSummaryService} from '../../../../core/services/fishschool/summary/schools.summary.service';
 import {DD_MM_YYYY_Format} from '../farm/fish-schools/fish-schools.module';
 import {
@@ -27,6 +26,11 @@ import {ToastrModule} from 'ng6-toastr-notifications';
 import {FsUrlsService} from '../../../../core/services/fishschool/fs.urls';
 import {FishSchoolsService} from '../../../../core/services/fishschool/fish-schools.service';
 import {FishSchoolsAuthorizationService} from '../../../../core/services/fishschool/fish-schools.authorization.service';
+import {ChartsModule} from 'ng2-charts';
+import {SummaryBarChartComponent} from './summary/summary-bar-chart/summary-bar-chart.component';
+import {SummaryBarChartService} from '../../../../core/services/dashboard/summary-bar-chart.service';
+import {BarChartComponent} from '../../../partials/content/widgets/charts/bar-chart/bar-chart.component';
+import {WidgetChartsModule} from '../../../partials/content/widgets/charts/widget-charts.module';
 
 @NgModule({
 	imports: [
@@ -35,7 +39,7 @@ import {FishSchoolsAuthorizationService} from '../../../../core/services/fishsch
 		LayoutModule,
 		PartialsModule,
 		ListTimelineModule,
-		WidgetChartsModule,
+		ChartsModule,
 		MatInputModule,
 		MatFormFieldModule,
 		FormsModule,
@@ -44,6 +48,7 @@ import {FishSchoolsAuthorizationService} from '../../../../core/services/fishsch
 		MatSortModule,
 		MatDatepickerModule,
 		MatIconModule,
+		WidgetChartsModule,
 		ToastrModule.forRoot(),
 		TranslateModule.forChild(),
 		RouterModule.forChild([
@@ -53,6 +58,9 @@ import {FishSchoolsAuthorizationService} from '../../../../core/services/fishsch
 			}
 		]),
 	],
+	exports: [
+		SummaryBarChartComponent,
+    ],
 	providers: [
 		InterceptService,
 		{provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true},
@@ -66,6 +74,7 @@ import {FishSchoolsAuthorizationService} from '../../../../core/services/fishsch
 		FsUrlsService,
 		FishSchoolsService,
 		FishSchoolsAuthorizationService,
+		SummaryBarChartService,
 	],
 	entryComponents: [
 		SchoolsSummaryDetailsComponent
@@ -74,6 +83,7 @@ import {FishSchoolsAuthorizationService} from '../../../../core/services/fishsch
 		DashboardComponent,
 		SchoolsSummaryComponent,
 		SchoolsSummaryDetailsComponent,
+		SummaryBarChartComponent,
 	]
 })
 export class DashboardModule {}

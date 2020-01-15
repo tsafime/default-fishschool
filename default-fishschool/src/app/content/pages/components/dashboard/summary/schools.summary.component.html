@@ -1,76 +1,99 @@
-<div class="m-portlet">
-<div class="m-widget1">
-	<div class="m-widget1__title">
-		<h3>{{'DASHBOARD.FARM_SUMMARY' | translate}}</h3>
+<div class="m-portlet" xmlns:width="http://www.w3.org/1999/xhtml">
+	<div class="m-widget1">
+		<div class="m-widget1__title">
+			<h3>{{'DASHBOARD.FARM_SUMMARY' | translate}}</h3>
+		</div>
+		<div class="m-widget1__item">
+			<mat-form-field>
+				<mat-label>{{'DASHBOARD.SUMMARY_DATE' | translate}}</mat-label>
+				<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="summaryDate"
+					   #startDate minlength="10" required [max]="maxDate" (dateChange)="view()">
+				<mat-datepicker-toggle matSuffix [for]="picker">
+					<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+				</mat-datepicker-toggle>
+				<mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+			</mat-form-field>
+		</div>
+		<div class="m-widget29" (click)="viewDetails()">
+			<div class="m-widget1__item">
+				<div class="row m-row--no-padding align-items-center">
+					<div class="col">
+						<h3 class="m-widget1__title">{{'DASHBOARD.AVG_WEIGHT' | translate}}</h3>
+						<span class="m-widget1__desc"></span>
+					</div>
+					<div class="col m--align-right">
+						<span class="m-widget1__number m--font-brand">{{ schoolsSum.totalAverageWeight | number:'1.2-2' }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="m-widget1__item">
+				<div class="row m-row--no-padding align-items-center">
+					<div class="col">
+						<h3 class="m-widget1__title">{{'DASHBOARD.NUM_OF_FISH' | translate}}</h3>
+						<span class="m-widget1__desc"></span>
+					</div>
+					<div class="col m--align-right">
+						<span class="m-widget1__number m--font-danger">{{ schoolsSum.totalNumberOfFish | number:'1.2-2' }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="m-widget1__item">
+				<div class="row m-row--no-padding align-items-center">
+					<div class="col">
+						<h3 class="m-widget1__title">{{'DASHBOARD.PLAN_FOOD' | translate}}</h3>
+						<span class="m-widget1__desc"></span>
+					</div>
+					<div class="col m--align-right">
+						<span class="m-widget1__number m--font-brand">{{ schoolsSum.totalPlanFood | number:'1.2-2' }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="m-widget1__item">
+				<div>
+					<tr *ngFor = "let item of schoolsSum.feedPlanByTypes">
+						<td align="left">{{item.key}}</td>
+						<td [width]="250"></td>
+						<td align="right">{{item.value | number:'1.0-0'}}</td>
+					</tr>
+				</div>
+			</div>
+			<div class="m-widget1__item">
+				<div class="row m-row--no-padding align-items-center">
+					<div class="col">
+						<h3 class="m-widget1__title">{{'DASHBOARD.GIVEN_FOOD' | translate}}</h3>
+						<span class="m-widget1__desc"></span>
+					</div>
+					<div class="col m--align-right">
+						<span class="m-widget1__number m--font-success">{{ schoolsSum.totalGivenFood | number:'1.2-2' }}</span>
+					</div>
+
+				</div>
+			</div>
+			<div class="m-widget1__item">
+				<div>
+					<tr *ngFor = "let item of schoolsSum.totalGivenFoodByTypes">
+						<td>{{item.key}}</td>
+						<td [width]="250"></td>
+						<td align="right">{{item.value | number:'1.0-0'}}</td>
+					</tr>
+				</div>
+			</div>
+			<div class="m-widget1__item">
+				<div class="row m-row--no-padding align-items-center">
+					<div class="col">
+						<h3 class="m-widget1__title">{{'GENERAL.F_C_R' | translate}}</h3>
+						<span class="m-widget1__desc"></span>
+					</div>
+					<div class="col m--align-right">
+						<span class="m-widget1__number m--font-brand">{{ schoolsSum.totalFCR | number:'1.2-2' }}</span>
+					</div>
+				</div>
+			</div>
+
+			<!--<div class="m-widget1__item">
+				<m-summary-bar-chart *ngIf="isSummaryReady"></m-summary-bar-chart>
+			</div>-->
+		</div>
 	</div>
-	<div class="m-widget1__item">
-		<mat-form-field>
-			<mat-label>{{'DASHBOARD.SUMMARY_DATE' | translate}}</mat-label>
-			<input matInput [matDatepicker]="picker" name="startDate" [(ngModel)]="summaryDate"
-				   #startDate minlength="10" required [max]="maxDate" (dateChange)="view()">
-			<mat-datepicker-toggle matSuffix [for]="picker">
-				<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-			</mat-datepicker-toggle>
-			<mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
-		</mat-form-field>
-	</div>
-	<div class="m-widget29" (click)="viewDetails()">
-		<div class="m-widget1__item">
-			<div class="row m-row--no-padding align-items-center">
-				<div class="col">
-					<h3 class="m-widget1__title">{{'DASHBOARD.AVG_WEIGHT' | translate}}</h3>
-					<span class="m-widget1__desc"></span>
-				</div>
-				<div class="col m--align-right">
-					<span class="m-widget1__number m--font-brand">{{ schoolsSum.totalAverageWeight | number:'1.2-2' }}</span>
-				</div>
-			</div>
-		</div>
-		<div class="m-widget1__item">
-			<div class="row m-row--no-padding align-items-center">
-				<div class="col">
-					<h3 class="m-widget1__title">{{'DASHBOARD.NUM_OF_FISH' | translate}}</h3>
-					<span class="m-widget1__desc"></span>
-				</div>
-				<div class="col m--align-right">
-					<span class="m-widget1__number m--font-danger">{{ schoolsSum.totalNumberOfFish | number:'1.2-2' }}</span>
-				</div>
-			</div>
-		</div>
-		<div class="m-widget1__item">
-			<div class="row m-row--no-padding align-items-center">
-				<div class="col">
-					<h3 class="m-widget1__title">{{'DASHBOARD.PLAN_FOOD' | translate}}</h3>
-					<span class="m-widget1__desc"></span>
-				</div>
-				<div class="col m--align-right">
-					<span class="m-widget1__number m--font-brand">{{ schoolsSum.totalPlanFood | number:'1.2-2' }}</span>
-				</div>
-			</div>
-		</div>
-		<div class="m-widget1__item">
-			<div class="row m-row--no-padding align-items-center">
-				<div class="col">
-					<h3 class="m-widget1__title">{{'DASHBOARD.GIVEN_FOOD' | translate}}</h3>
-					<span class="m-widget1__desc"></span>
-				</div>
-				<div class="col m--align-right">
-					<span class="m-widget1__number m--font-success">{{ schoolsSum.totalGivenFood | number:'1.2-2' }}</span>
-				</div>
-			</div>
-		</div>
-		<div class="m-widget1__item">
-			<div class="row m-row--no-padding align-items-center">
-				<div class="col">
-					<h3 class="m-widget1__title">{{'GENERAL.F_C_R' | translate}}</h3>
-					<span class="m-widget1__desc"></span>
-				</div>
-				<div class="col m--align-right">
-					<span class="m-widget1__number m--font-brand">{{ schoolsSum.totalFCR | number:'1.2-2' }}</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 </div>
 

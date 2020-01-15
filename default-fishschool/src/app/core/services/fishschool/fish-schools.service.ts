@@ -54,7 +54,7 @@ export class FishSchoolsService extends ToastSupport {
 		const queryFilters: QueryFilter[] = [];
 
 		queryFilters.push(new QueryFilter('name', [model.schoolName.name], '=', 'AND'));
-		// queryFilters.push(new QueryFilter('status', [model.schoolName.status], '=', 'AND'));
+		queryFilters.push(new QueryFilter('status', [model.schoolName.status], '=', 'AND'));
 		queryFilters.push(new QueryFilter('sale', [''], 'IS NOT NULL', 'AND'));
 		queryFilters.push(new QueryFilter('feedDate', [model.feedDate.clone().format('DD/MM/YYYY')], 'BETWEEN', 'NONE'));
 

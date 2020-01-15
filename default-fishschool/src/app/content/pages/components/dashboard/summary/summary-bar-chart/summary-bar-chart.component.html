@@ -1,0 +1,14 @@
+<div class="">
+	<div class="m-widget1__header">
+		<h3 class="m-widget1__title">Food plan</h3>
+	</div>
+	<canvas baseChart
+			[datasets]="barChartData"
+			[labels]="barChartLabels"
+			[options]="barChartOptions"
+			[colors]="barChartColors"
+			[legend]="barChartLegend"
+			[chartType]="barChartType"
+			(chartHover)="chartHovered($event)"
+			(chartClick)="chartClicked($event)"></canvas>
+</div>

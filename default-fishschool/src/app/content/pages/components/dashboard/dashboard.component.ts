@@ -12,8 +12,7 @@ import {ToastSupport} from '../../../../core/models/fishschool/toast.support';
 export class DashboardComponent extends ToastSupport implements OnInit {
 
 	public config: any;
-	public mySchoolsSum: SummaryModel = new SummaryModel(0, 0, 0, 0, 0, 0, []);
-
+	public mySchoolsSum: SummaryModel = new SummaryModel(0, 0, 0, 0, 0, 0, [], [], [], []);
 	constructor(public toastr: ToastrManager) {
 		super(toastr);
 	}

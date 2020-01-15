@@ -12,9 +12,11 @@ export class SchoolSummaryModel {
 	feedDate: string;
 	foodTypeName: string;
 	feedTypes: PairModel<string, number>[];
+	totalGivenFoodByTypes: PairModel<string, number>[];
+	feedPlanByTypes: PairModel<string, number>[];
 
-	constructor(name: string, quantity: number, averageWeight: number, foodWeight: number,givenFood: number, fcr: number, feedDate: string,
-	            foodTypeName: string, foodTypes: PairModel<string, number>[]) {
+	constructor(name: string, quantity: number, averageWeight: number, foodWeight: number, givenFood: number, fcr: number, feedDate: string,
+	            foodTypeName: string, foodTypes: PairModel<string, number>[], totalGivenFoodByTypes: PairModel<string, number>[], feedPlanByTypes: PairModel<string, number>[]) {
 
 		this.name = name;
 		this.quantity = quantity;
@@ -25,6 +27,8 @@ export class SchoolSummaryModel {
 		this.feedDate = moment(feedDate).format('DD/MM/YYYY');
 		this.foodTypeName = foodTypeName;
 		this.feedTypes = foodTypes;
+		this.totalGivenFoodByTypes = totalGivenFoodByTypes;
+		this.feedPlanByTypes = feedPlanByTypes;
 	}
 }
 
