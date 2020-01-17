@@ -56,12 +56,13 @@ export class FishSchoolsService extends ToastSupport {
 		queryFilters.push(new QueryFilter('name', [model.schoolName.name], '=', 'AND'));
 		queryFilters.push(new QueryFilter('status', [model.schoolName.status], '=', 'AND'));
 		queryFilters.push(new QueryFilter('sale', [''], 'IS NOT NULL', 'AND'));
-		queryFilters.push(new QueryFilter('feedDate', [model.feedDate.clone().format('DD/MM/YYYY')], 'BETWEEN', 'NONE'));
+		// queryFilters.push(new QueryFilter('feedDate', [model.feedDate.clone().format('DD/MM/YYYY')], 'BETWEEN', 'NONE'));
+		  queryFilters.push(new QueryFilter('feedDate', [model.feedDate.clone().format('DD/MM/YYYY')], '=', 'NONE'));
 
 
-		// const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 400, 0, ['feedDate'], 'ASC');
+
+		  // const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 400, 0, ['feedDate'], 'ASC');
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, model.days, 0, ['feedDate'], 'ASC');
-
 		const json = JSON.stringify(filteredQuery);
 		return this.http.post<FishSchools>(this.urlsService.fsViewSoldUrl, json);
 	}

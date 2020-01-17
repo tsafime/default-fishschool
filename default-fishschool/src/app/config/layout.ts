@@ -13,7 +13,8 @@ export class LayoutConfig implements ConfigModel {
 		// == Page Loader(splash)
 		loader: {
 			enabled: true, // Enable page loader
-			image: './assets/demo/default/media/img/logo/logo_large.png'
+		image: './assets/demo/default/media/img/logo/fish-logo-g.png'
+			//image: './assets/demo/default/media/img/logos/fish-logo.png'
 		},
 
 		// == Header
@@ -40,8 +41,10 @@ export class LayoutConfig implements ConfigModel {
 					}
 				},
 				logo: {
-					dark: './assets/demo/default/media/img/logo/fish-logo-transparent.png',
-					light: './assets/demo/default/media/img/logo/fish-logo-transparent.png'
+				//	dark: './assets/demo/default/media/img/logo/fish-logo-transparent.png',
+				//	light: './assets/demo/default/media/img/logo/fish-logo-transparent.png'
+					dark: './assets/demo/default/media/img/logo/fish-logo12.png',
+					light: './assets/demo/default/media/img/logo/fish-logo12.png'
 				}
 			},
 

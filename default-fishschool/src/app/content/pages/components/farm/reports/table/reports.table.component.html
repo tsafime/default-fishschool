@@ -152,7 +152,7 @@
 					[ngStyle]="sort.active == 'fcr' ? {background: 'rgba(0, 0, 0, 0.24)', color: 'white'} : {background: 'white', color: 'black'}">
 					{{ headers[12] }}</th>
 				<td mat-cell *matCellDef="let row">
-					<div class="top-align">{{row.fcr | number:'1.2-2'}}</div>
+				<div class="top-align">{{row.averageWeight | number:'1.0-0'}}</div>
 				</td>
 				<td mat-footer-cell *matFooterCellDef="let row"></td>
 			</ng-container>
