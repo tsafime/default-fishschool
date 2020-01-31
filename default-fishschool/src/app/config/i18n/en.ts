@@ -141,6 +141,7 @@ export const locale = {
 				SCHOOL_NAME: 'School name',
 				SELECT_SCHOOL_NAME: 'Select School name',
 				SELECT_FROM_SCHOOL_NAME: 'Select From School name',
+				SELECT_SCHOOL_STAUS: 'Select School Status',
 				SELECT_TO_SCHOOL_NAME: 'Select To School name',
 				SOLD_SCHOOL_NAME: 'Sold School name',
 				CHOOSE_SCHOOL_NAME: 'Choose School Name',

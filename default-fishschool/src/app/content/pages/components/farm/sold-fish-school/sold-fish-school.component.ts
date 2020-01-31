@@ -21,6 +21,8 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 	soldFrom: FishSchoolModel = this.getEmptyFishSchool();
 	soldTo: FishSchoolModel[] = [this.getEmptyFishSchool()];
 	source = 'ACTIVE';
+	status = ['ACTIVE', 'SOLD'];
+
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
 				private translate: TranslateService, public toastr: ToastrManager, private changeDetector: ChangeDetectorRef) {

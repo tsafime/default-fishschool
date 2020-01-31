@@ -12,6 +12,18 @@
 				</mat-select>
 			</mat-form-field>
 
+			<label class="mat-form-field-label">{{'FISH_SCHOOL.FILTERS.SELECT_FROM_SCHOOL_NAME' | translate}}</label>
+			<mat-form-field class="school-names-select">
+				<mat-label>{{'FISH_SCHOOL.FILTERS.SELECT_SCHOOL_STAUS' | translate}}</mat-label>
+				<mat-select required (selectionChange)="soldFrom.status = $event.value;">
+					<mat-option *ngFor="let key of status" [value]="key">
+						{{key}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+
+
 			<mat-form-field>
 				<mat-label>{{'FISH_SCHOOL.FILTERS.PANEL.SALE_DATE' | translate}}</mat-label>
 				<input matInput [matDatepicker]="picker" name="feedDate" [(ngModel)]="soldFrom.feedDate"
@@ -45,6 +57,7 @@
 					</div>
 				</div>
 			</mat-form-field>
+
 
 			<!-- Sale weight -->
 			<mat-form-field>
