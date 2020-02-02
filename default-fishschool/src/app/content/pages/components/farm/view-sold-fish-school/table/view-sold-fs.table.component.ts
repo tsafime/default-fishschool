@@ -88,6 +88,7 @@ export class ViewSoldTableComponent extends ToastSupport implements OnInit {
 					this.loadData(response.data);
 				}
 			} else {
+				this.dataReady.emit(false);
 				this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FS_FAILURE'), type: 'danger'});
 			}
 		}).catch(response => {
@@ -97,9 +98,13 @@ export class ViewSoldTableComponent extends ToastSupport implements OnInit {
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.VIEW_SOLD_FS') + ' - '
 						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
+			this.dataReady.emit(false);
 		});
 
 		this.isFishSchoolTableLoading = false;
+		if (!this.changeDetector['destroyed']) {
+			this.changeDetector.detectChanges();
+		}
 	}
 
 	validate(): boolean {

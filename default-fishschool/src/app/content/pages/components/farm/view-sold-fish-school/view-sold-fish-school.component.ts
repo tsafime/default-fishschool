@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material';
 import {FishSchoolsService} from '../../../../../core/services/fishschool/fish-schools.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -34,7 +34,7 @@ export class ViewSoldFishSchoolComponent extends ToastSupport implements OnInit 
 
 	constructor(private service: FishSchoolsService, private authService: AuthenticationService,
 				private translate: TranslateService, private authorization: FishSchoolsAuthorizationService,
-				public toastr: ToastrManager, private reloadService: ReloadTableDataService) {
+				public toastr: ToastrManager, private reloadService: ReloadTableDataService, private changeDetector: ChangeDetectorRef) {
 
 		super(toastr);
 	}
@@ -51,10 +51,15 @@ export class ViewSoldFishSchoolComponent extends ToastSupport implements OnInit 
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.VIEW_SOLD_FS') + ' - '
 						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
+
+			this.isFishSchoolLoadingStarted = false;
+
+			if (!this.changeDetector['destroyed']) {
+				this.changeDetector.detectChanges();
+			}
 		});
 
 		this.model.schoolName = { name: '', status: undefined };
-
 	}
 
 	loadTableData() {
