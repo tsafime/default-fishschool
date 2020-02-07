@@ -60,7 +60,7 @@
 									*ngIf="isFishSchoolReadWrite('UPDATE', 'averageWeight', row) && row.id; else display">
 						<input matInput type="number" class="editable" [value]="row.averageWeight" [(ngModel)]="row.averageWeight">
 					</mat-form-field>
-					<ng-template #display><div class="top-align">{{row.averageWeight | number:'1.2-2'}}</div></ng-template>
+					<ng-template #display><div class="top-align">{{row.averageWeight | number:'1.3-3'}}</div></ng-template>
 				</td>
 			</ng-container>
 

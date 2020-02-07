@@ -70,7 +70,7 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 
 		// Remove empty soldTo is not fulfilled
 		this.soldTo.forEach((item, index) => {
-			if (item.name === undefined || item.quantity === undefined || item.averageWeight === undefined) {
+			if (item.name === undefined || item.sale === undefined || item.averageWeight === undefined) {
 				this.soldTo.splice(index);
 			}
 		});
@@ -126,7 +126,7 @@ export class SoldFishSchoolComponent extends ToastSupport implements OnInit {
 
 	validate() {
 		const incompleteTo = this.soldTo.filter((item, index) => {
-			return item.name === undefined || item.quantity === undefined || item.averageWeight === undefined;
+			return item.name === undefined || item.sale === undefined || item.averageWeight === undefined;
 		});
 
 		return this.soldTo.length === 0 || incompleteTo.length > 0 || this.soldFrom.name === undefined

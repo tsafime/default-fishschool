@@ -91,11 +91,25 @@
 						</mat-select>
 					</mat-form-field>
 
-					<!-- Quantity -->
+					<!-- Quantity
 					<mat-form-field>
 						<mat-label>{{'FISH_SCHOOL.SOLD.SALE_TO_MOVED_QUANTITY' | translate}}</mat-label>
 						<input matInput type="text" #quantity name="quantity_{{i}}" placeholder="{{ 'FISH_SCHOOL.SOLD.SALE_TO_MOVED_QUANTITY' | translate }}"
 							   autocomplete="off" [(ngModel)]="toSchool.quantity" minlength="1" required>
+						<div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)" class="text-danger">
+							<div *ngIf="quantity.errors.required">
+								{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SALE_TO_QUANTITY' | translate} }}
+							</div>
+							<div *ngIf="quantity.errors.minlength">
+								{{ 'VALIDATION.MIN_LENGTH_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SALE_TO_QUANTITY' | translate, min: 1} }}
+							</div>
+						</div>
+					</mat-form-field>-->
+
+					<mat-form-field>
+						<mat-label>{{'FISH_SCHOOL.SOLD.SALE_TO_MOVED_QUANTITY' | translate}}</mat-label>
+						<input matInput type="text" #quantity name="quantity_{{i}}" placeholder="{{ 'FISH_SCHOOL.SOLD.SALE_TO_MOVED_QUANTITY' | translate }}"
+							   autocomplete="off" [(ngModel)]="toSchool.sale" minlength="1" required>
 						<div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)" class="text-danger">
 							<div *ngIf="quantity.errors.required">
 								{{ 'VALIDATION.REQUIRED_FIELD' | translate: {name: 'FISH_SCHOOL.SOLD.SALE_TO_QUANTITY' | translate} }}
