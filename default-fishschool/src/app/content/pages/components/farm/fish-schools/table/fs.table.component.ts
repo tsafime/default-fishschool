@@ -28,7 +28,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 	// 	'menualAvgWeight', 'averageWeight', 'foodWeight', 'totalGivenFood', 'actualGivenFood', 'percentageTsemach', 'deadLastUpdateDate',
 	// 	'food', 'feedDate', 'sale', 'totalSale', 'fcr', 'salesFcr', 'totalWeight'];
 
-	// If you choose to diplay other dates like: creationDate, updatedDate, deadLastUpdateDate make sure to uncomment in view()
+	// If you choose to display other dates like: creationDate, updatedDate, deadLastUpdateDate make sure to uncomment in view()
 	// the relevant cases
 	// displayedColumns = The JSON names
 	displayedColumns: string[] = ['feedDate', 'age', 'menualAvgWeight', 'averageWeight', 'quantity', 'totalWeight', 'totalGivenFood',
@@ -107,10 +107,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 				}
 			} else {
 				this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FS_FAILURE'), type: 'danger'});
-			}
-
-			if (!this.changeDetector['destroyed']) {
-				this.changeDetector.detectChanges();
+				this.dataReady.emit(false);
 			}
 		}).catch(response => {
 			if (response && response.error && response.error.status === 'Failure') {
@@ -119,9 +116,13 @@ export class TableComponent extends ToastSupport implements OnInit {
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.FS') + ' - '
 						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
+			this.dataReady.emit(false);
 		});
 
 		this.isFishSchoolTableLoading = false;
+		if (!this.changeDetector['destroyed']) {
+			this.changeDetector.detectChanges();
+		}
 	}
 
 	update() {

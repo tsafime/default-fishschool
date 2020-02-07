@@ -29,7 +29,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 	// 	'menualAvgWeight', 'averageWeight', 'foodWeight', 'totalGivenFood', 'actualGivenFood', 'percentageTsemach', 'deadLastUpdateDate',
 	// 	'food', 'feedDate', 'sale', 'totalSale', 'fcr', 'salesFcr', 'totalWeight'];
 
-	// If you choose to diplay other dates like: creationDate, updatedDate, deadLastUpdateDate make sure to uncomment in view()
+	// If you choose to display other dates like: creationDate, updatedDate, deadLastUpdateDate make sure to uncomment in view()
 	// the relevant cases
 	// displayedColumns = The JSON names
 	displayedColumns: string[] = ['feedDate', 'name', 'age', 'menualAvgWeight', 'averageWeight', 'quantity', 'totalWeight', 'totalGivenFood',
@@ -43,9 +43,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 	@Input() public filters: QueryFilter[];
 	@ViewChild(MatSort) sort: MatSort;
 
-
-
-	@Output() dataReady = new EventEmitter<boolean>();
+    @Output() dataReady = new EventEmitter<boolean>();
 	foods: FoodModel[];
 	isFishSchoolTableLoading = true;
 	havingFishSchoolRecords = false;
@@ -112,6 +110,7 @@ export class TableComponent extends ToastSupport implements OnInit {
 				}
 			} else {
 				this.showError({message: this.translate.instant('FISH_SCHOOL.VALIDATION.LOAD_FS_FAILURE'), type: 'danger'});
+				this.dataReady.emit(false);
 			}
 
 			if (!this.changeDetector['destroyed']) {
@@ -124,9 +123,13 @@ export class TableComponent extends ToastSupport implements OnInit {
 				this.showError({message: this.translate.instant('AUTH.VALIDATION.FS') + ' - '
 						+ this.translate.instant('AUTH.VALIDATION.CONNECTION_FAILURE'), type: 'danger'});
 			}
+			this.dataReady.emit(false);
 		});
 
 		this.isFishSchoolTableLoading = false;
+		if (!this.changeDetector['destroyed']) {
+			this.changeDetector.detectChanges();
+		}
 	}
 
 	update() {

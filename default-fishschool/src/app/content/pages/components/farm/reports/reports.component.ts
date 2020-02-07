@@ -30,9 +30,10 @@ export class ReportsComponent extends ToastSupport implements OnInit {
 	role: string;
 	maxDate: Date = moment().add(365, 'days').toDate();
 	startLoadReports: boolean = false;
-	isReportslLoadingStarted = false;
+	isReportsLoadingStarted = false;
 	keys = ['name', 'feedDate', 'status', 'age', 'dead', 'menualAvgWeight', 'averageWeight', 'totalGivenFood', ' foodWeight',
-		'actualGivenFood', 'food_id', 'feedDate', 'sale', 'totalSale', 'quantity'];
+		'actualGivenFood', 'food', 'feedDate', 'sale', 'totalSale', 'quantity'];
+
 	operators = ['=', '>', '<', '<>', 'IS NOT NULL', 'IS NULL', 'BETWEEN', 'ALL NULL', 'SUM'];
 
 	// This is required since Datatable not visible immediately until focus is set
@@ -67,7 +68,7 @@ export class ReportsComponent extends ToastSupport implements OnInit {
 	}
 
 	loadTableData(f: NgForm) {
-		this.isReportslLoadingStarted = true;
+		this.isReportsLoadingStarted = true;
 		this.startLoadReports = true;
 		this.reloadService.reload(true);
 	}
@@ -78,7 +79,7 @@ export class ReportsComponent extends ToastSupport implements OnInit {
 
 	onDataReady($event) {
 		this.panelOpenState = !$event;
-		this.isReportslLoadingStarted = false;
+		this.isReportsLoadingStarted = false;
 	}
 
 	addNew() {

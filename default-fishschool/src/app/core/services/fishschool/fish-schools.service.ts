@@ -43,6 +43,10 @@ export class FishSchoolsService extends ToastSupport {
 			} else {
 				filter.variant = 'NONE';
 			}
+
+			if (filter.key === 'feedDate') {
+				filter.values[0] = moment(filter.values[0], 'DD/MM/YYYY').format('DD/MM/YYYY');
+			}
 		});
 
 		const filteredQuery: FilteredQuery = new FilteredQuery(queryFilters, 4000, 0, ['feedDate'], 'ASC');
