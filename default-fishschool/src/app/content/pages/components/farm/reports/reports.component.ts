@@ -13,6 +13,7 @@ import {FsRequestModel} from '../fish-schools/fish-schools.component';
 import {XQueryFilter} from '../../../../../core/models/fishschool/xquery.filter';
 import {ReportsService} from '../../../../../core/services/fishschool/reports.service';
 import {NgForm} from '@angular/forms';
+import * as objectPath from 'object-path';
 
 @Component({
 	selector: 'm-reports',
@@ -68,6 +69,9 @@ export class ReportsComponent extends ToastSupport implements OnInit {
 	}
 
 	loadTableData(f: NgForm) {
+		if (! this.validate()) {
+			return;
+		}
 		this.isReportsLoadingStarted = true;
 		this.startLoadReports = true;
 		this.reloadService.reload(true);
@@ -108,5 +112,18 @@ export class ReportsComponent extends ToastSupport implements OnInit {
 		if (!this.changeDetector['destroyed']) {
 			this.changeDetector.detectChanges();
 		}
+	}
+
+	validate() {
+
+		let result = true;
+		this.filters.forEach((filter, index) => {
+			if (filter.key === '' || filter.values.length === 0 || filter.operator === '') {
+				this.showError({message: 'Filter #' + (index + 1) + ' is not fully defined', type: 'danger'});
+				result = false;
+			}
+		});
+
+		return result;
 	}
 }
