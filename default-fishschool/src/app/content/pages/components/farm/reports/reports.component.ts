@@ -23,7 +23,7 @@ import * as objectPath from 'object-path';
 export class ReportsComponent extends ToastSupport implements OnInit {
 	source = 'ACTIVE';
 	public filters: XQueryFilter[] = [new XQueryFilter('', [''], '', '', '', undefined)];
-	public model: FsRequestModel = {schoolName: undefined, status: 'ACTIVE', feedDate: moment(), days: 10};
+	public model: FsRequestModel = {schoolName: undefined, status: 'ACTIVE', feedDate: moment(), days: 30};
 	@ViewChild(MatSort) sort: MatSort;
 	fishSchoolNames: NameEntity[];
 
@@ -32,7 +32,7 @@ export class ReportsComponent extends ToastSupport implements OnInit {
 	maxDate: Date = moment().add(365, 'days').toDate();
 	startLoadReports: boolean = false;
 	isReportsLoadingStarted = false;
-	keys = ['name', 'feedDate', 'status', 'age', 'dead', 'menualAvgWeight', 'averageWeight', 'totalGivenFood', ' foodWeight',
+	keys = ['name', 'feedDate', 'status', 'age', 'dead', 'menualAvgWeight', 'averageWeight', 'totalGivenFood', 'foodWeight',
 		'actualGivenFood', 'food', 'feedDate', 'sale', 'totalSale', 'quantity'];
 
 	operators = ['=', '>', '<', '<>', 'IS NOT NULL', 'IS NULL', 'BETWEEN', 'ALL NULL', 'SUM'];

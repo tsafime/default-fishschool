@@ -18,7 +18,7 @@ import {NameEntity} from '../../../../../core/models/fishschool/fish-school.name
 })
 export class FishSchoolsComponent extends ToastSupport implements OnInit {
 	source = 'ACTIVE';
-	public model: FsRequestModel = {schoolName: undefined, status: 'ACTIVE', feedDate: moment(), days: 10};
+	public model: FsRequestModel = {schoolName: undefined, status: 'ACTIVE', feedDate: moment(), days: 30};
 
 	@ViewChild(MatSort) sort: MatSort;
 	fishSchoolNames: NameEntity[];
